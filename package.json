@@ -5,14 +5,26 @@
   "type": "module",
   "exports": {
     "./catalyst": {
+      "development": {
+        "types": "./src/catalyst/index.ts",
+        "import": "./src/catalyst/index.ts"
+      },
       "types": "./lib/catalyst/index.d.ts",
       "import": "./lib/catalyst/index.js"
     },
     "./common": {
+      "development": {
+        "types": "./src/common/index.ts",
+        "import": "./src/common/index.ts"
+      },
       "types": "./lib/common/index.d.ts",
       "import": "./lib/common/index.js"
     },
     "./core": {
+      "development": {
+        "types": "./src/core/index.ts",
+        "import": "./src/core/index.ts"
+      },
       "types": "./lib/core/index.d.ts",
       "import": "./lib/core/index.js"
     }
