@@ -1,6 +1,6 @@
 import * as Headless from '@headlessui/react';
 import type React from 'react';
-export declare function InputGroup({ children }: React.ComponentPropsWithoutRef<'span'>): import("react/jsx-runtime").JSX.Element;
+export declare function InputGroup({ children }: React.ComponentPropsWithoutRef<'span'>): React.JSX.Element;
 declare const dateTypes: string[];
 type DateType = (typeof dateTypes)[number];
 export declare const Input: React.ForwardRefExoticComponent<{

@@ -16,14 +16,14 @@ export declare function Dialog({ size, className, children, ...props }: {
     size?: keyof typeof sizes;
     className?: string;
     children: React.ReactNode;
-} & Omit<Headless.DialogProps, 'as' | 'className'>): import("react/jsx-runtime").JSX.Element;
+} & Omit<Headless.DialogProps, 'as' | 'className'>): React.JSX.Element;
 export declare function DialogTitle({ className, ...props }: {
     className?: string;
-} & Omit<Headless.DialogTitleProps, 'as' | 'className'>): import("react/jsx-runtime").JSX.Element;
+} & Omit<Headless.DialogTitleProps, 'as' | 'className'>): React.JSX.Element;
 export declare function DialogDescription({ className, ...props }: {
     className?: string;
-} & Omit<Headless.DescriptionProps<typeof Text>, 'as' | 'className'>): import("react/jsx-runtime").JSX.Element;
-export declare function DialogBody({ className, ...props }: React.ComponentPropsWithoutRef<'div'>): import("react/jsx-runtime").JSX.Element;
-export declare function DialogActions({ className, ...props }: React.ComponentPropsWithoutRef<'div'>): import("react/jsx-runtime").JSX.Element;
+} & Omit<Headless.DescriptionProps<typeof Text>, 'as' | 'className'>): React.JSX.Element;
+export declare function DialogBody({ className, ...props }: React.ComponentPropsWithoutRef<'div'>): React.JSX.Element;
+export declare function DialogActions({ className, ...props }: React.ComponentPropsWithoutRef<'div'>): React.JSX.Element;
 export {};
 //# sourceMappingURL=dialog.d.ts.map
