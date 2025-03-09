@@ -23,7 +23,7 @@ declare const colors: {
 type BadgeProps = {
     color?: keyof typeof colors;
 };
-export declare function Badge({ color, className, ...props }: BadgeProps & React.ComponentPropsWithoutRef<'span'>): import("react/jsx-runtime").JSX.Element;
+export declare function Badge({ color, className, ...props }: BadgeProps & React.ComponentPropsWithoutRef<'span'>): React.JSX.Element;
 export declare const BadgeButton: React.ForwardRefExoticComponent<(BadgeProps & ({
     className?: string;
     children: React.ReactNode;

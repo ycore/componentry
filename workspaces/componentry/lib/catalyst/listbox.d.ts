@@ -7,11 +7,11 @@ export declare function Listbox<T>({ className, placeholder, autoFocus, 'aria-la
     autoFocus?: boolean;
     'aria-label'?: string;
     children?: React.ReactNode;
-} & Omit<Headless.ListboxProps<typeof Fragment, T>, 'as' | 'multiple'>): import("react/jsx-runtime").JSX.Element;
+} & Omit<Headless.ListboxProps<typeof Fragment, T>, 'as' | 'multiple'>): React.JSX.Element;
 export declare function ListboxOption<T>({ children, className, ...props }: {
     className?: string;
     children?: React.ReactNode;
-} & Omit<Headless.ListboxOptionProps<'div', T>, 'as' | 'className'>): import("react/jsx-runtime").JSX.Element;
-export declare function ListboxLabel({ className, ...props }: React.ComponentPropsWithoutRef<'span'>): import("react/jsx-runtime").JSX.Element;
-export declare function ListboxDescription({ className, children, ...props }: React.ComponentPropsWithoutRef<'span'>): import("react/jsx-runtime").JSX.Element;
+} & Omit<Headless.ListboxOptionProps<'div', T>, 'as' | 'className'>): React.JSX.Element;
+export declare function ListboxLabel({ className, ...props }: React.ComponentPropsWithoutRef<'span'>): React.JSX.Element;
+export declare function ListboxDescription({ className, children, ...props }: React.ComponentPropsWithoutRef<'span'>): React.JSX.Element;
 //# sourceMappingURL=listbox.d.ts.map

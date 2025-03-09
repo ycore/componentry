@@ -1,2 +1,2 @@
-export declare const ThemeSwitcher: () => import("react/jsx-runtime").JSX.Element | null;
+export declare const ThemeSwitcher: () => import("react").JSX.Element | null;
 //# sourceMappingURL=ThemeSwitcher.d.ts.map

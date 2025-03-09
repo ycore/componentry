@@ -1,1 +1,0 @@
-{"version":3,"file":"spinner.js","sourceRoot":"","sources":["../../src/core/spinner.tsx"],"names":[],"mappings":";AAAA,OAAO,IAAI,MAAM,MAAM,CAAC;AAExB,MAAM,UAAU,OAAO,CAAC,EAAE,SAAS,EAAyB;IAC1D,OAAO,cAAK,SAAS,EAAE,IAAI,CAAC,SAAS,EAAE,+FAA+F,CAAC,gBAAa,SAAS,GAAG,CAAC;AACnK,CAAC"}

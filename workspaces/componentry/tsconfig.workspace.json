@@ -10,7 +10,9 @@
         "src"
     ],
     "exclude": [
+        "@config",
         "lib",
+        "node_modules",
         "scripts",
         "templates",
         "test",

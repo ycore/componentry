@@ -1,9 +1,9 @@
 import * as Headless from '@headlessui/react';
 import type React from 'react';
-export declare function SwitchGroup({ className, ...props }: React.ComponentPropsWithoutRef<'div'>): import("react/jsx-runtime").JSX.Element;
+export declare function SwitchGroup({ className, ...props }: React.ComponentPropsWithoutRef<'div'>): React.JSX.Element;
 export declare function SwitchField({ className, ...props }: {
     className?: string;
-} & Omit<Headless.FieldProps, 'as' | 'className'>): import("react/jsx-runtime").JSX.Element;
+} & Omit<Headless.FieldProps, 'as' | 'className'>): React.JSX.Element;
 declare const colors: {
     'dark/zinc': string[];
     'dark/white': string[];
@@ -32,6 +32,6 @@ type Color = keyof typeof colors;
 export declare function Switch({ color, className, ...props }: {
     color?: Color;
     className?: string;
-} & Omit<Headless.SwitchProps, 'as' | 'className' | 'children'>): import("react/jsx-runtime").JSX.Element;
+} & Omit<Headless.SwitchProps, 'as' | 'className' | 'children'>): React.JSX.Element;
 export {};
 //# sourceMappingURL=switch.d.ts.map

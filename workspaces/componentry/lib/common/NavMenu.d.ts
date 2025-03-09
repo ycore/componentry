@@ -19,6 +19,6 @@ interface NavMenuProps {
     className?: string;
     navConfig: NavConfig;
 }
-export declare function NavMenu({ className, navConfig }: NavMenuProps): JSX.Element;
+export declare function NavMenu({ className, navConfig }: NavMenuProps): import("react").JSX.Element;
 export {};
 //# sourceMappingURL=NavMenu.d.ts.map
