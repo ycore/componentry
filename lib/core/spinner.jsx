@@ -1,5 +1,0 @@
-import clsx from 'clsx';
-export function Spinner({ className }) {
-    return <div className={clsx(className, 'h-4 w-4 animate-spin rounded-full border-t-2 border-t-current border-r-2 border-r-transparent')} aria-label="Loading"/>;
-}
-//# sourceMappingURL=spinner.jsx.map

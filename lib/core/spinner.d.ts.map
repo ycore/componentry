@@ -1,1 +1,1 @@
-{"version":3,"file":"spinner.d.ts","sourceRoot":"","sources":["../../src/core/spinner.tsx"],"names":[],"mappings":"AAEA,wBAAgB,OAAO,CAAC,EAAE,SAAS,EAAE,EAAE;IAAE,SAAS,EAAE,MAAM,CAAA;CAAE,+BAE3D"}
+{"version":3,"file":"spinner.d.ts","sourceRoot":"","sources":["../../src/core/spinner.tsx"],"names":[],"mappings":"AAEA,wBAAgB,OAAO,CAAC,EAAE,SAAS,EAAE,EAAE;IAAE,SAAS,EAAE,MAAM,CAAA;CAAE,2CAE3D"}

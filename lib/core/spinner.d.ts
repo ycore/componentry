@@ -1,4 +1,4 @@
 export declare function Spinner({ className }: {
     className: string;
-}): import("react").JSX.Element;
+}): import("react/jsx-runtime").JSX.Element;
 //# sourceMappingURL=spinner.d.ts.map
