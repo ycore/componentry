@@ -54,6 +54,6 @@ export declare const Button: React.ForwardRefExoticComponent<ButtonProps & React
  */
 export declare function TouchTarget({ children }: {
     children: React.ReactNode;
-}): React.JSX.Element;
+}): import("react/jsx-runtime").JSX.Element;
 export {};
 //# sourceMappingURL=button.d.ts.map

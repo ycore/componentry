@@ -1,10 +1,10 @@
 import * as Headless from '@headlessui/react';
 export declare function RadioGroup({ className, ...props }: {
     className?: string;
-} & Omit<Headless.RadioGroupProps, 'as' | 'className'>): import("react").JSX.Element;
+} & Omit<Headless.RadioGroupProps, 'as' | 'className'>): import("react/jsx-runtime").JSX.Element;
 export declare function RadioField({ className, ...props }: {
     className?: string;
-} & Omit<Headless.FieldProps, 'as' | 'className'>): import("react").JSX.Element;
+} & Omit<Headless.FieldProps, 'as' | 'className'>): import("react/jsx-runtime").JSX.Element;
 declare const colors: {
     'dark/zinc': string[];
     'dark/white': string[];
@@ -33,6 +33,6 @@ type Color = keyof typeof colors;
 export declare function Radio({ color, className, ...props }: {
     color?: Color;
     className?: string;
-} & Omit<Headless.RadioProps, 'as' | 'className' | 'children'>): import("react").JSX.Element;
+} & Omit<Headless.RadioProps, 'as' | 'className' | 'children'>): import("react/jsx-runtime").JSX.Element;
 export {};
 //# sourceMappingURL=radio.d.ts.map

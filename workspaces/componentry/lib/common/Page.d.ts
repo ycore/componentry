@@ -22,11 +22,11 @@ interface Config<T> {
     [key: string]: T | Config<T> | Config<T>[];
 }
 type ImgConfig = Config<string>;
-export declare function Page({ footConfig, imgConfig, navConfig, className, children }: PageProps): React.JSX.Element;
-export declare function Header({ imgConfig }: HeaderConfig): React.JSX.Element;
-export declare function Script(footConfig: FootConfig): React.JSX.Element;
+export declare function Page({ footConfig, imgConfig, navConfig, className, children }: PageProps): import("react/jsx-runtime").JSX.Element;
+export declare function Header({ imgConfig }: HeaderConfig): import("react/jsx-runtime").JSX.Element;
+export declare function Script(footConfig: FootConfig): import("react/jsx-runtime").JSX.Element;
 export declare function Footer({ footConfig }: {
     footConfig: FootConfig;
-}): React.JSX.Element;
+}): import("react/jsx-runtime").JSX.Element;
 export {};
 //# sourceMappingURL=Page.d.ts.map
