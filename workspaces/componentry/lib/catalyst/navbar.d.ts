@@ -1,5 +1,5 @@
 import * as Headless from '@headlessui/react';
-import type React from 'react';
+import React from 'react';
 export declare function Navbar({ className, ...props }: React.ComponentPropsWithoutRef<'nav'>): import("react/jsx-runtime").JSX.Element;
 export declare function NavbarDivider({ className, ...props }: React.ComponentPropsWithoutRef<'div'>): import("react/jsx-runtime").JSX.Element;
 export declare function NavbarSection({ className, ...props }: React.ComponentPropsWithoutRef<'div'>): import("react/jsx-runtime").JSX.Element;
