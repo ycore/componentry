@@ -1,5 +1,5 @@
 import * as Headless from '@headlessui/react';
-import type React from 'react';
+import React from 'react';
 export declare const Textarea: React.ForwardRefExoticComponent<{
     className?: string;
     resizable?: boolean;

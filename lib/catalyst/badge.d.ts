@@ -1,5 +1,5 @@
 import * as Headless from '@headlessui/react';
-import type React from 'react';
+import React from 'react';
 declare const colors: {
     red: string;
     orange: string;

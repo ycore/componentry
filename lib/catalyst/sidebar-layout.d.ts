@@ -1,4 +1,4 @@
-import type React from 'react';
+import React from 'react';
 export declare function SidebarLayout({ navbar, sidebar, children }: React.PropsWithChildren<{
     navbar: React.ReactNode;
     sidebar: React.ReactNode;
