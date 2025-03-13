@@ -48,10 +48,10 @@ export function Header({ imgConfig }: HeaderConfig) {
       <Link href="/">
         <div className="flex flex-col md:py-8 md:pl-8">
           <div className="flew-row flex w-full justify-around md:justify-start md:gap-x-8">
-            <SvgImage href={imgConfig.logo as string} className="h-16 text-slate-700 text-opacity-70 dark:text-slate-200 dark:text-opacity-30 md:h-28" viewBox="0 0 2434 740" />
+            <SvgImage href={imgConfig.logo as string} className="h-16 text-slate-700 text-opacity-70 md:h-28 dark:text-slate-200 dark:text-opacity-30" viewBox="0 0 2434 740" />
             <div className="flex flex-col items-center pt-1 md:pt-3">
               <div className="flex flex-col items-end">
-                <p className="font-maharlika break-normal text-3xl uppercase text-slate-700 dark:text-slate-400 md:text-7xl md:tracking-[.25em]"></p>
+                <p className="break-normal font-maharlika text-3xl text-slate-700 uppercase md:text-7xl md:tracking-[.25em] dark:text-slate-400" />
               </div>
             </div>
           </div>
@@ -68,7 +68,7 @@ export function Script(footConfig: FootConfig) {
 
 export function Footer({ footConfig }: { footConfig: FootConfig }) {
   return (
-    <footer className="sticky top-[100vh] flex w-full flex-col items-center bg-opacity-100 pb-8 pt-12 print:hidden">
+    <footer className="sticky top-[100vh] flex w-full flex-col items-center bg-opacity-100 pt-12 pb-8 print:hidden">
       <p className="font-lato-100 text-xs uppercase text-opacity-30">
         Copyright © {footConfig?.title} {footConfig?.from} - {footConfig?.to()}
       </p>

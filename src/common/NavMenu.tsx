@@ -14,22 +14,19 @@ export interface NavConfig {
   }>;
 }
 
-type NavItem = {
-  heading?: string;
-  url: string;
-  tag?: JSX.Element;
-  label?: string;
-};
+type NavItem = { heading?: string; tag: JSX.Element; url?: never; label?: never } | { heading?: string; url: string; label?: string; tag: JSX.Element } | { heading?: string; url: string; label: string; tag?: JSX.Element };
 
-interface NavMenuProps {
+interface NavMenuProps extends React.PropsWithChildren {
   className?: string;
   navConfig: NavConfig;
+  stackClass?: string;
 }
 
-export function NavMenu({ className, navConfig }: NavMenuProps) {
+export function NavMenu({ className, navConfig, stackClass, children }: NavMenuProps) {
   return (
     navConfig.sections && (
       <StackedLayout
+        className={stackClass}
         navbar={
           <Navbar className={className}>
             {navConfig.sections.map((section, index) => (
@@ -109,7 +106,9 @@ export function NavMenu({ className, navConfig }: NavMenuProps) {
             </Sidebar.Body>
           </Sidebar>
         }
-      />
+      >
+        {children}
+      </StackedLayout>
     )
   );
 }
