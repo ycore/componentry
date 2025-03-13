@@ -1,5 +1,8 @@
 import * as Headless from '@headlessui/react';
-import React, { useState } from 'react';
+import type React from 'react';
+import { useState } from 'react';
+
+import clsx from 'clsx';
 import { NavbarItem } from './navbar.js';
 
 function OpenMenuIcon() {
@@ -18,12 +21,12 @@ function CloseMenuIcon() {
   );
 }
 
-function MobileSidebar({ open, close, children }: React.PropsWithChildren<{ open: boolean; close: () => void }>) {
+function MobileSidebar({ open, close, className, children }: React.PropsWithChildren<{ open: boolean; close: () => void; className?: string }>) {
   return (
     <Headless.Dialog open={open} onClose={close} className="lg:hidden">
       <Headless.DialogBackdrop transition className="fixed inset-0 bg-black/30 transition data-closed:opacity-0 data-enter:duration-300 data-leave:duration-200 data-enter:ease-out data-leave:ease-in" />
       <Headless.DialogPanel transition className="data-closed:-translate-x-full fixed inset-y-0 w-full max-w-80 p-2 transition duration-300 ease-in-out">
-        <div className="flex h-full flex-col rounded-lg bg-white shadow-xs ring-1 ring-zinc-950/5 dark:bg-zinc-900 dark:ring-white/10">
+        <div className={clsx([className ?? 'bg-white dark:bg-zinc-900', 'flex h-full flex-col rounded-lg shadow-xs ring-1 ring-zinc-950/5 dark:ring-white/10'])}>
           <div className="-mb-3 px-4 pt-3">
             <Headless.CloseButton as={NavbarItem} aria-label="Close navigation">
               <CloseMenuIcon />
@@ -36,11 +39,10 @@ function MobileSidebar({ open, close, children }: React.PropsWithChildren<{ open
   );
 }
 
-export function StackedLayout({ navbar, sidebar, children }: React.PropsWithChildren<{ navbar: React.ReactNode; sidebar: React.ReactNode }>) {
+export function StackedLayout({ navbar, sidebar, className, children }: React.PropsWithChildren<{ navbar: React.ReactNode; sidebar: React.ReactNode; className?: string }>) {
   const [showSidebar, setShowSidebar] = useState(false);
-
   return (
-    <div className="relative isolate flex min-h-svh w-full flex-col bg-white lg:bg-zinc-100 dark:bg-zinc-900 dark:lg:bg-zinc-950">
+    <div className={clsx([children && 'min-h-svh', className ?? 'bg-white lg:bg-zinc-100 dark:bg-zinc-900 dark:lg:bg-zinc-950', 'relative isolate flex w-full flex-col'])}>
       {/* Sidebar on mobile */}
       <MobileSidebar open={showSidebar} close={() => setShowSidebar(false)}>
         {sidebar}
@@ -57,11 +59,13 @@ export function StackedLayout({ navbar, sidebar, children }: React.PropsWithChil
       </header>
 
       {/* Content */}
-      <main className="flex flex-1 flex-col pb-2 lg:px-2">
-        <div className="grow p-6 lg:rounded-lg lg:bg-white lg:p-10 lg:shadow-xs lg:ring-1 lg:ring-zinc-950/5 dark:lg:bg-zinc-900 dark:lg:ring-white/10">
-          <div className="mx-auto max-w-6xl">{children}</div>
-        </div>
-      </main>
+      {children && (
+        <main className="flex flex-1 flex-col pb-2 lg:px-2">
+          <div className={clsx(['grow p-6 lg:rounded-lg lg:bg-white lg:p-10 lg:shadow-xs lg:ring-1 lg:ring-zinc-950/5 dark:lg:bg-zinc-900 dark:lg:ring-white/10'])}>
+            <div className="mx-auto max-w-6xl">{children}</div>
+          </div>
+        </main>
+      )}
     </div>
   );
 }

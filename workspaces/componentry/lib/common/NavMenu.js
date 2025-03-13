@@ -2,8 +2,8 @@ import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { ChevronDownIcon } from '@heroicons/react/16/solid';
 import { Fragment } from 'react/jsx-runtime';
 import { Dropdown, Navbar, Sidebar, StackedLayout } from '../catalyst/index.js';
-export function NavMenu({ className, navConfig }) {
-    return (navConfig.sections && (_jsx(StackedLayout, { navbar: _jsx(Navbar, { className: className, children: navConfig.sections.map((section, index) => (
+export function NavMenu({ className, navConfig, stackClass, children }) {
+    return (navConfig.sections && (_jsx(StackedLayout, { className: stackClass, navbar: _jsx(Navbar, { className: className, children: navConfig.sections.map((section, index) => (
             // biome-ignore lint/suspicious/noArrayIndexKey:
             _jsx(Navbar.Section, { className: "max-lg:hidden", children: section.items.map((item, itemIndex) => {
                     if (item.items) {
@@ -25,6 +25,6 @@ export function NavMenu({ className, navConfig }) {
                             }
                             return (_jsxs(Sidebar.Item, { href: item.url ?? '#', children: [item.tag, item.label && _jsx(Sidebar.Label, { children: item.label })] }, `sidebar-${index}-${item.url}`));
                         }) }, `sidebar-section-${index}`));
-                }) }) }) })));
+                }) }) }), children: children })));
 }
 //# sourceMappingURL=NavMenu.js.map
