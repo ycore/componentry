@@ -1,4 +1,5 @@
 export { NavMenu } from './NavMenu.js';
+export type { NavConfig } from './NavMenu.js';
 export { Footer, Header, Page, Script } from './Page.js';
 export { SvgImage } from './SvgImage.js';
 export { ThemeSwitcher } from './ThemeSwitcher.js';

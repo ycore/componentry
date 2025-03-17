@@ -5,10 +5,10 @@ import { type NavConfig, NavMenu } from './NavMenu.js';
 import { SvgImage } from './SvgImage.js';
 
 interface PageProps {
-  footConfig: FootConfig;
-  imgConfig: ImgConfig;
-  navConfig: NavConfig;
   className?: string;
+  footConfig: FootConfig;
+  logoRef: string;
+  navConfig: NavConfig;
   children: React.ReactNode;
 }
 
@@ -20,19 +20,13 @@ interface FootConfig {
 }
 
 interface HeaderConfig {
-  imgConfig: ImgConfig;
+  logoRef: string;
 }
 
-interface Config<T> {
-  [key: string]: T | Config<T> | Config<T>[];
-}
-
-type ImgConfig = Config<string>;
-
-export function Page({ footConfig, imgConfig, navConfig, className, children }: PageProps) {
+export function Page({ className, footConfig, logoRef, navConfig, children }: PageProps) {
   return (
     <div className="min-h-screen">
-      <Header imgConfig={imgConfig} />
+      <Header logoRef={logoRef} />
       <nav className="mb-6 flex-row justify-between">
         <NavMenu className={className} navConfig={navConfig} />
       </nav>
@@ -42,13 +36,13 @@ export function Page({ footConfig, imgConfig, navConfig, className, children }: 
   );
 }
 
-export function Header({ imgConfig }: HeaderConfig) {
+export function Header({ logoRef }: HeaderConfig) {
   return (
     <header className="print:hidden">
       <Link href="/">
         <div className="flex flex-col md:py-8 md:pl-8">
           <div className="flew-row flex w-full justify-around md:justify-start md:gap-x-8">
-            <SvgImage href={imgConfig.logo as string} className="h-16 text-slate-700 text-opacity-70 md:h-28 dark:text-slate-200 dark:text-opacity-30" viewBox="0 0 2434 740" />
+            <SvgImage href={logoRef} className="h-16 text-slate-700 text-opacity-70 md:h-28 dark:text-slate-200 dark:text-opacity-30" viewBox="0 0 2434 740" />
             <div className="flex flex-col items-center pt-1 md:pt-3">
               <div className="flex flex-col items-end">
                 <p className="break-normal font-maharlika text-3xl text-slate-700 uppercase md:text-7xl md:tracking-[.25em] dark:text-slate-400" />

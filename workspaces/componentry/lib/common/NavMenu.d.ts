@@ -1,35 +1,32 @@
 import { type JSX } from 'react/jsx-runtime';
-export interface NavConfig {
+export type NavConfig = {
     sections: Array<{
-        items: Array<{
-            label?: string;
-            url?: string;
-            tag?: JSX.Element;
-            items?: NavItem[];
-        }>;
+        items: NavItem[];
     }>;
-}
+};
 type NavItem = {
+    items: NavItem[];
+} | {
+    filter?: string[] | boolean[] | number[];
+} | {
+    filter?: string[] | boolean[] | number[];
     heading?: string;
+    label?: never;
     tag: JSX.Element;
     url?: never;
-    label?: never;
 } | {
+    filter?: string[] | boolean[] | number[];
     heading?: string;
-    url: string;
-    label?: string;
-    tag: JSX.Element;
-} | {
-    heading?: string;
-    url: string;
     label: string;
     tag?: JSX.Element;
+    url: string;
 };
 interface NavMenuProps extends React.PropsWithChildren {
     className?: string;
     navConfig: NavConfig;
     stackClass?: string;
+    filters?: string[];
 }
-export declare function NavMenu({ className, navConfig, stackClass, children }: NavMenuProps): JSX.Element;
+export declare function NavMenu({ className, navConfig, stackClass, filters, children }: NavMenuProps): false | JSX.Element;
 export {};
 //# sourceMappingURL=NavMenu.d.ts.map
