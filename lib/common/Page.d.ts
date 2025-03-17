@@ -1,10 +1,10 @@
 import type React from 'react';
 import { type NavConfig } from './NavMenu.js';
 interface PageProps {
-    footConfig: FootConfig;
-    imgConfig: ImgConfig;
-    navConfig: NavConfig;
     className?: string;
+    footConfig: FootConfig;
+    logoRef: string;
+    navConfig: NavConfig;
     children: React.ReactNode;
 }
 interface FootConfig {
@@ -16,14 +16,10 @@ interface FootConfig {
     }>;
 }
 interface HeaderConfig {
-    imgConfig: ImgConfig;
+    logoRef: string;
 }
-interface Config<T> {
-    [key: string]: T | Config<T> | Config<T>[];
-}
-type ImgConfig = Config<string>;
-export declare function Page({ footConfig, imgConfig, navConfig, className, children }: PageProps): import("react/jsx-runtime").JSX.Element;
-export declare function Header({ imgConfig }: HeaderConfig): import("react/jsx-runtime").JSX.Element;
+export declare function Page({ className, footConfig, logoRef, navConfig, children }: PageProps): import("react/jsx-runtime").JSX.Element;
+export declare function Header({ logoRef }: HeaderConfig): import("react/jsx-runtime").JSX.Element;
 export declare function Script(footConfig: FootConfig): import("react/jsx-runtime").JSX.Element;
 export declare function Footer({ footConfig }: {
     footConfig: FootConfig;
