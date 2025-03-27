@@ -32,4 +32,3 @@ export declare function DropdownShortcut({ keys, className, ...props }: {
     keys: string | string[];
     className?: string;
 } & Omit<Headless.DescriptionProps<'kbd'>, 'as' | 'className'>): import("react/jsx-runtime").JSX.Element;
-//# sourceMappingURL=dropdown.d.ts.map

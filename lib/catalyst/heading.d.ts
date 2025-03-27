@@ -5,4 +5,3 @@ type HeadingProps = {
 export declare function Heading({ className, level, ...props }: HeadingProps): import("react/jsx-runtime").JSX.Element;
 export declare function Subheading({ className, level, ...props }: HeadingProps): import("react/jsx-runtime").JSX.Element;
 export {};
-//# sourceMappingURL=heading.d.ts.map

@@ -4,4 +4,3 @@ export declare function StackedLayout({ navbar, sidebar, className, children }: 
     sidebar: React.ReactNode;
     className?: string;
 }>): import("react/jsx-runtime").JSX.Element;
-//# sourceMappingURL=stacked-layout.d.ts.map

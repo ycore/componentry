@@ -15,4 +15,3 @@ export declare function PaginationPage({ href, className, current, children }: R
     current?: boolean;
 }>): import("react/jsx-runtime").JSX.Element;
 export declare function PaginationGap({ className, children, ...props }: React.ComponentPropsWithoutRef<'span'>): import("react/jsx-runtime").JSX.Element;
-//# sourceMappingURL=pagination.d.ts.map

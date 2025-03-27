@@ -3,4 +3,3 @@ export declare function SidebarLayout({ navbar, sidebar, children }: React.Props
     navbar: React.ReactNode;
     sidebar: React.ReactNode;
 }>): import("react/jsx-runtime").JSX.Element;
-//# sourceMappingURL=sidebar-layout.d.ts.map

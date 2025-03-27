@@ -14,4 +14,3 @@ export declare function ListboxOption<T>({ children, className, ...props }: {
 } & Omit<Headless.ListboxOptionProps<'div', T>, 'as' | 'className'>): import("react/jsx-runtime").JSX.Element;
 export declare function ListboxLabel({ className, ...props }: React.ComponentPropsWithoutRef<'span'>): import("react/jsx-runtime").JSX.Element;
 export declare function ListboxDescription({ className, children, ...props }: React.ComponentPropsWithoutRef<'span'>): import("react/jsx-runtime").JSX.Element;
-//# sourceMappingURL=listbox.d.ts.map

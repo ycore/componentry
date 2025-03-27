@@ -12,4 +12,3 @@ export declare const AvatarButton: React.ForwardRefExoticComponent<(AvatarProps 
     href: string | import("react-router").LinkProps["to"];
 } & Omit<import("react-router").LinkProps, "to"> & React.RefAttributes<HTMLAnchorElement>, "ref">, "className">)) & React.RefAttributes<HTMLElement>>;
 export {};
-//# sourceMappingURL=avatar.d.ts.map

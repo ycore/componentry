@@ -31,4 +31,3 @@ export declare const BadgeButton: React.ForwardRefExoticComponent<(BadgeProps & 
     href: string | import("react-router").LinkProps["to"];
 } & Omit<import("react-router").LinkProps, "to"> & React.RefAttributes<HTMLAnchorElement>, "ref">, "className">))) & React.RefAttributes<HTMLElement>>;
 export {};
-//# sourceMappingURL=badge.d.ts.map

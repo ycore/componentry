@@ -25,4 +25,3 @@ export declare function Footer({ footConfig }: {
     footConfig: FootConfig;
 }): import("react/jsx-runtime").JSX.Element;
 export {};
-//# sourceMappingURL=Page.d.ts.map

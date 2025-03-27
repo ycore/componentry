@@ -193,4 +193,3 @@ export declare const Text: typeof TextComponent & {
     Code: typeof TextComponents.Code;
 };
 export { Textarea } from './textarea.js';
-//# sourceMappingURL=index.d.ts.map

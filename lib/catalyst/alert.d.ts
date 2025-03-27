@@ -26,4 +26,3 @@ export declare function AlertDescription({ className, ...props }: {
 export declare function AlertBody({ className, ...props }: React.ComponentPropsWithoutRef<'div'>): import("react/jsx-runtime").JSX.Element;
 export declare function AlertActions({ className, ...props }: React.ComponentPropsWithoutRef<'div'>): import("react/jsx-runtime").JSX.Element;
 export {};
-//# sourceMappingURL=alert.d.ts.map

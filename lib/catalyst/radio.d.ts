@@ -35,4 +35,3 @@ export declare function Radio({ color, className, ...props }: {
     className?: string;
 } & Omit<Headless.RadioProps, 'as' | 'className' | 'children'>): import("react/jsx-runtime").JSX.Element;
 export {};
-//# sourceMappingURL=radio.d.ts.map

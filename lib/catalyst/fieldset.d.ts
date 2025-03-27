@@ -19,4 +19,3 @@ export declare function Description({ className, ...props }: {
 export declare function ErrorMessage({ className, ...props }: {
     className?: string;
 } & Omit<Headless.DescriptionProps, 'as' | 'className'>): import("react/jsx-runtime").JSX.Element;
-//# sourceMappingURL=fieldset.d.ts.map

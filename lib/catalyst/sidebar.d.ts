@@ -1,5 +1,5 @@
 import * as Headless from '@headlessui/react';
-import React from 'react';
+import type React from 'react';
 export declare function Sidebar({ className, ...props }: React.ComponentPropsWithoutRef<'nav'>): import("react/jsx-runtime").JSX.Element;
 export declare function SidebarHeader({ className, ...props }: React.ComponentPropsWithoutRef<'div'>): import("react/jsx-runtime").JSX.Element;
 export declare function SidebarBody({ className, ...props }: React.ComponentPropsWithoutRef<'div'>): import("react/jsx-runtime").JSX.Element;
@@ -16,4 +16,3 @@ export declare const SidebarItem: React.ForwardRefExoticComponent<({
     href: string | import("react-router").LinkProps["to"];
 } & Omit<import("react-router").LinkProps, "to"> & React.RefAttributes<HTMLAnchorElement>>>, "className" | "as">)) & React.RefAttributes<HTMLAnchorElement | HTMLButtonElement>>;
 export declare function SidebarLabel({ className, ...props }: React.ComponentPropsWithoutRef<'span'>): import("react/jsx-runtime").JSX.Element;
-//# sourceMappingURL=sidebar.d.ts.map

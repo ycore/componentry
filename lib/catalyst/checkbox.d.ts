@@ -34,4 +34,3 @@ export declare function Checkbox({ color, className, ...props }: {
     className?: string;
 } & Omit<Headless.CheckboxProps, 'as' | 'className'>): import("react/jsx-runtime").JSX.Element;
 export {};
-//# sourceMappingURL=checkbox.d.ts.map

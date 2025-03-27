@@ -56,4 +56,3 @@ export declare function TouchTarget({ children }: {
     children: React.ReactNode;
 }): import("react/jsx-runtime").JSX.Element;
 export {};
-//# sourceMappingURL=button.d.ts.map

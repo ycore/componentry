@@ -29,4 +29,3 @@ interface NavMenuProps extends React.PropsWithChildren {
 }
 export declare function NavMenu({ className, navConfig, stackClass, filters, children }: NavMenuProps): false | JSX.Element;
 export {};
-//# sourceMappingURL=NavMenu.d.ts.map

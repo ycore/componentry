@@ -1,1 +1,0 @@
-{"version":3,"file":"SvgImage.d.ts","sourceRoot":"","sources":["../../../src/common/SvgImage.tsx"],"names":[],"mappings":"AAAA,OAAO,KAAK,KAAK,MAAM,OAAO,CAAC;AAK/B,MAAM,MAAM,aAAa,GAAG;IAC1B,IAAI,EAAE,MAAM,CAAC;CACd,GAAG,KAAK,CAAC,QAAQ,CAAC,aAAa,CAAC,CAAC;AAElC,wBAAgB,QAAQ,CAAC,EAAE,IAAI,EAAE,GAAG,QAAQ,EAAE,EAAE,aAAa,2CAM5D"}

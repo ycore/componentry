@@ -26,4 +26,3 @@ export declare function DialogDescription({ className, ...props }: {
 export declare function DialogBody({ className, ...props }: React.ComponentPropsWithoutRef<'div'>): import("react/jsx-runtime").JSX.Element;
 export declare function DialogActions({ className, ...props }: React.ComponentPropsWithoutRef<'div'>): import("react/jsx-runtime").JSX.Element;
 export {};
-//# sourceMappingURL=dialog.d.ts.map

@@ -10,4 +10,3 @@ import { type LinkProps } from 'react-router';
 export declare const Link: React.ForwardRefExoticComponent<{
     href: string | LinkProps["to"];
 } & Omit<LinkProps, "to"> & React.RefAttributes<HTMLAnchorElement>>;
-//# sourceMappingURL=link.d.ts.map

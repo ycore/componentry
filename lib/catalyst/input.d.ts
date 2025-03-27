@@ -8,4 +8,3 @@ export declare const Input: React.ForwardRefExoticComponent<{
     type?: "email" | "number" | "password" | "search" | "tel" | "text" | "url" | DateType;
 } & Omit<Headless.InputProps<"input">, "className" | "as"> & React.RefAttributes<HTMLInputElement>>;
 export {};
-//# sourceMappingURL=input.d.ts.map

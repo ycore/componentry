@@ -34,4 +34,3 @@ export declare function Switch({ color, className, ...props }: {
     className?: string;
 } & Omit<Headless.SwitchProps, 'as' | 'className' | 'children'>): import("react/jsx-runtime").JSX.Element;
 export {};
-//# sourceMappingURL=switch.d.ts.map

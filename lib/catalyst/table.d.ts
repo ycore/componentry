@@ -14,4 +14,3 @@ export declare function TableRow({ href, target, title, className, ...props }: {
 } & React.ComponentPropsWithoutRef<'tr'>): import("react/jsx-runtime").JSX.Element;
 export declare function TableHeader({ className, ...props }: React.ComponentPropsWithoutRef<'th'>): import("react/jsx-runtime").JSX.Element;
 export declare function TableCell({ className, children, ...props }: React.ComponentPropsWithoutRef<'td'>): import("react/jsx-runtime").JSX.Element;
-//# sourceMappingURL=table.d.ts.map

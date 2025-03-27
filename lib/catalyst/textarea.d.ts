@@ -4,4 +4,3 @@ export declare const Textarea: React.ForwardRefExoticComponent<{
     className?: string;
     resizable?: boolean;
 } & Omit<Headless.TextareaProps<"textarea">, "className" | "as"> & React.RefAttributes<HTMLTextAreaElement>>;
-//# sourceMappingURL=textarea.d.ts.map
