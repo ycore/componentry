@@ -1,5 +1,5 @@
 import * as Headless from '@headlessui/react';
-import type React from 'react';
+import React from 'react';
 export declare function Sidebar({ className, ...props }: React.ComponentPropsWithoutRef<'nav'>): import("react/jsx-runtime").JSX.Element;
 export declare function SidebarHeader({ className, ...props }: React.ComponentPropsWithoutRef<'div'>): import("react/jsx-runtime").JSX.Element;
 export declare function SidebarBody({ className, ...props }: React.ComponentPropsWithoutRef<'div'>): import("react/jsx-runtime").JSX.Element;
