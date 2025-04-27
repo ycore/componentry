@@ -12,13 +12,17 @@
       "types": "./lib/catalyst/index.d.ts",
       "import": "./lib/catalyst/index.js"
     },
-    "./common": {
-      "types": "./lib/common/index.d.ts",
-      "import": "./lib/common/index.js"
+    "./impetus": {
+      "types": "./lib/impetus/index.d.ts",
+      "import": "./lib/impetus/index.js"
     },
-    "./core": {
-      "types": "./lib/core/index.d.ts",
-      "import": "./lib/core/index.js"
+    "./stimulus": {
+      "types": "./lib/stimulus/index.d.ts",
+      "import": "./lib/stimulus/index.js"
+    },
+    "./utils": {
+      "types": "./lib/utils/index.d.ts",
+      "import": "./lib/utils/index.js"
     }
   },
   "dependencies": {

@@ -1,3 +1,3 @@
 export declare function Spinner({ className }: {
-    className: string;
+    className?: string;
 }): import("react/jsx-runtime").JSX.Element;
