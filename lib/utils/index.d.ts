@@ -1,1 +1,1 @@
-export { iconImporter } from './icon-importer';
+export { iconImporter } from './icon-importer.ts';
