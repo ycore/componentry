@@ -5,7 +5,7 @@ import {
   Sidebar,
   SidebarLayout,
   StackedLayout
-} from "../chunk-J2AZFGYU.mjs";
+} from "../chunk-4KVOBAK4.mjs";
 
 // src/stimulus/NavMenu.tsx
 import { ChevronDownIcon, ChevronRightIcon } from "@heroicons/react/16/solid";

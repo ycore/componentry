@@ -38,6 +38,11 @@ __export(impetus_exports, {
 });
 module.exports = __toCommonJS(impetus_exports);
 
+// src/impetus/LazyImage.tsx
+var import_clsx2 = __toESM(require("clsx"), 1);
+var import_react = __toESM(require("react"), 1);
+var import_react_router = require("react-router");
+
 // src/impetus/Spinner.tsx
 var import_clsx = __toESM(require("clsx"), 1);
 var import_jsx_runtime = require("react/jsx-runtime");
@@ -45,37 +50,34 @@ function Spinner({ className }) {
   return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: (0, import_clsx.default)(className, "h-4 w-4 animate-spin rounded-full border-t-2 border-t-current border-r-2 border-r-transparent"), "aria-label": "Loading" });
 }
 
-// src/impetus/SpriteIcon.tsx
-var import_jsx_runtime2 = require("react/jsx-runtime");
-function SpriteIcon({ url, id, ...props }) {
-  return (
-    // biome-ignore lint/a11y/noSvgWithoutTitle:
-    /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("svg", { ...props, children: id ? /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("use", { href: `${url}#${id}` }) : /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("use", { href: `${url}` }) })
-  );
-}
-
 // src/impetus/LazyImage.tsx
-var import_clsx2 = __toESM(require("clsx"), 1);
-var import_react = __toESM(require("react"), 1);
-var import_react_router = require("react-router");
-var import_jsx_runtime3 = require("react/jsx-runtime");
+var import_jsx_runtime2 = require("react/jsx-runtime");
 var Image = ({ src, alt, width, height, className, loading = "lazy" }) => {
-  return /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("img", { src, alt, width, height, className, loading, decoding: "async" });
+  return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("img", { src, alt, width, height, className, loading, decoding: "async" });
 };
 var imageLoader = async (filenames) => {
   return Object.keys(filenames).map((filePath) => filePath.replace(/.*\/(.*)/, "$1"));
 };
-function LazyImage({ image, className, fallback = /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(Spinner, {}) }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(import_react.default.Suspense, { fallback, children: /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(TypedAwait, { resolve: image, errorElement: /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(Spinner, { className: "text-red-500" }), children: (imageData) => /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(Image, { ...imageData, className: (0, import_clsx2.default)(imageData.className, className) }) }) });
+function LazyImage({ image, className, fallback = /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Spinner, {}) }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(import_react.default.Suspense, { fallback, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TypedAwait, { resolve: image, errorElement: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Spinner, { className: "text-red-500" }), children: (imageData) => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Image, { ...imageData, className: (0, import_clsx2.default)(imageData.className, className) }) }) });
 }
-function LazyGallery({ images, className, imageClass, fallback = /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(Spinner, { className: "h-[180px]" }) }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", { className, children: images.map((imgPromise, index) => (
+function LazyGallery({ images, className, imageClass, fallback = /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Spinner, { className: "h-[180px]" }) }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className, children: images.map((imgPromise, index) => (
     // biome-ignore lint/suspicious/noArrayIndexKey:
-    /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(LazyImage, { image: imgPromise, className: imageClass, fallback }, index)
+    /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(LazyImage, { image: imgPromise, className: imageClass, fallback }, index)
   )) });
 }
 function TypedAwait({ resolve, children, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(import_react_router.Await, { resolve, ...props, children: (data) => children(data) });
+  return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(import_react_router.Await, { resolve, ...props, children: (data) => children(data) });
+}
+
+// src/impetus/SpriteIcon.tsx
+var import_jsx_runtime3 = require("react/jsx-runtime");
+function SpriteIcon({ url, id, ...props }) {
+  return (
+    // biome-ignore lint/a11y/noSvgWithoutTitle:
+    /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("svg", { ...props, children: id ? /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("use", { href: `${url}#${id}` }) : /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("use", { href: `${url}` }) })
+  );
 }
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
