@@ -1,0 +1,1 @@
+import*as r from"./icon-importer.mjs";var o=r.iconImporter;export{o as iconImporter};

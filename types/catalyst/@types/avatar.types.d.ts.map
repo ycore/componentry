@@ -1,0 +1,1 @@
+{"version":3,"file":"avatar.types.d.ts","sourceRoot":"","sources":["../../../../src/catalyst/@types/avatar.types.ts"],"names":[],"mappings":"AAAA,MAAM,MAAM,WAAW,GAAG;IACxB,GAAG,CAAC,EAAE,MAAM,GAAG,IAAI,CAAC;IACpB,MAAM,CAAC,EAAE,OAAO,CAAC;IACjB,QAAQ,CAAC,EAAE,MAAM,CAAC;IAClB,GAAG,CAAC,EAAE,MAAM,CAAC;IACb,SAAS,CAAC,EAAE,MAAM,CAAC;CACpB,CAAC"}

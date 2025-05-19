@@ -1,0 +1,1 @@
+import*as r from"react/jsx-runtime";import*as e from"clsx";function o({soft:o=!1,className:t,...i}){return(0,r.jsx)("hr",{...i,className:(0,e.default)(t,"w-full border-t",o&&"border-zinc-950/5 dark:border-white/5",!o&&"border-zinc-950/10 dark:border-white/10")})}export{o as Divider};

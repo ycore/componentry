@@ -1,0 +1,1 @@
+import*as r from"react/jsx-runtime";function e({url:e,id:s,...t}){return(0,r.jsx)("svg",{...t,children:s?(0,r.jsx)("use",{href:`${e}#${s}`}):(0,r.jsx)("use",{href:`${e}`})})}export{e as SpriteIcon};

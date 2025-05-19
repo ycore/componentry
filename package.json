@@ -9,20 +9,20 @@
   },
   "exports": {
     "./catalyst": {
-      "import": "./catalyst/index.mjs",
-      "types": "./catalyst/index.d.ts"
+      "import": "./esm/catalyst/index.mjs",
+      "types": "./types/catalyst/index.d.ts"
     },
     "./impetus": {
-      "import": "./impetus/index.mjs",
-      "types": "./impetus/index.d.ts"
+      "import": "./esm/impetus/index.mjs",
+      "types": "./types/impetus/index.d.ts"
     },
     "./stimulus": {
-      "import": "./stimulus/index.mjs",
-      "types": "./stimulus/index.d.ts"
+      "import": "./esm/stimulus/index.mjs",
+      "types": "./types/stimulus/index.d.ts"
     },
     "./utils": {
-      "import": "./utils/index.mjs",
-      "types": "./utils/index.d.ts"
+      "import": "./esm/utils/index.mjs",
+      "types": "./types/utils/index.d.ts"
     },
     "./package.json": "./package.json"
   },

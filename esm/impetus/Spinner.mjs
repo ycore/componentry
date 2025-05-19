@@ -1,0 +1,1 @@
+import*as r from"react/jsx-runtime";import*as e from"clsx";function a({className:a}){return(0,r.jsx)("div",{className:(0,e.default)(a,"h-4 w-4 animate-spin rounded-full border-t-2 border-t-current border-r-2 border-r-transparent"),"aria-label":"Loading"})}export{a as Spinner};

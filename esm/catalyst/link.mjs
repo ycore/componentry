@@ -1,0 +1,1 @@
+import*as r from"react/jsx-runtime";import*as t from"@headlessui/react";import*as e from"react";import*as a from"react-router";let i=e.default.forwardRef(function(e,i){return(0,r.jsx)(t.DataInteractive,{children:(0,r.jsx)(a.Link,{...e,to:e.href,ref:i})})});export{i as Link};
