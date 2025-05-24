@@ -26,11 +26,11 @@ import * as ButtonComponents from './button';
 export declare const Button: import("react").ForwardRefExoticComponent<import("./@types/button.types").ButtonProps & import("react").RefAttributes<HTMLElement>> & {
     TouchTarget: typeof ButtonComponents.TouchTarget;
 };
-import { CheckboxGroup as CheckboxGroupComponent } from './checkbox';
-import * as CheckboxGroupComponents from './checkbox';
-export declare const CheckboxGroup: typeof CheckboxGroupComponent & {
-    CheckboxField: typeof CheckboxGroupComponents.CheckboxField;
-    Checkbox: typeof CheckboxGroupComponents.Checkbox;
+import { Checkbox as CheckboxComponent } from './checkbox';
+import * as CheckboxComponents from './checkbox';
+export declare const Checkbox: typeof CheckboxComponent & {
+    Field: typeof CheckboxComponents.CheckboxField;
+    Group: typeof CheckboxComponents.CheckboxGroup;
 };
 import { Combobox as ComboboxComponent } from './combobox';
 import * as ComboboxComponents from './combobox';
@@ -68,32 +68,30 @@ export declare const Dropdown: typeof DropdownComponent & {
     Description: typeof DropdownComponents.DropdownDescription;
     Shortcut: typeof DropdownComponents.DropdownShortcut;
 };
-import { Fieldset as FieldsetComponent } from './fieldset';
-import * as FieldsetComponents from './fieldset';
-export declare const Fieldset: typeof FieldsetComponent & {
-    Legend: typeof FieldsetComponents.Legend;
-    FieldGroup: typeof FieldsetComponents.FieldGroup;
-    Field: typeof FieldsetComponents.Field;
-    Label: typeof FieldsetComponents.Label;
-    Description: typeof FieldsetComponents.Description;
-    ErrorMessage: typeof FieldsetComponents.ErrorMessage;
+import { Field as FieldComponent } from './fieldset';
+import * as FieldComponents from './fieldset';
+export declare const Field: typeof FieldComponent & {
+    Legend: typeof FieldComponents.Legend;
+    Group: typeof FieldComponents.FieldGroup;
+    Set: typeof FieldComponents.Fieldset;
+    Label: typeof FieldComponents.Label;
+    Description: typeof FieldComponents.Description;
+    ErrorMessage: typeof FieldComponents.ErrorMessage;
 };
-export { Field } from './fieldset';
 export { Label } from './fieldset';
 export { ErrorMessage } from './fieldset';
 import { Heading as HeadingComponent } from './heading';
 import * as HeadingComponents from './heading';
 export declare const Heading: typeof HeadingComponent & {
-    Subheading: typeof HeadingComponents.Subheading;
+    Sub: typeof HeadingComponents.Subheading;
 };
-import { InputGroup as InputGroupComponent } from './input';
-export declare const InputGroup: typeof InputGroupComponent & {
-    Input: import("react").ForwardRefExoticComponent<{
-        className?: string;
-        type?: "email" | "number" | "password" | "search" | "tel" | "text" | "url" | import("./@types/input.types").DateType;
-    } & Omit<import("@headlessui/react").InputProps<"input">, "className" | "as"> & import("react").RefAttributes<HTMLInputElement>>;
+import * as InputComponents from './input';
+export declare const Input: import("react").ForwardRefExoticComponent<{
+    className?: string;
+    type?: "email" | "number" | "password" | "search" | "tel" | "text" | "url" | import("./@types/input.types").DateType;
+} & Omit<import("@headlessui/react").InputProps<"input">, "className" | "as"> & import("react").RefAttributes<HTMLInputElement>> & {
+    Group: typeof InputComponents.InputGroup;
 };
-export { Input } from './input';
 export { Link } from './link';
 import { Listbox as ListboxComponent } from './listbox';
 import * as ListboxComponents from './listbox';
@@ -126,11 +124,11 @@ export declare const Pagination: typeof PaginationComponent & {
     Page: typeof PaginationComponents.PaginationPage;
     Gap: typeof PaginationComponents.PaginationGap;
 };
-import { RadioGroup as RadioGroupComponent } from './radio';
-import * as RadioGroupComponents from './radio';
-export declare const RadioGroup: typeof RadioGroupComponent & {
-    RadioField: typeof RadioGroupComponents.RadioField;
-    Radio: typeof RadioGroupComponents.Radio;
+import { Radio as RadioComponent } from './radio';
+import * as RadioComponents from './radio';
+export declare const Radio: typeof RadioComponent & {
+    Field: typeof RadioComponents.RadioField;
+    Group: typeof RadioComponents.RadioGroup;
 };
 export { Select } from './select';
 export { SidebarLayout } from './sidebar-layout';
@@ -154,11 +152,11 @@ export declare const Sidebar: typeof SidebarComponent & {
     Label: typeof SidebarComponents.SidebarLabel;
 };
 export { StackedLayout } from './stacked-layout';
-import { SwitchGroup as SwitchGroupComponent } from './switch';
-import * as SwitchGroupComponents from './switch';
-export declare const SwitchGroup: typeof SwitchGroupComponent & {
-    SwitchField: typeof SwitchGroupComponents.SwitchField;
-    Switch: typeof SwitchGroupComponents.Switch;
+import { Switch as SwitchComponent } from './switch';
+import * as SwitchComponents from './switch';
+export declare const Switch: typeof SwitchComponent & {
+    Field: typeof SwitchComponents.SwitchField;
+    Group: typeof SwitchComponents.SwitchGroup;
 };
 import { Table as TableComponent } from './table';
 import * as TableComponents from './table';
