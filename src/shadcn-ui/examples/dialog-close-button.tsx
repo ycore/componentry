@@ -1,3 +1,4 @@
+import React from 'react';
 import { Button } from '../components/button';
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '../components/dialog';
 import { Input } from '../components/input';

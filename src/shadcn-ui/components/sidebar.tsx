@@ -1,13 +1,13 @@
 import { cva, type VariantProps } from 'class-variance-authority';
 import clsx from 'clsx';
 import { Slot as SlotPrimitive } from 'radix-ui';
-import * as React from 'react';
+import React from 'react';
 
 import { SpriteIcon } from '../../images/SpriteIcon';
 import type { IconName } from '../@types/lucide-sprites';
 import svgSpriteUrl from '../assets/lucide-sprites.svg?url';
-import { Button } from './button';
 import { useIsMobile } from '../hooks/use-mobile';
+import { Button } from './button';
 import { Input } from './input';
 import { Separator } from './separator';
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from './sheet';

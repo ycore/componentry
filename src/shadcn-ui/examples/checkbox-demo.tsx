@@ -1,3 +1,4 @@
+import React from 'react';
 import { Checkbox } from '../components/checkbox';
 import { Label } from '../components/label';
 

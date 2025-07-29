@@ -1,3 +1,4 @@
+import React from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '../components/avatar';
 import { Button } from '../components/button';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '../components/hover-card';

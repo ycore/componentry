@@ -1,3 +1,4 @@
+import React from 'react';
 import { createSpriteIcon } from '../../images/SpriteIcon';
 import type { IconName } from '../@types/lucide-sprites';
 import svgSpriteUrl from '../assets/lucide-sprites.svg?url';

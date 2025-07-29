@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { Command as CommandPrimitive } from 'cmdk';
-import * as React from 'react';
+import React from 'react';
 
 import { SpriteIcon } from '../../images/SpriteIcon';
 import type { IconName } from '../@types/lucide-sprites';

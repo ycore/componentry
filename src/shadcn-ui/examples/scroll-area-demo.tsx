@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { ScrollArea } from '../components/scroll-area';
 import { Separator } from '../components/separator';
 

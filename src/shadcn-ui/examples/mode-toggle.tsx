@@ -1,5 +1,5 @@
 import { useTheme } from 'next-themes';
-import * as React from 'react';
+import React from 'react';
 
 import { createSpriteIcon } from '../../images/SpriteIcon';
 import type { IconName } from '../@types/lucide-sprites';

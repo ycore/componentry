@@ -1,3 +1,4 @@
+import React from 'react';
 import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from '../components/pagination';
 
 export default function PaginationDemo() {

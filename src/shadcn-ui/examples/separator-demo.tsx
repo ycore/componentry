@@ -1,3 +1,4 @@
+import React from 'react';
 import { Separator } from '../components/separator';
 
 export default function SeparatorDemo() {

@@ -1,5 +1,5 @@
 import { LazyImage } from '@ycore/componentry/images';
-import * as React from 'react';
+import React from 'react';
 
 import { ScrollArea, ScrollBar } from '../components/scroll-area';
 

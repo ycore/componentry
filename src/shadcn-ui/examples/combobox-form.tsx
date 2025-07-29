@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import * as React from 'react';
+import React from 'react';
 import { toast } from 'sonner';
 
 import { createSpriteIcon } from '../../images/SpriteIcon';

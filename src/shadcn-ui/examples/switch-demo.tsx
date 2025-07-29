@@ -1,3 +1,4 @@
+import React from 'react';
 import { Label } from '../components/label';
 import { Switch } from '../components/switch';
 

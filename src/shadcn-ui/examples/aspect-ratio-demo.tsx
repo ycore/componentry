@@ -1,3 +1,4 @@
+import React from 'react';
 import { LazyImage } from '../../images/LazyImage';
 import { AspectRatio } from '../components/aspect-ratio';
 

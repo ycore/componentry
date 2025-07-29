@@ -1,3 +1,4 @@
+import React from 'react';
 import { Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow } from '../components/table';
 
 const invoices = [

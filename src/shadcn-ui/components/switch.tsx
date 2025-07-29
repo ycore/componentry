@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { Switch as SwitchPrimitive } from 'radix-ui';
-import * as React from 'react';
+import React from 'react';
 
 function Switch({ className, ...props }: React.ComponentProps<typeof SwitchPrimitive.Root>) {
   return (

@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { type Label as LabelPrimitive, Slot as SlotPrimitive } from 'radix-ui';
-import * as React from 'react';
+import React from 'react';
 import { Form as RouterForm } from 'react-router';
 
 import { Label } from '../components/label';
