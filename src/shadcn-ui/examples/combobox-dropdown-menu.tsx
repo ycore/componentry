@@ -1,0 +1,83 @@
+import * as React from 'react';
+
+import { createSpriteIcon } from '../../images/SpriteIcon';
+import type { IconName } from '../@types/lucide-sprites';
+import svgSpriteUrl from '../assets/lucide-sprites.svg?url';
+import { Button } from '../components/button';
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '../components/command';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuTrigger,
+} from '../components/dropdown-menu';
+
+const SpriteIcon = createSpriteIcon<IconName>(svgSpriteUrl);
+
+const labels = ['feature', 'bug', 'enhancement', 'documentation', 'design', 'question', 'maintenance'];
+
+export default function ComboboxDropdownMenu() {
+  const [label, setLabel] = React.useState('feature');
+  const [open, setOpen] = React.useState(false);
+
+  return (
+    <div className="flex w-full flex-col items-start justify-between rounded-md border px-4 py-3 sm:flex-row sm:items-center">
+      <p className="font-medium text-sm leading-none">
+        <span className="mr-2 rounded-lg bg-primary px-2 py-1 text-primary-foreground text-xs">{label}</span>
+        <span className="text-muted-foreground">Create a new project</span>
+      </p>
+      <DropdownMenu open={open} onOpenChange={setOpen}>
+        <DropdownMenuTrigger asChild>
+          <Button variant="ghost" size="sm">
+            <SpriteIcon id="Ellipsis" />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end" className="w-[200px]">
+          <DropdownMenuLabel>Actions</DropdownMenuLabel>
+          <DropdownMenuGroup>
+            <DropdownMenuItem>Assign to...</DropdownMenuItem>
+            <DropdownMenuItem>Set due date...</DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuSub>
+              <DropdownMenuSubTrigger>Apply label</DropdownMenuSubTrigger>
+              <DropdownMenuSubContent className="p-0">
+                <Command>
+                  <CommandInput placeholder="Filter label..." autoFocus={true} className="h-9" />
+                  <CommandList>
+                    <CommandEmpty>No label found.</CommandEmpty>
+                    <CommandGroup>
+                      {labels.map(label => (
+                        <CommandItem
+                          key={label}
+                          value={label}
+                          onSelect={value => {
+                            setLabel(value);
+                            setOpen(false);
+                          }}
+                        >
+                          {label}
+                        </CommandItem>
+                      ))}
+                    </CommandGroup>
+                  </CommandList>
+                </Command>
+              </DropdownMenuSubContent>
+            </DropdownMenuSub>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem className="text-red-600">
+              Delete
+              <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
+            </DropdownMenuItem>
+          </DropdownMenuGroup>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </div>
+  );
+}

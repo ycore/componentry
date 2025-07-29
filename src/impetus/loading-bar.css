@@ -1,0 +1,29 @@
+@theme {
+  @keyframes loading-bar {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+}
+
+@layer utilities {
+  .loading-bar {
+    @apply relative;
+  }
+
+  .loading-bar::before {
+    content: "";
+    @apply absolute top-0 left-0 right-0 h-1 bg-slate-200/30 dark:bg-slate-700/30 overflow-hidden;
+  }
+
+  .loading-bar::after {
+    content: "";
+    @apply absolute top-0 left-0 h-1 bg-blue-600 dark:bg-blue-400;
+    background: linear-gradient(90deg, transparent, currentColor, transparent);
+    animation: loading-bar 2s ease-in-out infinite;
+    width: 100%;
+  }
+}

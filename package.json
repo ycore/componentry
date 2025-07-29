@@ -1,0 +1,52 @@
+{
+  "name": "@ycore/componentry",
+  "version": "2.1.0",
+  "private": true,
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/ycore/componentry.git"
+  },
+  "exports": {
+    "./catalyst": "./src/catalyst/index.ts",
+    "./images": "./src/images/index.ts",
+    "./images/plugins": "./src/images/plugins/index.ts",
+    "./impetus": "./src/impetus/index.ts",
+    "./impetus/loading-bar.css": "./src/impetus/loading-bar.css",
+    "./impetus/theme-switch.css": "./src/impetus/theme-switch.css",
+    "./shadcn-ui": "./src/shadcn-ui/components/index.ts",
+    "./shadcn-ui/styles/shadcn-ui.css": "./src/shadcn-ui/styles/shadcn-ui.css",
+    "./shadcn-ui/styles/gray.css": "./src/shadcn-ui/styles/gray-tw.css",
+    "./shadcn-ui/styles/neutral.css": "./src/shadcn-ui/styles/neutral-tw.css",
+    "./shadcn-ui/styles/slate.css": "./src/shadcn-ui/styles/slate-tw.css",
+    "./shadcn-ui/styles/stone.css": "./src/shadcn-ui/styles/stone-tw.css",
+    "./shadcn-ui/styles/zinc.css": "./src/shadcn-ui/styles/zinc-tw.css",
+    "./shadcn-ui/assets/lucide-sprites.svg": "./src/shadcn-ui/assets/lucide-sprites.svg",
+    "./shadcn-ui/types/lucide-sprites": "./src/shadcn-ui/@types/lucide-sprites.ts",
+    "./package.json": "./package.json"
+  },
+  "dependencies": {
+    "@headlessui/react": "^2.2.4",
+    "class-variance-authority": "^0.7.1",
+    "cmdk": "^1.1.1",
+    "next-themes": "^0.4.6",
+    "radix-ui": "^1.4.2",
+    "sonner": "^2.0.6"
+  },
+  "devDependencies": {
+    "@total-typescript/tsconfig": "catalog:dev",
+    "@types/react": "catalog:dev",
+    "heroicons": "catalog:dev",
+    "lucide-static": "catalog:dev",
+    "vite": "catalog:dev"
+  },
+  "peerDependencies": {
+    "clsx": "catalog:peer",
+    "react": "catalog:peer",
+    "react-router": "catalog:peer"
+  },
+  "scripts": {
+    "build-catalyst": "bun ./scripts/build-catalyst.ts",
+    "build-shadcn": "bun ./scripts/build-shadcn.ts"
+  }
+}
