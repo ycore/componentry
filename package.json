@@ -14,7 +14,7 @@
     "./impetus": "./src/impetus/index.ts",
     "./impetus/loading-bar.css": "./src/impetus/loading-bar.css",
     "./impetus/theme-switch.css": "./src/impetus/theme-switch.css",
-    "./shadcn-ui": "./src/shadcn-ui/components/index.ts",
+    "./shadcn-ui": "./src/shadcn-ui/index.ts",
     "./shadcn-ui/styles/shadcn-ui.css": "./src/shadcn-ui/styles/shadcn-ui.css",
     "./shadcn-ui/styles/gray.css": "./src/shadcn-ui/styles/gray-tw.css",
     "./shadcn-ui/styles/neutral.css": "./src/shadcn-ui/styles/neutral-tw.css",
