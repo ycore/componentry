@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { Progress as ProgressPrimitive } from 'radix-ui';
-import type * as React from 'react';
+import * as React from 'react';
 
 function Progress({ className, value, ...props }: React.ComponentProps<typeof ProgressPrimitive.Root>) {
   return (

@@ -1,4 +1,4 @@
-import type React from 'react';
+import React from 'react';
 import { SpriteIcon } from '../../images/SpriteIcon';
 import { THEME_OPTIONS, ThemeSwitch } from '../../impetus';
 import { type IconName, iconNames } from '../@types/lucide-sprites';

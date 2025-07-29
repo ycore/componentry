@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { ScrollArea as ScrollAreaPrimitive } from 'radix-ui';
-import type * as React from 'react';
+import * as React from 'react';
 
 function ScrollArea({ className, children, ...props }: React.ComponentProps<typeof ScrollAreaPrimitive.Root>) {
   return (

@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { RadioGroup as RadioGroupPrimitive } from 'radix-ui';
-import type * as React from 'react';
+import * as React from 'react';
 
 import { SpriteIcon } from '../../images/SpriteIcon';
 import type { IconName } from '../@types/lucide-sprites';

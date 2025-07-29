@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { Tabs as TabsPrimitive } from 'radix-ui';
-import type * as React from 'react';
+import * as React from 'react';
 
 function Tabs({ className, ...props }: React.ComponentProps<typeof TabsPrimitive.Root>) {
   return <TabsPrimitive.Root data-slot="tabs" className={clsx('flex flex-col gap-2', className)} {...props} />;

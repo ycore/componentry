@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { ContextMenu as ContextMenuPrimitive } from 'radix-ui';
-import type * as React from 'react';
+import * as React from 'react';
 
 import { createSpriteIcon } from '../../images/SpriteIcon';
 import type { IconName } from '../@types/lucide-sprites';
