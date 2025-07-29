@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import React from 'react';
 
 import { SpriteIcon } from '../../images/SpriteIcon';
 import type { IconName } from '../@types/lucide-sprites';
