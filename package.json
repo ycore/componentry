@@ -38,11 +38,11 @@
       "default": "./src/shadcn-ui/index.ts"
     },
     "./shadcn-ui/styles/shadcn-ui.css": "./dist/shadcn-ui/styles/shadcn-ui.css",
-    "./shadcn-ui/styles/gray.css": "./dist/shadcn-ui/styles/gray-tw.css",
-    "./shadcn-ui/styles/neutral.css": "./dist/shadcn-ui/styles/neutral-tw.css",
-    "./shadcn-ui/styles/slate.css": "./dist/shadcn-ui/styles/slate-tw.css",
-    "./shadcn-ui/styles/stone.css": "./dist/shadcn-ui/styles/stone-tw.css",
-    "./shadcn-ui/styles/zinc.css": "./dist/shadcn-ui/styles/zinc-tw.css",
+    "./shadcn-ui/styles/gray.css": "./dist/shadcn-ui/styles/gray.css",
+    "./shadcn-ui/styles/neutral.css": "./dist/shadcn-ui/styles/neutral.css",
+    "./shadcn-ui/styles/slate.css": "./dist/shadcn-ui/styles/slate.css",
+    "./shadcn-ui/styles/stone.css": "./dist/shadcn-ui/styles/stone.css",
+    "./shadcn-ui/styles/zinc.css": "./dist/shadcn-ui/styles/zinc.css",
     "./shadcn-ui/assets/lucide-sprites.svg": "./dist/shadcn-ui/assets/lucide-sprites.svg",
     "./shadcn-ui/types/lucide-sprites": "./src/shadcn-ui/@types/lucide-sprites.ts",
     "./package.json": "./package.json"
