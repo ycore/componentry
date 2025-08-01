@@ -1,5 +1,3 @@
-'use client';
-
 import React from 'react';
 import { Button } from '../components/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuSeparator, DropdownMenuTrigger } from '../components/dropdown-menu';

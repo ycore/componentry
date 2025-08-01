@@ -342,7 +342,7 @@ export const Form = Object.assign(FormComponent, {
   Field: FormComponents.FormField,
 });
 
-export { iconNames } from './@types/lucide-sprites.ts';
+export { type IconName, iconNames } from './@types/lucide-sprites.ts';
 export { Link } from './custom/link';
 export { Spinner } from './custom/spinner';
 export { ComponentExamples } from './examples/index';

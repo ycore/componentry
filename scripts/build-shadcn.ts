@@ -150,6 +150,15 @@ async function processFiles(basePath: string, relativePath: string = '', fileSpe
       }
     }
 
+    // 3. Process standalone type exports: export type ... = ...
+    const standaloneTypeExports = fileContent.match(/export\s+type\s+([A-Za-z]\w+)/g);
+    if (standaloneTypeExports) {
+      for (const stmt of standaloneTypeExports) {
+        const exportName = stmt.match(/export\s+type\s+([A-Za-z]\w+)/)?.[1];
+        if (exportName) typeExports.add(exportName);
+      }
+    }
+
     processedFiles.push({ fileName, filePathWithRelative, relativePath, exports, typeExports, useExports });
   }
 
@@ -159,10 +168,8 @@ async function processFiles(basePath: string, relativePath: string = '', fileSpe
 async function generateIndexFile(componentPath: URL) {
   let indexContent = '';
 
-  // Process main directory files
-  // const mainFiles = await processFiles(componentPath.pathname);
-
-  const additionalFiles = await Promise.all(
+  // Process files
+  const processedFiles = await Promise.all(
     COMPONENTS_ADD.map(async (config) => {
       const dirPath = path.join(componentPath.pathname, config.relativePath);
 
@@ -174,24 +181,7 @@ async function generateIndexFile(componentPath: URL) {
     })
   );
 
-  // Process custom directory files if it exists
-  // const customPath = path.join(componentPath.pathname, '../custom');
-  // let customFiles = [];
-  // if (fs.existsSync(customPath)) {
-  //   customFiles = await processFiles(customPath, '../custom');
-  // }
-
-  // Process examples directory files if it exists
-  // const examplesPath = path.join(componentPath.pathname, '../examples');
-  // let examplesFiles = [];
-  // if (fs.existsSync(examplesPath) && fs.existsSync(path.join(examplesPath, 'index.tsx'))) {
-  //   examplesFiles = await processFiles(examplesPath, '../examples', 'index.tsx');
-  // }
-
-  // Combine all files
-  // const allFiles = [...mainFiles, ...customFiles, ...examplesFiles];
-  // const allFiles = [...mainFiles, ...additionalFiles.flat()];
-  const allFiles = [...additionalFiles.flat()];
+  const allFiles = [...processedFiles.flat()];
 
   for (const file of allFiles) {
     const { fileName, filePathWithRelative, relativePath, exports, typeExports, useExports } = file;

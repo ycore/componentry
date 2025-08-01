@@ -157,7 +157,7 @@ function SpriteExamples() {
 
       <div className="flex flex-row flex-wrap gap-4">
         {iconNames.map(iconName => (
-          <div key={iconName} className="flex flex-col items-center rounded-lg border p-3 transition-colors hover:bg-gray-800/75 hover:dark:bg-gray-100/75">
+          <div key={iconName} className='flex flex-col items-center rounded-lg border bg-background p-3 transition-colors hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:hover:bg-input/50'>
             <Tooltip>
               <TooltipTrigger asChild>
                 <SpriteIcon<IconName> url={svgSpriteUrl} id={iconName} className="h-6 w-6 text-accent-foreground" viewBox="0 0 24 24" />
