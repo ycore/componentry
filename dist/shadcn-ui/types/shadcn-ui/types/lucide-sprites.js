@@ -1,4 +1,5 @@
-const e = [
+// src/shadcn-ui/@types/lucide-sprites.ts
+var iconNames = [
   "ArrowDown",
   "ArrowLeft",
   "ArrowRight",
@@ -37,6 +38,7 @@ const e = [
   "X"
 ];
 export {
-  e as iconNames
+  iconNames
 };
-//# sourceMappingURL=lucide-sprites.js.map
+
+//# debugId=41FB68423F3726B464756E2164756E21
