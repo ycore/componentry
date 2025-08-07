@@ -103,56 +103,8 @@ async function writeChangedFile(filepath, newContent, count) {
     console.info(`  ✅ Created SVG sprite: ${filepath}`);
   }
 }
-// src/images/plugins/resolve-assets.ts
-import { existsSync } from "node:fs";
-import fs2 from "node:fs/promises";
-import path2 from "node:path";
-function resolveAssets(options) {
-  const virtualPrefix = "virtual:external-asset:";
-  function getSourcePath(asset) {
-    return asset.replace(/^@([^/]+)\/([^/]+)\/(.+)$/, "node_modules/@$1/$2/dist/$3");
-  }
-  return {
-    name: "resolve-assets-plugin",
-    resolveId(id) {
-      if (id.startsWith(virtualPrefix)) {
-        return id;
-      }
-      for (const asset of options.assets) {
-        if (id === asset || id === `${asset}?url`) {
-          return `${virtualPrefix}${asset}`;
-        }
-      }
-      return null;
-    },
-    async load(id) {
-      if (id.startsWith(virtualPrefix)) {
-        const asset = id.replace(virtualPrefix, "");
-        if (options.assets.includes(asset)) {
-          const sourceFile = path2.join(process.cwd(), getSourcePath(asset));
-          if (existsSync(sourceFile)) {
-            try {
-              const fileName = path2.basename(sourceFile);
-              const source = await fs2.readFile(sourceFile);
-              const assetRefId = this.emitFile({
-                type: "asset",
-                name: fileName,
-                source
-              });
-              return `export default import.meta.ROLLUP_FILE_URL_${assetRefId}`;
-            } catch (error) {
-              this.error(`Failed to load asset ${sourceFile}: ${error}`);
-            }
-          }
-        }
-      }
-      return null;
-    }
-  };
-}
 export {
-  resolveAssets,
   iconSpritesheets
 };
 
-//# debugId=9891ABB0E3E84FA964756E2164756E21
+//# debugId=46A7E2F42178DDFD64756E2164756E21

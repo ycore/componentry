@@ -2,6 +2,7 @@ import { defineConfig } from 'vite'
 import { resolve } from 'path'
 
 export default defineConfig({
+  plugins: [],
 
   build: {
     lib: {
@@ -10,6 +11,7 @@ export default defineConfig({
         'images': resolve(__dirname, 'src/images/index.ts'),
         'impetus': resolve(__dirname, 'src/impetus/index.ts'),
         'shadcn-ui': resolve(__dirname, 'src/shadcn-ui/index.ts'),
+        'shadcn-ui/examples': resolve(__dirname, 'src/shadcn-ui/examples/index.tsx'),
         'shadcn-ui/types/lucide-sprites': resolve(__dirname, 'src/shadcn-ui/@types/lucide-sprites.ts')
       },
       formats: ['es'],
@@ -24,6 +26,7 @@ export default defineConfig({
         'class-variance-authority',
         'cmdk',
         'next-themes',
+        'node-html-parser',
         'radix-ui',
         'sonner',
         'node:child_process',

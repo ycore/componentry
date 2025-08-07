@@ -5,7 +5,6 @@ import React from 'react';
 
 import { SpriteIcon } from '../../images/SpriteIcon';
 import type { IconName } from '../@types/lucide-sprites';
-import svgSpriteUrl from '../assets/lucide-sprites.svg?url';
 import { useIsMobile } from '../hooks/use-mobile';
 import { Button } from './button';
 import { Input } from './input';
@@ -141,12 +140,13 @@ function Sidebar({
   collapsible = 'offcanvas',
   className,
   children,
+  spriteUrl,
   ...props
 }: React.ComponentProps<'div'> & {
   side?: 'left' | 'right';
   variant?: 'sidebar' | 'floating' | 'inset';
   collapsible?: 'offcanvas' | 'icon' | 'none';
-}) {
+} & { spriteUrl: string }) {
   const { isMobile, state, openMobile, setOpenMobile } = useSidebar();
 
   if (collapsible === 'none') {
@@ -171,6 +171,7 @@ function Sidebar({
             } as React.CSSProperties
           }
           side={side}
+          spriteUrl={spriteUrl}
         >
           <SheetHeader className="sr-only">
             <SheetTitle>Sidebar</SheetTitle>
@@ -219,7 +220,7 @@ function Sidebar({
   );
 }
 
-function SidebarTrigger({ className, onClick, ...props }: React.ComponentProps<typeof Button>) {
+function SidebarTrigger({ className, onClick, spriteUrl, ...props }: React.ComponentProps<typeof Button> & { spriteUrl: string }) {
   const { toggleSidebar } = useSidebar();
 
   return (
@@ -235,7 +236,7 @@ function SidebarTrigger({ className, onClick, ...props }: React.ComponentProps<t
       }}
       {...props}
     >
-      <SpriteIcon<IconName> id="PanelLeft" url={svgSpriteUrl} />
+      <SpriteIcon<IconName> id="PanelLeft" url={spriteUrl} />
       <span className="sr-only">Toggle Sidebar</span>
     </Button>
   );

@@ -1,21 +1,8 @@
 import React from 'react';
-import {
-  Menubar,
-  MenubarCheckboxItem,
-  MenubarContent,
-  MenubarItem,
-  MenubarMenu,
-  MenubarRadioGroup,
-  MenubarRadioItem,
-  MenubarSeparator,
-  MenubarShortcut,
-  MenubarSub,
-  MenubarSubContent,
-  MenubarSubTrigger,
-  MenubarTrigger,
-} from '../components/menubar';
 
-export default function MenubarDemo() {
+import { Menubar, MenubarCheckboxItem, MenubarContent, MenubarItem, MenubarMenu, MenubarRadioGroup, MenubarRadioItem, MenubarSeparator, MenubarShortcut, MenubarSub, MenubarSubContent, MenubarSubTrigger, MenubarTrigger, } from '../components/menubar';
+
+export default function MenubarDemo({ spriteUrl }: { spriteUrl: string }) {
   return (
     <Menubar>
       <MenubarMenu>
@@ -30,7 +17,7 @@ export default function MenubarDemo() {
           <MenubarItem disabled>New Incognito Window</MenubarItem>
           <MenubarSeparator />
           <MenubarSub>
-            <MenubarSubTrigger>Share</MenubarSubTrigger>
+            <MenubarSubTrigger spriteUrl={spriteUrl}>Share</MenubarSubTrigger>
             <MenubarSubContent>
               <MenubarItem>Email link</MenubarItem>
               <MenubarItem>Messages</MenubarItem>
@@ -54,7 +41,7 @@ export default function MenubarDemo() {
           </MenubarItem>
           <MenubarSeparator />
           <MenubarSub>
-            <MenubarSubTrigger>Find</MenubarSubTrigger>
+            <MenubarSubTrigger spriteUrl={spriteUrl}>Find</MenubarSubTrigger>
             <MenubarSubContent>
               <MenubarItem>Search the web</MenubarItem>
               <MenubarSeparator />
@@ -72,8 +59,8 @@ export default function MenubarDemo() {
       <MenubarMenu>
         <MenubarTrigger>View</MenubarTrigger>
         <MenubarContent>
-          <MenubarCheckboxItem>Always Show Bookmarks Bar</MenubarCheckboxItem>
-          <MenubarCheckboxItem checked>Always Show Full URLs</MenubarCheckboxItem>
+          <MenubarCheckboxItem spriteUrl={spriteUrl}>Always Show Bookmarks Bar</MenubarCheckboxItem>
+          <MenubarCheckboxItem spriteUrl={spriteUrl} checked>Always Show Full URLs</MenubarCheckboxItem>
           <MenubarSeparator />
           <MenubarItem inset>
             Reload <MenubarShortcut>⌘R</MenubarShortcut>
@@ -91,9 +78,9 @@ export default function MenubarDemo() {
         <MenubarTrigger>Profiles</MenubarTrigger>
         <MenubarContent>
           <MenubarRadioGroup value="benoit">
-            <MenubarRadioItem value="andy">Andy</MenubarRadioItem>
-            <MenubarRadioItem value="benoit">Benoit</MenubarRadioItem>
-            <MenubarRadioItem value="Luis">Luis</MenubarRadioItem>
+            <MenubarRadioItem spriteUrl={spriteUrl} value="andy">Andy</MenubarRadioItem>
+            <MenubarRadioItem spriteUrl={spriteUrl} value="benoit">Benoit</MenubarRadioItem>
+            <MenubarRadioItem spriteUrl={spriteUrl} value="Luis">Luis</MenubarRadioItem>
           </MenubarRadioGroup>
           <MenubarSeparator />
           <MenubarItem inset>Edit...</MenubarItem>

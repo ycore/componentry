@@ -1,16 +1,12 @@
 import React from 'react';
-import { createSpriteIcon } from '../../images/SpriteIcon';
+import { SpriteIcon } from '../../images/SpriteIcon';
 import type { IconName } from '../@types/example-sprites';
-import svgSpriteUrl from '../assets/example-sprites.svg?url';
-
-const SpriteIcon = createSpriteIcon<IconName>(svgSpriteUrl);
-
 import { Toggle } from '../components/toggle';
 
-export default function ToggleDisabled() {
+export default function ToggleDisabled({ spriteUrl }: { spriteUrl: string }) {
   return (
     <Toggle aria-label="Toggle italic" disabled>
-      <SpriteIcon id="Underline" className="h-4 w-4" />
+      <SpriteIcon<IconName> id="Underline" className="h-4 w-4" url={spriteUrl} />
     </Toggle>
   );
 }

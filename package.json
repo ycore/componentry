@@ -37,6 +37,11 @@
       "types": "./dist/shadcn-ui/index.d.ts",
       "default": "./src/shadcn-ui/index.ts"
     },
+    "./shadcn-ui/examples": {
+      "import": "./dist/shadcn-ui/examples/index.js",
+      "types": "./dist/shadcn-ui/examples/index.d.ts",
+      "default": "./src/shadcn-ui/examples/index.tsx"
+    },
     "./shadcn-ui/styles/shadcn-ui.css": "./dist/shadcn-ui/styles/shadcn-ui.css",
     "./shadcn-ui/styles/gray.css": "./dist/shadcn-ui/styles/gray.css",
     "./shadcn-ui/styles/neutral.css": "./dist/shadcn-ui/styles/neutral.css",

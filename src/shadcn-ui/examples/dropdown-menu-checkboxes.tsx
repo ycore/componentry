@@ -5,7 +5,7 @@ import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMe
 
 type Checked = DropdownMenuCheckboxItemProps['checked'];
 
-export default function DropdownMenuCheckboxes() {
+export default function DropdownMenuCheckboxes({ spriteUrl }: { spriteUrl: string }) {
   const [showStatusBar, setShowStatusBar] = React.useState<Checked>(true);
   const [showActivityBar, setShowActivityBar] = React.useState<Checked>(false);
   const [showPanel, setShowPanel] = React.useState<Checked>(false);
@@ -18,13 +18,13 @@ export default function DropdownMenuCheckboxes() {
       <DropdownMenuContent className="w-56">
         <DropdownMenuLabel>Appearance</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuCheckboxItem checked={showStatusBar} onCheckedChange={setShowStatusBar}>
+        <DropdownMenuCheckboxItem spriteUrl={spriteUrl} checked={showStatusBar} onCheckedChange={setShowStatusBar}>
           Status Bar
         </DropdownMenuCheckboxItem>
-        <DropdownMenuCheckboxItem checked={showActivityBar} onCheckedChange={setShowActivityBar} disabled>
+        <DropdownMenuCheckboxItem spriteUrl={spriteUrl} checked={showActivityBar} onCheckedChange={setShowActivityBar} disabled>
           Activity Bar
         </DropdownMenuCheckboxItem>
-        <DropdownMenuCheckboxItem checked={showPanel} onCheckedChange={setShowPanel}>
+        <DropdownMenuCheckboxItem spriteUrl={spriteUrl} checked={showPanel} onCheckedChange={setShowPanel}>
           Panel
         </DropdownMenuCheckboxItem>
       </DropdownMenuContent>

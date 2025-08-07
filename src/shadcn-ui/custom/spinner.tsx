@@ -12,10 +12,6 @@ interface SpinnerProps {
 
 export function Spinner({ className, spriteUrl, iconId = 'Loader' }: SpinnerProps) {
   return (
-    <SpriteIcon<IconName>
-      id={iconId}
-      url={spriteUrl}
-      className={clsx(className, 'animate-spin')}
-    />
+    <SpriteIcon<IconName> id={iconId} url={spriteUrl} className={clsx(className, 'animate-spin')} />
   );
 }

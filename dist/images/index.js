@@ -28,15 +28,12 @@ function createSpriteIcon(spriteUrl) {
   };
 }
 
-// url-asset:../assets/lucide-sprites.svg
-var lucide_sprites_default = "./../assets/lucide-sprites.svg";
-
 // src/shadcn-ui/custom/spinner.tsx
 import { jsx as jsx2 } from "react/jsx-runtime";
-function Spinner({ className }) {
+function Spinner({ className, spriteUrl, iconId = "Loader" }) {
   return /* @__PURE__ */ jsx2(SpriteIcon, {
-    id: "Loader",
-    url: lucide_sprites_default,
+    id: iconId,
+    url: spriteUrl,
     className: clsx(className, "animate-spin")
   });
 }
@@ -58,7 +55,21 @@ var createRemoteImagePromise = (src, alt, width, height) => {
     img.src = src;
   });
 };
-function LazyImage({ image, src, alt, width, height, className, fallback = /* @__PURE__ */ jsx3(Spinner, {}) }) {
+function LazyImage({
+  image,
+  src,
+  alt,
+  width,
+  height,
+  className,
+  spriteUrl,
+  fallback = spriteUrl ? /* @__PURE__ */ jsx3(Spinner, {
+    spriteUrl
+  }) : /* @__PURE__ */ jsx3("div", {
+    className: "text-slate-500/50",
+    children: "Loading..."
+  })
+}) {
   const imagePromise = image || (src ? createRemoteImagePromise(src, alt || "", width, height) : null);
   if (!imagePromise) {
     return /* @__PURE__ */ jsx3("div", {
@@ -70,8 +81,12 @@ function LazyImage({ image, src, alt, width, height, className, fallback = /* @_
     fallback,
     children: /* @__PURE__ */ jsx3(TypedAwait, {
       resolve: imagePromise,
-      errorElement: /* @__PURE__ */ jsx3(Spinner, {
+      errorElement: spriteUrl ? /* @__PURE__ */ jsx3(Spinner, {
+        spriteUrl,
         className: "text-slate-500/50"
+      }) : /* @__PURE__ */ jsx3("div", {
+        className: "text-slate-500/50",
+        children: "Error loading image"
       }),
       children: (imageData) => /* @__PURE__ */ jsx3(ImageElement, {
         ...imageData,
@@ -80,16 +95,27 @@ function LazyImage({ image, src, alt, width, height, className, fallback = /* @_
     })
   });
 }
-function LazyGallery({ images, className, imageClass, fallback = /* @__PURE__ */ jsx3(Spinner, {
-  className: "h-[180px]"
-}) }) {
+function LazyGallery({
+  images,
+  className,
+  imageClass,
+  spriteUrl,
+  fallback = spriteUrl ? /* @__PURE__ */ jsx3(Spinner, {
+    spriteUrl,
+    className: "h-[180px]"
+  }) : /* @__PURE__ */ jsx3("div", {
+    className: "h-[180px] text-slate-500/50",
+    children: "Loading..."
+  })
+}) {
   return /* @__PURE__ */ jsx3("div", {
     className,
     children: images.map((imgPromise) => /* @__PURE__ */ jsx3(LazyImage, {
       image: imgPromise,
       className: imageClass,
+      spriteUrl,
       fallback
-    }))
+    }, imgPromise.toString()))
   });
 }
 function TypedAwait({ resolve, children, ...props }) {
@@ -118,4 +144,4 @@ export {
   LazyGallery
 };
 
-//# debugId=4C8223723C69A64D64756E2164756E21
+//# debugId=D44B83C0F4CD192664756E2164756E21

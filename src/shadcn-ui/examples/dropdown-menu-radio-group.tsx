@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from '../components/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuSeparator, DropdownMenuTrigger } from '../components/dropdown-menu';
 
-export default function DropdownMenuRadioGroupDemo() {
+export default function DropdownMenuRadioGroupDemo({ spriteUrl }: { spriteUrl: string }) {
   const [position, setPosition] = React.useState('bottom');
 
   return (
@@ -14,9 +14,9 @@ export default function DropdownMenuRadioGroupDemo() {
         <DropdownMenuLabel>Panel Position</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuRadioGroup value={position} onValueChange={setPosition}>
-          <DropdownMenuRadioItem value="top">Top</DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="bottom">Bottom</DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="right">Right</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem spriteUrl={spriteUrl} value="top">Top</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem spriteUrl={spriteUrl} value="bottom">Bottom</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem spriteUrl={spriteUrl} value="right">Right</DropdownMenuRadioItem>
         </DropdownMenuRadioGroup>
       </DropdownMenuContent>
     </DropdownMenu>

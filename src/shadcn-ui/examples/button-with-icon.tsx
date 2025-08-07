@@ -1,15 +1,12 @@
 import React from 'react';
-import { createSpriteIcon } from '../../images/SpriteIcon';
+import { SpriteIcon } from '../../images/SpriteIcon';
 import type { IconName } from '../@types/lucide-sprites';
-import svgSpriteUrl from '../assets/lucide-sprites.svg?url';
 import { Button } from '../components/button';
 
-const SpriteIcon = createSpriteIcon<IconName>(svgSpriteUrl);
-
-export default function ButtonWithIcon() {
+export default function ButtonWithIcon({ spriteUrl }: { spriteUrl: string }) {
   return (
     <Button variant="outline" size="sm">
-      <SpriteIcon id="Calendar" /> New Branch
+      <SpriteIcon<IconName> id="Calendar" url={spriteUrl} /> New Branch
     </Button>
   );
 }

@@ -66,24 +66,11 @@ function SpriteIcon({ url, id, ...props }) {
     })
   });
 }
-function createSpriteIcon(spriteUrl) {
-  return function SpriteIconComponent({ id, ...props }) {
-    return /* @__PURE__ */ jsx4(SpriteIcon, {
-      url: spriteUrl,
-      id,
-      ...props
-    });
-  };
-}
-
-// url-asset:../shadcn-ui/assets/lucide-sprites.svg
-var lucide_sprites_default = "./../shadcn-ui/assets/lucide-sprites.svg";
 
 // src/impetus/ThemeSwitch.tsx
 import { jsx as jsx5 } from "react/jsx-runtime";
-var SpriteIcon2 = createSpriteIcon(lucide_sprites_default);
 var THEME_OPTIONS = { theme: { light: "light", dark: "dark" } };
-var ThemeSwitch = ({ theme = THEME_OPTIONS, className, classTheme }) => {
+var ThemeSwitch = ({ theme = THEME_OPTIONS, spriteUrl, className, classTheme }) => {
   const [mounted, setMounted] = useState(false);
   const { resolvedTheme, setTheme } = useTheme();
   useEffect(() => setMounted(true), []);
@@ -98,10 +85,12 @@ var ThemeSwitch = ({ theme = THEME_OPTIONS, className, classTheme }) => {
       e.stopPropagation();
     },
     "aria-label": "theme switch",
-    children: resolvedTheme === theme.theme.dark ? /* @__PURE__ */ jsx5(SpriteIcon2, {
+    children: resolvedTheme === theme.theme.dark ? /* @__PURE__ */ jsx5(SpriteIcon, {
+      url: spriteUrl,
       id: "Moon",
       className: clsx3("size-5", className)
-    }) : /* @__PURE__ */ jsx5(SpriteIcon2, {
+    }) : /* @__PURE__ */ jsx5(SpriteIcon, {
+      url: spriteUrl,
       id: "Sun",
       className: clsx3("size-5", className)
     })
@@ -116,4 +105,4 @@ export {
   Footer
 };
 
-//# debugId=3012A9C3044CF2EA64756E2164756E21
+//# debugId=32D85A38BFB7D3A064756E2164756E21

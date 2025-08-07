@@ -3,7 +3,7 @@ import { Breadcrumb, BreadcrumbEllipsis, BreadcrumbItem, BreadcrumbLink, Breadcr
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '../components/dropdown-menu';
 import { Link } from '../custom/link';
 
-export default function BreadcrumbDemo() {
+export default function BreadcrumbDemo({ spriteUrl }: { spriteUrl: string }) {
   return (
     <Breadcrumb>
       <BreadcrumbList>
@@ -12,11 +12,11 @@ export default function BreadcrumbDemo() {
             <Link href="/">Home</Link>
           </BreadcrumbLink>
         </BreadcrumbItem>
-        <BreadcrumbSeparator />
+        <BreadcrumbSeparator spriteUrl={spriteUrl} />
         <BreadcrumbItem>
           <DropdownMenu>
             <DropdownMenuTrigger className="flex items-center gap-1">
-              <BreadcrumbEllipsis className="size-4" />
+              <BreadcrumbEllipsis spriteUrl={spriteUrl} className="size-4" />
               <span className="sr-only">Toggle menu</span>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="start">
@@ -26,13 +26,13 @@ export default function BreadcrumbDemo() {
             </DropdownMenuContent>
           </DropdownMenu>
         </BreadcrumbItem>
-        <BreadcrumbSeparator />
+        <BreadcrumbSeparator spriteUrl={spriteUrl} />
         <BreadcrumbItem>
           <BreadcrumbLink asChild>
             <Link href="/docs/components">Components</Link>
           </BreadcrumbLink>
         </BreadcrumbItem>
-        <BreadcrumbSeparator />
+        <BreadcrumbSeparator spriteUrl={spriteUrl} />
         <BreadcrumbItem>
           <BreadcrumbPage>Breadcrumb</BreadcrumbPage>
         </BreadcrumbItem>
