@@ -1,6 +1,4 @@
-import type { HTMLAttributes, ReactNode } from 'react';
-
-import type { SidebarLayout } from '../../catalyst';
+import type { ReactNode } from 'react';
 
 export type FilterProps = { filter?: string[] };
 export type ComponentProps = { component: ReactNode };
@@ -12,13 +10,15 @@ export type ValidSubMenuItem = ({ ref: string } & WithLabelOrComponent & WithHre
 export type WithSubmenu = { submenu: ValidSubMenuItem[]; href?: never };
 export type SectionItem = { ref: string } & FilterProps & ((WithLabelOrComponent & WithHref) | (WithLabelOrComponent & WithSubmenu) | (ComponentProps & { href?: never; submenu?: never }));
 export type Section = { section: SectionItem[] };
-export interface NavMenuProps extends Omit<React.ComponentProps<typeof SidebarLayout>, 'navbar' | 'sidebar'> {
+
+export interface StackMenuProps extends React.ComponentProps<'div'> {
   navConfigItems: Section[];
   navFilters?: string[];
   menuClass?: string;
+  spriteUrl: string;
 }
-export interface NavMenuItemProps extends HTMLAttributes<HTMLElement> {
-  sectionitem: SectionItem;
-  type?: string;
-  navkey?: string | number;
+
+export interface NavMenuItemProps {
+  sectionItem: SectionItem;
+  spriteUrl: string;
 }

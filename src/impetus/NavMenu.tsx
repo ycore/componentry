@@ -1,141 +1,134 @@
-import { ChevronDownIcon, ChevronRightIcon } from '@heroicons/react/16/solid';
 import clsx from 'clsx';
-
-// Simple utility function for converting numbers to base-36 strings
-const toBase = (num: number): string => num.toString(36);
-import { createContext, Fragment, useContext } from 'react';
+import { createContext, useContext } from 'react';
 import { useLocation } from 'react-router';
-import { Dropdown, Navbar, Sidebar, SidebarLayout, StackedLayout } from '../catalyst';
-import type { NavMenuItemProps, NavMenuProps, Section, SectionItem } from './@types/NavMenu.types';
+
+import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger, navigationMenuTriggerStyle } from '../shadcn-ui/components/navigation-menu';
+import type { NavMenuItemProps, Section, SectionItem, StackMenuProps } from './@types/NavMenu.types';
 
 const LocationContext = createContext<string>('');
 
-export const SideMenu = ({ navConfigItems, navFilters, menuClass, ...props }: NavMenuProps) => {
-  const { children, ...rest } = props;
+export const StackMenu3 = ({ navConfigItems, navFilters, menuClass, spriteUrl, children, ...props }: StackMenuProps) => {
   const location = useLocation();
-  const { navbar, sidebar } = NavMenuFactory({ navConfigItems, navFilters });
+
   return (
     <LocationContext.Provider value={location.pathname}>
-      <SidebarLayout navbar={navbar} sidebar={sidebar} className={menuClass} {...rest}>
-        {children}
-      </SidebarLayout>
+      <div className={clsx('flex min-h-svh w-full flex-col', menuClass)} {...props}>
+        {/* Top Navigation Bar */}
+        <header className="border-b bg-background/95 backdrop-blur supports-backdrop-blur:bg-background/60">
+          <div className='flex h-14 w-full items-center'>
+            <NavMenuFactory navConfigItems={navConfigItems} navFilters={navFilters} spriteUrl={spriteUrl} />
+          </div>
+        </header>
+
+        {/* Content Area */}
+        {children && (
+          <main className="flex-1">
+            <div className="container py-6">{children}</div>
+          </main>
+        )}
+      </div>
     </LocationContext.Provider>
   );
 };
 
-export const StackMenu = ({ navConfigItems, navFilters, menuClass, ...props }: NavMenuProps) => {
-  const { children, ...rest } = props;
-  const location = useLocation();
-  const { navbar, sidebar } = NavMenuFactory({ navConfigItems, navFilters });
-  return (
-    <LocationContext.Provider value={location.pathname}>
-      <StackedLayout navbar={navbar} sidebar={sidebar} className={menuClass} {...rest}>
-        {children}
-      </StackedLayout>
-    </LocationContext.Provider>
-  );
-};
-
-export const NavMenuFactory = ({ navConfigItems, navFilters = [] }: NavMenuProps) => {
+const NavMenuFactory = ({ navConfigItems, navFilters = [], spriteUrl }: StackMenuProps) => {
   const shouldShowItem = (item: SectionItem) => {
     if (!item.filter || item.filter.length === 0) return true;
-
     return item.filter.some(filter => navFilters.includes(filter));
   };
 
-  const filteredItems: Section[] =
+  const filteredSections: Section[] =
     navFilters.length === 0
       ? (navConfigItems as Section[])
       : (navConfigItems
-        .map(section => {
-          return {
-            section: section.section.filter(shouldShowItem).map(item => {
-              if (item.submenu) {
-                return {
-                  ...item,
-                  submenu: item.submenu.filter(shouldShowItem),
-                };
-              }
-              return item;
-            }),
-          };
-        })
+        .map(section => ({
+          section: section.section.filter(shouldShowItem).map(item => {
+            if (item.submenu) {
+              return {
+                ...item,
+                submenu: item.submenu.filter(shouldShowItem),
+              };
+            }
+            return item;
+          }),
+        }))
         .filter(section => section.section.length > 0) as Section[]);
 
-  return {
-    navbar: (
-      <Navbar>
-        {filteredItems.map((sections, idx) => {
-          const keyIdx = toBase(idx);
-          return (
-            <Fragment key={`fmt-${keyIdx}`}>
-              {idx === 1 && <Navbar.Spacer key={`space-${keyIdx}`} />}
-              <Navbar.Section key={`section-${keyIdx}`} className="max-lg:hidden">
-                {idx !== 0 && <Navbar.Divider key={`div-${keyIdx}`} />}
-                {sections.section.map(sectionitem => {
-                  return <NavMenuItem sectionitem={sectionitem} type="navbar" key={sectionitem.ref} />;
-                })}
-              </Navbar.Section>
-            </Fragment>
-          );
-        })}
-      </Navbar>
-    ),
-    sidebar: (
-      <Sidebar>
-        <Sidebar.Body>
-          {filteredItems.map((sections, idx) => {
-            const keyIdx = toBase(idx);
-            return (
-              <Fragment key={`fmt-${keyIdx}`}>
-                {idx !== 0 && <Sidebar.Divider key={`div-${keyIdx}`} />}
-                {idx === filteredItems.length - 1 && <Sidebar.Spacer key={`space-${keyIdx}`} />}
-                <Sidebar.Section key={`section-${keyIdx}`}>
-                  {sections.section.map((sectionitem, itx) => {
-                    return <NavMenuItem sectionitem={sectionitem} type="sidebar" key={sectionitem.ref} />;
-                  })}
-                </Sidebar.Section>
-              </Fragment>
-            );
-          })}
-        </Sidebar.Body>
-      </Sidebar>
-    ),
-  };
+  return (
+    <div className="w-full flex-1 px-4">
+      <NavigationMenu className="w-full max-w-none" viewport={false}>
+        <NavigationMenuList className="flex w-full">
+          {filteredSections.map((section, idx) => (
+            <div key={`section-${idx}`} className='flex flex-1 items-center justify-center gap-1'>
+              {section.section.map(sectionItem => (
+                <NavMenuItem key={sectionItem.ref} sectionItem={sectionItem} spriteUrl={spriteUrl} />
+              ))}
+            </div>
+          ))}
+        </NavigationMenuList>
+      </NavigationMenu>
+    </div>
+  );
 };
 
-const NavMenuItem = ({ sectionitem, type, navkey, ...props }: NavMenuItemProps) => {
+const NavMenuItem = ({ sectionItem, spriteUrl }: NavMenuItemProps) => {
   const pathname = useContext(LocationContext);
-  const hasActive = sectionitem.submenu?.some(item => item.href && pathname === item.href);
-  const isNavbar = type === 'navbar';
+  const isActive = !!(sectionItem.href && pathname === sectionItem.href);
+  const hasActiveChild = sectionItem.submenu?.some(item => item.href && pathname === item.href);
 
-  return sectionitem.submenu ? (
-    <Dropdown key={`dd-${navkey}`}>
-      <Dropdown.Button as={isNavbar ? Navbar.Item : Sidebar.Item} className={clsx(isNavbar ? 'max-lg:hidden' : 'lg:mb-2.5', hasActive ? 'rounded-b-none border-b' : 'border-current')}>
-        {sectionitem.component}
-        {'label' in sectionitem && sectionitem.label && (isNavbar ? <Navbar.Label>{sectionitem.label}</Navbar.Label> : <Sidebar.Label>{sectionitem.label}</Sidebar.Label>)}
-        {isNavbar ? <ChevronDownIcon /> : <ChevronRightIcon />}
-      </Dropdown.Button>
-      <Dropdown.Menu key={navkey} className="min-w-80 lg:min-w-64" {...props}>
-        {sectionitem.submenu.map((submenuitem, ix) => {
-          return (
-            <Dropdown.Item key={`drop-${toBase(ix)}`} href={submenuitem.href} className={clsx(submenuitem.href && pathname === submenuitem.href ? 'rounded-l-none border-l-2' : 'border-current')}>
-              {submenuitem.component}
-              {'label' in submenuitem && submenuitem.label && <Dropdown.Label>{submenuitem.label}</Dropdown.Label>}
-            </Dropdown.Item>
-          );
-        })}
-      </Dropdown.Menu>
-    </Dropdown>
-  ) : isNavbar ? (
-    <Navbar.Item key={navkey} href={sectionitem.href || '#'} current={!!(sectionitem.href && pathname === sectionitem.href)}>
-      {sectionitem.component}
-      {'label' in sectionitem && sectionitem.label && <Navbar.Label>{sectionitem.label}</Navbar.Label>}
-    </Navbar.Item>
-  ) : (
-    <Sidebar.Item key={navkey} href={sectionitem.href || '#'} current={!!(sectionitem.href && pathname === sectionitem.href)}>
-      {sectionitem.component}
-      {'label' in sectionitem && sectionitem.label && <Sidebar.Label>{sectionitem.label}</Sidebar.Label>}
-    </Sidebar.Item>
+  // Handle items with submenus (dropdowns)
+  if (sectionItem.submenu && sectionItem.submenu.length > 0) {
+    return (
+      <NavigationMenuItem>
+        <NavigationMenuTrigger spriteUrl={spriteUrl} className={clsx(hasActiveChild && 'bg-accent text-accent-foreground')}>
+          <div className="flex items-center gap-2">
+            {sectionItem.component}
+            {'label' in sectionItem && sectionItem.label && <span>{sectionItem.label}</span>}
+          </div>
+        </NavigationMenuTrigger>
+        <NavigationMenuContent className='data-[motion^=from-]:fade-in-0 data-[motion^=to-]:fade-out-0 data-[motion^=from-]:zoom-in-95 data-[motion^=to-]:zoom-out-95 left-0 min-w-[250px]'>
+          <div className="grid w-full gap-1 p-2">
+            {sectionItem.submenu.map(subItem => {
+              const subIsActive = !!(subItem.href && pathname === subItem.href);
+              return (
+                <NavigationMenuLink
+                  key={subItem.ref}
+                  asChild
+                  className={clsx(
+                    'block select-none rounded-sm p-3 leading-none no-underline outline-hidden transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground',
+                    subIsActive && 'bg-accent text-accent-foreground'
+                  )}
+                >
+                  <a href={subItem.href || '#'}>
+                    <div className="flex items-center gap-2">
+                      {subItem.component}
+                      {'label' in subItem && subItem.label && (
+                        <div>
+                          <div className='font-medium text-sm'>{subItem.label}</div>
+                        </div>
+                      )}
+                    </div>
+                  </a>
+                </NavigationMenuLink>
+              );
+            })}
+          </div>
+        </NavigationMenuContent>
+      </NavigationMenuItem>
+    );
+  }
+
+  // Handle simple navigation items
+  return (
+    <NavigationMenuItem>
+      <NavigationMenuLink asChild className={clsx(navigationMenuTriggerStyle(), isActive && 'bg-accent text-accent-foreground')}>
+        <a href={sectionItem.href || '#'}>
+          <div className="flex items-center gap-2">
+            {sectionItem.component}
+            {'label' in sectionItem && sectionItem.label && <span>{sectionItem.label}</span>}
+          </div>
+        </a>
+      </NavigationMenuLink>
+    </NavigationMenuItem>
   );
 };

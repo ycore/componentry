@@ -282,7 +282,7 @@ export declare const Form: import("react").ForwardRefExoticComponent<import("rea
         children: React.ReactNode;
     }) => import("react/jsx-runtime").JSX.Element;
 };
+export type { IconName as ExampleIconName } from './@types/example-sprites';
 export { type IconName, iconNames } from './@types/lucide-sprites';
-export { type IconName as ExampleIconName } from './@types/example-sprites';
 export { Link } from './custom/link';
 export { Spinner } from './custom/spinner';

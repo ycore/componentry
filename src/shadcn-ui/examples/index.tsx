@@ -171,7 +171,7 @@ function SpriteExamples({ spriteUrl }: { spriteUrl: string }) {
   );
 }
 
-export function ComponentExamples({ spriteUrl }: { spriteUrl: string }) {
+export function ComponentExamples({ spriteUrl, exampleUrl }: { spriteUrl: string, exampleUrl: string }) {
   const sections = [
     { id: 'accordion', title: 'Accordion' },
     { id: 'alerts', title: 'Alerts' },
@@ -682,40 +682,40 @@ export function ComponentExamples({ spriteUrl }: { spriteUrl: string }) {
         <ComponentSection id="toggles" title="Toggles" spriteUrl={spriteUrl}>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             <ComponentExample name="Toggle Demo">
-              <ToggleDemo spriteUrl={spriteUrl} />
+              <ToggleDemo spriteUrl={exampleUrl} />
             </ComponentExample>
             <ComponentExample name="Toggle Disabled">
-              <ToggleDisabled spriteUrl={spriteUrl} />
+              <ToggleDisabled spriteUrl={exampleUrl} />
             </ComponentExample>
             <ComponentExample name="Toggle Group Demo">
-              <ToggleGroupDemo spriteUrl={spriteUrl} />
+              <ToggleGroupDemo spriteUrl={exampleUrl} />
             </ComponentExample>
             <ComponentExample name="Toggle Group Disabled">
-              <ToggleGroupDisabled spriteUrl={spriteUrl} />
+              <ToggleGroupDisabled spriteUrl={exampleUrl} />
             </ComponentExample>
             <ComponentExample name="Toggle Group Large">
-              <ToggleGroupLg spriteUrl={spriteUrl} />
+              <ToggleGroupLg spriteUrl={exampleUrl} />
             </ComponentExample>
             <ComponentExample name="Toggle Group Outline">
-              <ToggleGroupOutline spriteUrl={spriteUrl} />
+              <ToggleGroupOutline spriteUrl={exampleUrl} />
             </ComponentExample>
             <ComponentExample name="Toggle Group Single">
-              <ToggleGroupSingle spriteUrl={spriteUrl} />
+              <ToggleGroupSingle spriteUrl={exampleUrl} />
             </ComponentExample>
             <ComponentExample name="Toggle Group Small">
-              <ToggleGroupSm spriteUrl={spriteUrl} />
+              <ToggleGroupSm spriteUrl={exampleUrl} />
             </ComponentExample>
             <ComponentExample name="Toggle Large">
-              <ToggleLg spriteUrl={spriteUrl} />
+              <ToggleLg spriteUrl={exampleUrl} />
             </ComponentExample>
             <ComponentExample name="Toggle Outline">
-              <ToggleOutline spriteUrl={spriteUrl} />
+              <ToggleOutline spriteUrl={exampleUrl} />
             </ComponentExample>
             <ComponentExample name="Toggle Small">
-              <ToggleSm spriteUrl={spriteUrl} />
+              <ToggleSm spriteUrl={exampleUrl} />
             </ComponentExample>
             <ComponentExample name="Toggle With Text">
-              <ToggleWithText spriteUrl={spriteUrl} />
+              <ToggleWithText spriteUrl={exampleUrl} />
             </ComponentExample>
           </div>
         </ComponentSection>

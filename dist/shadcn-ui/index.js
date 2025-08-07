@@ -311,11 +311,7 @@ function BreadcrumbItem({ className, ...props }) {
     ...props
   });
 }
-function BreadcrumbLink({
-  asChild,
-  className,
-  ...props
-}) {
+function BreadcrumbLink({ asChild, className, ...props }) {
   const Comp = asChild ? SlotPrimitive3.Slot : "a";
   return /* @__PURE__ */ jsx9(Comp, {
     "data-slot": "breadcrumb-link",
@@ -1148,13 +1144,7 @@ function MenubarSub({ ...props }) {
     ...props
   });
 }
-function MenubarSubTrigger({
-  className,
-  inset,
-  children,
-  spriteUrl,
-  ...props
-}) {
+function MenubarSubTrigger({ className, inset, children, spriteUrl, ...props }) {
   return /* @__PURE__ */ jsxs8(MenubarPrimitive.SubTrigger, {
     "data-slot": "menubar-sub-trigger",
     "data-inset": inset,
@@ -2871,4 +2861,4 @@ export {
   Accordion2 as Accordion
 };
 
-//# debugId=F0A1F72CB943017264756E2164756E21
+//# debugId=300AFAE493DE164A64756E2164756E21
