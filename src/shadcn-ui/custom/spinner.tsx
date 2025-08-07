@@ -1,9 +1,21 @@
 import clsx from 'clsx';
 import React from 'react';
 
-import { manifestAsset, SpriteIcon } from '../../images/SpriteIcon';
+import { SpriteIcon } from '../../images/SpriteIcon';
 import type { IconName } from '../@types/lucide-sprites';
 
-export function Spinner({ className }: { className?: string }) {
-  return <SpriteIcon<IconName> id="Loader" url={manifestAsset('/assets/lucide-sprites.svg')} className={clsx(className, 'animate-spin')} />;
+interface SpinnerProps {
+  className?: string;
+  spriteUrl: string;
+  iconId?: IconName;
+}
+
+export function Spinner({ className, spriteUrl, iconId = 'Loader' }: SpinnerProps) {
+  return (
+    <SpriteIcon<IconName>
+      id={iconId}
+      url={spriteUrl}
+      className={clsx(className, 'animate-spin')}
+    />
+  );
 }

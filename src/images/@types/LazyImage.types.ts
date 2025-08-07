@@ -14,10 +14,12 @@ export interface LazyImageProps {
   height?: number;
   className?: string;
   fallback?: React.ReactNode;
+  spriteUrl?: string;
 }
 export interface LazyGalleryProps {
   images: Array<Promise<ImageData>>;
   className?: string;
   imageClass?: string;
   fallback?: React.ReactNode;
+  spriteUrl?: string;
 }
