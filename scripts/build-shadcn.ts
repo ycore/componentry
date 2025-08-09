@@ -24,10 +24,6 @@ const COMPONENTS_ADD = [
     fileSpec: '*.tsx'
   },
   {
-    relativePath: 'examples',
-    fileSpec: 'index.tsx'
-  },
-  {
     relativePath: '\@types',
     fileSpec: 'lucide-sprites.ts'
   }

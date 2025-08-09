@@ -1,24 +1,54 @@
-import type { ReactNode } from 'react';
+import type { IconName } from '../../shadcn-ui/@types/lucide-sprites';
 
-export type FilterProps = { filter?: string[] };
-export type ComponentProps = { component: ReactNode };
-export type WithLabel = { label: ReactNode } & { component?: ReactNode };
-export type WithComponent = ComponentProps & { label?: ReactNode };
-export type WithLabelOrComponent = WithLabel | WithComponent;
-export type WithHref = { href: string; submenu?: never };
-export type ValidSubMenuItem = ({ ref: string } & WithLabelOrComponent & WithHref) | (ComponentProps & { ref: string; href?: never; submenu?: never });
-export type WithSubmenu = { submenu: ValidSubMenuItem[]; href?: never };
-export type SectionItem = { ref: string } & FilterProps & ((WithLabelOrComponent & WithHref) | (WithLabelOrComponent & WithSubmenu) | (ComponentProps & { href?: never; submenu?: never }));
-export type Section = { section: SectionItem[] };
+export interface MenubarItemConfig {
+    label?: string;
+    iconId?: IconName;
+    spriteUrl?: string;
+    href?: string;
+    disabled?: boolean;
+    inset?: boolean;
+    variant?: 'default' | 'destructive';
+    shortcut?: string;
+    component?: React.ComponentType<any>;
+    separator?: boolean;
 
-export interface StackMenuProps extends React.ComponentProps<'div'> {
-  navConfigItems: Section[];
-  navFilters?: string[];
-  menuClass?: string;
-  spriteUrl: string;
+    // For checkbox items
+    checked?: boolean;
+
+    // For radio items
+    value?: string;
+
+    // For sub menus (derived from having items array)
+    items?: MenubarItemConfig[];
 }
 
-export interface NavMenuItemProps {
-  sectionItem: SectionItem;
-  spriteUrl: string;
+export interface MenubarConfigItem {
+    label?: string;
+    iconId?: IconName;
+    href?: string;
+    items?: MenubarItemConfig[];
+    component?: React.ComponentType<{ spriteUrl: string }>;
+    filter?: string[];
+    radioGroup?: true;
+    value?: string;
+}
+
+export interface MenubarConfig {
+    menus?: MenubarConfigItem[];
+    sections?: Array<{
+        menus: MenubarConfigItem[];
+    }>;
+}
+
+export interface NavMenubarProps {
+    navConfigItems: MenubarConfig;
+    spriteUrl: string;
+    navFilters?: string[];
+    className?: string;
+}
+
+export interface MenubarContextValue {
+    currentPath: string;
+    spriteUrl: string;
+    IconSprite: React.ComponentType<{ id: IconName } & React.ComponentProps<'svg'>>;
 }

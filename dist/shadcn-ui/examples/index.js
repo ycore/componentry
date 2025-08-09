@@ -22,133 +22,339 @@ var LoadingBar = memo(({ className }) => /* @__PURE__ */ jsx2("div", {
   className: clsx("loading-bar", className)
 }));
 // src/impetus/NavMenu.tsx
-import clsx3 from "clsx";
-import { createContext, useContext } from "react";
+import clsx5 from "clsx";
+import { createContext, useState } from "react";
 import { useLocation } from "react-router";
 
-// src/shadcn-ui/components/navigation-menu.tsx
+// src/shadcn-ui/components/button.tsx
 import { cva } from "class-variance-authority";
 import clsx2 from "clsx";
-import { NavigationMenu as NavigationMenuPrimitive } from "radix-ui";
-import { jsx as jsx3, jsxs } from "react/jsx-runtime";
-function NavigationMenu({ className, children, viewport = true, ...props }) {
-  return /* @__PURE__ */ jsxs(NavigationMenuPrimitive.Root, {
-    "data-slot": "navigation-menu",
-    "data-viewport": viewport,
-    className: clsx2("group/navigation-menu relative flex max-w-max flex-1 items-center justify-center", className),
-    ...props,
-    children: [
-      children,
-      viewport && /* @__PURE__ */ jsx3(NavigationMenuViewport, {})
-    ]
-  });
-}
-function NavigationMenuList({ className, ...props }) {
-  return /* @__PURE__ */ jsx3(NavigationMenuPrimitive.List, {
-    "data-slot": "navigation-menu-list",
-    className: clsx2("group flex flex-1 list-none items-center justify-center gap-1", className),
+import { Slot as SlotPrimitive } from "radix-ui";
+import { jsx as jsx3 } from "react/jsx-runtime";
+var buttonVariants = cva("inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive", {
+  variants: {
+    variant: {
+      default: "bg-primary text-primary-foreground shadow-xs hover:bg-primary/90",
+      destructive: "bg-destructive text-white shadow-xs hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
+      outline: "border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50",
+      secondary: "bg-secondary text-secondary-foreground shadow-xs hover:bg-secondary/80",
+      ghost: "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
+      link: "text-primary underline-offset-4 hover:underline"
+    },
+    size: {
+      default: "h-9 px-4 py-2 has-[>svg]:px-3",
+      sm: "h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5",
+      lg: "h-10 rounded-md px-6 has-[>svg]:px-4",
+      icon: "size-9"
+    }
+  },
+  defaultVariants: {
+    variant: "default",
+    size: "default"
+  }
+});
+function Button({
+  className,
+  variant,
+  size,
+  asChild = false,
+  ...props
+}) {
+  const Comp = asChild ? SlotPrimitive.Slot : "button";
+  return /* @__PURE__ */ jsx3(Comp, {
+    "data-slot": "button",
+    className: clsx2(buttonVariants({ variant, size, className })),
     ...props
   });
 }
-function NavigationMenuItem({ className, ...props }) {
-  return /* @__PURE__ */ jsx3(NavigationMenuPrimitive.Item, {
-    "data-slot": "navigation-menu-item",
-    className: clsx2("relative", className),
+
+// src/shadcn-ui/components/menubar.tsx
+import clsx3 from "clsx";
+import { Menubar as MenubarPrimitive } from "radix-ui";
+import { jsx as jsx4, jsxs } from "react/jsx-runtime";
+function Menubar({ className, ...props }) {
+  return /* @__PURE__ */ jsx4(MenubarPrimitive.Root, {
+    "data-slot": "menubar",
+    className: clsx3("flex h-9 items-center gap-1 rounded-md border bg-background p-1 shadow-xs", className),
     ...props
   });
 }
-var navigationMenuTriggerStyle = cva("group inline-flex h-9 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground disabled:pointer-events-none disabled:opacity-50 data-[state=open]:hover:bg-accent data-[state=open]:text-accent-foreground data-[state=open]:focus:bg-accent data-[state=open]:bg-accent/50 focus-visible:ring-ring/50 outline-none transition-[color,box-shadow] focus-visible:ring-[3px] focus-visible:outline-1");
-function NavigationMenuTrigger({ className, children, spriteUrl, ...props }) {
-  return /* @__PURE__ */ jsxs(NavigationMenuPrimitive.Trigger, {
-    "data-slot": "navigation-menu-trigger",
-    className: clsx2(navigationMenuTriggerStyle(), "group", className),
-    ...props,
-    children: [
-      children,
-      " ",
-      /* @__PURE__ */ jsx3(SpriteIcon, {
-        id: "ChevronDown",
-        url: spriteUrl,
-        className: "relative top-[1px] ml-1 size-3 transition duration-300 group-data-[state=open]:rotate-180",
-        "aria-hidden": "true"
-      })
-    ]
-  });
-}
-function NavigationMenuContent({ className, ...props }) {
-  return /* @__PURE__ */ jsx3(NavigationMenuPrimitive.Content, {
-    "data-slot": "navigation-menu-content",
-    className: clsx2("data-[motion^=from-]:fade-in data-[motion^=to-]:fade-out data-[motion=from-end]:slide-in-from-right-52 data-[motion=from-start]:slide-in-from-left-52 data-[motion=to-end]:slide-out-to-right-52 data-[motion=to-start]:slide-out-to-left-52 top-0 left-0 w-full p-2 pr-2.5 data-[motion^=from-]:animate-in data-[motion^=to-]:animate-out md:absolute md:w-auto", "group-data-[viewport=false]/navigation-menu:data-[state=closed]:zoom-out-95 group-data-[viewport=false]/navigation-menu:data-[state=open]:zoom-in-95 group-data-[viewport=false]/navigation-menu:data-[state=open]:fade-in-0 group-data-[viewport=false]/navigation-menu:data-[state=closed]:fade-out-0 **:data-[slot=navigation-menu-link]:focus:outline-none **:data-[slot=navigation-menu-link]:focus:ring-0 group-data-[viewport=false]/navigation-menu:top-full group-data-[viewport=false]/navigation-menu:mt-1.5 group-data-[viewport=false]/navigation-menu:overflow-hidden group-data-[viewport=false]/navigation-menu:rounded-md group-data-[viewport=false]/navigation-menu:border group-data-[viewport=false]/navigation-menu:bg-popover group-data-[viewport=false]/navigation-menu:text-popover-foreground group-data-[viewport=false]/navigation-menu:shadow group-data-[viewport=false]/navigation-menu:duration-200 group-data-[viewport=false]/navigation-menu:data-[state=closed]:animate-out group-data-[viewport=false]/navigation-menu:data-[state=open]:animate-in", className),
+function MenubarMenu({ ...props }) {
+  return /* @__PURE__ */ jsx4(MenubarPrimitive.Menu, {
+    "data-slot": "menubar-menu",
     ...props
   });
 }
-function NavigationMenuViewport({ className, ...props }) {
-  return /* @__PURE__ */ jsx3("div", {
-    className: clsx2("absolute top-full left-0 isolate z-50 flex justify-center"),
-    children: /* @__PURE__ */ jsx3(NavigationMenuPrimitive.Viewport, {
-      "data-slot": "navigation-menu-viewport",
-      className: clsx2("data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-90 relative mt-1.5 h-[var(--radix-navigation-menu-viewport-height)] w-full origin-top-center overflow-hidden rounded-md border bg-popover text-popover-foreground shadow data-[state=closed]:animate-out data-[state=open]:animate-in md:w-[var(--radix-navigation-menu-viewport-width)]", className),
+function MenubarPortal({ ...props }) {
+  return /* @__PURE__ */ jsx4(MenubarPrimitive.Portal, {
+    "data-slot": "menubar-portal",
+    ...props
+  });
+}
+function MenubarRadioGroup({ ...props }) {
+  return /* @__PURE__ */ jsx4(MenubarPrimitive.RadioGroup, {
+    "data-slot": "menubar-radio-group",
+    ...props
+  });
+}
+function MenubarTrigger({ className, ...props }) {
+  return /* @__PURE__ */ jsx4(MenubarPrimitive.Trigger, {
+    "data-slot": "menubar-trigger",
+    className: clsx3("flex select-none items-center rounded-sm px-2 py-1 font-medium text-sm outline-hidden focus:bg-accent focus:text-accent-foreground data-[state=open]:bg-accent data-[state=open]:text-accent-foreground", className),
+    ...props
+  });
+}
+function MenubarContent({ className, align = "start", alignOffset = -4, sideOffset = 8, ...props }) {
+  return /* @__PURE__ */ jsx4(MenubarPortal, {
+    children: /* @__PURE__ */ jsx4(MenubarPrimitive.Content, {
+      "data-slot": "menubar-content",
+      align,
+      alignOffset,
+      sideOffset,
+      className: clsx3("data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 min-w-[12rem] origin-(--radix-menubar-content-transform-origin) overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-md data-[state=open]:animate-in", className),
       ...props
     })
   });
 }
-function NavigationMenuLink({ className, ...props }) {
-  return /* @__PURE__ */ jsx3(NavigationMenuPrimitive.Link, {
-    "data-slot": "navigation-menu-link",
-    className: clsx2("flex flex-col gap-1 rounded-sm p-2 text-sm outline-none transition-all hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus-visible:outline-1 focus-visible:ring-[3px] focus-visible:ring-ring/50 data-[active=true]:bg-accent/50 data-[active=true]:text-accent-foreground data-[active=true]:focus:bg-accent data-[active=true]:hover:bg-accent [&_svg:not([class*='size-'])]:size-4 [&_svg:not([class*='text-'])]:text-muted-foreground", className),
+function MenubarItem({
+  className,
+  inset,
+  variant = "default",
+  ...props
+}) {
+  return /* @__PURE__ */ jsx4(MenubarPrimitive.Item, {
+    "data-slot": "menubar-item",
+    "data-inset": inset,
+    "data-variant": variant,
+    className: clsx3("data-[variant=destructive]:*:[svg]:!text-destructive relative flex cursor-default select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[inset]:pl-8 data-[variant=destructive]:text-destructive data-[disabled]:opacity-50 data-[variant=destructive]:focus:bg-destructive/10 data-[variant=destructive]:focus:text-destructive dark:data-[variant=destructive]:focus:bg-destructive/20 [&_svg:not([class*='size-'])]:size-4 [&_svg:not([class*='text-'])]:text-muted-foreground [&_svg]:pointer-events-none [&_svg]:shrink-0", className),
+    ...props
+  });
+}
+function MenubarCheckboxItem({ className, children, checked, spriteUrl, ...props }) {
+  return /* @__PURE__ */ jsxs(MenubarPrimitive.CheckboxItem, {
+    "data-slot": "menubar-checkbox-item",
+    className: clsx3("relative flex cursor-default select-none items-center gap-2 rounded-xs py-1.5 pr-2 pl-8 text-sm outline-hidden focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0", className),
+    checked,
+    ...props,
+    children: [
+      /* @__PURE__ */ jsx4("span", {
+        className: "pointer-events-none absolute left-2 flex size-3.5 items-center justify-center",
+        children: /* @__PURE__ */ jsx4(MenubarPrimitive.ItemIndicator, {
+          children: /* @__PURE__ */ jsx4(SpriteIcon, {
+            id: "Check",
+            className: "size-4",
+            url: spriteUrl
+          })
+        })
+      }),
+      children
+    ]
+  });
+}
+function MenubarRadioItem({ className, children, spriteUrl, ...props }) {
+  return /* @__PURE__ */ jsxs(MenubarPrimitive.RadioItem, {
+    "data-slot": "menubar-radio-item",
+    className: clsx3("relative flex cursor-default select-none items-center gap-2 rounded-xs py-1.5 pr-2 pl-8 text-sm outline-hidden focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0", className),
+    ...props,
+    children: [
+      /* @__PURE__ */ jsx4("span", {
+        className: "pointer-events-none absolute left-2 flex size-3.5 items-center justify-center",
+        children: /* @__PURE__ */ jsx4(MenubarPrimitive.ItemIndicator, {
+          children: /* @__PURE__ */ jsx4(SpriteIcon, {
+            id: "Circle",
+            className: "size-2 fill-current",
+            url: spriteUrl
+          })
+        })
+      }),
+      children
+    ]
+  });
+}
+function MenubarSeparator({ className, ...props }) {
+  return /* @__PURE__ */ jsx4(MenubarPrimitive.Separator, {
+    "data-slot": "menubar-separator",
+    className: clsx3("-mx-1 my-1 h-px bg-border", className),
+    ...props
+  });
+}
+function MenubarShortcut({ className, ...props }) {
+  return /* @__PURE__ */ jsx4("span", {
+    "data-slot": "menubar-shortcut",
+    className: clsx3("ml-auto text-muted-foreground text-xs tracking-widest", className),
+    ...props
+  });
+}
+function MenubarSub({ ...props }) {
+  return /* @__PURE__ */ jsx4(MenubarPrimitive.Sub, {
+    "data-slot": "menubar-sub",
+    ...props
+  });
+}
+function MenubarSubTrigger({ className, inset, children, spriteUrl, ...props }) {
+  return /* @__PURE__ */ jsxs(MenubarPrimitive.SubTrigger, {
+    "data-slot": "menubar-sub-trigger",
+    "data-inset": inset,
+    className: clsx3("flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[state=open]:bg-accent data-[inset]:pl-8 data-[state=open]:text-accent-foreground", className),
+    ...props,
+    children: [
+      children,
+      /* @__PURE__ */ jsx4(SpriteIcon, {
+        id: "ChevronRight",
+        className: "ml-auto h-4 w-4",
+        url: spriteUrl
+      })
+    ]
+  });
+}
+function MenubarSubContent({ className, ...props }) {
+  return /* @__PURE__ */ jsx4(MenubarPrimitive.SubContent, {
+    "data-slot": "menubar-sub-content",
+    className: clsx3("data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 min-w-[8rem] origin-(--radix-menubar-content-transform-origin) overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-lg data-[state=closed]:animate-out data-[state=open]:animate-in", className),
     ...props
   });
 }
 
-// src/impetus/NavMenu.tsx
-import { jsx as jsx4, jsxs as jsxs2 } from "react/jsx-runtime";
-var LocationContext = createContext("");
-// src/impetus/Page.tsx
+// src/shadcn-ui/components/sheet.tsx
 import clsx4 from "clsx";
+import { Dialog as SheetPrimitive } from "radix-ui";
+import { jsx as jsx5, jsxs as jsxs2 } from "react/jsx-runtime";
+function Sheet({ ...props }) {
+  return /* @__PURE__ */ jsx5(SheetPrimitive.Root, {
+    "data-slot": "sheet",
+    ...props
+  });
+}
+function SheetTrigger({ ...props }) {
+  return /* @__PURE__ */ jsx5(SheetPrimitive.Trigger, {
+    "data-slot": "sheet-trigger",
+    ...props
+  });
+}
+function SheetClose({ ...props }) {
+  return /* @__PURE__ */ jsx5(SheetPrimitive.Close, {
+    "data-slot": "sheet-close",
+    ...props
+  });
+}
+function SheetPortal({ ...props }) {
+  return /* @__PURE__ */ jsx5(SheetPrimitive.Portal, {
+    "data-slot": "sheet-portal",
+    ...props
+  });
+}
+function SheetOverlay({ className, ...props }) {
+  return /* @__PURE__ */ jsx5(SheetPrimitive.Overlay, {
+    "data-slot": "sheet-overlay",
+    className: clsx4("data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/50 data-[state=closed]:animate-out data-[state=open]:animate-in", className),
+    ...props
+  });
+}
+function SheetContent({ className, children, side = "right", spriteUrl, ...props }) {
+  return /* @__PURE__ */ jsxs2(SheetPortal, {
+    children: [
+      /* @__PURE__ */ jsx5(SheetOverlay, {}),
+      /* @__PURE__ */ jsxs2(SheetPrimitive.Content, {
+        "data-slot": "sheet-content",
+        className: clsx4("fixed z-50 flex flex-col gap-4 bg-background shadow-lg transition ease-in-out data-[state=closed]:animate-out data-[state=open]:animate-in data-[state=closed]:duration-300 data-[state=open]:duration-500", side === "right" && "data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right inset-y-0 right-0 h-full w-3/4 border-l sm:max-w-sm", side === "left" && "data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left inset-y-0 left-0 h-full w-3/4 border-r sm:max-w-sm", side === "top" && "data-[state=closed]:slide-out-to-top data-[state=open]:slide-in-from-top inset-x-0 top-0 h-auto border-b", side === "bottom" && "data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom inset-x-0 bottom-0 h-auto border-t", className),
+        ...props,
+        children: [
+          children,
+          /* @__PURE__ */ jsxs2(SheetPrimitive.Close, {
+            className: "absolute top-4 right-4 rounded-xs opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-hidden focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary",
+            children: [
+              /* @__PURE__ */ jsx5(SpriteIcon, {
+                id: "X",
+                url: spriteUrl,
+                className: "size-4"
+              }),
+              /* @__PURE__ */ jsx5("span", {
+                className: "sr-only",
+                children: "Close"
+              })
+            ]
+          })
+        ]
+      })
+    ]
+  });
+}
+function SheetHeader({ className, ...props }) {
+  return /* @__PURE__ */ jsx5("div", {
+    "data-slot": "sheet-header",
+    className: clsx4("flex flex-col gap-1.5 p-4", className),
+    ...props
+  });
+}
+function SheetFooter({ className, ...props }) {
+  return /* @__PURE__ */ jsx5("div", {
+    "data-slot": "sheet-footer",
+    className: clsx4("mt-auto flex flex-col gap-2 p-4", className),
+    ...props
+  });
+}
+function SheetTitle({ className, ...props }) {
+  return /* @__PURE__ */ jsx5(SheetPrimitive.Title, {
+    "data-slot": "sheet-title",
+    className: clsx4("font-semibold text-foreground", className),
+    ...props
+  });
+}
+function SheetDescription({ className, ...props }) {
+  return /* @__PURE__ */ jsx5(SheetPrimitive.Description, {
+    "data-slot": "sheet-description",
+    className: clsx4("text-muted-foreground text-sm", className),
+    ...props
+  });
+}
 
 // src/shadcn-ui/custom/link.tsx
 import React from "react";
 import { Link as RouterLink } from "react-router";
-import { jsx as jsx5 } from "react/jsx-runtime";
+import { jsx as jsx6 } from "react/jsx-runtime";
 var Link = React.forwardRef(function Link2(props, ref) {
-  return /* @__PURE__ */ jsx5(RouterLink, {
+  return /* @__PURE__ */ jsx6(RouterLink, {
     ...props,
     to: props.href,
     ref
   });
 });
 
+// src/impetus/NavMenu.tsx
+import { jsx as jsx7, jsxs as jsxs3, Fragment } from "react/jsx-runtime";
+var MenubarContext = createContext(null);
 // src/impetus/Page.tsx
-import { jsx as jsx6 } from "react/jsx-runtime";
+import clsx6 from "clsx";
+import { jsx as jsx8 } from "react/jsx-runtime";
 // src/impetus/ThemeSwitch.tsx
-import clsx5 from "clsx";
+import clsx7 from "clsx";
 import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
-import { jsx as jsx7 } from "react/jsx-runtime";
+import { useEffect, useState as useState2 } from "react";
+import { jsx as jsx9 } from "react/jsx-runtime";
 var THEME_OPTIONS = { theme: { light: "light", dark: "dark" } };
 var ThemeSwitch = ({ theme = THEME_OPTIONS, spriteUrl, className, classTheme }) => {
-  const [mounted, setMounted] = useState(false);
+  const [mounted, setMounted] = useState2(false);
   const { resolvedTheme, setTheme } = useTheme();
   useEffect(() => setMounted(true), []);
   if (!mounted)
     return null;
-  return /* @__PURE__ */ jsx7("button", {
+  return /* @__PURE__ */ jsx9("button", {
     type: "button",
-    className: clsx5("size-5 hover:animate-rotate", classTheme),
+    className: clsx7("size-5 hover:animate-rotate", classTheme),
     onClick: (e) => {
       setTheme(resolvedTheme === theme.theme.dark ? theme.theme.light : theme.theme.dark);
       e.preventDefault();
       e.stopPropagation();
     },
     "aria-label": "theme switch",
-    children: resolvedTheme === theme.theme.dark ? /* @__PURE__ */ jsx7(SpriteIcon, {
+    children: resolvedTheme === theme.theme.dark ? /* @__PURE__ */ jsx9(SpriteIcon, {
       url: spriteUrl,
       id: "Moon",
-      className: clsx5("size-5", className)
-    }) : /* @__PURE__ */ jsx7(SpriteIcon, {
+      className: clsx7("size-5", className)
+    }) : /* @__PURE__ */ jsx9(SpriteIcon, {
       url: spriteUrl,
       id: "Sun",
-      className: clsx5("size-5", className)
+      className: clsx7("size-5", className)
     })
   });
 };
@@ -193,40 +399,40 @@ var iconNames = [
 ];
 
 // src/shadcn-ui/components/tooltip.tsx
-import clsx6 from "clsx";
+import clsx8 from "clsx";
 import { Tooltip as TooltipPrimitive } from "radix-ui";
-import { jsx as jsx8, jsxs as jsxs3 } from "react/jsx-runtime";
+import { jsx as jsx10, jsxs as jsxs4 } from "react/jsx-runtime";
 function TooltipProvider({ delayDuration = 0, ...props }) {
-  return /* @__PURE__ */ jsx8(TooltipPrimitive.Provider, {
+  return /* @__PURE__ */ jsx10(TooltipPrimitive.Provider, {
     "data-slot": "tooltip-provider",
     delayDuration,
     ...props
   });
 }
 function Tooltip({ ...props }) {
-  return /* @__PURE__ */ jsx8(TooltipProvider, {
-    children: /* @__PURE__ */ jsx8(TooltipPrimitive.Root, {
+  return /* @__PURE__ */ jsx10(TooltipProvider, {
+    children: /* @__PURE__ */ jsx10(TooltipPrimitive.Root, {
       "data-slot": "tooltip",
       ...props
     })
   });
 }
 function TooltipTrigger({ ...props }) {
-  return /* @__PURE__ */ jsx8(TooltipPrimitive.Trigger, {
+  return /* @__PURE__ */ jsx10(TooltipPrimitive.Trigger, {
     "data-slot": "tooltip-trigger",
     ...props
   });
 }
 function TooltipContent({ className, sideOffset = 0, children, ...props }) {
-  return /* @__PURE__ */ jsx8(TooltipPrimitive.Portal, {
-    children: /* @__PURE__ */ jsxs3(TooltipPrimitive.Content, {
+  return /* @__PURE__ */ jsx10(TooltipPrimitive.Portal, {
+    children: /* @__PURE__ */ jsxs4(TooltipPrimitive.Content, {
       "data-slot": "tooltip-content",
       sideOffset,
-      className: clsx6("fade-in-0 zoom-in-95 data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 w-fit origin-(--radix-tooltip-content-transform-origin) animate-in text-balance rounded-md bg-primary px-3 py-1.5 text-primary-foreground text-xs data-[state=closed]:animate-out", className),
+      className: clsx8("fade-in-0 zoom-in-95 data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 w-fit origin-(--radix-tooltip-content-transform-origin) animate-in text-balance rounded-md bg-primary px-3 py-1.5 text-primary-foreground text-xs data-[state=closed]:animate-out", className),
       ...props,
       children: [
         children,
-        /* @__PURE__ */ jsx8(TooltipPrimitive.Arrow, {
+        /* @__PURE__ */ jsx10(TooltipPrimitive.Arrow, {
           className: "z-50 size-2.5 translate-y-[calc(-50%_-_2px)] rotate-45 rounded-[2px] bg-primary fill-primary"
         })
       ]
@@ -235,32 +441,32 @@ function TooltipContent({ className, sideOffset = 0, children, ...props }) {
 }
 
 // src/shadcn-ui/components/accordion.tsx
-import clsx7 from "clsx";
+import clsx9 from "clsx";
 import { Accordion as AccordionPrimitive } from "radix-ui";
-import { jsx as jsx9, jsxs as jsxs4 } from "react/jsx-runtime";
+import { jsx as jsx11, jsxs as jsxs5 } from "react/jsx-runtime";
 function Accordion({ ...props }) {
-  return /* @__PURE__ */ jsx9(AccordionPrimitive.Root, {
+  return /* @__PURE__ */ jsx11(AccordionPrimitive.Root, {
     "data-slot": "accordion",
     ...props
   });
 }
 function AccordionItem({ className, ...props }) {
-  return /* @__PURE__ */ jsx9(AccordionPrimitive.Item, {
+  return /* @__PURE__ */ jsx11(AccordionPrimitive.Item, {
     "data-slot": "accordion-item",
-    className: clsx7("border-b last:border-b-0", className),
+    className: clsx9("border-b last:border-b-0", className),
     ...props
   });
 }
 function AccordionTrigger({ className, children, spriteUrl, ...props }) {
-  return /* @__PURE__ */ jsx9(AccordionPrimitive.Header, {
+  return /* @__PURE__ */ jsx11(AccordionPrimitive.Header, {
     className: "flex",
-    children: /* @__PURE__ */ jsxs4(AccordionPrimitive.Trigger, {
+    children: /* @__PURE__ */ jsxs5(AccordionPrimitive.Trigger, {
       "data-slot": "accordion-trigger",
-      className: clsx7("flex flex-1 items-start justify-between gap-4 rounded-md py-4 text-left font-medium text-sm outline-none transition-all hover:underline focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 [&[data-state=open]>svg]:rotate-180", className),
+      className: clsx9("flex flex-1 items-start justify-between gap-4 rounded-md py-4 text-left font-medium text-sm outline-none transition-all hover:underline focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 [&[data-state=open]>svg]:rotate-180", className),
       ...props,
       children: [
         children,
-        /* @__PURE__ */ jsx9(SpriteIcon, {
+        /* @__PURE__ */ jsx11(SpriteIcon, {
           id: "ChevronDown",
           url: spriteUrl,
           className: "pointer-events-none size-4 shrink-0 translate-y-0.5 text-muted-foreground transition-transform duration-200"
@@ -270,80 +476,80 @@ function AccordionTrigger({ className, children, spriteUrl, ...props }) {
   });
 }
 function AccordionContent({ className, children, ...props }) {
-  return /* @__PURE__ */ jsx9(AccordionPrimitive.Content, {
+  return /* @__PURE__ */ jsx11(AccordionPrimitive.Content, {
     "data-slot": "accordion-content",
     className: "overflow-hidden text-sm data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down",
     ...props,
-    children: /* @__PURE__ */ jsx9("div", {
-      className: clsx7("pt-0 pb-4", className),
+    children: /* @__PURE__ */ jsx11("div", {
+      className: clsx9("pt-0 pb-4", className),
       children
     })
   });
 }
 
 // src/shadcn-ui/examples/accordion-demo.tsx
-import { jsx as jsx10, jsxs as jsxs5 } from "react/jsx-runtime";
+import { jsx as jsx12, jsxs as jsxs6 } from "react/jsx-runtime";
 function AccordionDemo({ spriteUrl }) {
-  return /* @__PURE__ */ jsxs5(Accordion, {
+  return /* @__PURE__ */ jsxs6(Accordion, {
     type: "single",
     collapsible: true,
     className: "w-full",
     defaultValue: "item-1",
     children: [
-      /* @__PURE__ */ jsxs5(AccordionItem, {
+      /* @__PURE__ */ jsxs6(AccordionItem, {
         value: "item-1",
         children: [
-          /* @__PURE__ */ jsx10(AccordionTrigger, {
+          /* @__PURE__ */ jsx12(AccordionTrigger, {
             spriteUrl,
             children: "Product Information"
           }),
-          /* @__PURE__ */ jsxs5(AccordionContent, {
+          /* @__PURE__ */ jsxs6(AccordionContent, {
             className: "flex flex-col gap-4 text-balance",
             children: [
-              /* @__PURE__ */ jsx10("p", {
+              /* @__PURE__ */ jsx12("p", {
                 children: "Our flagship product combines cutting-edge technology with sleek design. Built with premium materials, it offers unparalleled performance and reliability."
               }),
-              /* @__PURE__ */ jsx10("p", {
+              /* @__PURE__ */ jsx12("p", {
                 children: "Key features include advanced processing capabilities, and an intuitive user interface designed for both beginners and experts."
               })
             ]
           })
         ]
       }),
-      /* @__PURE__ */ jsxs5(AccordionItem, {
+      /* @__PURE__ */ jsxs6(AccordionItem, {
         value: "item-2",
         children: [
-          /* @__PURE__ */ jsx10(AccordionTrigger, {
+          /* @__PURE__ */ jsx12(AccordionTrigger, {
             spriteUrl,
             children: "Shipping Details"
           }),
-          /* @__PURE__ */ jsxs5(AccordionContent, {
+          /* @__PURE__ */ jsxs6(AccordionContent, {
             className: "flex flex-col gap-4 text-balance",
             children: [
-              /* @__PURE__ */ jsx10("p", {
+              /* @__PURE__ */ jsx12("p", {
                 children: "We offer worldwide shipping through trusted courier partners. Standard delivery takes 3-5 business days, while express shipping ensures delivery within 1-2 business days."
               }),
-              /* @__PURE__ */ jsx10("p", {
+              /* @__PURE__ */ jsx12("p", {
                 children: "All orders are carefully packaged and fully insured. Track your shipment in real-time through our dedicated tracking portal."
               })
             ]
           })
         ]
       }),
-      /* @__PURE__ */ jsxs5(AccordionItem, {
+      /* @__PURE__ */ jsxs6(AccordionItem, {
         value: "item-3",
         children: [
-          /* @__PURE__ */ jsx10(AccordionTrigger, {
+          /* @__PURE__ */ jsx12(AccordionTrigger, {
             spriteUrl,
             children: "Return Policy"
           }),
-          /* @__PURE__ */ jsxs5(AccordionContent, {
+          /* @__PURE__ */ jsxs6(AccordionContent, {
             className: "flex flex-col gap-4 text-balance",
             children: [
-              /* @__PURE__ */ jsx10("p", {
+              /* @__PURE__ */ jsx12("p", {
                 children: "We stand behind our products with a comprehensive 30-day return policy. If you're not completely satisfied, simply return the item in its original condition."
               }),
-              /* @__PURE__ */ jsx10("p", {
+              /* @__PURE__ */ jsx12("p", {
                 children: "Our hassle-free return process includes free return shipping and full refunds processed within 48 hours of receiving the returned item."
               })
             ]
@@ -356,8 +562,8 @@ function AccordionDemo({ spriteUrl }) {
 
 // src/shadcn-ui/components/alert.tsx
 import { cva as cva2 } from "class-variance-authority";
-import clsx8 from "clsx";
-import { jsx as jsx11 } from "react/jsx-runtime";
+import clsx10 from "clsx";
+import { jsx as jsx13 } from "react/jsx-runtime";
 var alertVariants = cva2("relative w-full rounded-lg border px-4 py-3 text-sm grid has-[>svg]:grid-cols-[calc(var(--spacing)*4)_1fr] grid-cols-[0_1fr] has-[>svg]:gap-x-3 gap-y-0.5 items-start [&>svg]:size-4 [&>svg]:translate-y-0.5 [&>svg]:text-current", {
   variants: {
     variant: {
@@ -370,84 +576,84 @@ var alertVariants = cva2("relative w-full rounded-lg border px-4 py-3 text-sm gr
   }
 });
 function Alert({ className, variant, ...props }) {
-  return /* @__PURE__ */ jsx11("div", {
+  return /* @__PURE__ */ jsx13("div", {
     "data-slot": "alert",
     role: "alert",
-    className: clsx8(alertVariants({ variant }), className),
+    className: clsx10(alertVariants({ variant }), className),
     ...props
   });
 }
 function AlertTitle({ className, ...props }) {
-  return /* @__PURE__ */ jsx11("div", {
+  return /* @__PURE__ */ jsx13("div", {
     "data-slot": "alert-title",
-    className: clsx8("col-start-2 line-clamp-1 min-h-4 font-medium tracking-tight", className),
+    className: clsx10("col-start-2 line-clamp-1 min-h-4 font-medium tracking-tight", className),
     ...props
   });
 }
 function AlertDescription({ className, ...props }) {
-  return /* @__PURE__ */ jsx11("div", {
+  return /* @__PURE__ */ jsx13("div", {
     "data-slot": "alert-description",
-    className: clsx8("col-start-2 grid justify-items-start gap-1 text-muted-foreground text-sm [&_p]:leading-relaxed", className),
+    className: clsx10("col-start-2 grid justify-items-start gap-1 text-muted-foreground text-sm [&_p]:leading-relaxed", className),
     ...props
   });
 }
 
 // src/shadcn-ui/examples/alert-demo.tsx
-import { jsx as jsx12, jsxs as jsxs6 } from "react/jsx-runtime";
+import { jsx as jsx14, jsxs as jsxs7 } from "react/jsx-runtime";
 function AlertDemo({ spriteUrl }) {
-  return /* @__PURE__ */ jsxs6("div", {
+  return /* @__PURE__ */ jsxs7("div", {
     className: "grid w-full max-w-xl items-start gap-4",
     children: [
-      /* @__PURE__ */ jsxs6(Alert, {
+      /* @__PURE__ */ jsxs7(Alert, {
         children: [
-          /* @__PURE__ */ jsx12(SpriteIcon, {
+          /* @__PURE__ */ jsx14(SpriteIcon, {
             id: "CircleCheck",
             url: spriteUrl
           }),
-          /* @__PURE__ */ jsx12(AlertTitle, {
+          /* @__PURE__ */ jsx14(AlertTitle, {
             children: "Success! Your changes have been saved"
           }),
-          /* @__PURE__ */ jsx12(AlertDescription, {
+          /* @__PURE__ */ jsx14(AlertDescription, {
             children: "This is an alert with icon, title and description."
           })
         ]
       }),
-      /* @__PURE__ */ jsxs6(Alert, {
+      /* @__PURE__ */ jsxs7(Alert, {
         children: [
-          /* @__PURE__ */ jsx12(SpriteIcon, {
+          /* @__PURE__ */ jsx14(SpriteIcon, {
             id: "Calendar",
             url: spriteUrl
           }),
-          /* @__PURE__ */ jsx12(AlertTitle, {
+          /* @__PURE__ */ jsx14(AlertTitle, {
             children: "This Alert has a title and an icon. No description."
           })
         ]
       }),
-      /* @__PURE__ */ jsxs6(Alert, {
+      /* @__PURE__ */ jsxs7(Alert, {
         variant: "destructive",
         children: [
-          /* @__PURE__ */ jsx12(SpriteIcon, {
+          /* @__PURE__ */ jsx14(SpriteIcon, {
             id: "CircleAlert",
             url: spriteUrl
           }),
-          /* @__PURE__ */ jsx12(AlertTitle, {
+          /* @__PURE__ */ jsx14(AlertTitle, {
             children: "Unable to process your payment."
           }),
-          /* @__PURE__ */ jsxs6(AlertDescription, {
+          /* @__PURE__ */ jsxs7(AlertDescription, {
             children: [
-              /* @__PURE__ */ jsx12("p", {
+              /* @__PURE__ */ jsx14("p", {
                 children: "Please verify your billing information and try again."
               }),
-              /* @__PURE__ */ jsxs6("ul", {
+              /* @__PURE__ */ jsxs7("ul", {
                 className: "list-inside list-disc text-sm",
                 children: [
-                  /* @__PURE__ */ jsx12("li", {
+                  /* @__PURE__ */ jsx14("li", {
                     children: "Check your card details"
                   }),
-                  /* @__PURE__ */ jsx12("li", {
+                  /* @__PURE__ */ jsx14("li", {
                     children: "Ensure sufficient funds"
                   }),
-                  /* @__PURE__ */ jsx12("li", {
+                  /* @__PURE__ */ jsx14("li", {
                     children: "Verify billing address"
                   })
                 ]
@@ -461,19 +667,19 @@ function AlertDemo({ spriteUrl }) {
 }
 
 // src/shadcn-ui/examples/alert-destructive.tsx
-import { jsx as jsx13, jsxs as jsxs7 } from "react/jsx-runtime";
+import { jsx as jsx15, jsxs as jsxs8 } from "react/jsx-runtime";
 function AlertDestructive({ spriteUrl }) {
-  return /* @__PURE__ */ jsxs7(Alert, {
+  return /* @__PURE__ */ jsxs8(Alert, {
     variant: "destructive",
     children: [
-      /* @__PURE__ */ jsx13(SpriteIcon, {
+      /* @__PURE__ */ jsx15(SpriteIcon, {
         id: "CircleAlert",
         url: spriteUrl
       }),
-      /* @__PURE__ */ jsx13(AlertTitle, {
+      /* @__PURE__ */ jsx15(AlertTitle, {
         children: "Error"
       }),
-      /* @__PURE__ */ jsx13(AlertDescription, {
+      /* @__PURE__ */ jsx15(AlertDescription, {
         children: "Your session has expired. Please log in again."
       })
     ]
@@ -481,161 +687,117 @@ function AlertDestructive({ spriteUrl }) {
 }
 
 // src/shadcn-ui/components/alert-dialog.tsx
-import clsx10 from "clsx";
+import clsx11 from "clsx";
 import { AlertDialog as AlertDialogPrimitive } from "radix-ui";
-
-// src/shadcn-ui/components/button.tsx
-import { cva as cva3 } from "class-variance-authority";
-import clsx9 from "clsx";
-import { Slot as SlotPrimitive } from "radix-ui";
-import { jsx as jsx14 } from "react/jsx-runtime";
-var buttonVariants = cva3("inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive", {
-  variants: {
-    variant: {
-      default: "bg-primary text-primary-foreground shadow-xs hover:bg-primary/90",
-      destructive: "bg-destructive text-white shadow-xs hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
-      outline: "border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50",
-      secondary: "bg-secondary text-secondary-foreground shadow-xs hover:bg-secondary/80",
-      ghost: "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
-      link: "text-primary underline-offset-4 hover:underline"
-    },
-    size: {
-      default: "h-9 px-4 py-2 has-[>svg]:px-3",
-      sm: "h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5",
-      lg: "h-10 rounded-md px-6 has-[>svg]:px-4",
-      icon: "size-9"
-    }
-  },
-  defaultVariants: {
-    variant: "default",
-    size: "default"
-  }
-});
-function Button({
-  className,
-  variant,
-  size,
-  asChild = false,
-  ...props
-}) {
-  const Comp = asChild ? SlotPrimitive.Slot : "button";
-  return /* @__PURE__ */ jsx14(Comp, {
-    "data-slot": "button",
-    className: clsx9(buttonVariants({ variant, size, className })),
-    ...props
-  });
-}
-
-// src/shadcn-ui/components/alert-dialog.tsx
-import { jsx as jsx15, jsxs as jsxs8 } from "react/jsx-runtime";
+import { jsx as jsx16, jsxs as jsxs9 } from "react/jsx-runtime";
 function AlertDialog({ ...props }) {
-  return /* @__PURE__ */ jsx15(AlertDialogPrimitive.Root, {
+  return /* @__PURE__ */ jsx16(AlertDialogPrimitive.Root, {
     "data-slot": "alert-dialog",
     ...props
   });
 }
 function AlertDialogTrigger({ ...props }) {
-  return /* @__PURE__ */ jsx15(AlertDialogPrimitive.Trigger, {
+  return /* @__PURE__ */ jsx16(AlertDialogPrimitive.Trigger, {
     "data-slot": "alert-dialog-trigger",
     ...props
   });
 }
 function AlertDialogPortal({ ...props }) {
-  return /* @__PURE__ */ jsx15(AlertDialogPrimitive.Portal, {
+  return /* @__PURE__ */ jsx16(AlertDialogPrimitive.Portal, {
     "data-slot": "alert-dialog-portal",
     ...props
   });
 }
 function AlertDialogOverlay({ className, ...props }) {
-  return /* @__PURE__ */ jsx15(AlertDialogPrimitive.Overlay, {
+  return /* @__PURE__ */ jsx16(AlertDialogPrimitive.Overlay, {
     "data-slot": "alert-dialog-overlay",
-    className: clsx10("data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/50 data-[state=closed]:animate-out data-[state=open]:animate-in", className),
+    className: clsx11("data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/50 data-[state=closed]:animate-out data-[state=open]:animate-in", className),
     ...props
   });
 }
 function AlertDialogContent({ className, ...props }) {
-  return /* @__PURE__ */ jsxs8(AlertDialogPortal, {
+  return /* @__PURE__ */ jsxs9(AlertDialogPortal, {
     children: [
-      /* @__PURE__ */ jsx15(AlertDialogOverlay, {}),
-      /* @__PURE__ */ jsx15(AlertDialogPrimitive.Content, {
+      /* @__PURE__ */ jsx16(AlertDialogOverlay, {}),
+      /* @__PURE__ */ jsx16(AlertDialogPrimitive.Content, {
         "data-slot": "alert-dialog-content",
-        className: clsx10("data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 fixed top-[50%] left-[50%] z-50 grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded-lg border bg-background p-6 shadow-lg duration-200 data-[state=closed]:animate-out data-[state=open]:animate-in sm:max-w-lg", className),
+        className: clsx11("data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 fixed top-[50%] left-[50%] z-50 grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded-lg border bg-background p-6 shadow-lg duration-200 data-[state=closed]:animate-out data-[state=open]:animate-in sm:max-w-lg", className),
         ...props
       })
     ]
   });
 }
 function AlertDialogHeader({ className, ...props }) {
-  return /* @__PURE__ */ jsx15("div", {
+  return /* @__PURE__ */ jsx16("div", {
     "data-slot": "alert-dialog-header",
-    className: clsx10("flex flex-col gap-2 text-center sm:text-left", className),
+    className: clsx11("flex flex-col gap-2 text-center sm:text-left", className),
     ...props
   });
 }
 function AlertDialogFooter({ className, ...props }) {
-  return /* @__PURE__ */ jsx15("div", {
+  return /* @__PURE__ */ jsx16("div", {
     "data-slot": "alert-dialog-footer",
-    className: clsx10("flex flex-col-reverse gap-2 sm:flex-row sm:justify-end", className),
+    className: clsx11("flex flex-col-reverse gap-2 sm:flex-row sm:justify-end", className),
     ...props
   });
 }
 function AlertDialogTitle({ className, ...props }) {
-  return /* @__PURE__ */ jsx15(AlertDialogPrimitive.Title, {
+  return /* @__PURE__ */ jsx16(AlertDialogPrimitive.Title, {
     "data-slot": "alert-dialog-title",
-    className: clsx10("font-semibold text-lg", className),
+    className: clsx11("font-semibold text-lg", className),
     ...props
   });
 }
 function AlertDialogDescription({ className, ...props }) {
-  return /* @__PURE__ */ jsx15(AlertDialogPrimitive.Description, {
+  return /* @__PURE__ */ jsx16(AlertDialogPrimitive.Description, {
     "data-slot": "alert-dialog-description",
-    className: clsx10("text-muted-foreground text-sm", className),
+    className: clsx11("text-muted-foreground text-sm", className),
     ...props
   });
 }
 function AlertDialogAction({ className, ...props }) {
-  return /* @__PURE__ */ jsx15(AlertDialogPrimitive.Action, {
-    className: clsx10(buttonVariants(), className),
+  return /* @__PURE__ */ jsx16(AlertDialogPrimitive.Action, {
+    className: clsx11(buttonVariants(), className),
     ...props
   });
 }
 function AlertDialogCancel({ className, ...props }) {
-  return /* @__PURE__ */ jsx15(AlertDialogPrimitive.Cancel, {
-    className: clsx10(buttonVariants({ variant: "outline" }), className),
+  return /* @__PURE__ */ jsx16(AlertDialogPrimitive.Cancel, {
+    className: clsx11(buttonVariants({ variant: "outline" }), className),
     ...props
   });
 }
 
 // src/shadcn-ui/examples/alert-dialog-demo.tsx
-import { jsx as jsx16, jsxs as jsxs9 } from "react/jsx-runtime";
+import { jsx as jsx17, jsxs as jsxs10 } from "react/jsx-runtime";
 function AlertDialogDemo() {
-  return /* @__PURE__ */ jsxs9(AlertDialog, {
+  return /* @__PURE__ */ jsxs10(AlertDialog, {
     children: [
-      /* @__PURE__ */ jsx16(AlertDialogTrigger, {
+      /* @__PURE__ */ jsx17(AlertDialogTrigger, {
         asChild: true,
-        children: /* @__PURE__ */ jsx16(Button, {
+        children: /* @__PURE__ */ jsx17(Button, {
           variant: "outline",
           children: "Show Dialog"
         })
       }),
-      /* @__PURE__ */ jsxs9(AlertDialogContent, {
+      /* @__PURE__ */ jsxs10(AlertDialogContent, {
         children: [
-          /* @__PURE__ */ jsxs9(AlertDialogHeader, {
+          /* @__PURE__ */ jsxs10(AlertDialogHeader, {
             children: [
-              /* @__PURE__ */ jsx16(AlertDialogTitle, {
+              /* @__PURE__ */ jsx17(AlertDialogTitle, {
                 children: "Are you absolutely sure?"
               }),
-              /* @__PURE__ */ jsx16(AlertDialogDescription, {
+              /* @__PURE__ */ jsx17(AlertDialogDescription, {
                 children: "This action cannot be undone. This will permanently delete your account and remove your data from our servers."
               })
             ]
           }),
-          /* @__PURE__ */ jsxs9(AlertDialogFooter, {
+          /* @__PURE__ */ jsxs10(AlertDialogFooter, {
             children: [
-              /* @__PURE__ */ jsx16(AlertDialogCancel, {
+              /* @__PURE__ */ jsx17(AlertDialogCancel, {
                 children: "Cancel"
               }),
-              /* @__PURE__ */ jsx16(AlertDialogAction, {
+              /* @__PURE__ */ jsx17(AlertDialogAction, {
                 children: "Continue"
               })
             ]
@@ -647,23 +809,23 @@ function AlertDialogDemo() {
 }
 
 // src/images/LazyImage.tsx
-import clsx12 from "clsx";
+import clsx13 from "clsx";
 import React2 from "react";
 import { Await } from "react-router";
 
 // src/shadcn-ui/custom/spinner.tsx
-import clsx11 from "clsx";
-import { jsx as jsx17 } from "react/jsx-runtime";
+import clsx12 from "clsx";
+import { jsx as jsx18 } from "react/jsx-runtime";
 function Spinner({ className, spriteUrl, iconId = "Loader" }) {
-  return /* @__PURE__ */ jsx17(SpriteIcon, {
+  return /* @__PURE__ */ jsx18(SpriteIcon, {
     id: iconId,
     url: spriteUrl,
-    className: clsx11(className, "animate-spin")
+    className: clsx12(className, "animate-spin")
   });
 }
 
 // src/images/LazyImage.tsx
-import { jsx as jsx18 } from "react/jsx-runtime";
+import { jsx as jsx19 } from "react/jsx-runtime";
 var createRemoteImagePromise = (src, alt, width, height) => {
   return new Promise((resolve, reject) => {
     const img = new Image;
@@ -684,47 +846,47 @@ function LazyImage({
   height,
   className,
   spriteUrl,
-  fallback = spriteUrl ? /* @__PURE__ */ jsx18(Spinner, {
+  fallback = spriteUrl ? /* @__PURE__ */ jsx19(Spinner, {
     spriteUrl
-  }) : /* @__PURE__ */ jsx18("div", {
+  }) : /* @__PURE__ */ jsx19("div", {
     className: "text-slate-500/50",
     children: "Loading..."
   })
 }) {
   const imagePromise = image || (src ? createRemoteImagePromise(src, alt || "", width, height) : null);
   if (!imagePromise) {
-    return /* @__PURE__ */ jsx18("div", {
+    return /* @__PURE__ */ jsx19("div", {
       className: "text-slate-500/50",
       children: "Error: No image source provided"
     });
   }
-  return /* @__PURE__ */ jsx18(React2.Suspense, {
+  return /* @__PURE__ */ jsx19(React2.Suspense, {
     fallback,
-    children: /* @__PURE__ */ jsx18(TypedAwait, {
+    children: /* @__PURE__ */ jsx19(TypedAwait, {
       resolve: imagePromise,
-      errorElement: spriteUrl ? /* @__PURE__ */ jsx18(Spinner, {
+      errorElement: spriteUrl ? /* @__PURE__ */ jsx19(Spinner, {
         spriteUrl,
         className: "text-slate-500/50"
-      }) : /* @__PURE__ */ jsx18("div", {
+      }) : /* @__PURE__ */ jsx19("div", {
         className: "text-slate-500/50",
         children: "Error loading image"
       }),
-      children: (imageData) => /* @__PURE__ */ jsx18(ImageElement, {
+      children: (imageData) => /* @__PURE__ */ jsx19(ImageElement, {
         ...imageData,
-        className: clsx12(imageData.className, className)
+        className: clsx13(imageData.className, className)
       })
     })
   });
 }
 function TypedAwait({ resolve, children, ...props }) {
-  return /* @__PURE__ */ jsx18(Await, {
+  return /* @__PURE__ */ jsx19(Await, {
     resolve,
     ...props,
     children: (data) => children(data)
   });
 }
 var ImageElement = ({ src, alt, width, height, className, loading = "lazy" }) => {
-  return /* @__PURE__ */ jsx18("img", {
+  return /* @__PURE__ */ jsx19("img", {
     src,
     alt,
     width,
@@ -737,21 +899,21 @@ var ImageElement = ({ src, alt, width, height, className, loading = "lazy" }) =>
 
 // src/shadcn-ui/components/aspect-ratio.tsx
 import { AspectRatio as AspectRatioPrimitive } from "radix-ui";
-import { jsx as jsx19 } from "react/jsx-runtime";
+import { jsx as jsx20 } from "react/jsx-runtime";
 function AspectRatio({ ...props }) {
-  return /* @__PURE__ */ jsx19(AspectRatioPrimitive.Root, {
+  return /* @__PURE__ */ jsx20(AspectRatioPrimitive.Root, {
     "data-slot": "aspect-ratio",
     ...props
   });
 }
 
 // src/shadcn-ui/examples/aspect-ratio-demo.tsx
-import { jsx as jsx20 } from "react/jsx-runtime";
+import { jsx as jsx21 } from "react/jsx-runtime";
 function AspectRatioDemo() {
-  return /* @__PURE__ */ jsx20(AspectRatio, {
+  return /* @__PURE__ */ jsx21(AspectRatio, {
     ratio: 16 / 9,
     className: "rounded-lg bg-muted",
-    children: /* @__PURE__ */ jsx20(LazyImage, {
+    children: /* @__PURE__ */ jsx21(LazyImage, {
       src: "https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=800&dpr=2&q=80",
       alt: "Photo by Drew Beamer",
       className: "h-full w-full rounded-lg object-cover dark:brightness-[0.2] dark:grayscale"
@@ -760,92 +922,92 @@ function AspectRatioDemo() {
 }
 
 // src/shadcn-ui/components/avatar.tsx
-import clsx13 from "clsx";
+import clsx14 from "clsx";
 import { Avatar as AvatarPrimitive } from "radix-ui";
-import { jsx as jsx21 } from "react/jsx-runtime";
+import { jsx as jsx22 } from "react/jsx-runtime";
 function Avatar({ className, ...props }) {
-  return /* @__PURE__ */ jsx21(AvatarPrimitive.Root, {
+  return /* @__PURE__ */ jsx22(AvatarPrimitive.Root, {
     "data-slot": "avatar",
-    className: clsx13("relative flex size-8 shrink-0 overflow-hidden rounded-full", className),
+    className: clsx14("relative flex size-8 shrink-0 overflow-hidden rounded-full", className),
     ...props
   });
 }
 function AvatarImage({ className, ...props }) {
-  return /* @__PURE__ */ jsx21(AvatarPrimitive.Image, {
+  return /* @__PURE__ */ jsx22(AvatarPrimitive.Image, {
     "data-slot": "avatar-image",
-    className: clsx13("aspect-square size-full", className),
+    className: clsx14("aspect-square size-full", className),
     ...props
   });
 }
 function AvatarFallback({ className, ...props }) {
-  return /* @__PURE__ */ jsx21(AvatarPrimitive.Fallback, {
+  return /* @__PURE__ */ jsx22(AvatarPrimitive.Fallback, {
     "data-slot": "avatar-fallback",
-    className: clsx13("flex size-full items-center justify-center rounded-full bg-muted", className),
+    className: clsx14("flex size-full items-center justify-center rounded-full bg-muted", className),
     ...props
   });
 }
 
 // src/shadcn-ui/examples/avatar-demo.tsx
-import { jsx as jsx22, jsxs as jsxs10 } from "react/jsx-runtime";
+import { jsx as jsx23, jsxs as jsxs11 } from "react/jsx-runtime";
 function AvatarDemo() {
-  return /* @__PURE__ */ jsxs10("div", {
+  return /* @__PURE__ */ jsxs11("div", {
     className: "flex flex-row flex-wrap items-center gap-12",
     children: [
-      /* @__PURE__ */ jsxs10(Avatar, {
+      /* @__PURE__ */ jsxs11(Avatar, {
         children: [
-          /* @__PURE__ */ jsx22(AvatarImage, {
+          /* @__PURE__ */ jsx23(AvatarImage, {
             src: "https://github.com/shadcn.png",
             alt: "@shadcn"
           }),
-          /* @__PURE__ */ jsx22(AvatarFallback, {
+          /* @__PURE__ */ jsx23(AvatarFallback, {
             children: "CN"
           })
         ]
       }),
-      /* @__PURE__ */ jsxs10(Avatar, {
+      /* @__PURE__ */ jsxs11(Avatar, {
         className: "rounded-lg",
         children: [
-          /* @__PURE__ */ jsx22(AvatarImage, {
+          /* @__PURE__ */ jsx23(AvatarImage, {
             src: "https://github.com/evilrabbit.png",
             alt: "@evilrabbit"
           }),
-          /* @__PURE__ */ jsx22(AvatarFallback, {
+          /* @__PURE__ */ jsx23(AvatarFallback, {
             children: "ER"
           })
         ]
       }),
-      /* @__PURE__ */ jsxs10("div", {
+      /* @__PURE__ */ jsxs11("div", {
         className: "-space-x-2 flex *:data-[slot=avatar]:ring-2 *:data-[slot=avatar]:ring-background *:data-[slot=avatar]:grayscale",
         children: [
-          /* @__PURE__ */ jsxs10(Avatar, {
+          /* @__PURE__ */ jsxs11(Avatar, {
             children: [
-              /* @__PURE__ */ jsx22(AvatarImage, {
+              /* @__PURE__ */ jsx23(AvatarImage, {
                 src: "https://github.com/shadcn.png",
                 alt: "@shadcn"
               }),
-              /* @__PURE__ */ jsx22(AvatarFallback, {
+              /* @__PURE__ */ jsx23(AvatarFallback, {
                 children: "CN"
               })
             ]
           }),
-          /* @__PURE__ */ jsxs10(Avatar, {
+          /* @__PURE__ */ jsxs11(Avatar, {
             children: [
-              /* @__PURE__ */ jsx22(AvatarImage, {
+              /* @__PURE__ */ jsx23(AvatarImage, {
                 src: "https://github.com/leerob.png",
                 alt: "@leerob"
               }),
-              /* @__PURE__ */ jsx22(AvatarFallback, {
+              /* @__PURE__ */ jsx23(AvatarFallback, {
                 children: "LR"
               })
             ]
           }),
-          /* @__PURE__ */ jsxs10(Avatar, {
+          /* @__PURE__ */ jsxs11(Avatar, {
             children: [
-              /* @__PURE__ */ jsx22(AvatarImage, {
+              /* @__PURE__ */ jsx23(AvatarImage, {
                 src: "https://github.com/evilrabbit.png",
                 alt: "@evilrabbit"
               }),
-              /* @__PURE__ */ jsx22(AvatarFallback, {
+              /* @__PURE__ */ jsx23(AvatarFallback, {
                 children: "ER"
               })
             ]
@@ -857,11 +1019,11 @@ function AvatarDemo() {
 }
 
 // src/shadcn-ui/components/badge.tsx
-import { cva as cva4 } from "class-variance-authority";
-import clsx14 from "clsx";
+import { cva as cva3 } from "class-variance-authority";
+import clsx15 from "clsx";
 import { Slot as SlotPrimitive2 } from "radix-ui";
-import { jsx as jsx23 } from "react/jsx-runtime";
-var badgeVariants = cva4("inline-flex items-center justify-center rounded-md border px-2 py-0.5 text-xs font-medium w-fit whitespace-nowrap shrink-0 [&>svg]:size-3 gap-1 [&>svg]:pointer-events-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive transition-[color,box-shadow] overflow-hidden", {
+import { jsx as jsx24 } from "react/jsx-runtime";
+var badgeVariants = cva3("inline-flex items-center justify-center rounded-md border px-2 py-0.5 text-xs font-medium w-fit whitespace-nowrap shrink-0 [&>svg]:size-3 gap-1 [&>svg]:pointer-events-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive transition-[color,box-shadow] overflow-hidden", {
   variants: {
     variant: {
       default: "border-transparent bg-primary text-primary-foreground [a&]:hover:bg-primary/90",
@@ -876,63 +1038,63 @@ var badgeVariants = cva4("inline-flex items-center justify-center rounded-md bor
 });
 function Badge({ className, variant, asChild = false, ...props }) {
   const Comp = asChild ? SlotPrimitive2.Slot : "span";
-  return /* @__PURE__ */ jsx23(Comp, {
+  return /* @__PURE__ */ jsx24(Comp, {
     "data-slot": "badge",
-    className: clsx14(badgeVariants({ variant }), className),
+    className: clsx15(badgeVariants({ variant }), className),
     ...props
   });
 }
 
 // src/shadcn-ui/examples/badge-demo.tsx
-import { jsx as jsx24, jsxs as jsxs11 } from "react/jsx-runtime";
+import { jsx as jsx25, jsxs as jsxs12 } from "react/jsx-runtime";
 function BadgeDemo({ spriteUrl }) {
-  return /* @__PURE__ */ jsxs11("div", {
+  return /* @__PURE__ */ jsxs12("div", {
     className: "flex flex-col items-center gap-2",
     children: [
-      /* @__PURE__ */ jsxs11("div", {
+      /* @__PURE__ */ jsxs12("div", {
         className: "flex w-full flex-wrap gap-2",
         children: [
-          /* @__PURE__ */ jsx24(Badge, {
+          /* @__PURE__ */ jsx25(Badge, {
             children: "Badge"
           }),
-          /* @__PURE__ */ jsx24(Badge, {
+          /* @__PURE__ */ jsx25(Badge, {
             variant: "secondary",
             children: "Secondary"
           }),
-          /* @__PURE__ */ jsx24(Badge, {
+          /* @__PURE__ */ jsx25(Badge, {
             variant: "destructive",
             children: "Destructive"
           }),
-          /* @__PURE__ */ jsx24(Badge, {
+          /* @__PURE__ */ jsx25(Badge, {
             variant: "outline",
             children: "Outline"
           })
         ]
       }),
-      /* @__PURE__ */ jsxs11("div", {
+      /* @__PURE__ */ jsxs12("div", {
         className: "flex w-full flex-wrap gap-2",
         children: [
-          /* @__PURE__ */ jsxs11(Badge, {
+          /* @__PURE__ */ jsxs12(Badge, {
             variant: "secondary",
             className: "bg-blue-500 text-white dark:bg-blue-600",
             children: [
-              /* @__PURE__ */ jsx24(SpriteIcon, {
+              /* @__PURE__ */ jsx25(SpriteIcon, {
                 id: "BadgeCheck",
                 url: spriteUrl
               }),
               "Verified"
             ]
           }),
-          /* @__PURE__ */ jsx24(Badge, {
+          /* @__PURE__ */ jsx25(Badge, {
             className: "h-5 min-w-5 rounded-full px-1 font-mono tabular-nums",
             children: "8"
           }),
-          /* @__PURE__ */ jsx24(Badge, {
+          /* @__PURE__ */ jsx25(Badge, {
             className: "h-5 min-w-5 rounded-full px-1 font-mono tabular-nums",
             variant: "destructive",
             children: "99"
           }),
-          /* @__PURE__ */ jsx24(Badge, {
+          /* @__PURE__ */ jsx25(Badge, {
             className: "h-5 min-w-5 rounded-full px-1 font-mono tabular-nums",
             variant: "outline",
             children: "20+"
@@ -944,102 +1106,102 @@ function BadgeDemo({ spriteUrl }) {
 }
 
 // src/shadcn-ui/examples/badge-destructive.tsx
-import { jsx as jsx25 } from "react/jsx-runtime";
+import { jsx as jsx26 } from "react/jsx-runtime";
 function BadgeDestructive() {
-  return /* @__PURE__ */ jsx25(Badge, {
+  return /* @__PURE__ */ jsx26(Badge, {
     variant: "destructive",
     children: "Destructive"
   });
 }
 
 // src/shadcn-ui/examples/badge-outline.tsx
-import { jsx as jsx26 } from "react/jsx-runtime";
+import { jsx as jsx27 } from "react/jsx-runtime";
 function BadgeOutline() {
-  return /* @__PURE__ */ jsx26(Badge, {
+  return /* @__PURE__ */ jsx27(Badge, {
     variant: "outline",
     children: "Outline"
   });
 }
 
 // src/shadcn-ui/examples/badge-secondary.tsx
-import { jsx as jsx27 } from "react/jsx-runtime";
+import { jsx as jsx28 } from "react/jsx-runtime";
 function BadgeSecondary() {
-  return /* @__PURE__ */ jsx27(Badge, {
+  return /* @__PURE__ */ jsx28(Badge, {
     variant: "secondary",
     children: "Secondary"
   });
 }
 
 // src/shadcn-ui/components/breadcrumb.tsx
-import clsx15 from "clsx";
+import clsx16 from "clsx";
 import { Slot as SlotPrimitive3 } from "radix-ui";
-import { jsx as jsx28, jsxs as jsxs12 } from "react/jsx-runtime";
+import { jsx as jsx29, jsxs as jsxs13 } from "react/jsx-runtime";
 function Breadcrumb({ ...props }) {
-  return /* @__PURE__ */ jsx28("nav", {
+  return /* @__PURE__ */ jsx29("nav", {
     "aria-label": "breadcrumb",
     "data-slot": "breadcrumb",
     ...props
   });
 }
 function BreadcrumbList({ className, ...props }) {
-  return /* @__PURE__ */ jsx28("ol", {
+  return /* @__PURE__ */ jsx29("ol", {
     "data-slot": "breadcrumb-list",
-    className: clsx15("flex flex-wrap items-center gap-1.5 break-words text-muted-foreground text-sm sm:gap-2.5", className),
+    className: clsx16("flex flex-wrap items-center gap-1.5 break-words text-muted-foreground text-sm sm:gap-2.5", className),
     ...props
   });
 }
 function BreadcrumbItem({ className, ...props }) {
-  return /* @__PURE__ */ jsx28("li", {
+  return /* @__PURE__ */ jsx29("li", {
     "data-slot": "breadcrumb-item",
-    className: clsx15("inline-flex items-center gap-1.5", className),
+    className: clsx16("inline-flex items-center gap-1.5", className),
     ...props
   });
 }
 function BreadcrumbLink({ asChild, className, ...props }) {
   const Comp = asChild ? SlotPrimitive3.Slot : "a";
-  return /* @__PURE__ */ jsx28(Comp, {
+  return /* @__PURE__ */ jsx29(Comp, {
     "data-slot": "breadcrumb-link",
-    className: clsx15("transition-colors hover:text-foreground", className),
+    className: clsx16("transition-colors hover:text-foreground", className),
     ...props
   });
 }
 function BreadcrumbPage({ className, ...props }) {
-  return /* @__PURE__ */ jsx28("span", {
+  return /* @__PURE__ */ jsx29("span", {
     "data-slot": "breadcrumb-page",
     role: "link",
     "aria-disabled": "true",
     "aria-current": "page",
-    className: clsx15("font-normal text-foreground", className),
+    className: clsx16("font-normal text-foreground", className),
     ...props
   });
 }
 function BreadcrumbSeparator({ children, className, spriteUrl, ...props }) {
-  return /* @__PURE__ */ jsx28("li", {
+  return /* @__PURE__ */ jsx29("li", {
     "data-slot": "breadcrumb-separator",
     role: "presentation",
     "aria-hidden": "true",
-    className: clsx15("[&>svg]:size-3.5", className),
+    className: clsx16("[&>svg]:size-3.5", className),
     ...props,
-    children: children ?? /* @__PURE__ */ jsx28(SpriteIcon, {
+    children: children ?? /* @__PURE__ */ jsx29(SpriteIcon, {
       id: "ChevronRight",
       url: spriteUrl
     })
   });
 }
 function BreadcrumbEllipsis({ className, spriteUrl, ...props }) {
-  return /* @__PURE__ */ jsxs12("span", {
+  return /* @__PURE__ */ jsxs13("span", {
     "data-slot": "breadcrumb-ellipsis",
     role: "presentation",
     "aria-hidden": "true",
-    className: clsx15("flex size-9 items-center justify-center", className),
+    className: clsx16("flex size-9 items-center justify-center", className),
     ...props,
     children: [
-      /* @__PURE__ */ jsx28(SpriteIcon, {
+      /* @__PURE__ */ jsx29(SpriteIcon, {
         id: "Ellipsis",
         className: "size-4",
         url: spriteUrl
       }),
-      /* @__PURE__ */ jsx28("span", {
+      /* @__PURE__ */ jsx29("span", {
         className: "sr-only",
         children: "More"
       })
@@ -1048,63 +1210,63 @@ function BreadcrumbEllipsis({ className, spriteUrl, ...props }) {
 }
 
 // src/shadcn-ui/components/dropdown-menu.tsx
-import clsx16 from "clsx";
+import clsx17 from "clsx";
 import { DropdownMenu as DropdownMenuPrimitive } from "radix-ui";
-import { jsx as jsx29, jsxs as jsxs13 } from "react/jsx-runtime";
+import { jsx as jsx30, jsxs as jsxs14 } from "react/jsx-runtime";
 function DropdownMenu({ ...props }) {
-  return /* @__PURE__ */ jsx29(DropdownMenuPrimitive.Root, {
+  return /* @__PURE__ */ jsx30(DropdownMenuPrimitive.Root, {
     "data-slot": "dropdown-menu",
     ...props
   });
 }
 function DropdownMenuPortal({ ...props }) {
-  return /* @__PURE__ */ jsx29(DropdownMenuPrimitive.Portal, {
+  return /* @__PURE__ */ jsx30(DropdownMenuPrimitive.Portal, {
     "data-slot": "dropdown-menu-portal",
     ...props
   });
 }
 function DropdownMenuTrigger({ ...props }) {
-  return /* @__PURE__ */ jsx29(DropdownMenuPrimitive.Trigger, {
+  return /* @__PURE__ */ jsx30(DropdownMenuPrimitive.Trigger, {
     "data-slot": "dropdown-menu-trigger",
     ...props
   });
 }
 function DropdownMenuContent({ className, sideOffset = 4, ...props }) {
-  return /* @__PURE__ */ jsx29(DropdownMenuPrimitive.Portal, {
-    children: /* @__PURE__ */ jsx29(DropdownMenuPrimitive.Content, {
+  return /* @__PURE__ */ jsx30(DropdownMenuPrimitive.Portal, {
+    children: /* @__PURE__ */ jsx30(DropdownMenuPrimitive.Content, {
       "data-slot": "dropdown-menu-content",
       sideOffset,
-      className: clsx16("data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 max-h-(--radix-dropdown-menu-content-available-height) min-w-[8rem] origin-(--radix-dropdown-menu-content-transform-origin) overflow-y-auto overflow-x-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-md data-[state=closed]:animate-out data-[state=open]:animate-in", className),
+      className: clsx17("data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 max-h-(--radix-dropdown-menu-content-available-height) min-w-[8rem] origin-(--radix-dropdown-menu-content-transform-origin) overflow-y-auto overflow-x-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-md data-[state=closed]:animate-out data-[state=open]:animate-in", className),
       ...props
     })
   });
 }
 function DropdownMenuGroup({ ...props }) {
-  return /* @__PURE__ */ jsx29(DropdownMenuPrimitive.Group, {
+  return /* @__PURE__ */ jsx30(DropdownMenuPrimitive.Group, {
     "data-slot": "dropdown-menu-group",
     ...props
   });
 }
 function DropdownMenuItem({ className, inset, variant = "default", ...props }) {
-  return /* @__PURE__ */ jsx29(DropdownMenuPrimitive.Item, {
+  return /* @__PURE__ */ jsx30(DropdownMenuPrimitive.Item, {
     "data-slot": "dropdown-menu-item",
     "data-inset": inset,
     "data-variant": variant,
-    className: clsx16("data-[variant=destructive]:*:[svg]:!text-destructive relative flex cursor-default select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[inset]:pl-8 data-[variant=destructive]:text-destructive data-[disabled]:opacity-50 data-[variant=destructive]:focus:bg-destructive/10 data-[variant=destructive]:focus:text-destructive dark:data-[variant=destructive]:focus:bg-destructive/20 [&_svg:not([class*='size-'])]:size-4 [&_svg:not([class*='text-'])]:text-muted-foreground [&_svg]:pointer-events-none [&_svg]:shrink-0", className),
+    className: clsx17("data-[variant=destructive]:*:[svg]:!text-destructive relative flex cursor-default select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[inset]:pl-8 data-[variant=destructive]:text-destructive data-[disabled]:opacity-50 data-[variant=destructive]:focus:bg-destructive/10 data-[variant=destructive]:focus:text-destructive dark:data-[variant=destructive]:focus:bg-destructive/20 [&_svg:not([class*='size-'])]:size-4 [&_svg:not([class*='text-'])]:text-muted-foreground [&_svg]:pointer-events-none [&_svg]:shrink-0", className),
     ...props
   });
 }
 function DropdownMenuCheckboxItem({ className, children, checked, spriteUrl, ...props }) {
-  return /* @__PURE__ */ jsxs13(DropdownMenuPrimitive.CheckboxItem, {
+  return /* @__PURE__ */ jsxs14(DropdownMenuPrimitive.CheckboxItem, {
     "data-slot": "dropdown-menu-checkbox-item",
-    className: clsx16("relative flex cursor-default select-none items-center gap-2 rounded-sm py-1.5 pr-2 pl-8 text-sm outline-hidden focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0", className),
+    className: clsx17("relative flex cursor-default select-none items-center gap-2 rounded-sm py-1.5 pr-2 pl-8 text-sm outline-hidden focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0", className),
     checked,
     ...props,
     children: [
-      /* @__PURE__ */ jsx29("span", {
+      /* @__PURE__ */ jsx30("span", {
         className: "pointer-events-none absolute left-2 flex size-3.5 items-center justify-center",
-        children: /* @__PURE__ */ jsx29(DropdownMenuPrimitive.ItemIndicator, {
-          children: /* @__PURE__ */ jsx29(SpriteIcon, {
+        children: /* @__PURE__ */ jsx30(DropdownMenuPrimitive.ItemIndicator, {
+          children: /* @__PURE__ */ jsx30(SpriteIcon, {
             id: "Check",
             className: "size-4",
             url: spriteUrl
@@ -1116,21 +1278,21 @@ function DropdownMenuCheckboxItem({ className, children, checked, spriteUrl, ...
   });
 }
 function DropdownMenuRadioGroup({ ...props }) {
-  return /* @__PURE__ */ jsx29(DropdownMenuPrimitive.RadioGroup, {
+  return /* @__PURE__ */ jsx30(DropdownMenuPrimitive.RadioGroup, {
     "data-slot": "dropdown-menu-radio-group",
     ...props
   });
 }
 function DropdownMenuRadioItem({ className, children, spriteUrl, ...props }) {
-  return /* @__PURE__ */ jsxs13(DropdownMenuPrimitive.RadioItem, {
+  return /* @__PURE__ */ jsxs14(DropdownMenuPrimitive.RadioItem, {
     "data-slot": "dropdown-menu-radio-item",
-    className: clsx16("relative flex cursor-default select-none items-center gap-2 rounded-sm py-1.5 pr-2 pl-8 text-sm outline-hidden focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0", className),
+    className: clsx17("relative flex cursor-default select-none items-center gap-2 rounded-sm py-1.5 pr-2 pl-8 text-sm outline-hidden focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0", className),
     ...props,
     children: [
-      /* @__PURE__ */ jsx29("span", {
+      /* @__PURE__ */ jsx30("span", {
         className: "pointer-events-none absolute left-2 flex size-3.5 items-center justify-center",
-        children: /* @__PURE__ */ jsx29(DropdownMenuPrimitive.ItemIndicator, {
-          children: /* @__PURE__ */ jsx29(SpriteIcon, {
+        children: /* @__PURE__ */ jsx30(DropdownMenuPrimitive.ItemIndicator, {
+          children: /* @__PURE__ */ jsx30(SpriteIcon, {
             id: "Circle",
             className: "size-2 fill-current",
             url: spriteUrl
@@ -1142,42 +1304,42 @@ function DropdownMenuRadioItem({ className, children, spriteUrl, ...props }) {
   });
 }
 function DropdownMenuLabel({ className, inset, ...props }) {
-  return /* @__PURE__ */ jsx29(DropdownMenuPrimitive.Label, {
+  return /* @__PURE__ */ jsx30(DropdownMenuPrimitive.Label, {
     "data-slot": "dropdown-menu-label",
     "data-inset": inset,
-    className: clsx16("px-2 py-1.5 font-medium text-sm data-[inset]:pl-8", className),
+    className: clsx17("px-2 py-1.5 font-medium text-sm data-[inset]:pl-8", className),
     ...props
   });
 }
 function DropdownMenuSeparator({ className, ...props }) {
-  return /* @__PURE__ */ jsx29(DropdownMenuPrimitive.Separator, {
+  return /* @__PURE__ */ jsx30(DropdownMenuPrimitive.Separator, {
     "data-slot": "dropdown-menu-separator",
-    className: clsx16("-mx-1 my-1 h-px bg-border", className),
+    className: clsx17("-mx-1 my-1 h-px bg-border", className),
     ...props
   });
 }
 function DropdownMenuShortcut({ className, ...props }) {
-  return /* @__PURE__ */ jsx29("span", {
+  return /* @__PURE__ */ jsx30("span", {
     "data-slot": "dropdown-menu-shortcut",
-    className: clsx16("ml-auto text-muted-foreground text-xs tracking-widest", className),
+    className: clsx17("ml-auto text-muted-foreground text-xs tracking-widest", className),
     ...props
   });
 }
 function DropdownMenuSub({ ...props }) {
-  return /* @__PURE__ */ jsx29(DropdownMenuPrimitive.Sub, {
+  return /* @__PURE__ */ jsx30(DropdownMenuPrimitive.Sub, {
     "data-slot": "dropdown-menu-sub",
     ...props
   });
 }
 function DropdownMenuSubTrigger({ className, inset, children, spriteUrl, ...props }) {
-  return /* @__PURE__ */ jsxs13(DropdownMenuPrimitive.SubTrigger, {
+  return /* @__PURE__ */ jsxs14(DropdownMenuPrimitive.SubTrigger, {
     "data-slot": "dropdown-menu-sub-trigger",
     "data-inset": inset,
-    className: clsx16("flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-hidden focus:bg-accent focus:text-accent-foreground data-[state=open]:bg-accent data-[inset]:pl-8 data-[state=open]:text-accent-foreground", className),
+    className: clsx17("flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-hidden focus:bg-accent focus:text-accent-foreground data-[state=open]:bg-accent data-[inset]:pl-8 data-[state=open]:text-accent-foreground", className),
     ...props,
     children: [
       children,
-      /* @__PURE__ */ jsx29(SpriteIcon, {
+      /* @__PURE__ */ jsx30(SpriteIcon, {
         id: "ChevronRight",
         className: "ml-auto size-4",
         url: spriteUrl
@@ -1186,92 +1348,16 @@ function DropdownMenuSubTrigger({ className, inset, children, spriteUrl, ...prop
   });
 }
 function DropdownMenuSubContent({ className, ...props }) {
-  return /* @__PURE__ */ jsx29(DropdownMenuPrimitive.SubContent, {
+  return /* @__PURE__ */ jsx30(DropdownMenuPrimitive.SubContent, {
     "data-slot": "dropdown-menu-sub-content",
-    className: clsx16("data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 min-w-[8rem] origin-(--radix-dropdown-menu-content-transform-origin) overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-lg data-[state=closed]:animate-out data-[state=open]:animate-in", className),
+    className: clsx17("data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 min-w-[8rem] origin-(--radix-dropdown-menu-content-transform-origin) overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-lg data-[state=closed]:animate-out data-[state=open]:animate-in", className),
     ...props
   });
 }
 
 // src/shadcn-ui/examples/breadcrumb-demo.tsx
-import { jsx as jsx30, jsxs as jsxs14 } from "react/jsx-runtime";
-function BreadcrumbDemo({ spriteUrl }) {
-  return /* @__PURE__ */ jsx30(Breadcrumb, {
-    children: /* @__PURE__ */ jsxs14(BreadcrumbList, {
-      children: [
-        /* @__PURE__ */ jsx30(BreadcrumbItem, {
-          children: /* @__PURE__ */ jsx30(BreadcrumbLink, {
-            asChild: true,
-            children: /* @__PURE__ */ jsx30(Link, {
-              href: "/",
-              children: "Home"
-            })
-          })
-        }),
-        /* @__PURE__ */ jsx30(BreadcrumbSeparator, {
-          spriteUrl
-        }),
-        /* @__PURE__ */ jsx30(BreadcrumbItem, {
-          children: /* @__PURE__ */ jsxs14(DropdownMenu, {
-            children: [
-              /* @__PURE__ */ jsxs14(DropdownMenuTrigger, {
-                className: "flex items-center gap-1",
-                children: [
-                  /* @__PURE__ */ jsx30(BreadcrumbEllipsis, {
-                    spriteUrl,
-                    className: "size-4"
-                  }),
-                  /* @__PURE__ */ jsx30("span", {
-                    className: "sr-only",
-                    children: "Toggle menu"
-                  })
-                ]
-              }),
-              /* @__PURE__ */ jsxs14(DropdownMenuContent, {
-                align: "start",
-                children: [
-                  /* @__PURE__ */ jsx30(DropdownMenuItem, {
-                    children: "Documentation"
-                  }),
-                  /* @__PURE__ */ jsx30(DropdownMenuItem, {
-                    children: "Themes"
-                  }),
-                  /* @__PURE__ */ jsx30(DropdownMenuItem, {
-                    children: "GitHub"
-                  })
-                ]
-              })
-            ]
-          })
-        }),
-        /* @__PURE__ */ jsx30(BreadcrumbSeparator, {
-          spriteUrl
-        }),
-        /* @__PURE__ */ jsx30(BreadcrumbItem, {
-          children: /* @__PURE__ */ jsx30(BreadcrumbLink, {
-            asChild: true,
-            children: /* @__PURE__ */ jsx30(Link, {
-              href: "/docs/components",
-              children: "Components"
-            })
-          })
-        }),
-        /* @__PURE__ */ jsx30(BreadcrumbSeparator, {
-          spriteUrl
-        }),
-        /* @__PURE__ */ jsx30(BreadcrumbItem, {
-          children: /* @__PURE__ */ jsx30(BreadcrumbPage, {
-            children: "Breadcrumb"
-          })
-        })
-      ]
-    })
-  });
-}
-
-// src/shadcn-ui/examples/breadcrumb-dropdown.tsx
 import { jsx as jsx31, jsxs as jsxs15 } from "react/jsx-runtime";
-function BreadcrumbWithDropdown({ spriteUrl }) {
+function BreadcrumbDemo({ spriteUrl }) {
   return /* @__PURE__ */ jsx31(Breadcrumb, {
     children: /* @__PURE__ */ jsxs15(BreadcrumbList, {
       children: [
@@ -1285,22 +1371,21 @@ function BreadcrumbWithDropdown({ spriteUrl }) {
           })
         }),
         /* @__PURE__ */ jsx31(BreadcrumbSeparator, {
-          spriteUrl,
-          children: /* @__PURE__ */ jsx31(SpriteIcon, {
-            id: "Slash",
-            url: spriteUrl
-          })
+          spriteUrl
         }),
         /* @__PURE__ */ jsx31(BreadcrumbItem, {
           children: /* @__PURE__ */ jsxs15(DropdownMenu, {
             children: [
               /* @__PURE__ */ jsxs15(DropdownMenuTrigger, {
-                className: "flex items-center gap-1 [&_svg:not([class*='size-'])]:size-3.5 [&_svg]:pointer-events-none [&_svg]:shrink-0",
+                className: "flex items-center gap-1",
                 children: [
-                  "Components",
-                  /* @__PURE__ */ jsx31(SpriteIcon, {
-                    id: "ChevronDown",
-                    url: spriteUrl
+                  /* @__PURE__ */ jsx31(BreadcrumbEllipsis, {
+                    spriteUrl,
+                    className: "size-4"
+                  }),
+                  /* @__PURE__ */ jsx31("span", {
+                    className: "sr-only",
+                    children: "Toggle menu"
                   })
                 ]
               }),
@@ -1322,11 +1407,19 @@ function BreadcrumbWithDropdown({ spriteUrl }) {
           })
         }),
         /* @__PURE__ */ jsx31(BreadcrumbSeparator, {
-          spriteUrl,
-          children: /* @__PURE__ */ jsx31(SpriteIcon, {
-            id: "Slash",
-            url: spriteUrl
+          spriteUrl
+        }),
+        /* @__PURE__ */ jsx31(BreadcrumbItem, {
+          children: /* @__PURE__ */ jsx31(BreadcrumbLink, {
+            asChild: true,
+            children: /* @__PURE__ */ jsx31(Link, {
+              href: "/docs/components",
+              children: "Components"
+            })
           })
+        }),
+        /* @__PURE__ */ jsx31(BreadcrumbSeparator, {
+          spriteUrl
         }),
         /* @__PURE__ */ jsx31(BreadcrumbItem, {
           children: /* @__PURE__ */ jsx31(BreadcrumbPage, {
@@ -1338,9 +1431,9 @@ function BreadcrumbWithDropdown({ spriteUrl }) {
   });
 }
 
-// src/shadcn-ui/examples/breadcrumb-ellipsis.tsx
+// src/shadcn-ui/examples/breadcrumb-dropdown.tsx
 import { jsx as jsx32, jsxs as jsxs16 } from "react/jsx-runtime";
-function BreadcrumbCollapsed({ spriteUrl }) {
+function BreadcrumbWithDropdown({ spriteUrl }) {
   return /* @__PURE__ */ jsx32(Breadcrumb, {
     children: /* @__PURE__ */ jsxs16(BreadcrumbList, {
       children: [
@@ -1354,27 +1447,48 @@ function BreadcrumbCollapsed({ spriteUrl }) {
           })
         }),
         /* @__PURE__ */ jsx32(BreadcrumbSeparator, {
-          spriteUrl
+          spriteUrl,
+          children: /* @__PURE__ */ jsx32(SpriteIcon, {
+            id: "Slash",
+            url: spriteUrl
+          })
         }),
         /* @__PURE__ */ jsx32(BreadcrumbItem, {
-          children: /* @__PURE__ */ jsx32(BreadcrumbEllipsis, {
-            spriteUrl
+          children: /* @__PURE__ */ jsxs16(DropdownMenu, {
+            children: [
+              /* @__PURE__ */ jsxs16(DropdownMenuTrigger, {
+                className: "flex items-center gap-1 [&_svg:not([class*='size-'])]:size-3.5 [&_svg]:pointer-events-none [&_svg]:shrink-0",
+                children: [
+                  "Components",
+                  /* @__PURE__ */ jsx32(SpriteIcon, {
+                    id: "ChevronDown",
+                    url: spriteUrl
+                  })
+                ]
+              }),
+              /* @__PURE__ */ jsxs16(DropdownMenuContent, {
+                align: "start",
+                children: [
+                  /* @__PURE__ */ jsx32(DropdownMenuItem, {
+                    children: "Documentation"
+                  }),
+                  /* @__PURE__ */ jsx32(DropdownMenuItem, {
+                    children: "Themes"
+                  }),
+                  /* @__PURE__ */ jsx32(DropdownMenuItem, {
+                    children: "GitHub"
+                  })
+                ]
+              })
+            ]
           })
         }),
         /* @__PURE__ */ jsx32(BreadcrumbSeparator, {
-          spriteUrl
-        }),
-        /* @__PURE__ */ jsx32(BreadcrumbItem, {
-          children: /* @__PURE__ */ jsx32(BreadcrumbLink, {
-            asChild: true,
-            children: /* @__PURE__ */ jsx32(Link, {
-              href: "/docs/components",
-              children: "Components"
-            })
+          spriteUrl,
+          children: /* @__PURE__ */ jsx32(SpriteIcon, {
+            id: "Slash",
+            url: spriteUrl
           })
-        }),
-        /* @__PURE__ */ jsx32(BreadcrumbSeparator, {
-          spriteUrl
         }),
         /* @__PURE__ */ jsx32(BreadcrumbItem, {
           children: /* @__PURE__ */ jsx32(BreadcrumbPage, {
@@ -1386,9 +1500,9 @@ function BreadcrumbCollapsed({ spriteUrl }) {
   });
 }
 
-// src/shadcn-ui/examples/breadcrumb-link.tsx
+// src/shadcn-ui/examples/breadcrumb-ellipsis.tsx
 import { jsx as jsx33, jsxs as jsxs17 } from "react/jsx-runtime";
-function BreadcrumbWithCustomSeparator({ spriteUrl }) {
+function BreadcrumbCollapsed({ spriteUrl }) {
   return /* @__PURE__ */ jsx33(Breadcrumb, {
     children: /* @__PURE__ */ jsxs17(BreadcrumbList, {
       children: [
@@ -1405,10 +1519,18 @@ function BreadcrumbWithCustomSeparator({ spriteUrl }) {
           spriteUrl
         }),
         /* @__PURE__ */ jsx33(BreadcrumbItem, {
+          children: /* @__PURE__ */ jsx33(BreadcrumbEllipsis, {
+            spriteUrl
+          })
+        }),
+        /* @__PURE__ */ jsx33(BreadcrumbSeparator, {
+          spriteUrl
+        }),
+        /* @__PURE__ */ jsx33(BreadcrumbItem, {
           children: /* @__PURE__ */ jsx33(BreadcrumbLink, {
             asChild: true,
             children: /* @__PURE__ */ jsx33(Link, {
-              href: "/components",
+              href: "/docs/components",
               children: "Components"
             })
           })
@@ -1426,9 +1548,9 @@ function BreadcrumbWithCustomSeparator({ spriteUrl }) {
   });
 }
 
-// src/shadcn-ui/examples/breadcrumb-separator.tsx
+// src/shadcn-ui/examples/breadcrumb-link.tsx
 import { jsx as jsx34, jsxs as jsxs18 } from "react/jsx-runtime";
-function BreadcrumbWithCustomSeparator2({ spriteUrl }) {
+function BreadcrumbWithCustomSeparator({ spriteUrl }) {
   return /* @__PURE__ */ jsx34(Breadcrumb, {
     children: /* @__PURE__ */ jsxs18(BreadcrumbList, {
       children: [
@@ -1442,11 +1564,7 @@ function BreadcrumbWithCustomSeparator2({ spriteUrl }) {
           })
         }),
         /* @__PURE__ */ jsx34(BreadcrumbSeparator, {
-          spriteUrl,
-          children: /* @__PURE__ */ jsx34(SpriteIcon, {
-            id: "Slash",
-            url: spriteUrl
-          })
+          spriteUrl
         }),
         /* @__PURE__ */ jsx34(BreadcrumbItem, {
           children: /* @__PURE__ */ jsx34(BreadcrumbLink, {
@@ -1458,11 +1576,7 @@ function BreadcrumbWithCustomSeparator2({ spriteUrl }) {
           })
         }),
         /* @__PURE__ */ jsx34(BreadcrumbSeparator, {
-          spriteUrl,
-          children: /* @__PURE__ */ jsx34(SpriteIcon, {
-            id: "Slash",
-            url: spriteUrl
-          })
+          spriteUrl
         }),
         /* @__PURE__ */ jsx34(BreadcrumbItem, {
           children: /* @__PURE__ */ jsx34(BreadcrumbPage, {
@@ -1474,12 +1588,60 @@ function BreadcrumbWithCustomSeparator2({ spriteUrl }) {
   });
 }
 
+// src/shadcn-ui/examples/breadcrumb-separator.tsx
+import { jsx as jsx35, jsxs as jsxs19 } from "react/jsx-runtime";
+function BreadcrumbWithCustomSeparator2({ spriteUrl }) {
+  return /* @__PURE__ */ jsx35(Breadcrumb, {
+    children: /* @__PURE__ */ jsxs19(BreadcrumbList, {
+      children: [
+        /* @__PURE__ */ jsx35(BreadcrumbItem, {
+          children: /* @__PURE__ */ jsx35(BreadcrumbLink, {
+            asChild: true,
+            children: /* @__PURE__ */ jsx35(Link, {
+              href: "/",
+              children: "Home"
+            })
+          })
+        }),
+        /* @__PURE__ */ jsx35(BreadcrumbSeparator, {
+          spriteUrl,
+          children: /* @__PURE__ */ jsx35(SpriteIcon, {
+            id: "Slash",
+            url: spriteUrl
+          })
+        }),
+        /* @__PURE__ */ jsx35(BreadcrumbItem, {
+          children: /* @__PURE__ */ jsx35(BreadcrumbLink, {
+            asChild: true,
+            children: /* @__PURE__ */ jsx35(Link, {
+              href: "/components",
+              children: "Components"
+            })
+          })
+        }),
+        /* @__PURE__ */ jsx35(BreadcrumbSeparator, {
+          spriteUrl,
+          children: /* @__PURE__ */ jsx35(SpriteIcon, {
+            id: "Slash",
+            url: spriteUrl
+          })
+        }),
+        /* @__PURE__ */ jsx35(BreadcrumbItem, {
+          children: /* @__PURE__ */ jsx35(BreadcrumbPage, {
+            children: "Breadcrumb"
+          })
+        })
+      ]
+    })
+  });
+}
+
 // src/shadcn-ui/examples/button-as-child.tsx
-import { jsx as jsx35 } from "react/jsx-runtime";
+import { jsx as jsx36 } from "react/jsx-runtime";
 function ButtonAsChild() {
-  return /* @__PURE__ */ jsx35(Button, {
+  return /* @__PURE__ */ jsx36(Button, {
     asChild: true,
-    children: /* @__PURE__ */ jsx35(Link, {
+    children: /* @__PURE__ */ jsx36(Link, {
       href: "/login",
       children: "Login"
     })
@@ -1487,42 +1649,42 @@ function ButtonAsChild() {
 }
 
 // src/shadcn-ui/examples/button-demo.tsx
-import { jsx as jsx36 } from "react/jsx-runtime";
+import { jsx as jsx37 } from "react/jsx-runtime";
 function ButtonDemo() {
-  return /* @__PURE__ */ jsx36("div", {
+  return /* @__PURE__ */ jsx37("div", {
     className: "flex flex-wrap items-center gap-2 md:flex-row",
-    children: /* @__PURE__ */ jsx36(Button, {
+    children: /* @__PURE__ */ jsx37(Button, {
       children: "Button"
     })
   });
 }
 
 // src/shadcn-ui/examples/button-destructive.tsx
-import { jsx as jsx37 } from "react/jsx-runtime";
+import { jsx as jsx38 } from "react/jsx-runtime";
 function ButtonDestructive() {
-  return /* @__PURE__ */ jsx37(Button, {
+  return /* @__PURE__ */ jsx38(Button, {
     variant: "destructive",
     children: "Destructive"
   });
 }
 
 // src/shadcn-ui/examples/button-ghost.tsx
-import { jsx as jsx38 } from "react/jsx-runtime";
+import { jsx as jsx39 } from "react/jsx-runtime";
 function ButtonGhost() {
-  return /* @__PURE__ */ jsx38(Button, {
+  return /* @__PURE__ */ jsx39(Button, {
     variant: "ghost",
     children: "Ghost"
   });
 }
 
 // src/shadcn-ui/examples/button-icon.tsx
-import { jsx as jsx39 } from "react/jsx-runtime";
+import { jsx as jsx40 } from "react/jsx-runtime";
 function ButtonIcon({ spriteUrl }) {
-  return /* @__PURE__ */ jsx39(Button, {
+  return /* @__PURE__ */ jsx40(Button, {
     variant: "secondary",
     size: "icon",
     className: "size-8",
-    children: /* @__PURE__ */ jsx39(SpriteIcon, {
+    children: /* @__PURE__ */ jsx40(SpriteIcon, {
       id: "ChevronRight",
       url: spriteUrl
     })
@@ -1530,22 +1692,22 @@ function ButtonIcon({ spriteUrl }) {
 }
 
 // src/shadcn-ui/examples/button-link.tsx
-import { jsx as jsx40 } from "react/jsx-runtime";
+import { jsx as jsx41 } from "react/jsx-runtime";
 function ButtonLink() {
-  return /* @__PURE__ */ jsx40(Button, {
+  return /* @__PURE__ */ jsx41(Button, {
     variant: "link",
     children: "Link"
   });
 }
 
 // src/shadcn-ui/examples/button-loading.tsx
-import { jsx as jsx41, jsxs as jsxs19 } from "react/jsx-runtime";
+import { jsx as jsx42, jsxs as jsxs20 } from "react/jsx-runtime";
 function ButtonLoading({ spriteUrl }) {
-  return /* @__PURE__ */ jsxs19(Button, {
+  return /* @__PURE__ */ jsxs20(Button, {
     size: "sm",
     disabled: true,
     children: [
-      /* @__PURE__ */ jsx41(SpriteIcon, {
+      /* @__PURE__ */ jsx42(SpriteIcon, {
         id: "Loader",
         className: "animate-spin",
         url: spriteUrl
@@ -1556,31 +1718,31 @@ function ButtonLoading({ spriteUrl }) {
 }
 
 // src/shadcn-ui/examples/button-outline.tsx
-import { jsx as jsx42 } from "react/jsx-runtime";
+import { jsx as jsx43 } from "react/jsx-runtime";
 function ButtonOutline() {
-  return /* @__PURE__ */ jsx42(Button, {
+  return /* @__PURE__ */ jsx43(Button, {
     variant: "outline",
     children: "Outline"
   });
 }
 
 // src/shadcn-ui/examples/button-secondary.tsx
-import { jsx as jsx43 } from "react/jsx-runtime";
+import { jsx as jsx44 } from "react/jsx-runtime";
 function ButtonSecondary() {
-  return /* @__PURE__ */ jsx43(Button, {
+  return /* @__PURE__ */ jsx44(Button, {
     variant: "secondary",
     children: "Secondary"
   });
 }
 
 // src/shadcn-ui/examples/button-with-icon.tsx
-import { jsx as jsx44, jsxs as jsxs20 } from "react/jsx-runtime";
+import { jsx as jsx45, jsxs as jsxs21 } from "react/jsx-runtime";
 function ButtonWithIcon({ spriteUrl }) {
-  return /* @__PURE__ */ jsxs20(Button, {
+  return /* @__PURE__ */ jsxs21(Button, {
     variant: "outline",
     size: "sm",
     children: [
-      /* @__PURE__ */ jsx44(SpriteIcon, {
+      /* @__PURE__ */ jsx45(SpriteIcon, {
         id: "Calendar",
         url: spriteUrl
       }),
@@ -1590,117 +1752,117 @@ function ButtonWithIcon({ spriteUrl }) {
 }
 
 // src/shadcn-ui/components/card.tsx
-import clsx17 from "clsx";
-import { jsx as jsx45 } from "react/jsx-runtime";
+import clsx18 from "clsx";
+import { jsx as jsx46 } from "react/jsx-runtime";
 function Card({ className, ...props }) {
-  return /* @__PURE__ */ jsx45("div", {
+  return /* @__PURE__ */ jsx46("div", {
     "data-slot": "card",
-    className: clsx17("flex flex-col gap-6 rounded-xl border bg-card py-6 text-card-foreground shadow-sm", className),
+    className: clsx18("flex flex-col gap-6 rounded-xl border bg-card py-6 text-card-foreground shadow-sm", className),
     ...props
   });
 }
 function CardHeader({ className, ...props }) {
-  return /* @__PURE__ */ jsx45("div", {
+  return /* @__PURE__ */ jsx46("div", {
     "data-slot": "card-header",
-    className: clsx17("@container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-1.5 px-6 has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6", className),
+    className: clsx18("@container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-1.5 px-6 has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6", className),
     ...props
   });
 }
 function CardTitle({ className, ...props }) {
-  return /* @__PURE__ */ jsx45("div", {
+  return /* @__PURE__ */ jsx46("div", {
     "data-slot": "card-title",
-    className: clsx17("font-semibold leading-none", className),
+    className: clsx18("font-semibold leading-none", className),
     ...props
   });
 }
 function CardDescription({ className, ...props }) {
-  return /* @__PURE__ */ jsx45("div", {
+  return /* @__PURE__ */ jsx46("div", {
     "data-slot": "card-description",
-    className: clsx17("text-muted-foreground text-sm", className),
+    className: clsx18("text-muted-foreground text-sm", className),
     ...props
   });
 }
 function CardAction({ className, ...props }) {
-  return /* @__PURE__ */ jsx45("div", {
+  return /* @__PURE__ */ jsx46("div", {
     "data-slot": "card-action",
-    className: clsx17("col-start-2 row-span-2 row-start-1 self-start justify-self-end", className),
+    className: clsx18("col-start-2 row-span-2 row-start-1 self-start justify-self-end", className),
     ...props
   });
 }
 function CardContent({ className, ...props }) {
-  return /* @__PURE__ */ jsx45("div", {
+  return /* @__PURE__ */ jsx46("div", {
     "data-slot": "card-content",
-    className: clsx17("px-6", className),
+    className: clsx18("px-6", className),
     ...props
   });
 }
 function CardFooter({ className, ...props }) {
-  return /* @__PURE__ */ jsx45("div", {
+  return /* @__PURE__ */ jsx46("div", {
     "data-slot": "card-footer",
-    className: clsx17("flex items-center px-6 [.border-t]:pt-6", className),
+    className: clsx18("flex items-center px-6 [.border-t]:pt-6", className),
     ...props
   });
 }
 
 // src/shadcn-ui/components/input.tsx
-import clsx18 from "clsx";
-import { jsx as jsx46 } from "react/jsx-runtime";
+import clsx19 from "clsx";
+import { jsx as jsx47 } from "react/jsx-runtime";
 function Input({ className, type, ...props }) {
-  return /* @__PURE__ */ jsx46("input", {
+  return /* @__PURE__ */ jsx47("input", {
     type,
     "data-slot": "input",
-    className: clsx18("flex h-9 w-full min-w-0 rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-xs outline-none transition-[color,box-shadow] selection:bg-primary selection:text-primary-foreground file:inline-flex file:h-7 file:border-0 file:bg-transparent file:font-medium file:text-foreground file:text-sm placeholder:text-muted-foreground disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm dark:bg-input/30", "focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50", "aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40", className),
+    className: clsx19("flex h-9 w-full min-w-0 rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-xs outline-none transition-[color,box-shadow] selection:bg-primary selection:text-primary-foreground file:inline-flex file:h-7 file:border-0 file:bg-transparent file:font-medium file:text-foreground file:text-sm placeholder:text-muted-foreground disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm dark:bg-input/30", "focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50", "aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40", className),
     ...props
   });
 }
 
 // src/shadcn-ui/components/label.tsx
-import clsx19 from "clsx";
+import clsx20 from "clsx";
 import { Label as LabelPrimitive } from "radix-ui";
-import { jsx as jsx47 } from "react/jsx-runtime";
+import { jsx as jsx48 } from "react/jsx-runtime";
 function Label({ className, ...props }) {
-  return /* @__PURE__ */ jsx47(LabelPrimitive.Root, {
+  return /* @__PURE__ */ jsx48(LabelPrimitive.Root, {
     "data-slot": "label",
-    className: clsx19("flex select-none items-center gap-2 font-medium text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-50 group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50", className),
+    className: clsx20("flex select-none items-center gap-2 font-medium text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-50 group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50", className),
     ...props
   });
 }
 
 // src/shadcn-ui/examples/card-demo.tsx
-import { jsx as jsx48, jsxs as jsxs21 } from "react/jsx-runtime";
+import { jsx as jsx49, jsxs as jsxs22 } from "react/jsx-runtime";
 function CardDemo() {
-  return /* @__PURE__ */ jsxs21(Card, {
+  return /* @__PURE__ */ jsxs22(Card, {
     className: "w-full max-w-sm",
     children: [
-      /* @__PURE__ */ jsxs21(CardHeader, {
+      /* @__PURE__ */ jsxs22(CardHeader, {
         children: [
-          /* @__PURE__ */ jsx48(CardTitle, {
+          /* @__PURE__ */ jsx49(CardTitle, {
             children: "Login to your account"
           }),
-          /* @__PURE__ */ jsx48(CardDescription, {
+          /* @__PURE__ */ jsx49(CardDescription, {
             children: "Enter your email below to login to your account"
           }),
-          /* @__PURE__ */ jsx48(CardAction, {
-            children: /* @__PURE__ */ jsx48(Button, {
+          /* @__PURE__ */ jsx49(CardAction, {
+            children: /* @__PURE__ */ jsx49(Button, {
               variant: "link",
               children: "Sign Up"
             })
           })
         ]
       }),
-      /* @__PURE__ */ jsx48(CardContent, {
-        children: /* @__PURE__ */ jsx48("form", {
-          children: /* @__PURE__ */ jsxs21("div", {
+      /* @__PURE__ */ jsx49(CardContent, {
+        children: /* @__PURE__ */ jsx49("form", {
+          children: /* @__PURE__ */ jsxs22("div", {
             className: "flex flex-col gap-6",
             children: [
-              /* @__PURE__ */ jsxs21("div", {
+              /* @__PURE__ */ jsxs22("div", {
                 className: "grid gap-2",
                 children: [
-                  /* @__PURE__ */ jsx48(Label, {
+                  /* @__PURE__ */ jsx49(Label, {
                     htmlFor: "cardemail",
                     children: "cardemail"
                   }),
-                  /* @__PURE__ */ jsx48(Input, {
+                  /* @__PURE__ */ jsx49(Input, {
                     id: "cardemail",
                     type: "email",
                     placeholder: "place@example.com",
@@ -1708,24 +1870,24 @@ function CardDemo() {
                   })
                 ]
               }),
-              /* @__PURE__ */ jsxs21("div", {
+              /* @__PURE__ */ jsxs22("div", {
                 className: "grid gap-2",
                 children: [
-                  /* @__PURE__ */ jsxs21("div", {
+                  /* @__PURE__ */ jsxs22("div", {
                     className: "flex items-center",
                     children: [
-                      /* @__PURE__ */ jsx48(Label, {
+                      /* @__PURE__ */ jsx49(Label, {
                         htmlFor: "password",
                         children: "Password"
                       }),
-                      /* @__PURE__ */ jsx48("a", {
+                      /* @__PURE__ */ jsx49("a", {
                         href: "#",
                         className: "ml-auto inline-block text-sm underline-offset-4 hover:underline",
                         children: "Forgot your password?"
                       })
                     ]
                   }),
-                  /* @__PURE__ */ jsx48(Input, {
+                  /* @__PURE__ */ jsx49(Input, {
                     id: "password",
                     type: "password",
                     required: true
@@ -1736,15 +1898,15 @@ function CardDemo() {
           })
         })
       }),
-      /* @__PURE__ */ jsxs21(CardFooter, {
+      /* @__PURE__ */ jsxs22(CardFooter, {
         className: "flex-col gap-2",
         children: [
-          /* @__PURE__ */ jsx48(Button, {
+          /* @__PURE__ */ jsx49(Button, {
             type: "submit",
             className: "w-full",
             children: "Login"
           }),
-          /* @__PURE__ */ jsx48(Button, {
+          /* @__PURE__ */ jsx49(Button, {
             variant: "outline",
             className: "w-full",
             children: "Login with Google"
@@ -1756,38 +1918,38 @@ function CardDemo() {
 }
 
 // src/shadcn-ui/components/select.tsx
-import clsx20 from "clsx";
+import clsx21 from "clsx";
 import { Select as SelectPrimitive } from "radix-ui";
-import { jsx as jsx49, jsxs as jsxs22 } from "react/jsx-runtime";
+import { jsx as jsx50, jsxs as jsxs23 } from "react/jsx-runtime";
 function Select({ ...props }) {
-  return /* @__PURE__ */ jsx49(SelectPrimitive.Root, {
+  return /* @__PURE__ */ jsx50(SelectPrimitive.Root, {
     "data-slot": "select",
     ...props
   });
 }
 function SelectGroup({ ...props }) {
-  return /* @__PURE__ */ jsx49(SelectPrimitive.Group, {
+  return /* @__PURE__ */ jsx50(SelectPrimitive.Group, {
     "data-slot": "select-group",
     ...props
   });
 }
 function SelectValue({ ...props }) {
-  return /* @__PURE__ */ jsx49(SelectPrimitive.Value, {
+  return /* @__PURE__ */ jsx50(SelectPrimitive.Value, {
     "data-slot": "select-value",
     ...props
   });
 }
 function SelectTrigger({ className, size = "default", children, spriteUrl, ...props }) {
-  return /* @__PURE__ */ jsxs22(SelectPrimitive.Trigger, {
+  return /* @__PURE__ */ jsxs23(SelectPrimitive.Trigger, {
     "data-slot": "select-trigger",
     "data-size": size,
-    className: clsx20("flex w-fit items-center justify-between gap-2 whitespace-nowrap rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-xs outline-none transition-[color,box-shadow] focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 data-[size=default]:h-9 data-[size=sm]:h-8 data-[placeholder]:text-muted-foreground *:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-2 dark:bg-input/30 dark:aria-invalid:ring-destructive/40 dark:hover:bg-input/50 [&_svg:not([class*='size-'])]:size-4 [&_svg:not([class*='text-'])]:text-muted-foreground [&_svg]:pointer-events-none [&_svg]:shrink-0", className),
+    className: clsx21("flex w-fit items-center justify-between gap-2 whitespace-nowrap rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-xs outline-none transition-[color,box-shadow] focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 data-[size=default]:h-9 data-[size=sm]:h-8 data-[placeholder]:text-muted-foreground *:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-2 dark:bg-input/30 dark:aria-invalid:ring-destructive/40 dark:hover:bg-input/50 [&_svg:not([class*='size-'])]:size-4 [&_svg:not([class*='text-'])]:text-muted-foreground [&_svg]:pointer-events-none [&_svg]:shrink-0", className),
     ...props,
     children: [
       children,
-      /* @__PURE__ */ jsx49(SelectPrimitive.Icon, {
+      /* @__PURE__ */ jsx50(SelectPrimitive.Icon, {
         asChild: true,
-        children: /* @__PURE__ */ jsx49(SpriteIcon, {
+        children: /* @__PURE__ */ jsx50(SpriteIcon, {
           id: "ChevronDown",
           className: "size-4 opacity-50",
           url: spriteUrl
@@ -1797,21 +1959,21 @@ function SelectTrigger({ className, size = "default", children, spriteUrl, ...pr
   });
 }
 function SelectContent({ className, children, position = "popper", spriteUrl, ...props }) {
-  return /* @__PURE__ */ jsx49(SelectPrimitive.Portal, {
-    children: /* @__PURE__ */ jsxs22(SelectPrimitive.Content, {
+  return /* @__PURE__ */ jsx50(SelectPrimitive.Portal, {
+    children: /* @__PURE__ */ jsxs23(SelectPrimitive.Content, {
       "data-slot": "select-content",
-      className: clsx20("data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 relative z-50 max-h-(--radix-select-content-available-height) min-w-[8rem] origin-(--radix-select-content-transform-origin) overflow-y-auto overflow-x-hidden rounded-md border bg-popover text-popover-foreground shadow-md data-[state=closed]:animate-out data-[state=open]:animate-in", position === "popper" && "data-[side=left]:-translate-x-1 data-[side=top]:-translate-y-1 data-[side=right]:translate-x-1 data-[side=bottom]:translate-y-1", className),
+      className: clsx21("data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 relative z-50 max-h-(--radix-select-content-available-height) min-w-[8rem] origin-(--radix-select-content-transform-origin) overflow-y-auto overflow-x-hidden rounded-md border bg-popover text-popover-foreground shadow-md data-[state=closed]:animate-out data-[state=open]:animate-in", position === "popper" && "data-[side=left]:-translate-x-1 data-[side=top]:-translate-y-1 data-[side=right]:translate-x-1 data-[side=bottom]:translate-y-1", className),
       position,
       ...props,
       children: [
-        /* @__PURE__ */ jsx49(SelectScrollUpButton, {
+        /* @__PURE__ */ jsx50(SelectScrollUpButton, {
           spriteUrl
         }),
-        /* @__PURE__ */ jsx49(SelectPrimitive.Viewport, {
-          className: clsx20("p-1", position === "popper" && "h-[var(--radix-select-trigger-height)] w-full min-w-[var(--radix-select-trigger-width)] scroll-my-1"),
+        /* @__PURE__ */ jsx50(SelectPrimitive.Viewport, {
+          className: clsx21("p-1", position === "popper" && "h-[var(--radix-select-trigger-height)] w-full min-w-[var(--radix-select-trigger-width)] scroll-my-1"),
           children
         }),
-        /* @__PURE__ */ jsx49(SelectScrollDownButton, {
+        /* @__PURE__ */ jsx50(SelectScrollDownButton, {
           spriteUrl
         })
       ]
@@ -1819,40 +1981,40 @@ function SelectContent({ className, children, position = "popper", spriteUrl, ..
   });
 }
 function SelectLabel({ className, ...props }) {
-  return /* @__PURE__ */ jsx49(SelectPrimitive.Label, {
+  return /* @__PURE__ */ jsx50(SelectPrimitive.Label, {
     "data-slot": "select-label",
-    className: clsx20("px-2 py-1.5 text-muted-foreground text-xs", className),
+    className: clsx21("px-2 py-1.5 text-muted-foreground text-xs", className),
     ...props
   });
 }
 function SelectItem({ className, spriteUrl, children, ...props }) {
-  return /* @__PURE__ */ jsxs22(SelectPrimitive.Item, {
+  return /* @__PURE__ */ jsxs23(SelectPrimitive.Item, {
     "data-slot": "select-item",
-    className: clsx20("relative flex w-full cursor-default select-none items-center gap-2 rounded-sm py-1.5 pr-8 pl-2 text-sm outline-hidden focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg:not([class*='size-'])]:size-4 [&_svg:not([class*='text-'])]:text-muted-foreground [&_svg]:pointer-events-none [&_svg]:shrink-0 *:[span]:last:flex *:[span]:last:items-center *:[span]:last:gap-2", className),
+    className: clsx21("relative flex w-full cursor-default select-none items-center gap-2 rounded-sm py-1.5 pr-8 pl-2 text-sm outline-hidden focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg:not([class*='size-'])]:size-4 [&_svg:not([class*='text-'])]:text-muted-foreground [&_svg]:pointer-events-none [&_svg]:shrink-0 *:[span]:last:flex *:[span]:last:items-center *:[span]:last:gap-2", className),
     ...props,
     children: [
-      /* @__PURE__ */ jsx49("span", {
+      /* @__PURE__ */ jsx50("span", {
         className: "absolute right-2 flex size-3.5 items-center justify-center",
-        children: /* @__PURE__ */ jsx49(SelectPrimitive.ItemIndicator, {
-          children: /* @__PURE__ */ jsx49(SpriteIcon, {
+        children: /* @__PURE__ */ jsx50(SelectPrimitive.ItemIndicator, {
+          children: /* @__PURE__ */ jsx50(SpriteIcon, {
             id: "Check",
             className: "size-4",
             url: spriteUrl
           })
         })
       }),
-      /* @__PURE__ */ jsx49(SelectPrimitive.ItemText, {
+      /* @__PURE__ */ jsx50(SelectPrimitive.ItemText, {
         children
       })
     ]
   });
 }
 function SelectScrollUpButton({ className, spriteUrl, ...props }) {
-  return /* @__PURE__ */ jsx49(SelectPrimitive.ScrollUpButton, {
+  return /* @__PURE__ */ jsx50(SelectPrimitive.ScrollUpButton, {
     "data-slot": "select-scroll-up-button",
-    className: clsx20("flex cursor-default items-center justify-center py-1", className),
+    className: clsx21("flex cursor-default items-center justify-center py-1", className),
     ...props,
-    children: /* @__PURE__ */ jsx49(SpriteIcon, {
+    children: /* @__PURE__ */ jsx50(SpriteIcon, {
       id: "ChevronUp",
       className: "size-4",
       url: spriteUrl
@@ -1860,11 +2022,11 @@ function SelectScrollUpButton({ className, spriteUrl, ...props }) {
   });
 }
 function SelectScrollDownButton({ className, spriteUrl, ...props }) {
-  return /* @__PURE__ */ jsx49(SelectPrimitive.ScrollDownButton, {
+  return /* @__PURE__ */ jsx50(SelectPrimitive.ScrollDownButton, {
     "data-slot": "select-scroll-down-button",
-    className: clsx20("flex cursor-default items-center justify-center py-1", className),
+    className: clsx21("flex cursor-default items-center justify-center py-1", className),
     ...props,
-    children: /* @__PURE__ */ jsx49(SpriteIcon, {
+    children: /* @__PURE__ */ jsx50(SpriteIcon, {
       id: "ChevronDown",
       className: "size-4",
       url: spriteUrl
@@ -1873,76 +2035,76 @@ function SelectScrollDownButton({ className, spriteUrl, ...props }) {
 }
 
 // src/shadcn-ui/examples/card-with-form.tsx
-import { jsx as jsx50, jsxs as jsxs23 } from "react/jsx-runtime";
+import { jsx as jsx51, jsxs as jsxs24 } from "react/jsx-runtime";
 function CardWithForm({ spriteUrl }) {
-  return /* @__PURE__ */ jsxs23(Card, {
+  return /* @__PURE__ */ jsxs24(Card, {
     className: "w-[350px]",
     children: [
-      /* @__PURE__ */ jsxs23(CardHeader, {
+      /* @__PURE__ */ jsxs24(CardHeader, {
         children: [
-          /* @__PURE__ */ jsx50(CardTitle, {
+          /* @__PURE__ */ jsx51(CardTitle, {
             children: "Create project"
           }),
-          /* @__PURE__ */ jsx50(CardDescription, {
+          /* @__PURE__ */ jsx51(CardDescription, {
             children: "Deploy your new project in one-click."
           })
         ]
       }),
-      /* @__PURE__ */ jsx50(CardContent, {
-        children: /* @__PURE__ */ jsx50("form", {
-          children: /* @__PURE__ */ jsxs23("div", {
+      /* @__PURE__ */ jsx51(CardContent, {
+        children: /* @__PURE__ */ jsx51("form", {
+          children: /* @__PURE__ */ jsxs24("div", {
             className: "grid w-full items-center gap-6",
             children: [
-              /* @__PURE__ */ jsxs23("div", {
+              /* @__PURE__ */ jsxs24("div", {
                 className: "flex flex-col gap-3",
                 children: [
-                  /* @__PURE__ */ jsx50(Label, {
+                  /* @__PURE__ */ jsx51(Label, {
                     htmlFor: "name",
                     children: "Name"
                   }),
-                  /* @__PURE__ */ jsx50(Input, {
+                  /* @__PURE__ */ jsx51(Input, {
                     id: "name",
                     placeholder: "Name of your project"
                   })
                 ]
               }),
-              /* @__PURE__ */ jsxs23("div", {
+              /* @__PURE__ */ jsxs24("div", {
                 className: "flex flex-col gap-3",
                 children: [
-                  /* @__PURE__ */ jsx50(Label, {
+                  /* @__PURE__ */ jsx51(Label, {
                     htmlFor: "framework",
                     children: "Framework"
                   }),
-                  /* @__PURE__ */ jsxs23(Select, {
+                  /* @__PURE__ */ jsxs24(Select, {
                     children: [
-                      /* @__PURE__ */ jsx50(SelectTrigger, {
+                      /* @__PURE__ */ jsx51(SelectTrigger, {
                         spriteUrl,
                         id: "framework",
                         className: "w-full",
-                        children: /* @__PURE__ */ jsx50(SelectValue, {
+                        children: /* @__PURE__ */ jsx51(SelectValue, {
                           placeholder: "Select"
                         })
                       }),
-                      /* @__PURE__ */ jsxs23(SelectContent, {
+                      /* @__PURE__ */ jsxs24(SelectContent, {
                         spriteUrl,
                         position: "popper",
                         children: [
-                          /* @__PURE__ */ jsx50(SelectItem, {
+                          /* @__PURE__ */ jsx51(SelectItem, {
                             spriteUrl,
                             value: "next",
                             children: "Next.js"
                           }),
-                          /* @__PURE__ */ jsx50(SelectItem, {
+                          /* @__PURE__ */ jsx51(SelectItem, {
                             spriteUrl,
                             value: "sveltekit",
                             children: "SvelteKit"
                           }),
-                          /* @__PURE__ */ jsx50(SelectItem, {
+                          /* @__PURE__ */ jsx51(SelectItem, {
                             spriteUrl,
                             value: "astro",
                             children: "Astro"
                           }),
-                          /* @__PURE__ */ jsx50(SelectItem, {
+                          /* @__PURE__ */ jsx51(SelectItem, {
                             spriteUrl,
                             value: "nuxt",
                             children: "Nuxt.js"
@@ -1957,14 +2119,14 @@ function CardWithForm({ spriteUrl }) {
           })
         })
       }),
-      /* @__PURE__ */ jsxs23(CardFooter, {
+      /* @__PURE__ */ jsxs24(CardFooter, {
         className: "flex justify-between",
         children: [
-          /* @__PURE__ */ jsx50(Button, {
+          /* @__PURE__ */ jsx51(Button, {
             variant: "outline",
             children: "Cancel"
           }),
-          /* @__PURE__ */ jsx50(Button, {
+          /* @__PURE__ */ jsx51(Button, {
             children: "Deploy"
           })
         ]
@@ -1974,18 +2136,18 @@ function CardWithForm({ spriteUrl }) {
 }
 
 // src/shadcn-ui/components/checkbox.tsx
-import clsx21 from "clsx";
+import clsx22 from "clsx";
 import { Checkbox as CheckboxPrimitive } from "radix-ui";
-import { jsx as jsx51 } from "react/jsx-runtime";
+import { jsx as jsx52 } from "react/jsx-runtime";
 function Checkbox({ className, spriteUrl, ...props }) {
-  return /* @__PURE__ */ jsx51(CheckboxPrimitive.Root, {
+  return /* @__PURE__ */ jsx52(CheckboxPrimitive.Root, {
     "data-slot": "checkbox",
-    className: clsx21("peer size-4 shrink-0 rounded-[4px] border border-input shadow-xs outline-none transition-shadow focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 data-[state=checked]:border-primary data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground dark:bg-input/30 dark:data-[state=checked]:bg-primary dark:aria-invalid:ring-destructive/40", className),
+    className: clsx22("peer size-4 shrink-0 rounded-[4px] border border-input shadow-xs outline-none transition-shadow focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 data-[state=checked]:border-primary data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground dark:bg-input/30 dark:data-[state=checked]:bg-primary dark:aria-invalid:ring-destructive/40", className),
     ...props,
-    children: /* @__PURE__ */ jsx51(CheckboxPrimitive.Indicator, {
+    children: /* @__PURE__ */ jsx52(CheckboxPrimitive.Indicator, {
       "data-slot": "checkbox-indicator",
       className: "flex items-center justify-center text-current transition-none",
-      children: /* @__PURE__ */ jsx51(SpriteIcon, {
+      children: /* @__PURE__ */ jsx52(SpriteIcon, {
         id: "Check",
         url: spriteUrl,
         className: "size-3.5"
@@ -1995,40 +2157,40 @@ function Checkbox({ className, spriteUrl, ...props }) {
 }
 
 // src/shadcn-ui/examples/checkbox-demo.tsx
-import { jsx as jsx52, jsxs as jsxs24 } from "react/jsx-runtime";
+import { jsx as jsx53, jsxs as jsxs25 } from "react/jsx-runtime";
 function CheckboxDemo({ spriteUrl }) {
-  return /* @__PURE__ */ jsxs24("div", {
+  return /* @__PURE__ */ jsxs25("div", {
     className: "flex flex-col gap-6",
     children: [
-      /* @__PURE__ */ jsxs24("div", {
+      /* @__PURE__ */ jsxs25("div", {
         className: "flex items-center gap-3",
         children: [
-          /* @__PURE__ */ jsx52(Checkbox, {
+          /* @__PURE__ */ jsx53(Checkbox, {
             spriteUrl,
             id: "terms"
           }),
-          /* @__PURE__ */ jsx52(Label, {
+          /* @__PURE__ */ jsx53(Label, {
             htmlFor: "terms",
             children: "Accept terms and conditions"
           })
         ]
       }),
-      /* @__PURE__ */ jsxs24("div", {
+      /* @__PURE__ */ jsxs25("div", {
         className: "flex items-start gap-3",
         children: [
-          /* @__PURE__ */ jsx52(Checkbox, {
+          /* @__PURE__ */ jsx53(Checkbox, {
             spriteUrl,
             id: "terms-2",
             defaultChecked: true
           }),
-          /* @__PURE__ */ jsxs24("div", {
+          /* @__PURE__ */ jsxs25("div", {
             className: "grid gap-2",
             children: [
-              /* @__PURE__ */ jsx52(Label, {
+              /* @__PURE__ */ jsx53(Label, {
                 htmlFor: "terms-2",
                 children: "Accept terms and conditions"
               }),
-              /* @__PURE__ */ jsx52("p", {
+              /* @__PURE__ */ jsx53("p", {
                 className: "text-muted-foreground text-sm",
                 children: "By clicking this checkbox, you agree to the terms and conditions."
               })
@@ -2036,37 +2198,37 @@ function CheckboxDemo({ spriteUrl }) {
           })
         ]
       }),
-      /* @__PURE__ */ jsxs24("div", {
+      /* @__PURE__ */ jsxs25("div", {
         className: "flex items-start gap-3",
         children: [
-          /* @__PURE__ */ jsx52(Checkbox, {
+          /* @__PURE__ */ jsx53(Checkbox, {
             spriteUrl,
             id: "toggle",
             disabled: true
           }),
-          /* @__PURE__ */ jsx52(Label, {
+          /* @__PURE__ */ jsx53(Label, {
             htmlFor: "toggle",
             children: "Enable notifications"
           })
         ]
       }),
-      /* @__PURE__ */ jsxs24(Label, {
+      /* @__PURE__ */ jsxs25(Label, {
         className: "flex items-start gap-3 rounded-lg border p-3 hover:bg-accent/50 has-[[aria-checked=true]]:border-blue-600 has-[[aria-checked=true]]:bg-blue-50 dark:has-[[aria-checked=true]]:border-blue-900 dark:has-[[aria-checked=true]]:bg-blue-950",
         children: [
-          /* @__PURE__ */ jsx52(Checkbox, {
+          /* @__PURE__ */ jsx53(Checkbox, {
             spriteUrl,
             id: "toggle-2",
             defaultChecked: true,
             className: "data-[state=checked]:border-blue-600 data-[state=checked]:bg-blue-600 data-[state=checked]:text-white dark:data-[state=checked]:border-blue-700 dark:data-[state=checked]:bg-blue-700"
           }),
-          /* @__PURE__ */ jsxs24("div", {
+          /* @__PURE__ */ jsxs25("div", {
             className: "grid gap-1.5 font-normal",
             children: [
-              /* @__PURE__ */ jsx52("p", {
+              /* @__PURE__ */ jsx53("p", {
                 className: "font-medium text-sm leading-none",
                 children: "Enable notifications"
               }),
-              /* @__PURE__ */ jsx52("p", {
+              /* @__PURE__ */ jsx53("p", {
                 className: "text-muted-foreground text-sm",
                 children: "You can enable or disable notifications at any time."
               })
@@ -2079,17 +2241,17 @@ function CheckboxDemo({ spriteUrl }) {
 }
 
 // src/shadcn-ui/examples/checkbox-disabled.tsx
-import { jsx as jsx53, jsxs as jsxs25 } from "react/jsx-runtime";
+import { jsx as jsx54, jsxs as jsxs26 } from "react/jsx-runtime";
 function CheckboxDisabled({ spriteUrl }) {
-  return /* @__PURE__ */ jsxs25("div", {
+  return /* @__PURE__ */ jsxs26("div", {
     className: "flex items-center space-x-2",
     children: [
-      /* @__PURE__ */ jsx53(Checkbox, {
+      /* @__PURE__ */ jsx54(Checkbox, {
         spriteUrl,
         id: "terms2",
         disabled: true
       }),
-      /* @__PURE__ */ jsx53("label", {
+      /* @__PURE__ */ jsx54("label", {
         htmlFor: "terms2",
         className: "font-medium text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70",
         children: "Accept terms and conditions"
@@ -2103,15 +2265,15 @@ import React4 from "react";
 import { toast } from "sonner";
 
 // src/shadcn-ui/custom/form.tsx
-import clsx22 from "clsx";
+import clsx23 from "clsx";
 import { Slot as SlotPrimitive4 } from "radix-ui";
 import React3 from "react";
 import { Form as RouterForm } from "react-router";
-import { jsx as jsx54 } from "react/jsx-runtime";
+import { jsx as jsx55 } from "react/jsx-runtime";
 var Form = RouterForm;
 var FormFieldContext = React3.createContext({});
 var FormField = ({ name, children }) => {
-  return /* @__PURE__ */ jsx54(FormFieldContext.Provider, {
+  return /* @__PURE__ */ jsx55(FormFieldContext.Provider, {
     value: { name },
     children
   });
@@ -2135,28 +2297,28 @@ var useFormField = () => {
 var FormItemContext = React3.createContext({});
 function FormItem({ className, ...props }) {
   const id = React3.useId();
-  return /* @__PURE__ */ jsx54(FormItemContext.Provider, {
+  return /* @__PURE__ */ jsx55(FormItemContext.Provider, {
     value: { id },
-    children: /* @__PURE__ */ jsx54("div", {
+    children: /* @__PURE__ */ jsx55("div", {
       "data-slot": "form-item",
-      className: clsx22("grid gap-2", className),
+      className: clsx23("grid gap-2", className),
       ...props
     })
   });
 }
 function FormLabel({ className, ...props }) {
   const { error, formItemId } = useFormField();
-  return /* @__PURE__ */ jsx54(Label, {
+  return /* @__PURE__ */ jsx55(Label, {
     "data-slot": "form-label",
     "data-error": !!error,
-    className: clsx22("data-[error=true]:text-destructive", className),
+    className: clsx23("data-[error=true]:text-destructive", className),
     htmlFor: formItemId,
     ...props
   });
 }
 function FormControl({ ...props }) {
   const { error, formItemId, formDescriptionId, formMessageId } = useFormField();
-  return /* @__PURE__ */ jsx54(SlotPrimitive4.Slot, {
+  return /* @__PURE__ */ jsx55(SlotPrimitive4.Slot, {
     "data-slot": "form-control",
     id: formItemId,
     "aria-describedby": !error ? `${formDescriptionId}` : `${formDescriptionId} ${formMessageId}`,
@@ -2166,10 +2328,10 @@ function FormControl({ ...props }) {
 }
 function FormDescription({ className, ...props }) {
   const { formDescriptionId } = useFormField();
-  return /* @__PURE__ */ jsx54("p", {
+  return /* @__PURE__ */ jsx55("p", {
     "data-slot": "form-description",
     id: formDescriptionId,
-    className: clsx22("text-muted-foreground text-sm", className),
+    className: clsx23("text-muted-foreground text-sm", className),
     ...props
   });
 }
@@ -2179,17 +2341,17 @@ function FormMessage({ className, ...props }) {
   if (!body) {
     return null;
   }
-  return /* @__PURE__ */ jsx54("p", {
+  return /* @__PURE__ */ jsx55("p", {
     "data-slot": "form-message",
     id: formMessageId,
-    className: clsx22("text-destructive text-sm", className),
+    className: clsx23("text-destructive text-sm", className),
     ...props,
     children: body
   });
 }
 
 // src/shadcn-ui/examples/checkbox-form-multiple.tsx
-import { jsx as jsx55, jsxs as jsxs26 } from "react/jsx-runtime";
+import { jsx as jsx56, jsxs as jsxs27 } from "react/jsx-runtime";
 var items = [
   {
     id: "recents",
@@ -2223,9 +2385,9 @@ function CheckboxReactHookFormMultiple({ spriteUrl }) {
     const formData = new FormData(event.currentTarget);
     const items2 = formData.getAll("items");
     toast("You submitted the following values", {
-      description: /* @__PURE__ */ jsx55("pre", {
+      description: /* @__PURE__ */ jsx56("pre", {
         className: "mt-2 w-[320px] rounded-md bg-neutral-950 p-4",
-        children: /* @__PURE__ */ jsx55("code", {
+        children: /* @__PURE__ */ jsx56("code", {
           className: "text-white",
           children: JSON.stringify({ items: items2 }, null, 2)
         })
@@ -2239,31 +2401,31 @@ function CheckboxReactHookFormMultiple({ spriteUrl }) {
       setSelectedItems((prev) => prev.filter((id) => id !== itemId));
     }
   }
-  return /* @__PURE__ */ jsxs26(Form, {
+  return /* @__PURE__ */ jsxs27(Form, {
     onSubmit: handleSubmit,
     className: "space-y-8",
     children: [
-      /* @__PURE__ */ jsx55(FormField, {
+      /* @__PURE__ */ jsx56(FormField, {
         name: "items",
-        children: /* @__PURE__ */ jsxs26(FormItem, {
+        children: /* @__PURE__ */ jsxs27(FormItem, {
           children: [
-            /* @__PURE__ */ jsxs26("div", {
+            /* @__PURE__ */ jsxs27("div", {
               className: "mb-4",
               children: [
-                /* @__PURE__ */ jsx55(FormLabel, {
+                /* @__PURE__ */ jsx56(FormLabel, {
                   className: "text-base",
                   children: "Sidebar"
                 }),
-                /* @__PURE__ */ jsx55(FormDescription, {
+                /* @__PURE__ */ jsx56(FormDescription, {
                   children: "Select the items you want to display in the sidebar."
                 })
               ]
             }),
-            items.map((item) => /* @__PURE__ */ jsxs26(FormItem, {
+            items.map((item) => /* @__PURE__ */ jsxs27(FormItem, {
               className: "flex flex-row items-center gap-2",
               children: [
-                /* @__PURE__ */ jsx55(FormControl, {
-                  children: /* @__PURE__ */ jsx55(Checkbox, {
+                /* @__PURE__ */ jsx56(FormControl, {
+                  children: /* @__PURE__ */ jsx56(Checkbox, {
                     spriteUrl,
                     name: "items",
                     value: item.id,
@@ -2271,79 +2433,13 @@ function CheckboxReactHookFormMultiple({ spriteUrl }) {
                     onCheckedChange: (checked) => handleCheckboxChange(item.id, !!checked)
                   })
                 }),
-                /* @__PURE__ */ jsx55(FormLabel, {
+                /* @__PURE__ */ jsx56(FormLabel, {
                   className: "font-normal text-sm",
                   children: item.label
                 })
               ]
             }, item.id)),
-            /* @__PURE__ */ jsx55(FormMessage, {})
-          ]
-        })
-      }),
-      /* @__PURE__ */ jsx55(Button, {
-        type: "submit",
-        children: "Submit"
-      })
-    ]
-  });
-}
-
-// src/shadcn-ui/examples/checkbox-form-single.tsx
-import React5 from "react";
-import { toast as toast2 } from "sonner";
-import { jsx as jsx56, jsxs as jsxs27 } from "react/jsx-runtime";
-function CheckboxReactHookFormSingle({ spriteUrl }) {
-  const [mobileEnabled, setMobileEnabled] = React5.useState(false);
-  function handleSubmit(event) {
-    event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    const mobile = formData.has("mobile");
-    toast2("You submitted the following values", {
-      description: /* @__PURE__ */ jsx56("pre", {
-        className: "mt-2 w-[320px] rounded-md bg-neutral-950 p-4",
-        children: /* @__PURE__ */ jsx56("code", {
-          className: "text-white",
-          children: JSON.stringify({ mobile }, null, 2)
-        })
-      })
-    });
-  }
-  return /* @__PURE__ */ jsxs27(Form, {
-    onSubmit: handleSubmit,
-    className: "flex flex-col items-start gap-4",
-    children: [
-      /* @__PURE__ */ jsx56(FormField, {
-        name: "mobile",
-        children: /* @__PURE__ */ jsxs27(FormItem, {
-          className: "flex flex-row items-start gap-2 rounded-md border p-4 shadow-sm",
-          children: [
-            /* @__PURE__ */ jsx56(FormControl, {
-              children: /* @__PURE__ */ jsx56(Checkbox, {
-                spriteUrl,
-                name: "mobile",
-                checked: mobileEnabled,
-                onCheckedChange: setMobileEnabled
-              })
-            }),
-            /* @__PURE__ */ jsxs27("div", {
-              className: "space-y-1 leading-none",
-              children: [
-                /* @__PURE__ */ jsx56(FormLabel, {
-                  children: "Use different settings for my mobile devices"
-                }),
-                /* @__PURE__ */ jsxs27(FormDescription, {
-                  children: [
-                    "You can manage your mobile notifications in the ",
-                    /* @__PURE__ */ jsx56(Link, {
-                      href: "/examples/forms",
-                      children: "mobile settings"
-                    }),
-                    " page."
-                  ]
-                })
-              ]
-            })
+            /* @__PURE__ */ jsx56(FormMessage, {})
           ]
         })
       }),
@@ -2355,25 +2451,91 @@ function CheckboxReactHookFormSingle({ spriteUrl }) {
   });
 }
 
-// src/shadcn-ui/examples/checkbox-with-text.tsx
+// src/shadcn-ui/examples/checkbox-form-single.tsx
+import React5 from "react";
+import { toast as toast2 } from "sonner";
 import { jsx as jsx57, jsxs as jsxs28 } from "react/jsx-runtime";
+function CheckboxReactHookFormSingle({ spriteUrl }) {
+  const [mobileEnabled, setMobileEnabled] = React5.useState(false);
+  function handleSubmit(event) {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const mobile = formData.has("mobile");
+    toast2("You submitted the following values", {
+      description: /* @__PURE__ */ jsx57("pre", {
+        className: "mt-2 w-[320px] rounded-md bg-neutral-950 p-4",
+        children: /* @__PURE__ */ jsx57("code", {
+          className: "text-white",
+          children: JSON.stringify({ mobile }, null, 2)
+        })
+      })
+    });
+  }
+  return /* @__PURE__ */ jsxs28(Form, {
+    onSubmit: handleSubmit,
+    className: "flex flex-col items-start gap-4",
+    children: [
+      /* @__PURE__ */ jsx57(FormField, {
+        name: "mobile",
+        children: /* @__PURE__ */ jsxs28(FormItem, {
+          className: "flex flex-row items-start gap-2 rounded-md border p-4 shadow-sm",
+          children: [
+            /* @__PURE__ */ jsx57(FormControl, {
+              children: /* @__PURE__ */ jsx57(Checkbox, {
+                spriteUrl,
+                name: "mobile",
+                checked: mobileEnabled,
+                onCheckedChange: setMobileEnabled
+              })
+            }),
+            /* @__PURE__ */ jsxs28("div", {
+              className: "space-y-1 leading-none",
+              children: [
+                /* @__PURE__ */ jsx57(FormLabel, {
+                  children: "Use different settings for my mobile devices"
+                }),
+                /* @__PURE__ */ jsxs28(FormDescription, {
+                  children: [
+                    "You can manage your mobile notifications in the ",
+                    /* @__PURE__ */ jsx57(Link, {
+                      href: "/examples/forms",
+                      children: "mobile settings"
+                    }),
+                    " page."
+                  ]
+                })
+              ]
+            })
+          ]
+        })
+      }),
+      /* @__PURE__ */ jsx57(Button, {
+        type: "submit",
+        children: "Submit"
+      })
+    ]
+  });
+}
+
+// src/shadcn-ui/examples/checkbox-with-text.tsx
+import { jsx as jsx58, jsxs as jsxs29 } from "react/jsx-runtime";
 function CheckboxWithText({ spriteUrl }) {
-  return /* @__PURE__ */ jsxs28("div", {
+  return /* @__PURE__ */ jsxs29("div", {
     className: "items-top flex gap-2",
     children: [
-      /* @__PURE__ */ jsx57(Checkbox, {
+      /* @__PURE__ */ jsx58(Checkbox, {
         spriteUrl,
         id: "terms1"
       }),
-      /* @__PURE__ */ jsxs28("div", {
+      /* @__PURE__ */ jsxs29("div", {
         className: "grid gap-1.5 leading-none",
         children: [
-          /* @__PURE__ */ jsx57("label", {
+          /* @__PURE__ */ jsx58("label", {
             htmlFor: "terms1",
             className: "font-medium text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70",
             children: "Accept terms and conditions"
           }),
-          /* @__PURE__ */ jsx57("p", {
+          /* @__PURE__ */ jsx58("p", {
             className: "text-muted-foreground text-sm",
             children: "You agree to our Terms of Service and Privacy Policy."
           })
@@ -2388,54 +2550,54 @@ import React6 from "react";
 
 // src/shadcn-ui/components/collapsible.tsx
 import { Collapsible as CollapsiblePrimitive } from "radix-ui";
-import { jsx as jsx58 } from "react/jsx-runtime";
+import { jsx as jsx59 } from "react/jsx-runtime";
 function Collapsible({ ...props }) {
-  return /* @__PURE__ */ jsx58(CollapsiblePrimitive.Root, {
+  return /* @__PURE__ */ jsx59(CollapsiblePrimitive.Root, {
     "data-slot": "collapsible",
     ...props
   });
 }
 function CollapsibleTrigger({ ...props }) {
-  return /* @__PURE__ */ jsx58(CollapsiblePrimitive.CollapsibleTrigger, {
+  return /* @__PURE__ */ jsx59(CollapsiblePrimitive.CollapsibleTrigger, {
     "data-slot": "collapsible-trigger",
     ...props
   });
 }
 function CollapsibleContent({ ...props }) {
-  return /* @__PURE__ */ jsx58(CollapsiblePrimitive.CollapsibleContent, {
+  return /* @__PURE__ */ jsx59(CollapsiblePrimitive.CollapsibleContent, {
     "data-slot": "collapsible-content",
     ...props
   });
 }
 
 // src/shadcn-ui/examples/collapsible-demo.tsx
-import { jsx as jsx59, jsxs as jsxs29 } from "react/jsx-runtime";
+import { jsx as jsx60, jsxs as jsxs30 } from "react/jsx-runtime";
 function CollapsibleDemo({ spriteUrl }) {
   const [isOpen, setIsOpen] = React6.useState(false);
-  return /* @__PURE__ */ jsxs29(Collapsible, {
+  return /* @__PURE__ */ jsxs30(Collapsible, {
     open: isOpen,
     onOpenChange: setIsOpen,
     className: "flex w-[350px] flex-col gap-2",
     children: [
-      /* @__PURE__ */ jsxs29("div", {
+      /* @__PURE__ */ jsxs30("div", {
         className: "flex items-center justify-between gap-4 px-4",
         children: [
-          /* @__PURE__ */ jsx59("h4", {
+          /* @__PURE__ */ jsx60("h4", {
             className: "font-semibold text-sm",
             children: "@peduarte starred 3 repositories"
           }),
-          /* @__PURE__ */ jsx59(CollapsibleTrigger, {
+          /* @__PURE__ */ jsx60(CollapsibleTrigger, {
             asChild: true,
-            children: /* @__PURE__ */ jsxs29(Button, {
+            children: /* @__PURE__ */ jsxs30(Button, {
               variant: "ghost",
               size: "icon",
               className: "size-8",
               children: [
-                /* @__PURE__ */ jsx59(SpriteIcon, {
+                /* @__PURE__ */ jsx60(SpriteIcon, {
                   id: "ChevronsUpDown",
                   url: spriteUrl
                 }),
-                /* @__PURE__ */ jsx59("span", {
+                /* @__PURE__ */ jsx60("span", {
                   className: "sr-only",
                   children: "Toggle"
                 })
@@ -2444,18 +2606,18 @@ function CollapsibleDemo({ spriteUrl }) {
           })
         ]
       }),
-      /* @__PURE__ */ jsx59("div", {
+      /* @__PURE__ */ jsx60("div", {
         className: "rounded-md border px-4 py-2 font-mono text-sm",
         children: "@radix-ui/primitives"
       }),
-      /* @__PURE__ */ jsxs29(CollapsibleContent, {
+      /* @__PURE__ */ jsxs30(CollapsibleContent, {
         className: "flex flex-col gap-2",
         children: [
-          /* @__PURE__ */ jsx59("div", {
+          /* @__PURE__ */ jsx60("div", {
             className: "rounded-md border px-4 py-2 font-mono text-sm",
             children: "@radix-ui/colors"
           }),
-          /* @__PURE__ */ jsx59("div", {
+          /* @__PURE__ */ jsx60("div", {
             className: "rounded-md border px-4 py-2 font-mono text-sm",
             children: "@stitches/react"
           })
@@ -2466,68 +2628,68 @@ function CollapsibleDemo({ spriteUrl }) {
 }
 
 // src/shadcn-ui/examples/combobox-demo.tsx
-import clsx26 from "clsx";
+import clsx27 from "clsx";
 import React7 from "react";
 
 // src/shadcn-ui/components/command.tsx
-import clsx24 from "clsx";
+import clsx25 from "clsx";
 import { Command as CommandPrimitive } from "cmdk";
 
 // src/shadcn-ui/components/dialog.tsx
-import clsx23 from "clsx";
+import clsx24 from "clsx";
 import { Dialog as DialogPrimitive } from "radix-ui";
-import { jsx as jsx60, jsxs as jsxs30 } from "react/jsx-runtime";
+import { jsx as jsx61, jsxs as jsxs31 } from "react/jsx-runtime";
 function Dialog({ ...props }) {
-  return /* @__PURE__ */ jsx60(DialogPrimitive.Root, {
+  return /* @__PURE__ */ jsx61(DialogPrimitive.Root, {
     "data-slot": "dialog",
     ...props
   });
 }
 function DialogTrigger({ ...props }) {
-  return /* @__PURE__ */ jsx60(DialogPrimitive.Trigger, {
+  return /* @__PURE__ */ jsx61(DialogPrimitive.Trigger, {
     "data-slot": "dialog-trigger",
     ...props
   });
 }
 function DialogPortal({ ...props }) {
-  return /* @__PURE__ */ jsx60(DialogPrimitive.Portal, {
+  return /* @__PURE__ */ jsx61(DialogPrimitive.Portal, {
     "data-slot": "dialog-portal",
     ...props
   });
 }
 function DialogClose({ ...props }) {
-  return /* @__PURE__ */ jsx60(DialogPrimitive.Close, {
+  return /* @__PURE__ */ jsx61(DialogPrimitive.Close, {
     "data-slot": "dialog-close",
     ...props
   });
 }
 function DialogOverlay({ className, ...props }) {
-  return /* @__PURE__ */ jsx60(DialogPrimitive.Overlay, {
+  return /* @__PURE__ */ jsx61(DialogPrimitive.Overlay, {
     "data-slot": "dialog-overlay",
-    className: clsx23("data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/50 data-[state=closed]:animate-out data-[state=open]:animate-in", className),
+    className: clsx24("data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/50 data-[state=closed]:animate-out data-[state=open]:animate-in", className),
     ...props
   });
 }
 function DialogContent({ className, children, showCloseButton = true, spriteUrl, ...props }) {
-  return /* @__PURE__ */ jsxs30(DialogPortal, {
+  return /* @__PURE__ */ jsxs31(DialogPortal, {
     "data-slot": "dialog-portal",
     children: [
-      /* @__PURE__ */ jsx60(DialogOverlay, {}),
-      /* @__PURE__ */ jsxs30(DialogPrimitive.Content, {
+      /* @__PURE__ */ jsx61(DialogOverlay, {}),
+      /* @__PURE__ */ jsxs31(DialogPrimitive.Content, {
         "data-slot": "dialog-content",
-        className: clsx23("data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 fixed top-[50%] left-[50%] z-50 grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded-lg border bg-background p-6 shadow-lg duration-200 data-[state=closed]:animate-out data-[state=open]:animate-in sm:max-w-lg", className),
+        className: clsx24("data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 fixed top-[50%] left-[50%] z-50 grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded-lg border bg-background p-6 shadow-lg duration-200 data-[state=closed]:animate-out data-[state=open]:animate-in sm:max-w-lg", className),
         ...props,
         children: [
           children,
-          showCloseButton && /* @__PURE__ */ jsxs30(DialogPrimitive.Close, {
+          showCloseButton && /* @__PURE__ */ jsxs31(DialogPrimitive.Close, {
             "data-slot": "dialog-close",
             className: "absolute top-4 right-4 rounded-xs opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-hidden focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground [&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0",
             children: [
-              /* @__PURE__ */ jsx60(SpriteIcon, {
+              /* @__PURE__ */ jsx61(SpriteIcon, {
                 id: "X",
                 url: spriteUrl
               }),
-              /* @__PURE__ */ jsx60("span", {
+              /* @__PURE__ */ jsx61("span", {
                 className: "sr-only",
                 children: "Close"
               })
@@ -2539,120 +2701,120 @@ function DialogContent({ className, children, showCloseButton = true, spriteUrl,
   });
 }
 function DialogHeader({ className, ...props }) {
-  return /* @__PURE__ */ jsx60("div", {
+  return /* @__PURE__ */ jsx61("div", {
     "data-slot": "dialog-header",
-    className: clsx23("flex flex-col gap-2 text-center sm:text-left", className),
+    className: clsx24("flex flex-col gap-2 text-center sm:text-left", className),
     ...props
   });
 }
 function DialogFooter({ className, ...props }) {
-  return /* @__PURE__ */ jsx60("div", {
+  return /* @__PURE__ */ jsx61("div", {
     "data-slot": "dialog-footer",
-    className: clsx23("flex flex-col-reverse gap-2 sm:flex-row sm:justify-end", className),
+    className: clsx24("flex flex-col-reverse gap-2 sm:flex-row sm:justify-end", className),
     ...props
   });
 }
 function DialogTitle({ className, ...props }) {
-  return /* @__PURE__ */ jsx60(DialogPrimitive.Title, {
+  return /* @__PURE__ */ jsx61(DialogPrimitive.Title, {
     "data-slot": "dialog-title",
-    className: clsx23("font-semibold text-lg leading-none", className),
+    className: clsx24("font-semibold text-lg leading-none", className),
     ...props
   });
 }
 function DialogDescription({ className, ...props }) {
-  return /* @__PURE__ */ jsx60(DialogPrimitive.Description, {
+  return /* @__PURE__ */ jsx61(DialogPrimitive.Description, {
     "data-slot": "dialog-description",
-    className: clsx23("text-muted-foreground text-sm", className),
+    className: clsx24("text-muted-foreground text-sm", className),
     ...props
   });
 }
 
 // src/shadcn-ui/components/command.tsx
-import { jsx as jsx61, jsxs as jsxs31 } from "react/jsx-runtime";
+import { jsx as jsx62, jsxs as jsxs32 } from "react/jsx-runtime";
 function Command({ className, ...props }) {
-  return /* @__PURE__ */ jsx61(CommandPrimitive, {
+  return /* @__PURE__ */ jsx62(CommandPrimitive, {
     "data-slot": "command",
-    className: clsx24("flex h-full w-full flex-col overflow-hidden rounded-md bg-popover text-popover-foreground", className),
+    className: clsx25("flex h-full w-full flex-col overflow-hidden rounded-md bg-popover text-popover-foreground", className),
     ...props
   });
 }
 function CommandInput({ className, spriteUrl, ...props }) {
-  return /* @__PURE__ */ jsxs31("div", {
+  return /* @__PURE__ */ jsxs32("div", {
     "data-slot": "command-input-wrapper",
     className: "flex h-9 items-center gap-2 border-b px-3",
     children: [
-      /* @__PURE__ */ jsx61(SpriteIcon, {
+      /* @__PURE__ */ jsx62(SpriteIcon, {
         id: "Search",
         url: spriteUrl,
         className: "size-4 shrink-0 opacity-50"
       }),
-      /* @__PURE__ */ jsx61(CommandPrimitive.Input, {
+      /* @__PURE__ */ jsx62(CommandPrimitive.Input, {
         "data-slot": "command-input",
-        className: clsx24("flex h-10 w-full rounded-md bg-transparent py-3 text-sm outline-hidden placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50", className),
+        className: clsx25("flex h-10 w-full rounded-md bg-transparent py-3 text-sm outline-hidden placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50", className),
         ...props
       })
     ]
   });
 }
 function CommandList({ className, ...props }) {
-  return /* @__PURE__ */ jsx61(CommandPrimitive.List, {
+  return /* @__PURE__ */ jsx62(CommandPrimitive.List, {
     "data-slot": "command-list",
-    className: clsx24("max-h-[300px] scroll-py-1 overflow-y-auto overflow-x-hidden", className),
+    className: clsx25("max-h-[300px] scroll-py-1 overflow-y-auto overflow-x-hidden", className),
     ...props
   });
 }
 function CommandEmpty({ ...props }) {
-  return /* @__PURE__ */ jsx61(CommandPrimitive.Empty, {
+  return /* @__PURE__ */ jsx62(CommandPrimitive.Empty, {
     "data-slot": "command-empty",
     className: "py-6 text-center text-sm",
     ...props
   });
 }
 function CommandGroup({ className, ...props }) {
-  return /* @__PURE__ */ jsx61(CommandPrimitive.Group, {
+  return /* @__PURE__ */ jsx62(CommandPrimitive.Group, {
     "data-slot": "command-group",
-    className: clsx24("overflow-hidden p-1 text-foreground [&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:py-1.5 [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground [&_[cmdk-group-heading]]:text-xs", className),
+    className: clsx25("overflow-hidden p-1 text-foreground [&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:py-1.5 [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground [&_[cmdk-group-heading]]:text-xs", className),
     ...props
   });
 }
 function CommandItem({ className, ...props }) {
-  return /* @__PURE__ */ jsx61(CommandPrimitive.Item, {
+  return /* @__PURE__ */ jsx62(CommandPrimitive.Item, {
     "data-slot": "command-item",
-    className: clsx24("relative flex cursor-default select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden data-[disabled=true]:pointer-events-none data-[selected=true]:bg-accent data-[selected=true]:text-accent-foreground data-[disabled=true]:opacity-50 [&_svg:not([class*='size-'])]:size-4 [&_svg:not([class*='text-'])]:text-muted-foreground [&_svg]:pointer-events-none [&_svg]:shrink-0", className),
+    className: clsx25("relative flex cursor-default select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden data-[disabled=true]:pointer-events-none data-[selected=true]:bg-accent data-[selected=true]:text-accent-foreground data-[disabled=true]:opacity-50 [&_svg:not([class*='size-'])]:size-4 [&_svg:not([class*='text-'])]:text-muted-foreground [&_svg]:pointer-events-none [&_svg]:shrink-0", className),
     ...props
   });
 }
 
 // src/shadcn-ui/components/popover.tsx
-import clsx25 from "clsx";
+import clsx26 from "clsx";
 import { Popover as PopoverPrimitive } from "radix-ui";
-import { jsx as jsx62 } from "react/jsx-runtime";
+import { jsx as jsx63 } from "react/jsx-runtime";
 function Popover({ ...props }) {
-  return /* @__PURE__ */ jsx62(PopoverPrimitive.Root, {
+  return /* @__PURE__ */ jsx63(PopoverPrimitive.Root, {
     "data-slot": "popover",
     ...props
   });
 }
 function PopoverTrigger({ ...props }) {
-  return /* @__PURE__ */ jsx62(PopoverPrimitive.Trigger, {
+  return /* @__PURE__ */ jsx63(PopoverPrimitive.Trigger, {
     "data-slot": "popover-trigger",
     ...props
   });
 }
 function PopoverContent({ className, align = "center", sideOffset = 4, ...props }) {
-  return /* @__PURE__ */ jsx62(PopoverPrimitive.Portal, {
-    children: /* @__PURE__ */ jsx62(PopoverPrimitive.Content, {
+  return /* @__PURE__ */ jsx63(PopoverPrimitive.Portal, {
+    children: /* @__PURE__ */ jsx63(PopoverPrimitive.Content, {
       "data-slot": "popover-content",
       align,
       sideOffset,
-      className: clsx25("data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 w-72 origin-(--radix-popover-content-transform-origin) rounded-md border bg-popover p-4 text-popover-foreground shadow-md outline-hidden data-[state=closed]:animate-out data-[state=open]:animate-in", className),
+      className: clsx26("data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 w-72 origin-(--radix-popover-content-transform-origin) rounded-md border bg-popover p-4 text-popover-foreground shadow-md outline-hidden data-[state=closed]:animate-out data-[state=open]:animate-in", className),
       ...props
     })
   });
 }
 
 // src/shadcn-ui/examples/combobox-demo.tsx
-import { jsx as jsx63, jsxs as jsxs32 } from "react/jsx-runtime";
+import { jsx as jsx64, jsxs as jsxs33 } from "react/jsx-runtime";
 var frameworks = [
   {
     value: "next.js",
@@ -2678,20 +2840,20 @@ var frameworks = [
 function ComboboxDemo({ spriteUrl }) {
   const [open, setOpen] = React7.useState(false);
   const [value, setValue] = React7.useState("");
-  return /* @__PURE__ */ jsxs32(Popover, {
+  return /* @__PURE__ */ jsxs33(Popover, {
     open,
     onOpenChange: setOpen,
     children: [
-      /* @__PURE__ */ jsx63(PopoverTrigger, {
+      /* @__PURE__ */ jsx64(PopoverTrigger, {
         asChild: true,
-        children: /* @__PURE__ */ jsxs32(Button, {
+        children: /* @__PURE__ */ jsxs33(Button, {
           variant: "outline",
           role: "combobox",
           "aria-expanded": open,
           className: "w-[200px] justify-between",
           children: [
             value ? frameworks.find((framework) => framework.value === value)?.label : "Select framework...",
-            /* @__PURE__ */ jsx63(SpriteIcon, {
+            /* @__PURE__ */ jsx64(SpriteIcon, {
               id: "ChevronsUpDown",
               className: "opacity-50",
               url: spriteUrl
@@ -2699,22 +2861,22 @@ function ComboboxDemo({ spriteUrl }) {
           ]
         })
       }),
-      /* @__PURE__ */ jsx63(PopoverContent, {
+      /* @__PURE__ */ jsx64(PopoverContent, {
         className: "w-[200px] p-0",
-        children: /* @__PURE__ */ jsxs32(Command, {
+        children: /* @__PURE__ */ jsxs33(Command, {
           children: [
-            /* @__PURE__ */ jsx63(CommandInput, {
+            /* @__PURE__ */ jsx64(CommandInput, {
               spriteUrl,
               placeholder: "Search framework...",
               className: "h-9"
             }),
-            /* @__PURE__ */ jsxs32(CommandList, {
+            /* @__PURE__ */ jsxs33(CommandList, {
               children: [
-                /* @__PURE__ */ jsx63(CommandEmpty, {
+                /* @__PURE__ */ jsx64(CommandEmpty, {
                   children: "No framework found."
                 }),
-                /* @__PURE__ */ jsx63(CommandGroup, {
-                  children: frameworks.map((framework) => /* @__PURE__ */ jsxs32(CommandItem, {
+                /* @__PURE__ */ jsx64(CommandGroup, {
+                  children: frameworks.map((framework) => /* @__PURE__ */ jsxs33(CommandItem, {
                     value: framework.value,
                     onSelect: (currentValue) => {
                       setValue(currentValue === value ? "" : currentValue);
@@ -2722,9 +2884,9 @@ function ComboboxDemo({ spriteUrl }) {
                     },
                     children: [
                       framework.label,
-                      /* @__PURE__ */ jsx63(SpriteIcon, {
+                      /* @__PURE__ */ jsx64(SpriteIcon, {
                         id: "Check",
-                        className: clsx26("ml-auto", value === framework.value ? "opacity-100" : "opacity-0"),
+                        className: clsx27("ml-auto", value === framework.value ? "opacity-100" : "opacity-0"),
                         url: spriteUrl
                       })
                     ]
@@ -2741,81 +2903,81 @@ function ComboboxDemo({ spriteUrl }) {
 
 // src/shadcn-ui/examples/combobox-dropdown-menu.tsx
 import React8 from "react";
-import { jsx as jsx64, jsxs as jsxs33 } from "react/jsx-runtime";
+import { jsx as jsx65, jsxs as jsxs34 } from "react/jsx-runtime";
 var labels = ["feature", "bug", "enhancement", "documentation", "design", "question", "maintenance"];
 function ComboboxDropdownMenu({ spriteUrl }) {
   const [label, setLabel] = React8.useState("feature");
   const [open, setOpen] = React8.useState(false);
-  return /* @__PURE__ */ jsxs33("div", {
+  return /* @__PURE__ */ jsxs34("div", {
     className: "flex w-full flex-col items-start justify-between rounded-md border px-4 py-3 sm:flex-row sm:items-center",
     children: [
-      /* @__PURE__ */ jsxs33("p", {
+      /* @__PURE__ */ jsxs34("p", {
         className: "font-medium text-sm leading-none",
         children: [
-          /* @__PURE__ */ jsx64("span", {
+          /* @__PURE__ */ jsx65("span", {
             className: "mr-2 rounded-lg bg-primary px-2 py-1 text-primary-foreground text-xs",
             children: label
           }),
-          /* @__PURE__ */ jsx64("span", {
+          /* @__PURE__ */ jsx65("span", {
             className: "text-muted-foreground",
             children: "Create a new project"
           })
         ]
       }),
-      /* @__PURE__ */ jsxs33(DropdownMenu, {
+      /* @__PURE__ */ jsxs34(DropdownMenu, {
         open,
         onOpenChange: setOpen,
         children: [
-          /* @__PURE__ */ jsx64(DropdownMenuTrigger, {
+          /* @__PURE__ */ jsx65(DropdownMenuTrigger, {
             asChild: true,
-            children: /* @__PURE__ */ jsx64(Button, {
+            children: /* @__PURE__ */ jsx65(Button, {
               variant: "ghost",
               size: "sm",
-              children: /* @__PURE__ */ jsx64(SpriteIcon, {
+              children: /* @__PURE__ */ jsx65(SpriteIcon, {
                 id: "Ellipsis",
                 url: spriteUrl
               })
             })
           }),
-          /* @__PURE__ */ jsxs33(DropdownMenuContent, {
+          /* @__PURE__ */ jsxs34(DropdownMenuContent, {
             align: "end",
             className: "w-[200px]",
             children: [
-              /* @__PURE__ */ jsx64(DropdownMenuLabel, {
+              /* @__PURE__ */ jsx65(DropdownMenuLabel, {
                 children: "Actions"
               }),
-              /* @__PURE__ */ jsxs33(DropdownMenuGroup, {
+              /* @__PURE__ */ jsxs34(DropdownMenuGroup, {
                 children: [
-                  /* @__PURE__ */ jsx64(DropdownMenuItem, {
+                  /* @__PURE__ */ jsx65(DropdownMenuItem, {
                     children: "Assign to..."
                   }),
-                  /* @__PURE__ */ jsx64(DropdownMenuItem, {
+                  /* @__PURE__ */ jsx65(DropdownMenuItem, {
                     children: "Set due date..."
                   }),
-                  /* @__PURE__ */ jsx64(DropdownMenuSeparator, {}),
-                  /* @__PURE__ */ jsxs33(DropdownMenuSub, {
+                  /* @__PURE__ */ jsx65(DropdownMenuSeparator, {}),
+                  /* @__PURE__ */ jsxs34(DropdownMenuSub, {
                     children: [
-                      /* @__PURE__ */ jsx64(DropdownMenuSubTrigger, {
+                      /* @__PURE__ */ jsx65(DropdownMenuSubTrigger, {
                         spriteUrl,
                         children: "Apply label"
                       }),
-                      /* @__PURE__ */ jsx64(DropdownMenuSubContent, {
+                      /* @__PURE__ */ jsx65(DropdownMenuSubContent, {
                         className: "p-0",
-                        children: /* @__PURE__ */ jsxs33(Command, {
+                        children: /* @__PURE__ */ jsxs34(Command, {
                           children: [
-                            /* @__PURE__ */ jsx64(CommandInput, {
+                            /* @__PURE__ */ jsx65(CommandInput, {
                               spriteUrl,
                               placeholder: "Filter label...",
                               autoFocus: true,
                               className: "h-9"
                             }),
-                            /* @__PURE__ */ jsxs33(CommandList, {
+                            /* @__PURE__ */ jsxs34(CommandList, {
                               children: [
-                                /* @__PURE__ */ jsx64(CommandEmpty, {
+                                /* @__PURE__ */ jsx65(CommandEmpty, {
                                   children: "No label found."
                                 }),
-                                /* @__PURE__ */ jsx64(CommandGroup, {
-                                  children: labels.map((label2) => /* @__PURE__ */ jsx64(CommandItem, {
+                                /* @__PURE__ */ jsx65(CommandGroup, {
+                                  children: labels.map((label2) => /* @__PURE__ */ jsx65(CommandItem, {
                                     value: label2,
                                     onSelect: (value) => {
                                       setLabel(value);
@@ -2831,12 +2993,12 @@ function ComboboxDropdownMenu({ spriteUrl }) {
                       })
                     ]
                   }),
-                  /* @__PURE__ */ jsx64(DropdownMenuSeparator, {}),
-                  /* @__PURE__ */ jsxs33(DropdownMenuItem, {
+                  /* @__PURE__ */ jsx65(DropdownMenuSeparator, {}),
+                  /* @__PURE__ */ jsxs34(DropdownMenuItem, {
                     className: "text-red-600",
                     children: [
                       "Delete",
-                      /* @__PURE__ */ jsx64(DropdownMenuShortcut, {
+                      /* @__PURE__ */ jsx65(DropdownMenuShortcut, {
                         children: "⌘⌫"
                       })
                     ]
@@ -2852,10 +3014,10 @@ function ComboboxDropdownMenu({ spriteUrl }) {
 }
 
 // src/shadcn-ui/examples/combobox-form.tsx
-import clsx27 from "clsx";
+import clsx28 from "clsx";
 import React9 from "react";
 import { toast as toast3 } from "sonner";
-import { jsx as jsx65, jsxs as jsxs34 } from "react/jsx-runtime";
+import { jsx as jsx66, jsxs as jsxs35 } from "react/jsx-runtime";
 var languages = [
   { label: "English", value: "en" },
   { label: "French", value: "fr" },
@@ -2875,42 +3037,42 @@ function ComboboxForm({ spriteUrl }) {
     const formData = new FormData(event.currentTarget);
     const language = formData.get("language");
     toast3("You submitted the following values", {
-      description: /* @__PURE__ */ jsx65("pre", {
+      description: /* @__PURE__ */ jsx66("pre", {
         className: "mt-2 w-[320px] rounded-md bg-neutral-950 p-4",
-        children: /* @__PURE__ */ jsx65("code", {
+        children: /* @__PURE__ */ jsx66("code", {
           className: "text-white",
           children: JSON.stringify({ language }, null, 2)
         })
       })
     });
   }
-  return /* @__PURE__ */ jsxs34(Form, {
+  return /* @__PURE__ */ jsxs35(Form, {
     onSubmit: handleSubmit,
     className: "space-y-6",
     children: [
-      /* @__PURE__ */ jsx65(FormField, {
+      /* @__PURE__ */ jsx66(FormField, {
         name: "language",
-        children: /* @__PURE__ */ jsxs34(FormItem, {
+        children: /* @__PURE__ */ jsxs35(FormItem, {
           className: "flex flex-col",
           children: [
-            /* @__PURE__ */ jsx65(FormLabel, {
+            /* @__PURE__ */ jsx66(FormLabel, {
               children: "Language"
             }),
-            /* @__PURE__ */ jsxs34(Popover, {
+            /* @__PURE__ */ jsxs35(Popover, {
               open,
               onOpenChange: setOpen,
               children: [
-                /* @__PURE__ */ jsx65(PopoverTrigger, {
+                /* @__PURE__ */ jsx66(PopoverTrigger, {
                   asChild: true,
-                  children: /* @__PURE__ */ jsx65(FormControl, {
-                    children: /* @__PURE__ */ jsxs34(Button, {
+                  children: /* @__PURE__ */ jsx66(FormControl, {
+                    children: /* @__PURE__ */ jsxs35(Button, {
                       variant: "outline",
                       role: "combobox",
                       "aria-expanded": open,
-                      className: clsx27("w-[200px] justify-between", !selectedLanguage && "text-muted-foreground"),
+                      className: clsx28("w-[200px] justify-between", !selectedLanguage && "text-muted-foreground"),
                       children: [
                         selectedLanguage ? languages.find((language) => language.value === selectedLanguage)?.label : "Select language",
-                        /* @__PURE__ */ jsx65(SpriteIcon, {
+                        /* @__PURE__ */ jsx66(SpriteIcon, {
                           id: "ChevronsUpDown",
                           className: "opacity-50",
                           url: spriteUrl
@@ -2919,22 +3081,22 @@ function ComboboxForm({ spriteUrl }) {
                     })
                   })
                 }),
-                /* @__PURE__ */ jsx65(PopoverContent, {
+                /* @__PURE__ */ jsx66(PopoverContent, {
                   className: "w-[200px] p-0",
-                  children: /* @__PURE__ */ jsxs34(Command, {
+                  children: /* @__PURE__ */ jsxs35(Command, {
                     children: [
-                      /* @__PURE__ */ jsx65(CommandInput, {
+                      /* @__PURE__ */ jsx66(CommandInput, {
                         spriteUrl,
                         placeholder: "Search language...",
                         className: "h-9"
                       }),
-                      /* @__PURE__ */ jsxs34(CommandList, {
+                      /* @__PURE__ */ jsxs35(CommandList, {
                         children: [
-                          /* @__PURE__ */ jsx65(CommandEmpty, {
+                          /* @__PURE__ */ jsx66(CommandEmpty, {
                             children: "No language found."
                           }),
-                          /* @__PURE__ */ jsx65(CommandGroup, {
-                            children: languages.map((language) => /* @__PURE__ */ jsxs34(CommandItem, {
+                          /* @__PURE__ */ jsx66(CommandGroup, {
+                            children: languages.map((language) => /* @__PURE__ */ jsxs35(CommandItem, {
                               value: language.label,
                               onSelect: () => {
                                 setSelectedLanguage(language.value);
@@ -2942,9 +3104,9 @@ function ComboboxForm({ spriteUrl }) {
                               },
                               children: [
                                 language.label,
-                                /* @__PURE__ */ jsx65(SpriteIcon, {
+                                /* @__PURE__ */ jsx66(SpriteIcon, {
                                   id: "Check",
-                                  className: clsx27("ml-auto", language.value === selectedLanguage ? "opacity-100" : "opacity-0"),
+                                  className: clsx28("ml-auto", language.value === selectedLanguage ? "opacity-100" : "opacity-0"),
                                   url: spriteUrl
                                 })
                               ]
@@ -2957,19 +3119,19 @@ function ComboboxForm({ spriteUrl }) {
                 })
               ]
             }),
-            /* @__PURE__ */ jsx65("input", {
+            /* @__PURE__ */ jsx66("input", {
               type: "hidden",
               name: "language",
               value: selectedLanguage
             }),
-            /* @__PURE__ */ jsx65(FormDescription, {
+            /* @__PURE__ */ jsx66(FormDescription, {
               children: "This is the language that will be used in the dashboard."
             }),
-            /* @__PURE__ */ jsx65(FormMessage, {})
+            /* @__PURE__ */ jsx66(FormMessage, {})
           ]
         })
       }),
-      /* @__PURE__ */ jsx65(Button, {
+      /* @__PURE__ */ jsx66(Button, {
         type: "submit",
         children: "Submit"
       })
@@ -2979,7 +3141,7 @@ function ComboboxForm({ spriteUrl }) {
 
 // src/shadcn-ui/examples/combobox-popover.tsx
 import React10 from "react";
-import { jsx as jsx66, jsxs as jsxs35, Fragment } from "react/jsx-runtime";
+import { jsx as jsx67, jsxs as jsxs36, Fragment as Fragment2 } from "react/jsx-runtime";
 var statuses = [
   {
     value: "backlog",
@@ -3005,46 +3167,46 @@ var statuses = [
 function ComboboxPopover({ spriteUrl }) {
   const [open, setOpen] = React10.useState(false);
   const [selectedStatus, setSelectedStatus] = React10.useState(null);
-  return /* @__PURE__ */ jsxs35("div", {
+  return /* @__PURE__ */ jsxs36("div", {
     className: "flex items-center space-x-4",
     children: [
-      /* @__PURE__ */ jsx66("p", {
+      /* @__PURE__ */ jsx67("p", {
         className: "text-muted-foreground text-sm",
         children: "Status"
       }),
-      /* @__PURE__ */ jsxs35(Popover, {
+      /* @__PURE__ */ jsxs36(Popover, {
         open,
         onOpenChange: setOpen,
         children: [
-          /* @__PURE__ */ jsx66(PopoverTrigger, {
+          /* @__PURE__ */ jsx67(PopoverTrigger, {
             asChild: true,
-            children: /* @__PURE__ */ jsx66(Button, {
+            children: /* @__PURE__ */ jsx67(Button, {
               variant: "outline",
               className: "w-[150px] justify-start",
-              children: selectedStatus ? /* @__PURE__ */ jsx66(Fragment, {
+              children: selectedStatus ? /* @__PURE__ */ jsx67(Fragment2, {
                 children: selectedStatus.label
-              }) : /* @__PURE__ */ jsx66(Fragment, {
+              }) : /* @__PURE__ */ jsx67(Fragment2, {
                 children: "+ Set status"
               })
             })
           }),
-          /* @__PURE__ */ jsx66(PopoverContent, {
+          /* @__PURE__ */ jsx67(PopoverContent, {
             className: "p-0",
             side: "right",
             align: "start",
-            children: /* @__PURE__ */ jsxs35(Command, {
+            children: /* @__PURE__ */ jsxs36(Command, {
               children: [
-                /* @__PURE__ */ jsx66(CommandInput, {
+                /* @__PURE__ */ jsx67(CommandInput, {
                   spriteUrl,
                   placeholder: "Change status..."
                 }),
-                /* @__PURE__ */ jsxs35(CommandList, {
+                /* @__PURE__ */ jsxs36(CommandList, {
                   children: [
-                    /* @__PURE__ */ jsx66(CommandEmpty, {
+                    /* @__PURE__ */ jsx67(CommandEmpty, {
                       children: "No results found."
                     }),
-                    /* @__PURE__ */ jsx66(CommandGroup, {
-                      children: statuses.map((status) => /* @__PURE__ */ jsx66(CommandItem, {
+                    /* @__PURE__ */ jsx67(CommandGroup, {
+                      children: statuses.map((status) => /* @__PURE__ */ jsx67(CommandItem, {
                         value: status.value,
                         onSelect: (value) => {
                           setSelectedStatus(statuses.find((priority) => priority.value === value) || null);
@@ -3065,42 +3227,42 @@ function ComboboxPopover({ spriteUrl }) {
 }
 
 // src/shadcn-ui/components/context-menu.tsx
-import clsx28 from "clsx";
+import clsx29 from "clsx";
 import { ContextMenu as ContextMenuPrimitive } from "radix-ui";
-import { jsx as jsx67, jsxs as jsxs36 } from "react/jsx-runtime";
+import { jsx as jsx68, jsxs as jsxs37 } from "react/jsx-runtime";
 function ContextMenu({ ...props }) {
-  return /* @__PURE__ */ jsx67(ContextMenuPrimitive.Root, {
+  return /* @__PURE__ */ jsx68(ContextMenuPrimitive.Root, {
     "data-slot": "context-menu",
     ...props
   });
 }
 function ContextMenuTrigger({ ...props }) {
-  return /* @__PURE__ */ jsx67(ContextMenuPrimitive.Trigger, {
+  return /* @__PURE__ */ jsx68(ContextMenuPrimitive.Trigger, {
     "data-slot": "context-menu-trigger",
     ...props
   });
 }
 function ContextMenuSub({ ...props }) {
-  return /* @__PURE__ */ jsx67(ContextMenuPrimitive.Sub, {
+  return /* @__PURE__ */ jsx68(ContextMenuPrimitive.Sub, {
     "data-slot": "context-menu-sub",
     ...props
   });
 }
 function ContextMenuRadioGroup({ ...props }) {
-  return /* @__PURE__ */ jsx67(ContextMenuPrimitive.RadioGroup, {
+  return /* @__PURE__ */ jsx68(ContextMenuPrimitive.RadioGroup, {
     "data-slot": "context-menu-radio-group",
     ...props
   });
 }
 function ContextMenuSubTrigger({ className, inset, children, spriteUrl, ...props }) {
-  return /* @__PURE__ */ jsxs36(ContextMenuPrimitive.SubTrigger, {
+  return /* @__PURE__ */ jsxs37(ContextMenuPrimitive.SubTrigger, {
     "data-slot": "context-menu-sub-trigger",
     "data-inset": inset,
-    className: clsx28("flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-hidden focus:bg-accent focus:text-accent-foreground data-[state=open]:bg-accent data-[inset]:pl-8 data-[state=open]:text-accent-foreground [&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0", className),
+    className: clsx29("flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-hidden focus:bg-accent focus:text-accent-foreground data-[state=open]:bg-accent data-[inset]:pl-8 data-[state=open]:text-accent-foreground [&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0", className),
     ...props,
     children: [
       children,
-      /* @__PURE__ */ jsx67(SpriteIcon, {
+      /* @__PURE__ */ jsx68(SpriteIcon, {
         id: "ChevronRight",
         className: "ml-auto",
         url: spriteUrl
@@ -3109,41 +3271,41 @@ function ContextMenuSubTrigger({ className, inset, children, spriteUrl, ...props
   });
 }
 function ContextMenuSubContent({ className, ...props }) {
-  return /* @__PURE__ */ jsx67(ContextMenuPrimitive.SubContent, {
+  return /* @__PURE__ */ jsx68(ContextMenuPrimitive.SubContent, {
     "data-slot": "context-menu-sub-content",
-    className: clsx28("data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 min-w-[8rem] origin-(--radix-context-menu-content-transform-origin) overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-lg data-[state=closed]:animate-out data-[state=open]:animate-in", className),
+    className: clsx29("data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 min-w-[8rem] origin-(--radix-context-menu-content-transform-origin) overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-lg data-[state=closed]:animate-out data-[state=open]:animate-in", className),
     ...props
   });
 }
 function ContextMenuContent({ className, ...props }) {
-  return /* @__PURE__ */ jsx67(ContextMenuPrimitive.Portal, {
-    children: /* @__PURE__ */ jsx67(ContextMenuPrimitive.Content, {
+  return /* @__PURE__ */ jsx68(ContextMenuPrimitive.Portal, {
+    children: /* @__PURE__ */ jsx68(ContextMenuPrimitive.Content, {
       "data-slot": "context-menu-content",
-      className: clsx28("data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 max-h-(--radix-context-menu-content-available-height) min-w-[8rem] origin-(--radix-context-menu-content-transform-origin) overflow-y-auto overflow-x-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-md data-[state=closed]:animate-out data-[state=open]:animate-in", className),
+      className: clsx29("data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 max-h-(--radix-context-menu-content-available-height) min-w-[8rem] origin-(--radix-context-menu-content-transform-origin) overflow-y-auto overflow-x-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-md data-[state=closed]:animate-out data-[state=open]:animate-in", className),
       ...props
     })
   });
 }
 function ContextMenuItem({ className, inset, variant = "default", ...props }) {
-  return /* @__PURE__ */ jsx67(ContextMenuPrimitive.Item, {
+  return /* @__PURE__ */ jsx68(ContextMenuPrimitive.Item, {
     "data-slot": "context-menu-item",
     "data-inset": inset,
     "data-variant": variant,
-    className: clsx28("data-[variant=destructive]:*:[svg]:!text-destructive relative flex cursor-default select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[inset]:pl-8 data-[variant=destructive]:text-destructive data-[disabled]:opacity-50 data-[variant=destructive]:focus:bg-destructive/10 data-[variant=destructive]:focus:text-destructive dark:data-[variant=destructive]:focus:bg-destructive/20 [&_svg:not([class*='size-'])]:size-4 [&_svg:not([class*='text-'])]:text-muted-foreground [&_svg]:pointer-events-none [&_svg]:shrink-0", className),
+    className: clsx29("data-[variant=destructive]:*:[svg]:!text-destructive relative flex cursor-default select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[inset]:pl-8 data-[variant=destructive]:text-destructive data-[disabled]:opacity-50 data-[variant=destructive]:focus:bg-destructive/10 data-[variant=destructive]:focus:text-destructive dark:data-[variant=destructive]:focus:bg-destructive/20 [&_svg:not([class*='size-'])]:size-4 [&_svg:not([class*='text-'])]:text-muted-foreground [&_svg]:pointer-events-none [&_svg]:shrink-0", className),
     ...props
   });
 }
 function ContextMenuCheckboxItem({ className, children, checked, spriteUrl, ...props }) {
-  return /* @__PURE__ */ jsxs36(ContextMenuPrimitive.CheckboxItem, {
+  return /* @__PURE__ */ jsxs37(ContextMenuPrimitive.CheckboxItem, {
     "data-slot": "context-menu-checkbox-item",
-    className: clsx28("relative flex cursor-default select-none items-center gap-2 rounded-sm py-1.5 pr-2 pl-8 text-sm outline-hidden focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0", className),
+    className: clsx29("relative flex cursor-default select-none items-center gap-2 rounded-sm py-1.5 pr-2 pl-8 text-sm outline-hidden focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0", className),
     checked,
     ...props,
     children: [
-      /* @__PURE__ */ jsx67("span", {
+      /* @__PURE__ */ jsx68("span", {
         className: "pointer-events-none absolute left-2 flex size-3.5 items-center justify-center",
-        children: /* @__PURE__ */ jsx67(ContextMenuPrimitive.ItemIndicator, {
-          children: /* @__PURE__ */ jsx67(SpriteIcon, {
+        children: /* @__PURE__ */ jsx68(ContextMenuPrimitive.ItemIndicator, {
+          children: /* @__PURE__ */ jsx68(SpriteIcon, {
             id: "Check",
             className: "size-4",
             url: spriteUrl
@@ -3155,15 +3317,15 @@ function ContextMenuCheckboxItem({ className, children, checked, spriteUrl, ...p
   });
 }
 function ContextMenuRadioItem({ className, children, spriteUrl, ...props }) {
-  return /* @__PURE__ */ jsxs36(ContextMenuPrimitive.RadioItem, {
+  return /* @__PURE__ */ jsxs37(ContextMenuPrimitive.RadioItem, {
     "data-slot": "context-menu-radio-item",
-    className: clsx28("relative flex cursor-default select-none items-center gap-2 rounded-sm py-1.5 pr-2 pl-8 text-sm outline-hidden focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0", className),
+    className: clsx29("relative flex cursor-default select-none items-center gap-2 rounded-sm py-1.5 pr-2 pl-8 text-sm outline-hidden focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0", className),
     ...props,
     children: [
-      /* @__PURE__ */ jsx67("span", {
+      /* @__PURE__ */ jsx68("span", {
         className: "pointer-events-none absolute left-2 flex size-3.5 items-center justify-center",
-        children: /* @__PURE__ */ jsx67(ContextMenuPrimitive.ItemIndicator, {
-          children: /* @__PURE__ */ jsx67(SpriteIcon, {
+        children: /* @__PURE__ */ jsx68(ContextMenuPrimitive.ItemIndicator, {
+          children: /* @__PURE__ */ jsx68(SpriteIcon, {
             id: "Circle",
             className: "size-2 fill-current",
             url: spriteUrl
@@ -3175,93 +3337,93 @@ function ContextMenuRadioItem({ className, children, spriteUrl, ...props }) {
   });
 }
 function ContextMenuLabel({ className, inset, ...props }) {
-  return /* @__PURE__ */ jsx67(ContextMenuPrimitive.Label, {
+  return /* @__PURE__ */ jsx68(ContextMenuPrimitive.Label, {
     "data-slot": "context-menu-label",
     "data-inset": inset,
-    className: clsx28("px-2 py-1.5 font-medium text-foreground text-sm data-[inset]:pl-8", className),
+    className: clsx29("px-2 py-1.5 font-medium text-foreground text-sm data-[inset]:pl-8", className),
     ...props
   });
 }
 function ContextMenuSeparator({ className, ...props }) {
-  return /* @__PURE__ */ jsx67(ContextMenuPrimitive.Separator, {
+  return /* @__PURE__ */ jsx68(ContextMenuPrimitive.Separator, {
     "data-slot": "context-menu-separator",
-    className: clsx28("-mx-1 my-1 h-px bg-border", className),
+    className: clsx29("-mx-1 my-1 h-px bg-border", className),
     ...props
   });
 }
 function ContextMenuShortcut({ className, ...props }) {
-  return /* @__PURE__ */ jsx67("span", {
+  return /* @__PURE__ */ jsx68("span", {
     "data-slot": "context-menu-shortcut",
-    className: clsx28("ml-auto text-muted-foreground text-xs tracking-widest", className),
+    className: clsx29("ml-auto text-muted-foreground text-xs tracking-widest", className),
     ...props
   });
 }
 
 // src/shadcn-ui/examples/context-menu-demo.tsx
-import { jsx as jsx68, jsxs as jsxs37 } from "react/jsx-runtime";
+import { jsx as jsx69, jsxs as jsxs38 } from "react/jsx-runtime";
 function ContextMenuDemo({ spriteUrl }) {
-  return /* @__PURE__ */ jsxs37(ContextMenu, {
+  return /* @__PURE__ */ jsxs38(ContextMenu, {
     children: [
-      /* @__PURE__ */ jsx68(ContextMenuTrigger, {
+      /* @__PURE__ */ jsx69(ContextMenuTrigger, {
         className: "flex h-[150px] w-[300px] items-center justify-center rounded-md border border-dashed text-sm",
         children: "Right click here"
       }),
-      /* @__PURE__ */ jsxs37(ContextMenuContent, {
+      /* @__PURE__ */ jsxs38(ContextMenuContent, {
         className: "w-52",
         children: [
-          /* @__PURE__ */ jsxs37(ContextMenuItem, {
+          /* @__PURE__ */ jsxs38(ContextMenuItem, {
             inset: true,
             children: [
               "Back",
-              /* @__PURE__ */ jsx68(ContextMenuShortcut, {
+              /* @__PURE__ */ jsx69(ContextMenuShortcut, {
                 children: "⌘["
               })
             ]
           }),
-          /* @__PURE__ */ jsxs37(ContextMenuItem, {
+          /* @__PURE__ */ jsxs38(ContextMenuItem, {
             inset: true,
             disabled: true,
             children: [
               "Forward",
-              /* @__PURE__ */ jsx68(ContextMenuShortcut, {
+              /* @__PURE__ */ jsx69(ContextMenuShortcut, {
                 children: "⌘]"
               })
             ]
           }),
-          /* @__PURE__ */ jsxs37(ContextMenuItem, {
+          /* @__PURE__ */ jsxs38(ContextMenuItem, {
             inset: true,
             children: [
               "Reload",
-              /* @__PURE__ */ jsx68(ContextMenuShortcut, {
+              /* @__PURE__ */ jsx69(ContextMenuShortcut, {
                 children: "⌘R"
               })
             ]
           }),
-          /* @__PURE__ */ jsxs37(ContextMenuSub, {
+          /* @__PURE__ */ jsxs38(ContextMenuSub, {
             children: [
-              /* @__PURE__ */ jsx68(ContextMenuSubTrigger, {
+              /* @__PURE__ */ jsx69(ContextMenuSubTrigger, {
                 spriteUrl,
                 inset: true,
                 children: "More Tools"
               }),
-              /* @__PURE__ */ jsxs37(ContextMenuSubContent, {
+              /* @__PURE__ */ jsxs38(ContextMenuSubContent, {
                 className: "w-44",
                 children: [
-                  /* @__PURE__ */ jsx68(ContextMenuItem, {
+                  /* @__PURE__ */ jsx69(ContextMenuItem, {
                     children: "Save Page..."
                   }),
-                  /* @__PURE__ */ jsx68(ContextMenuItem, {
+                  /* @__PURE__ */ jsx69(ContextMenuItem, {
                     children: "Create Shortcut..."
                   }),
-                  /* @__PURE__ */ jsx68(ContextMenuItem, {
+                  /* @__PURE__ */ jsx69(ContextMenuItem, {
                     children: "Name Window..."
                   }),
-                  /* @__PURE__ */ jsx68(ContextMenuSeparator, {}),
-                  /* @__PURE__ */ jsx68(ContextMenuItem, {
+                  /* @__PURE__ */ jsx69(ContextMenuSeparator, {}),
+                  /* @__PURE__ */ jsx69(ContextMenuItem, {
                     children: "Developer Tools"
                   }),
-                  /* @__PURE__ */ jsx68(ContextMenuSeparator, {}),
-                  /* @__PURE__ */ jsx68(ContextMenuItem, {
+                  /* @__PURE__ */ jsx69(ContextMenuSeparator, {}),
+                  /* @__PURE__ */ jsx69(ContextMenuItem, {
                     variant: "destructive",
                     children: "Delete"
                   })
@@ -3269,30 +3431,30 @@ function ContextMenuDemo({ spriteUrl }) {
               })
             ]
           }),
-          /* @__PURE__ */ jsx68(ContextMenuSeparator, {}),
-          /* @__PURE__ */ jsx68(ContextMenuCheckboxItem, {
+          /* @__PURE__ */ jsx69(ContextMenuSeparator, {}),
+          /* @__PURE__ */ jsx69(ContextMenuCheckboxItem, {
             spriteUrl,
             checked: true,
             children: "Show Bookmarks"
           }),
-          /* @__PURE__ */ jsx68(ContextMenuCheckboxItem, {
+          /* @__PURE__ */ jsx69(ContextMenuCheckboxItem, {
             spriteUrl,
             children: "Show Full URLs"
           }),
-          /* @__PURE__ */ jsx68(ContextMenuSeparator, {}),
-          /* @__PURE__ */ jsxs37(ContextMenuRadioGroup, {
+          /* @__PURE__ */ jsx69(ContextMenuSeparator, {}),
+          /* @__PURE__ */ jsxs38(ContextMenuRadioGroup, {
             value: "pedro",
             children: [
-              /* @__PURE__ */ jsx68(ContextMenuLabel, {
+              /* @__PURE__ */ jsx69(ContextMenuLabel, {
                 inset: true,
                 children: "People"
               }),
-              /* @__PURE__ */ jsx68(ContextMenuRadioItem, {
+              /* @__PURE__ */ jsx69(ContextMenuRadioItem, {
                 spriteUrl,
                 value: "pedro",
                 children: "Pedro Duarte"
               }),
-              /* @__PURE__ */ jsx68(ContextMenuRadioItem, {
+              /* @__PURE__ */ jsx69(ContextMenuRadioItem, {
                 spriteUrl,
                 value: "colm",
                 children: "Colm Tuite"
@@ -3306,42 +3468,42 @@ function ContextMenuDemo({ spriteUrl }) {
 }
 
 // src/shadcn-ui/examples/dialog-close-button.tsx
-import { jsx as jsx69, jsxs as jsxs38 } from "react/jsx-runtime";
+import { jsx as jsx70, jsxs as jsxs39 } from "react/jsx-runtime";
 function DialogCloseButton({ spriteUrl }) {
-  return /* @__PURE__ */ jsxs38(Dialog, {
+  return /* @__PURE__ */ jsxs39(Dialog, {
     children: [
-      /* @__PURE__ */ jsx69(DialogTrigger, {
+      /* @__PURE__ */ jsx70(DialogTrigger, {
         asChild: true,
-        children: /* @__PURE__ */ jsx69(Button, {
+        children: /* @__PURE__ */ jsx70(Button, {
           variant: "outline",
           children: "Share"
         })
       }),
-      /* @__PURE__ */ jsxs38(DialogContent, {
+      /* @__PURE__ */ jsxs39(DialogContent, {
         spriteUrl,
         className: "sm:max-w-md",
         children: [
-          /* @__PURE__ */ jsxs38(DialogHeader, {
+          /* @__PURE__ */ jsxs39(DialogHeader, {
             children: [
-              /* @__PURE__ */ jsx69(DialogTitle, {
+              /* @__PURE__ */ jsx70(DialogTitle, {
                 children: "Share link"
               }),
-              /* @__PURE__ */ jsx69(DialogDescription, {
+              /* @__PURE__ */ jsx70(DialogDescription, {
                 children: "Anyone who has this link will be able to view this."
               })
             ]
           }),
-          /* @__PURE__ */ jsx69("div", {
+          /* @__PURE__ */ jsx70("div", {
             className: "flex items-center gap-2",
-            children: /* @__PURE__ */ jsxs38("div", {
+            children: /* @__PURE__ */ jsxs39("div", {
               className: "grid flex-1 gap-2",
               children: [
-                /* @__PURE__ */ jsx69(Label, {
+                /* @__PURE__ */ jsx70(Label, {
                   htmlFor: "link",
                   className: "sr-only",
                   children: "Link"
                 }),
-                /* @__PURE__ */ jsx69(Input, {
+                /* @__PURE__ */ jsx70(Input, {
                   id: "link",
                   defaultValue: "https://ui.shadcn.com/docs/installation",
                   readOnly: true
@@ -3349,11 +3511,11 @@ function DialogCloseButton({ spriteUrl }) {
               ]
             })
           }),
-          /* @__PURE__ */ jsx69(DialogFooter, {
+          /* @__PURE__ */ jsx70(DialogFooter, {
             className: "sm:justify-start",
-            children: /* @__PURE__ */ jsx69(DialogClose, {
+            children: /* @__PURE__ */ jsx70(DialogClose, {
               asChild: true,
-              children: /* @__PURE__ */ jsx69(Button, {
+              children: /* @__PURE__ */ jsx70(Button, {
                 type: "button",
                 variant: "secondary",
                 children: "Close"
@@ -3367,57 +3529,57 @@ function DialogCloseButton({ spriteUrl }) {
 }
 
 // src/shadcn-ui/examples/dialog-demo.tsx
-import { jsx as jsx70, jsxs as jsxs39 } from "react/jsx-runtime";
+import { jsx as jsx71, jsxs as jsxs40 } from "react/jsx-runtime";
 function DialogDemo({ spriteUrl }) {
-  return /* @__PURE__ */ jsx70(Dialog, {
-    children: /* @__PURE__ */ jsxs39("form", {
+  return /* @__PURE__ */ jsx71(Dialog, {
+    children: /* @__PURE__ */ jsxs40("form", {
       children: [
-        /* @__PURE__ */ jsx70(DialogTrigger, {
+        /* @__PURE__ */ jsx71(DialogTrigger, {
           asChild: true,
-          children: /* @__PURE__ */ jsx70(Button, {
+          children: /* @__PURE__ */ jsx71(Button, {
             variant: "outline",
             children: "Open Dialog"
           })
         }),
-        /* @__PURE__ */ jsxs39(DialogContent, {
+        /* @__PURE__ */ jsxs40(DialogContent, {
           spriteUrl,
           className: "sm:max-w-[425px]",
           children: [
-            /* @__PURE__ */ jsxs39(DialogHeader, {
+            /* @__PURE__ */ jsxs40(DialogHeader, {
               children: [
-                /* @__PURE__ */ jsx70(DialogTitle, {
+                /* @__PURE__ */ jsx71(DialogTitle, {
                   children: "Edit profile"
                 }),
-                /* @__PURE__ */ jsx70(DialogDescription, {
+                /* @__PURE__ */ jsx71(DialogDescription, {
                   children: "Make changes to your profile here. Click save when you're done."
                 })
               ]
             }),
-            /* @__PURE__ */ jsxs39("div", {
+            /* @__PURE__ */ jsxs40("div", {
               className: "grid gap-4",
               children: [
-                /* @__PURE__ */ jsxs39("div", {
+                /* @__PURE__ */ jsxs40("div", {
                   className: "grid gap-3",
                   children: [
-                    /* @__PURE__ */ jsx70(Label, {
+                    /* @__PURE__ */ jsx71(Label, {
                       htmlFor: "name-1",
                       children: "Name"
                     }),
-                    /* @__PURE__ */ jsx70(Input, {
+                    /* @__PURE__ */ jsx71(Input, {
                       id: "name-1",
                       name: "name",
                       defaultValue: "Pedro Duarte"
                     })
                   ]
                 }),
-                /* @__PURE__ */ jsxs39("div", {
+                /* @__PURE__ */ jsxs40("div", {
                   className: "grid gap-3",
                   children: [
-                    /* @__PURE__ */ jsx70(Label, {
+                    /* @__PURE__ */ jsx71(Label, {
                       htmlFor: "username-1",
                       children: "Username"
                     }),
-                    /* @__PURE__ */ jsx70(Input, {
+                    /* @__PURE__ */ jsx71(Input, {
                       id: "username-1",
                       name: "username",
                       defaultValue: "@peduarte"
@@ -3426,16 +3588,16 @@ function DialogDemo({ spriteUrl }) {
                 })
               ]
             }),
-            /* @__PURE__ */ jsxs39(DialogFooter, {
+            /* @__PURE__ */ jsxs40(DialogFooter, {
               children: [
-                /* @__PURE__ */ jsx70(DialogClose, {
+                /* @__PURE__ */ jsx71(DialogClose, {
                   asChild: true,
-                  children: /* @__PURE__ */ jsx70(Button, {
+                  children: /* @__PURE__ */ jsx71(Button, {
                     variant: "outline",
                     children: "Cancel"
                   })
                 }),
-                /* @__PURE__ */ jsx70(Button, {
+                /* @__PURE__ */ jsx71(Button, {
                   type: "submit",
                   children: "Save changes"
                 })
@@ -3450,41 +3612,41 @@ function DialogDemo({ spriteUrl }) {
 
 // src/shadcn-ui/examples/dropdown-menu-checkboxes.tsx
 import React11 from "react";
-import { jsx as jsx71, jsxs as jsxs40 } from "react/jsx-runtime";
+import { jsx as jsx72, jsxs as jsxs41 } from "react/jsx-runtime";
 function DropdownMenuCheckboxes({ spriteUrl }) {
   const [showStatusBar, setShowStatusBar] = React11.useState(true);
   const [showActivityBar, setShowActivityBar] = React11.useState(false);
   const [showPanel, setShowPanel] = React11.useState(false);
-  return /* @__PURE__ */ jsxs40(DropdownMenu, {
+  return /* @__PURE__ */ jsxs41(DropdownMenu, {
     children: [
-      /* @__PURE__ */ jsx71(DropdownMenuTrigger, {
+      /* @__PURE__ */ jsx72(DropdownMenuTrigger, {
         asChild: true,
-        children: /* @__PURE__ */ jsx71(Button, {
+        children: /* @__PURE__ */ jsx72(Button, {
           variant: "outline",
           children: "Open"
         })
       }),
-      /* @__PURE__ */ jsxs40(DropdownMenuContent, {
+      /* @__PURE__ */ jsxs41(DropdownMenuContent, {
         className: "w-56",
         children: [
-          /* @__PURE__ */ jsx71(DropdownMenuLabel, {
+          /* @__PURE__ */ jsx72(DropdownMenuLabel, {
             children: "Appearance"
           }),
-          /* @__PURE__ */ jsx71(DropdownMenuSeparator, {}),
-          /* @__PURE__ */ jsx71(DropdownMenuCheckboxItem, {
+          /* @__PURE__ */ jsx72(DropdownMenuSeparator, {}),
+          /* @__PURE__ */ jsx72(DropdownMenuCheckboxItem, {
             spriteUrl,
             checked: showStatusBar,
             onCheckedChange: setShowStatusBar,
             children: "Status Bar"
           }),
-          /* @__PURE__ */ jsx71(DropdownMenuCheckboxItem, {
+          /* @__PURE__ */ jsx72(DropdownMenuCheckboxItem, {
             spriteUrl,
             checked: showActivityBar,
             onCheckedChange: setShowActivityBar,
             disabled: true,
             children: "Activity Bar"
           }),
-          /* @__PURE__ */ jsx71(DropdownMenuCheckboxItem, {
+          /* @__PURE__ */ jsx72(DropdownMenuCheckboxItem, {
             spriteUrl,
             checked: showPanel,
             onCheckedChange: setShowPanel,
@@ -3497,83 +3659,83 @@ function DropdownMenuCheckboxes({ spriteUrl }) {
 }
 
 // src/shadcn-ui/examples/dropdown-menu-demo.tsx
-import { jsx as jsx72, jsxs as jsxs41 } from "react/jsx-runtime";
+import { jsx as jsx73, jsxs as jsxs42 } from "react/jsx-runtime";
 function DropdownMenuDemo({ spriteUrl }) {
-  return /* @__PURE__ */ jsxs41(DropdownMenu, {
+  return /* @__PURE__ */ jsxs42(DropdownMenu, {
     children: [
-      /* @__PURE__ */ jsx72(DropdownMenuTrigger, {
+      /* @__PURE__ */ jsx73(DropdownMenuTrigger, {
         asChild: true,
-        children: /* @__PURE__ */ jsx72(Button, {
+        children: /* @__PURE__ */ jsx73(Button, {
           variant: "outline",
           children: "Open"
         })
       }),
-      /* @__PURE__ */ jsxs41(DropdownMenuContent, {
+      /* @__PURE__ */ jsxs42(DropdownMenuContent, {
         className: "w-56",
         align: "start",
         children: [
-          /* @__PURE__ */ jsx72(DropdownMenuLabel, {
+          /* @__PURE__ */ jsx73(DropdownMenuLabel, {
             children: "My Account"
           }),
-          /* @__PURE__ */ jsxs41(DropdownMenuGroup, {
+          /* @__PURE__ */ jsxs42(DropdownMenuGroup, {
             children: [
-              /* @__PURE__ */ jsxs41(DropdownMenuItem, {
+              /* @__PURE__ */ jsxs42(DropdownMenuItem, {
                 children: [
                   "Profile",
-                  /* @__PURE__ */ jsx72(DropdownMenuShortcut, {
+                  /* @__PURE__ */ jsx73(DropdownMenuShortcut, {
                     children: "⇧⌘P"
                   })
                 ]
               }),
-              /* @__PURE__ */ jsxs41(DropdownMenuItem, {
+              /* @__PURE__ */ jsxs42(DropdownMenuItem, {
                 children: [
                   "Billing",
-                  /* @__PURE__ */ jsx72(DropdownMenuShortcut, {
+                  /* @__PURE__ */ jsx73(DropdownMenuShortcut, {
                     children: "⌘B"
                   })
                 ]
               }),
-              /* @__PURE__ */ jsxs41(DropdownMenuItem, {
+              /* @__PURE__ */ jsxs42(DropdownMenuItem, {
                 children: [
                   "Settings",
-                  /* @__PURE__ */ jsx72(DropdownMenuShortcut, {
+                  /* @__PURE__ */ jsx73(DropdownMenuShortcut, {
                     children: "⌘S"
                   })
                 ]
               }),
-              /* @__PURE__ */ jsxs41(DropdownMenuItem, {
+              /* @__PURE__ */ jsxs42(DropdownMenuItem, {
                 children: [
                   "Keyboard shortcuts",
-                  /* @__PURE__ */ jsx72(DropdownMenuShortcut, {
+                  /* @__PURE__ */ jsx73(DropdownMenuShortcut, {
                     children: "⌘K"
                   })
                 ]
               })
             ]
           }),
-          /* @__PURE__ */ jsx72(DropdownMenuSeparator, {}),
-          /* @__PURE__ */ jsxs41(DropdownMenuGroup, {
+          /* @__PURE__ */ jsx73(DropdownMenuSeparator, {}),
+          /* @__PURE__ */ jsxs42(DropdownMenuGroup, {
             children: [
-              /* @__PURE__ */ jsx72(DropdownMenuItem, {
+              /* @__PURE__ */ jsx73(DropdownMenuItem, {
                 children: "Team"
               }),
-              /* @__PURE__ */ jsxs41(DropdownMenuSub, {
+              /* @__PURE__ */ jsxs42(DropdownMenuSub, {
                 children: [
-                  /* @__PURE__ */ jsx72(DropdownMenuSubTrigger, {
+                  /* @__PURE__ */ jsx73(DropdownMenuSubTrigger, {
                     spriteUrl,
                     children: "Invite users"
                   }),
-                  /* @__PURE__ */ jsx72(DropdownMenuPortal, {
-                    children: /* @__PURE__ */ jsxs41(DropdownMenuSubContent, {
+                  /* @__PURE__ */ jsx73(DropdownMenuPortal, {
+                    children: /* @__PURE__ */ jsxs42(DropdownMenuSubContent, {
                       children: [
-                        /* @__PURE__ */ jsx72(DropdownMenuItem, {
+                        /* @__PURE__ */ jsx73(DropdownMenuItem, {
                           children: "Email"
                         }),
-                        /* @__PURE__ */ jsx72(DropdownMenuItem, {
+                        /* @__PURE__ */ jsx73(DropdownMenuItem, {
                           children: "Message"
                         }),
-                        /* @__PURE__ */ jsx72(DropdownMenuSeparator, {}),
-                        /* @__PURE__ */ jsx72(DropdownMenuItem, {
+                        /* @__PURE__ */ jsx73(DropdownMenuSeparator, {}),
+                        /* @__PURE__ */ jsx73(DropdownMenuItem, {
                           children: "More..."
                         })
                       ]
@@ -3581,32 +3743,32 @@ function DropdownMenuDemo({ spriteUrl }) {
                   })
                 ]
               }),
-              /* @__PURE__ */ jsxs41(DropdownMenuItem, {
+              /* @__PURE__ */ jsxs42(DropdownMenuItem, {
                 children: [
                   "New Team",
-                  /* @__PURE__ */ jsx72(DropdownMenuShortcut, {
+                  /* @__PURE__ */ jsx73(DropdownMenuShortcut, {
                     children: "⌘+T"
                   })
                 ]
               })
             ]
           }),
-          /* @__PURE__ */ jsx72(DropdownMenuSeparator, {}),
-          /* @__PURE__ */ jsx72(DropdownMenuItem, {
+          /* @__PURE__ */ jsx73(DropdownMenuSeparator, {}),
+          /* @__PURE__ */ jsx73(DropdownMenuItem, {
             children: "GitHub"
           }),
-          /* @__PURE__ */ jsx72(DropdownMenuItem, {
+          /* @__PURE__ */ jsx73(DropdownMenuItem, {
             children: "Support"
           }),
-          /* @__PURE__ */ jsx72(DropdownMenuItem, {
+          /* @__PURE__ */ jsx73(DropdownMenuItem, {
             disabled: true,
             children: "API"
           }),
-          /* @__PURE__ */ jsx72(DropdownMenuSeparator, {}),
-          /* @__PURE__ */ jsxs41(DropdownMenuItem, {
+          /* @__PURE__ */ jsx73(DropdownMenuSeparator, {}),
+          /* @__PURE__ */ jsxs42(DropdownMenuItem, {
             children: [
               "Log out",
-              /* @__PURE__ */ jsx72(DropdownMenuShortcut, {
+              /* @__PURE__ */ jsx73(DropdownMenuShortcut, {
                 children: "⇧⌘Q"
               })
             ]
@@ -3619,40 +3781,40 @@ function DropdownMenuDemo({ spriteUrl }) {
 
 // src/shadcn-ui/examples/dropdown-menu-radio-group.tsx
 import React12 from "react";
-import { jsx as jsx73, jsxs as jsxs42 } from "react/jsx-runtime";
+import { jsx as jsx74, jsxs as jsxs43 } from "react/jsx-runtime";
 function DropdownMenuRadioGroupDemo({ spriteUrl }) {
   const [position, setPosition] = React12.useState("bottom");
-  return /* @__PURE__ */ jsxs42(DropdownMenu, {
+  return /* @__PURE__ */ jsxs43(DropdownMenu, {
     children: [
-      /* @__PURE__ */ jsx73(DropdownMenuTrigger, {
+      /* @__PURE__ */ jsx74(DropdownMenuTrigger, {
         asChild: true,
-        children: /* @__PURE__ */ jsx73(Button, {
+        children: /* @__PURE__ */ jsx74(Button, {
           variant: "outline",
           children: "Open"
         })
       }),
-      /* @__PURE__ */ jsxs42(DropdownMenuContent, {
+      /* @__PURE__ */ jsxs43(DropdownMenuContent, {
         className: "w-56",
         children: [
-          /* @__PURE__ */ jsx73(DropdownMenuLabel, {
+          /* @__PURE__ */ jsx74(DropdownMenuLabel, {
             children: "Panel Position"
           }),
-          /* @__PURE__ */ jsx73(DropdownMenuSeparator, {}),
-          /* @__PURE__ */ jsxs42(DropdownMenuRadioGroup, {
+          /* @__PURE__ */ jsx74(DropdownMenuSeparator, {}),
+          /* @__PURE__ */ jsxs43(DropdownMenuRadioGroup, {
             value: position,
             onValueChange: setPosition,
             children: [
-              /* @__PURE__ */ jsx73(DropdownMenuRadioItem, {
+              /* @__PURE__ */ jsx74(DropdownMenuRadioItem, {
                 spriteUrl,
                 value: "top",
                 children: "Top"
               }),
-              /* @__PURE__ */ jsx73(DropdownMenuRadioItem, {
+              /* @__PURE__ */ jsx74(DropdownMenuRadioItem, {
                 spriteUrl,
                 value: "bottom",
                 children: "Bottom"
               }),
-              /* @__PURE__ */ jsx73(DropdownMenuRadioItem, {
+              /* @__PURE__ */ jsx74(DropdownMenuRadioItem, {
                 spriteUrl,
                 value: "right",
                 children: "Right"
@@ -3666,73 +3828,73 @@ function DropdownMenuRadioGroupDemo({ spriteUrl }) {
 }
 
 // src/shadcn-ui/components/hover-card.tsx
-import clsx29 from "clsx";
+import clsx30 from "clsx";
 import { HoverCard as HoverCardPrimitive } from "radix-ui";
-import { jsx as jsx74 } from "react/jsx-runtime";
+import { jsx as jsx75 } from "react/jsx-runtime";
 function HoverCard({ ...props }) {
-  return /* @__PURE__ */ jsx74(HoverCardPrimitive.Root, {
+  return /* @__PURE__ */ jsx75(HoverCardPrimitive.Root, {
     "data-slot": "hover-card",
     ...props
   });
 }
 function HoverCardTrigger({ ...props }) {
-  return /* @__PURE__ */ jsx74(HoverCardPrimitive.Trigger, {
+  return /* @__PURE__ */ jsx75(HoverCardPrimitive.Trigger, {
     "data-slot": "hover-card-trigger",
     ...props
   });
 }
 function HoverCardContent({ className, align = "center", sideOffset = 4, ...props }) {
-  return /* @__PURE__ */ jsx74(HoverCardPrimitive.Portal, {
+  return /* @__PURE__ */ jsx75(HoverCardPrimitive.Portal, {
     "data-slot": "hover-card-portal",
-    children: /* @__PURE__ */ jsx74(HoverCardPrimitive.Content, {
+    children: /* @__PURE__ */ jsx75(HoverCardPrimitive.Content, {
       "data-slot": "hover-card-content",
       align,
       sideOffset,
-      className: clsx29("data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 w-64 origin-(--radix-hover-card-content-transform-origin) rounded-md border bg-popover p-4 text-popover-foreground shadow-md outline-hidden data-[state=closed]:animate-out data-[state=open]:animate-in", className),
+      className: clsx30("data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 w-64 origin-(--radix-hover-card-content-transform-origin) rounded-md border bg-popover p-4 text-popover-foreground shadow-md outline-hidden data-[state=closed]:animate-out data-[state=open]:animate-in", className),
       ...props
     })
   });
 }
 
 // src/shadcn-ui/examples/hover-card-demo.tsx
-import { jsx as jsx75, jsxs as jsxs43 } from "react/jsx-runtime";
+import { jsx as jsx76, jsxs as jsxs44 } from "react/jsx-runtime";
 function HoverCardDemo() {
-  return /* @__PURE__ */ jsxs43(HoverCard, {
+  return /* @__PURE__ */ jsxs44(HoverCard, {
     children: [
-      /* @__PURE__ */ jsx75(HoverCardTrigger, {
+      /* @__PURE__ */ jsx76(HoverCardTrigger, {
         asChild: true,
-        children: /* @__PURE__ */ jsx75(Button, {
+        children: /* @__PURE__ */ jsx76(Button, {
           variant: "link",
           children: "@nextjs"
         })
       }),
-      /* @__PURE__ */ jsx75(HoverCardContent, {
+      /* @__PURE__ */ jsx76(HoverCardContent, {
         className: "w-80",
-        children: /* @__PURE__ */ jsxs43("div", {
+        children: /* @__PURE__ */ jsxs44("div", {
           className: "flex justify-between gap-4",
           children: [
-            /* @__PURE__ */ jsxs43(Avatar, {
+            /* @__PURE__ */ jsxs44(Avatar, {
               children: [
-                /* @__PURE__ */ jsx75(AvatarImage, {
+                /* @__PURE__ */ jsx76(AvatarImage, {
                   src: "https://github.com/vercel.png"
                 }),
-                /* @__PURE__ */ jsx75(AvatarFallback, {
+                /* @__PURE__ */ jsx76(AvatarFallback, {
                   children: "VC"
                 })
               ]
             }),
-            /* @__PURE__ */ jsxs43("div", {
+            /* @__PURE__ */ jsxs44("div", {
               className: "space-y-1",
               children: [
-                /* @__PURE__ */ jsx75("h4", {
+                /* @__PURE__ */ jsx76("h4", {
                   className: "font-semibold text-sm",
                   children: "@nextjs"
                 }),
-                /* @__PURE__ */ jsx75("p", {
+                /* @__PURE__ */ jsx76("p", {
                   className: "text-sm",
                   children: "The React Framework – created and maintained by @vercel."
                 }),
-                /* @__PURE__ */ jsx75("div", {
+                /* @__PURE__ */ jsx76("div", {
                   className: "text-muted-foreground text-xs",
                   children: "Joined December 2021"
                 })
@@ -3746,18 +3908,18 @@ function HoverCardDemo() {
 }
 
 // src/shadcn-ui/examples/input-demo.tsx
-import { jsx as jsx76 } from "react/jsx-runtime";
+import { jsx as jsx77 } from "react/jsx-runtime";
 function InputDemo() {
-  return /* @__PURE__ */ jsx76(Input, {
+  return /* @__PURE__ */ jsx77(Input, {
     type: "email",
     placeholder: "Email"
   });
 }
 
 // src/shadcn-ui/examples/input-disabled.tsx
-import { jsx as jsx77 } from "react/jsx-runtime";
+import { jsx as jsx78 } from "react/jsx-runtime";
 function InputDisabled() {
-  return /* @__PURE__ */ jsx77(Input, {
+  return /* @__PURE__ */ jsx78(Input, {
     disabled: true,
     type: "email",
     placeholder: "Email"
@@ -3765,16 +3927,16 @@ function InputDisabled() {
 }
 
 // src/shadcn-ui/examples/input-file.tsx
-import { jsx as jsx78, jsxs as jsxs44 } from "react/jsx-runtime";
+import { jsx as jsx79, jsxs as jsxs45 } from "react/jsx-runtime";
 function InputFile() {
-  return /* @__PURE__ */ jsxs44("div", {
+  return /* @__PURE__ */ jsxs45("div", {
     className: "grid w-full max-w-sm items-center gap-3",
     children: [
-      /* @__PURE__ */ jsx78(Label, {
+      /* @__PURE__ */ jsx79(Label, {
         htmlFor: "picture",
         children: "Picture"
       }),
-      /* @__PURE__ */ jsx78(Input, {
+      /* @__PURE__ */ jsx79(Input, {
         id: "picture",
         type: "file"
       })
@@ -3784,47 +3946,47 @@ function InputFile() {
 
 // src/shadcn-ui/examples/input-form.tsx
 import { toast as toast4 } from "sonner";
-import { jsx as jsx79, jsxs as jsxs45 } from "react/jsx-runtime";
+import { jsx as jsx80, jsxs as jsxs46 } from "react/jsx-runtime";
 function InputForm() {
   function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     const username = formData.get("username");
     toast4("You submitted the following values", {
-      description: /* @__PURE__ */ jsx79("pre", {
+      description: /* @__PURE__ */ jsx80("pre", {
         className: "mt-2 w-[320px] rounded-md bg-neutral-950 p-4",
-        children: /* @__PURE__ */ jsx79("code", {
+        children: /* @__PURE__ */ jsx80("code", {
           className: "text-white",
           children: JSON.stringify({ username }, null, 2)
         })
       })
     });
   }
-  return /* @__PURE__ */ jsxs45(Form, {
+  return /* @__PURE__ */ jsxs46(Form, {
     onSubmit: handleSubmit,
     className: "w-2/3 space-y-6",
     children: [
-      /* @__PURE__ */ jsx79(FormField, {
+      /* @__PURE__ */ jsx80(FormField, {
         name: "username",
-        children: /* @__PURE__ */ jsxs45(FormItem, {
+        children: /* @__PURE__ */ jsxs46(FormItem, {
           children: [
-            /* @__PURE__ */ jsx79(FormLabel, {
+            /* @__PURE__ */ jsx80(FormLabel, {
               children: "Username"
             }),
-            /* @__PURE__ */ jsx79(FormControl, {
-              children: /* @__PURE__ */ jsx79(Input, {
+            /* @__PURE__ */ jsx80(FormControl, {
+              children: /* @__PURE__ */ jsx80(Input, {
                 name: "username",
                 placeholder: "shadcn"
               })
             }),
-            /* @__PURE__ */ jsx79(FormDescription, {
+            /* @__PURE__ */ jsx80(FormDescription, {
               children: "This is your public display name."
             }),
-            /* @__PURE__ */ jsx79(FormMessage, {})
+            /* @__PURE__ */ jsx80(FormMessage, {})
           ]
         })
       }),
-      /* @__PURE__ */ jsx79(Button, {
+      /* @__PURE__ */ jsx80(Button, {
         type: "submit",
         children: "Submit"
       })
@@ -3833,16 +3995,16 @@ function InputForm() {
 }
 
 // src/shadcn-ui/examples/input-with-button.tsx
-import { jsx as jsx80, jsxs as jsxs46 } from "react/jsx-runtime";
+import { jsx as jsx81, jsxs as jsxs47 } from "react/jsx-runtime";
 function InputWithButton() {
-  return /* @__PURE__ */ jsxs46("div", {
+  return /* @__PURE__ */ jsxs47("div", {
     className: "flex w-full max-w-sm items-center gap-2",
     children: [
-      /* @__PURE__ */ jsx80(Input, {
+      /* @__PURE__ */ jsx81(Input, {
         type: "email",
         placeholder: "Email"
       }),
-      /* @__PURE__ */ jsx80(Button, {
+      /* @__PURE__ */ jsx81(Button, {
         type: "submit",
         variant: "outline",
         children: "Subscribe"
@@ -3852,16 +4014,16 @@ function InputWithButton() {
 }
 
 // src/shadcn-ui/examples/input-with-label.tsx
-import { jsx as jsx81, jsxs as jsxs47 } from "react/jsx-runtime";
+import { jsx as jsx82, jsxs as jsxs48 } from "react/jsx-runtime";
 function InputWithLabel() {
-  return /* @__PURE__ */ jsxs47("div", {
+  return /* @__PURE__ */ jsxs48("div", {
     className: "grid w-full max-w-sm items-center gap-3",
     children: [
-      /* @__PURE__ */ jsx81(Label, {
+      /* @__PURE__ */ jsx82(Label, {
         htmlFor: "inputemail",
         children: "Email"
       }),
-      /* @__PURE__ */ jsx81(Input, {
+      /* @__PURE__ */ jsx82(Input, {
         type: "inputemail",
         id: "email",
         placeholder: "Email"
@@ -3871,21 +4033,21 @@ function InputWithLabel() {
 }
 
 // src/shadcn-ui/examples/input-with-text.tsx
-import { jsx as jsx82, jsxs as jsxs48 } from "react/jsx-runtime";
+import { jsx as jsx83, jsxs as jsxs49 } from "react/jsx-runtime";
 function InputWithText() {
-  return /* @__PURE__ */ jsxs48("div", {
+  return /* @__PURE__ */ jsxs49("div", {
     className: "grid w-full max-w-sm items-center gap-3",
     children: [
-      /* @__PURE__ */ jsx82(Label, {
+      /* @__PURE__ */ jsx83(Label, {
         htmlFor: "email-2",
         children: "Email"
       }),
-      /* @__PURE__ */ jsx82(Input, {
+      /* @__PURE__ */ jsx83(Input, {
         type: "email",
         id: "email-2",
         placeholder: "Email"
       }),
-      /* @__PURE__ */ jsx82("p", {
+      /* @__PURE__ */ jsx83("p", {
         className: "text-muted-foreground text-sm",
         children: "Enter your email address."
       })
@@ -3894,169 +4056,22 @@ function InputWithText() {
 }
 
 // src/shadcn-ui/examples/label-demo.tsx
-import { jsx as jsx83, jsxs as jsxs49 } from "react/jsx-runtime";
+import { jsx as jsx84, jsxs as jsxs50 } from "react/jsx-runtime";
 function LabelDemo({ spriteUrl }) {
-  return /* @__PURE__ */ jsx83("div", {
-    children: /* @__PURE__ */ jsxs49("div", {
+  return /* @__PURE__ */ jsx84("div", {
+    children: /* @__PURE__ */ jsxs50("div", {
       className: "flex items-center space-x-2",
       children: [
-        /* @__PURE__ */ jsx83(Checkbox, {
+        /* @__PURE__ */ jsx84(Checkbox, {
           spriteUrl,
           id: "terms"
         }),
-        /* @__PURE__ */ jsx83(Label, {
+        /* @__PURE__ */ jsx84(Label, {
           htmlFor: "terms",
           children: "Accept terms and conditions"
         })
       ]
     })
-  });
-}
-
-// src/shadcn-ui/components/menubar.tsx
-import clsx30 from "clsx";
-import { Menubar as MenubarPrimitive } from "radix-ui";
-import { jsx as jsx84, jsxs as jsxs50 } from "react/jsx-runtime";
-function Menubar({ className, ...props }) {
-  return /* @__PURE__ */ jsx84(MenubarPrimitive.Root, {
-    "data-slot": "menubar",
-    className: clsx30("flex h-9 items-center gap-1 rounded-md border bg-background p-1 shadow-xs", className),
-    ...props
-  });
-}
-function MenubarMenu({ ...props }) {
-  return /* @__PURE__ */ jsx84(MenubarPrimitive.Menu, {
-    "data-slot": "menubar-menu",
-    ...props
-  });
-}
-function MenubarPortal({ ...props }) {
-  return /* @__PURE__ */ jsx84(MenubarPrimitive.Portal, {
-    "data-slot": "menubar-portal",
-    ...props
-  });
-}
-function MenubarRadioGroup({ ...props }) {
-  return /* @__PURE__ */ jsx84(MenubarPrimitive.RadioGroup, {
-    "data-slot": "menubar-radio-group",
-    ...props
-  });
-}
-function MenubarTrigger({ className, ...props }) {
-  return /* @__PURE__ */ jsx84(MenubarPrimitive.Trigger, {
-    "data-slot": "menubar-trigger",
-    className: clsx30("flex select-none items-center rounded-sm px-2 py-1 font-medium text-sm outline-hidden focus:bg-accent focus:text-accent-foreground data-[state=open]:bg-accent data-[state=open]:text-accent-foreground", className),
-    ...props
-  });
-}
-function MenubarContent({ className, align = "start", alignOffset = -4, sideOffset = 8, ...props }) {
-  return /* @__PURE__ */ jsx84(MenubarPortal, {
-    children: /* @__PURE__ */ jsx84(MenubarPrimitive.Content, {
-      "data-slot": "menubar-content",
-      align,
-      alignOffset,
-      sideOffset,
-      className: clsx30("data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 min-w-[12rem] origin-(--radix-menubar-content-transform-origin) overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-md data-[state=open]:animate-in", className),
-      ...props
-    })
-  });
-}
-function MenubarItem({
-  className,
-  inset,
-  variant = "default",
-  ...props
-}) {
-  return /* @__PURE__ */ jsx84(MenubarPrimitive.Item, {
-    "data-slot": "menubar-item",
-    "data-inset": inset,
-    "data-variant": variant,
-    className: clsx30("data-[variant=destructive]:*:[svg]:!text-destructive relative flex cursor-default select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[inset]:pl-8 data-[variant=destructive]:text-destructive data-[disabled]:opacity-50 data-[variant=destructive]:focus:bg-destructive/10 data-[variant=destructive]:focus:text-destructive dark:data-[variant=destructive]:focus:bg-destructive/20 [&_svg:not([class*='size-'])]:size-4 [&_svg:not([class*='text-'])]:text-muted-foreground [&_svg]:pointer-events-none [&_svg]:shrink-0", className),
-    ...props
-  });
-}
-function MenubarCheckboxItem({ className, children, checked, spriteUrl, ...props }) {
-  return /* @__PURE__ */ jsxs50(MenubarPrimitive.CheckboxItem, {
-    "data-slot": "menubar-checkbox-item",
-    className: clsx30("relative flex cursor-default select-none items-center gap-2 rounded-xs py-1.5 pr-2 pl-8 text-sm outline-hidden focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0", className),
-    checked,
-    ...props,
-    children: [
-      /* @__PURE__ */ jsx84("span", {
-        className: "pointer-events-none absolute left-2 flex size-3.5 items-center justify-center",
-        children: /* @__PURE__ */ jsx84(MenubarPrimitive.ItemIndicator, {
-          children: /* @__PURE__ */ jsx84(SpriteIcon, {
-            id: "Check",
-            className: "size-4",
-            url: spriteUrl
-          })
-        })
-      }),
-      children
-    ]
-  });
-}
-function MenubarRadioItem({ className, children, spriteUrl, ...props }) {
-  return /* @__PURE__ */ jsxs50(MenubarPrimitive.RadioItem, {
-    "data-slot": "menubar-radio-item",
-    className: clsx30("relative flex cursor-default select-none items-center gap-2 rounded-xs py-1.5 pr-2 pl-8 text-sm outline-hidden focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0", className),
-    ...props,
-    children: [
-      /* @__PURE__ */ jsx84("span", {
-        className: "pointer-events-none absolute left-2 flex size-3.5 items-center justify-center",
-        children: /* @__PURE__ */ jsx84(MenubarPrimitive.ItemIndicator, {
-          children: /* @__PURE__ */ jsx84(SpriteIcon, {
-            id: "Circle",
-            className: "size-2 fill-current",
-            url: spriteUrl
-          })
-        })
-      }),
-      children
-    ]
-  });
-}
-function MenubarSeparator({ className, ...props }) {
-  return /* @__PURE__ */ jsx84(MenubarPrimitive.Separator, {
-    "data-slot": "menubar-separator",
-    className: clsx30("-mx-1 my-1 h-px bg-border", className),
-    ...props
-  });
-}
-function MenubarShortcut({ className, ...props }) {
-  return /* @__PURE__ */ jsx84("span", {
-    "data-slot": "menubar-shortcut",
-    className: clsx30("ml-auto text-muted-foreground text-xs tracking-widest", className),
-    ...props
-  });
-}
-function MenubarSub({ ...props }) {
-  return /* @__PURE__ */ jsx84(MenubarPrimitive.Sub, {
-    "data-slot": "menubar-sub",
-    ...props
-  });
-}
-function MenubarSubTrigger({ className, inset, children, spriteUrl, ...props }) {
-  return /* @__PURE__ */ jsxs50(MenubarPrimitive.SubTrigger, {
-    "data-slot": "menubar-sub-trigger",
-    "data-inset": inset,
-    className: clsx30("flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[state=open]:bg-accent data-[inset]:pl-8 data-[state=open]:text-accent-foreground", className),
-    ...props,
-    children: [
-      children,
-      /* @__PURE__ */ jsx84(SpriteIcon, {
-        id: "ChevronRight",
-        className: "ml-auto h-4 w-4",
-        url: spriteUrl
-      })
-    ]
-  });
-}
-function MenubarSubContent({ className, ...props }) {
-  return /* @__PURE__ */ jsx84(MenubarPrimitive.SubContent, {
-    "data-slot": "menubar-sub-content",
-    className: clsx30("data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 min-w-[8rem] origin-(--radix-menubar-content-transform-origin) overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-lg data-[state=closed]:animate-out data-[state=open]:animate-in", className),
-    ...props
   });
 }
 
@@ -4336,8 +4351,82 @@ function ModeToggle({ spriteUrl }) {
   });
 }
 
-// src/shadcn-ui/examples/navigation-menu-demo.tsx
+// src/shadcn-ui/components/navigation-menu.tsx
+import { cva as cva4 } from "class-variance-authority";
+import clsx31 from "clsx";
+import { NavigationMenu as NavigationMenuPrimitive } from "radix-ui";
 import { jsx as jsx87, jsxs as jsxs53 } from "react/jsx-runtime";
+function NavigationMenu({ className, children, viewport = true, ...props }) {
+  return /* @__PURE__ */ jsxs53(NavigationMenuPrimitive.Root, {
+    "data-slot": "navigation-menu",
+    "data-viewport": viewport,
+    className: clsx31("group/navigation-menu relative flex max-w-max flex-1 items-center justify-center", className),
+    ...props,
+    children: [
+      children,
+      viewport && /* @__PURE__ */ jsx87(NavigationMenuViewport, {})
+    ]
+  });
+}
+function NavigationMenuList({ className, ...props }) {
+  return /* @__PURE__ */ jsx87(NavigationMenuPrimitive.List, {
+    "data-slot": "navigation-menu-list",
+    className: clsx31("group flex flex-1 list-none items-center justify-center gap-1", className),
+    ...props
+  });
+}
+function NavigationMenuItem({ className, ...props }) {
+  return /* @__PURE__ */ jsx87(NavigationMenuPrimitive.Item, {
+    "data-slot": "navigation-menu-item",
+    className: clsx31("relative", className),
+    ...props
+  });
+}
+var navigationMenuTriggerStyle = cva4("group inline-flex h-9 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground disabled:pointer-events-none disabled:opacity-50 data-[state=open]:hover:bg-accent data-[state=open]:text-accent-foreground data-[state=open]:focus:bg-accent data-[state=open]:bg-accent/50 focus-visible:ring-ring/50 outline-none transition-[color,box-shadow] focus-visible:ring-[3px] focus-visible:outline-1");
+function NavigationMenuTrigger({ className, children, spriteUrl, ...props }) {
+  return /* @__PURE__ */ jsxs53(NavigationMenuPrimitive.Trigger, {
+    "data-slot": "navigation-menu-trigger",
+    className: clsx31(navigationMenuTriggerStyle(), "group", className),
+    ...props,
+    children: [
+      children,
+      " ",
+      /* @__PURE__ */ jsx87(SpriteIcon, {
+        id: "ChevronDown",
+        url: spriteUrl,
+        className: "relative top-[1px] ml-1 size-3 transition duration-300 group-data-[state=open]:rotate-180",
+        "aria-hidden": "true"
+      })
+    ]
+  });
+}
+function NavigationMenuContent({ className, ...props }) {
+  return /* @__PURE__ */ jsx87(NavigationMenuPrimitive.Content, {
+    "data-slot": "navigation-menu-content",
+    className: clsx31("data-[motion^=from-]:fade-in data-[motion^=to-]:fade-out data-[motion=from-end]:slide-in-from-right-52 data-[motion=from-start]:slide-in-from-left-52 data-[motion=to-end]:slide-out-to-right-52 data-[motion=to-start]:slide-out-to-left-52 top-0 left-0 w-full p-2 pr-2.5 data-[motion^=from-]:animate-in data-[motion^=to-]:animate-out md:absolute md:w-auto", "group-data-[viewport=false]/navigation-menu:data-[state=closed]:zoom-out-95 group-data-[viewport=false]/navigation-menu:data-[state=open]:zoom-in-95 group-data-[viewport=false]/navigation-menu:data-[state=open]:fade-in-0 group-data-[viewport=false]/navigation-menu:data-[state=closed]:fade-out-0 **:data-[slot=navigation-menu-link]:focus:outline-none **:data-[slot=navigation-menu-link]:focus:ring-0 group-data-[viewport=false]/navigation-menu:top-full group-data-[viewport=false]/navigation-menu:mt-1.5 group-data-[viewport=false]/navigation-menu:overflow-hidden group-data-[viewport=false]/navigation-menu:rounded-md group-data-[viewport=false]/navigation-menu:border group-data-[viewport=false]/navigation-menu:bg-popover group-data-[viewport=false]/navigation-menu:text-popover-foreground group-data-[viewport=false]/navigation-menu:shadow group-data-[viewport=false]/navigation-menu:duration-200 group-data-[viewport=false]/navigation-menu:data-[state=closed]:animate-out group-data-[viewport=false]/navigation-menu:data-[state=open]:animate-in", className),
+    ...props
+  });
+}
+function NavigationMenuViewport({ className, ...props }) {
+  return /* @__PURE__ */ jsx87("div", {
+    className: clsx31("absolute top-full left-0 isolate z-50 flex justify-center"),
+    children: /* @__PURE__ */ jsx87(NavigationMenuPrimitive.Viewport, {
+      "data-slot": "navigation-menu-viewport",
+      className: clsx31("data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-90 relative mt-1.5 h-[var(--radix-navigation-menu-viewport-height)] w-full origin-top-center overflow-hidden rounded-md border bg-popover text-popover-foreground shadow data-[state=closed]:animate-out data-[state=open]:animate-in md:w-[var(--radix-navigation-menu-viewport-width)]", className),
+      ...props
+    })
+  });
+}
+function NavigationMenuLink({ className, ...props }) {
+  return /* @__PURE__ */ jsx87(NavigationMenuPrimitive.Link, {
+    "data-slot": "navigation-menu-link",
+    className: clsx31("flex flex-col gap-1 rounded-sm p-2 text-sm outline-none transition-all hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus-visible:outline-1 focus-visible:ring-[3px] focus-visible:ring-ring/50 data-[active=true]:bg-accent/50 data-[active=true]:text-accent-foreground data-[active=true]:focus:bg-accent data-[active=true]:hover:bg-accent [&_svg:not([class*='size-'])]:size-4 [&_svg:not([class*='text-'])]:text-muted-foreground", className),
+    ...props
+  });
+}
+
+// src/shadcn-ui/examples/navigation-menu-demo.tsx
+import { jsx as jsx88, jsxs as jsxs54 } from "react/jsx-runtime";
 var components = [
   {
     title: "Alert Dialog",
@@ -4371,33 +4460,33 @@ var components = [
   }
 ];
 function NavigationMenuDemo({ spriteUrl }) {
-  return /* @__PURE__ */ jsx87(NavigationMenu, {
+  return /* @__PURE__ */ jsx88(NavigationMenu, {
     viewport: false,
-    children: /* @__PURE__ */ jsxs53(NavigationMenuList, {
+    children: /* @__PURE__ */ jsxs54(NavigationMenuList, {
       children: [
-        /* @__PURE__ */ jsxs53(NavigationMenuItem, {
+        /* @__PURE__ */ jsxs54(NavigationMenuItem, {
           children: [
-            /* @__PURE__ */ jsx87(NavigationMenuTrigger, {
+            /* @__PURE__ */ jsx88(NavigationMenuTrigger, {
               spriteUrl,
               children: "Home"
             }),
-            /* @__PURE__ */ jsx87(NavigationMenuContent, {
-              children: /* @__PURE__ */ jsxs53("ul", {
+            /* @__PURE__ */ jsx88(NavigationMenuContent, {
+              children: /* @__PURE__ */ jsxs54("ul", {
                 className: "grid gap-2 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]",
                 children: [
-                  /* @__PURE__ */ jsx87("li", {
+                  /* @__PURE__ */ jsx88("li", {
                     className: "row-span-3",
-                    children: /* @__PURE__ */ jsx87(NavigationMenuLink, {
+                    children: /* @__PURE__ */ jsx88(NavigationMenuLink, {
                       asChild: true,
-                      children: /* @__PURE__ */ jsxs53("a", {
+                      children: /* @__PURE__ */ jsxs54("a", {
                         className: "flex h-full w-full select-none flex-col justify-end rounded-md bg-linear-to-b from-muted/50 to-muted p-6 no-underline outline-hidden focus:shadow-md",
                         href: "/",
                         children: [
-                          /* @__PURE__ */ jsx87("div", {
+                          /* @__PURE__ */ jsx88("div", {
                             className: "mt-4 mb-2 font-medium text-lg",
                             children: "shadcn/ui"
                           }),
-                          /* @__PURE__ */ jsx87("p", {
+                          /* @__PURE__ */ jsx88("p", {
                             className: "text-muted-foreground text-sm leading-tight",
                             children: "Beautifully designed components built with Tailwind CSS."
                           })
@@ -4405,17 +4494,17 @@ function NavigationMenuDemo({ spriteUrl }) {
                       })
                     })
                   }),
-                  /* @__PURE__ */ jsx87(ListItem, {
+                  /* @__PURE__ */ jsx88(ListItem, {
                     href: "/docs",
                     title: "Introduction",
                     children: "Re-usable components built using Radix UI and Tailwind CSS."
                   }),
-                  /* @__PURE__ */ jsx87(ListItem, {
+                  /* @__PURE__ */ jsx88(ListItem, {
                     href: "/docs/installation",
                     title: "Installation",
                     children: "How to install dependencies and structure your app."
                   }),
-                  /* @__PURE__ */ jsx87(ListItem, {
+                  /* @__PURE__ */ jsx88(ListItem, {
                     href: "/docs/primitives/typography",
                     title: "Typography",
                     children: "Styles for headings, paragraphs, lists...etc"
@@ -4425,16 +4514,16 @@ function NavigationMenuDemo({ spriteUrl }) {
             })
           ]
         }),
-        /* @__PURE__ */ jsxs53(NavigationMenuItem, {
+        /* @__PURE__ */ jsxs54(NavigationMenuItem, {
           children: [
-            /* @__PURE__ */ jsx87(NavigationMenuTrigger, {
+            /* @__PURE__ */ jsx88(NavigationMenuTrigger, {
               spriteUrl,
               children: "Components"
             }),
-            /* @__PURE__ */ jsx87(NavigationMenuContent, {
-              children: /* @__PURE__ */ jsx87("ul", {
+            /* @__PURE__ */ jsx88(NavigationMenuContent, {
+              children: /* @__PURE__ */ jsx88("ul", {
                 className: "grid w-[400px] gap-2 md:w-[500px] md:grid-cols-2 lg:w-[600px]",
-                children: components.map((component) => /* @__PURE__ */ jsx87(ListItem, {
+                children: components.map((component) => /* @__PURE__ */ jsx88(ListItem, {
                   title: component.title,
                   href: component.href,
                   children: component.description
@@ -4443,69 +4532,69 @@ function NavigationMenuDemo({ spriteUrl }) {
             })
           ]
         }),
-        /* @__PURE__ */ jsx87(NavigationMenuItem, {
-          children: /* @__PURE__ */ jsx87(NavigationMenuLink, {
+        /* @__PURE__ */ jsx88(NavigationMenuItem, {
+          children: /* @__PURE__ */ jsx88(NavigationMenuLink, {
             asChild: true,
             className: navigationMenuTriggerStyle(),
-            children: /* @__PURE__ */ jsx87(Link, {
+            children: /* @__PURE__ */ jsx88(Link, {
               href: "/docs",
               children: "Docs"
             })
           })
         }),
-        /* @__PURE__ */ jsxs53(NavigationMenuItem, {
+        /* @__PURE__ */ jsxs54(NavigationMenuItem, {
           children: [
-            /* @__PURE__ */ jsx87(NavigationMenuTrigger, {
+            /* @__PURE__ */ jsx88(NavigationMenuTrigger, {
               spriteUrl,
               children: "List"
             }),
-            /* @__PURE__ */ jsx87(NavigationMenuContent, {
-              children: /* @__PURE__ */ jsx87("ul", {
+            /* @__PURE__ */ jsx88(NavigationMenuContent, {
+              children: /* @__PURE__ */ jsx88("ul", {
                 className: "grid w-[300px] gap-4",
-                children: /* @__PURE__ */ jsxs53("li", {
+                children: /* @__PURE__ */ jsxs54("li", {
                   children: [
-                    /* @__PURE__ */ jsx87(NavigationMenuLink, {
+                    /* @__PURE__ */ jsx88(NavigationMenuLink, {
                       asChild: true,
-                      children: /* @__PURE__ */ jsxs53(Link, {
+                      children: /* @__PURE__ */ jsxs54(Link, {
                         href: "#",
                         children: [
-                          /* @__PURE__ */ jsx87("div", {
+                          /* @__PURE__ */ jsx88("div", {
                             className: "font-medium",
                             children: "Components"
                           }),
-                          /* @__PURE__ */ jsx87("div", {
+                          /* @__PURE__ */ jsx88("div", {
                             className: "text-muted-foreground",
                             children: "Browse all components in the library."
                           })
                         ]
                       })
                     }),
-                    /* @__PURE__ */ jsx87(NavigationMenuLink, {
+                    /* @__PURE__ */ jsx88(NavigationMenuLink, {
                       asChild: true,
-                      children: /* @__PURE__ */ jsxs53(Link, {
+                      children: /* @__PURE__ */ jsxs54(Link, {
                         href: "#",
                         children: [
-                          /* @__PURE__ */ jsx87("div", {
+                          /* @__PURE__ */ jsx88("div", {
                             className: "font-medium",
                             children: "Documentation"
                           }),
-                          /* @__PURE__ */ jsx87("div", {
+                          /* @__PURE__ */ jsx88("div", {
                             className: "text-muted-foreground",
                             children: "Learn how to use the library."
                           })
                         ]
                       })
                     }),
-                    /* @__PURE__ */ jsx87(NavigationMenuLink, {
+                    /* @__PURE__ */ jsx88(NavigationMenuLink, {
                       asChild: true,
-                      children: /* @__PURE__ */ jsxs53(Link, {
+                      children: /* @__PURE__ */ jsxs54(Link, {
                         href: "#",
                         children: [
-                          /* @__PURE__ */ jsx87("div", {
+                          /* @__PURE__ */ jsx88("div", {
                             className: "font-medium",
                             children: "Blog"
                           }),
-                          /* @__PURE__ */ jsx87("div", {
+                          /* @__PURE__ */ jsx88("div", {
                             className: "text-muted-foreground",
                             children: "Read our latest blog posts."
                           })
@@ -4518,34 +4607,34 @@ function NavigationMenuDemo({ spriteUrl }) {
             })
           ]
         }),
-        /* @__PURE__ */ jsxs53(NavigationMenuItem, {
+        /* @__PURE__ */ jsxs54(NavigationMenuItem, {
           children: [
-            /* @__PURE__ */ jsx87(NavigationMenuTrigger, {
+            /* @__PURE__ */ jsx88(NavigationMenuTrigger, {
               spriteUrl,
               children: "Simple"
             }),
-            /* @__PURE__ */ jsx87(NavigationMenuContent, {
-              children: /* @__PURE__ */ jsx87("ul", {
+            /* @__PURE__ */ jsx88(NavigationMenuContent, {
+              children: /* @__PURE__ */ jsx88("ul", {
                 className: "grid w-[200px] gap-4",
-                children: /* @__PURE__ */ jsxs53("li", {
+                children: /* @__PURE__ */ jsxs54("li", {
                   children: [
-                    /* @__PURE__ */ jsx87(NavigationMenuLink, {
+                    /* @__PURE__ */ jsx88(NavigationMenuLink, {
                       asChild: true,
-                      children: /* @__PURE__ */ jsx87(Link, {
+                      children: /* @__PURE__ */ jsx88(Link, {
                         href: "#",
                         children: "Components"
                       })
                     }),
-                    /* @__PURE__ */ jsx87(NavigationMenuLink, {
+                    /* @__PURE__ */ jsx88(NavigationMenuLink, {
                       asChild: true,
-                      children: /* @__PURE__ */ jsx87(Link, {
+                      children: /* @__PURE__ */ jsx88(Link, {
                         href: "#",
                         children: "Documentation"
                       })
                     }),
-                    /* @__PURE__ */ jsx87(NavigationMenuLink, {
+                    /* @__PURE__ */ jsx88(NavigationMenuLink, {
                       asChild: true,
-                      children: /* @__PURE__ */ jsx87(Link, {
+                      children: /* @__PURE__ */ jsx88(Link, {
                         href: "#",
                         children: "Blocks"
                       })
@@ -4556,24 +4645,24 @@ function NavigationMenuDemo({ spriteUrl }) {
             })
           ]
         }),
-        /* @__PURE__ */ jsxs53(NavigationMenuItem, {
+        /* @__PURE__ */ jsxs54(NavigationMenuItem, {
           children: [
-            /* @__PURE__ */ jsx87(NavigationMenuTrigger, {
+            /* @__PURE__ */ jsx88(NavigationMenuTrigger, {
               spriteUrl,
               children: "With Icon"
             }),
-            /* @__PURE__ */ jsx87(NavigationMenuContent, {
-              children: /* @__PURE__ */ jsx87("ul", {
+            /* @__PURE__ */ jsx88(NavigationMenuContent, {
+              children: /* @__PURE__ */ jsx88("ul", {
                 className: "grid w-[200px] gap-4",
-                children: /* @__PURE__ */ jsxs53("li", {
+                children: /* @__PURE__ */ jsxs54("li", {
                   children: [
-                    /* @__PURE__ */ jsx87(NavigationMenuLink, {
+                    /* @__PURE__ */ jsx88(NavigationMenuLink, {
                       asChild: true,
-                      children: /* @__PURE__ */ jsxs53(Link, {
+                      children: /* @__PURE__ */ jsxs54(Link, {
                         href: "#",
                         className: "flex-row items-center gap-2",
                         children: [
-                          /* @__PURE__ */ jsx87(SpriteIcon, {
+                          /* @__PURE__ */ jsx88(SpriteIcon, {
                             id: "CircleQuestionMark",
                             url: spriteUrl
                           }),
@@ -4581,13 +4670,13 @@ function NavigationMenuDemo({ spriteUrl }) {
                         ]
                       })
                     }),
-                    /* @__PURE__ */ jsx87(NavigationMenuLink, {
+                    /* @__PURE__ */ jsx88(NavigationMenuLink, {
                       asChild: true,
-                      children: /* @__PURE__ */ jsxs53(Link, {
+                      children: /* @__PURE__ */ jsxs54(Link, {
                         href: "#",
                         className: "flex-row items-center gap-2",
                         children: [
-                          /* @__PURE__ */ jsx87(SpriteIcon, {
+                          /* @__PURE__ */ jsx88(SpriteIcon, {
                             id: "Circle",
                             url: spriteUrl
                           }),
@@ -4595,13 +4684,13 @@ function NavigationMenuDemo({ spriteUrl }) {
                         ]
                       })
                     }),
-                    /* @__PURE__ */ jsx87(NavigationMenuLink, {
+                    /* @__PURE__ */ jsx88(NavigationMenuLink, {
                       asChild: true,
-                      children: /* @__PURE__ */ jsxs53(Link, {
+                      children: /* @__PURE__ */ jsxs54(Link, {
                         href: "#",
                         className: "flex-row items-center gap-2",
                         children: [
-                          /* @__PURE__ */ jsx87(SpriteIcon, {
+                          /* @__PURE__ */ jsx88(SpriteIcon, {
                             id: "CircleCheck",
                             url: spriteUrl
                           }),
@@ -4620,18 +4709,18 @@ function NavigationMenuDemo({ spriteUrl }) {
   });
 }
 function ListItem({ title, children, href, ...props }) {
-  return /* @__PURE__ */ jsx87("li", {
+  return /* @__PURE__ */ jsx88("li", {
     ...props,
-    children: /* @__PURE__ */ jsx87(NavigationMenuLink, {
+    children: /* @__PURE__ */ jsx88(NavigationMenuLink, {
       asChild: true,
-      children: /* @__PURE__ */ jsxs53(Link, {
+      children: /* @__PURE__ */ jsxs54(Link, {
         href,
         children: [
-          /* @__PURE__ */ jsx87("div", {
+          /* @__PURE__ */ jsx88("div", {
             className: "font-medium text-sm leading-none",
             children: title
           }),
-          /* @__PURE__ */ jsx87("p", {
+          /* @__PURE__ */ jsx88("p", {
             className: "line-clamp-2 text-muted-foreground text-sm leading-snug",
             children
           })
@@ -4642,35 +4731,35 @@ function ListItem({ title, children, href, ...props }) {
 }
 
 // src/shadcn-ui/components/pagination.tsx
-import clsx31 from "clsx";
-import { jsx as jsx88, jsxs as jsxs54 } from "react/jsx-runtime";
+import clsx32 from "clsx";
+import { jsx as jsx89, jsxs as jsxs55 } from "react/jsx-runtime";
 function Pagination({ className, ...props }) {
-  return /* @__PURE__ */ jsx88("nav", {
+  return /* @__PURE__ */ jsx89("nav", {
     "aria-label": "pagination",
     "data-slot": "pagination",
-    className: clsx31("mx-auto flex w-full justify-center", className),
+    className: clsx32("mx-auto flex w-full justify-center", className),
     ...props
   });
 }
 function PaginationContent({ className, ...props }) {
-  return /* @__PURE__ */ jsx88("ul", {
+  return /* @__PURE__ */ jsx89("ul", {
     "data-slot": "pagination-content",
-    className: clsx31("flex flex-row items-center gap-1", className),
+    className: clsx32("flex flex-row items-center gap-1", className),
     ...props
   });
 }
 function PaginationItem({ ...props }) {
-  return /* @__PURE__ */ jsx88("li", {
+  return /* @__PURE__ */ jsx89("li", {
     "data-slot": "pagination-item",
     ...props
   });
 }
 function PaginationLink({ className, isActive, size = "icon", ...props }) {
-  return /* @__PURE__ */ jsx88("a", {
+  return /* @__PURE__ */ jsx89("a", {
     "aria-current": isActive ? "page" : undefined,
     "data-slot": "pagination-link",
     "data-active": isActive,
-    className: clsx31(buttonVariants({
+    className: clsx32(buttonVariants({
       variant: isActive ? "outline" : "ghost",
       size
     }), className),
@@ -4678,17 +4767,17 @@ function PaginationLink({ className, isActive, size = "icon", ...props }) {
   });
 }
 function PaginationPrevious({ className, spriteUrl, ...props }) {
-  return /* @__PURE__ */ jsxs54(PaginationLink, {
+  return /* @__PURE__ */ jsxs55(PaginationLink, {
     "aria-label": "Go to previous page",
     size: "default",
-    className: clsx31("gap-1 px-2.5 sm:pl-2.5", className),
+    className: clsx32("gap-1 px-2.5 sm:pl-2.5", className),
     ...props,
     children: [
-      /* @__PURE__ */ jsx88(SpriteIcon, {
+      /* @__PURE__ */ jsx89(SpriteIcon, {
         id: "ChevronLeft",
         url: spriteUrl
       }),
-      /* @__PURE__ */ jsx88("span", {
+      /* @__PURE__ */ jsx89("span", {
         className: "hidden sm:block",
         children: "Previous"
       })
@@ -4696,17 +4785,17 @@ function PaginationPrevious({ className, spriteUrl, ...props }) {
   });
 }
 function PaginationNext({ className, spriteUrl, ...props }) {
-  return /* @__PURE__ */ jsxs54(PaginationLink, {
+  return /* @__PURE__ */ jsxs55(PaginationLink, {
     "aria-label": "Go to next page",
     size: "default",
-    className: clsx31("gap-1 px-2.5 sm:pr-2.5", className),
+    className: clsx32("gap-1 px-2.5 sm:pr-2.5", className),
     ...props,
     children: [
-      /* @__PURE__ */ jsx88("span", {
+      /* @__PURE__ */ jsx89("span", {
         className: "hidden sm:block",
         children: "Next"
       }),
-      /* @__PURE__ */ jsx88(SpriteIcon, {
+      /* @__PURE__ */ jsx89(SpriteIcon, {
         id: "ChevronRight",
         url: spriteUrl
       })
@@ -4714,18 +4803,18 @@ function PaginationNext({ className, spriteUrl, ...props }) {
   });
 }
 function PaginationEllipsis({ className, spriteUrl, ...props }) {
-  return /* @__PURE__ */ jsxs54("span", {
+  return /* @__PURE__ */ jsxs55("span", {
     "aria-hidden": true,
     "data-slot": "pagination-ellipsis",
-    className: clsx31("flex size-9 items-center justify-center", className),
+    className: clsx32("flex size-9 items-center justify-center", className),
     ...props,
     children: [
-      /* @__PURE__ */ jsx88(SpriteIcon, {
+      /* @__PURE__ */ jsx89(SpriteIcon, {
         id: "Ellipsis",
         className: "size-4",
         url: spriteUrl
       }),
-      /* @__PURE__ */ jsx88("span", {
+      /* @__PURE__ */ jsx89("span", {
         className: "sr-only",
         children: "More pages"
       })
@@ -4734,43 +4823,43 @@ function PaginationEllipsis({ className, spriteUrl, ...props }) {
 }
 
 // src/shadcn-ui/examples/pagination-demo.tsx
-import { jsx as jsx89, jsxs as jsxs55 } from "react/jsx-runtime";
+import { jsx as jsx90, jsxs as jsxs56 } from "react/jsx-runtime";
 function PaginationDemo({ spriteUrl }) {
-  return /* @__PURE__ */ jsx89(Pagination, {
-    children: /* @__PURE__ */ jsxs55(PaginationContent, {
+  return /* @__PURE__ */ jsx90(Pagination, {
+    children: /* @__PURE__ */ jsxs56(PaginationContent, {
       children: [
-        /* @__PURE__ */ jsx89(PaginationItem, {
-          children: /* @__PURE__ */ jsx89(PaginationPrevious, {
+        /* @__PURE__ */ jsx90(PaginationItem, {
+          children: /* @__PURE__ */ jsx90(PaginationPrevious, {
             spriteUrl,
             href: "#"
           })
         }),
-        /* @__PURE__ */ jsx89(PaginationItem, {
-          children: /* @__PURE__ */ jsx89(PaginationLink, {
+        /* @__PURE__ */ jsx90(PaginationItem, {
+          children: /* @__PURE__ */ jsx90(PaginationLink, {
             href: "#",
             children: "1"
           })
         }),
-        /* @__PURE__ */ jsx89(PaginationItem, {
-          children: /* @__PURE__ */ jsx89(PaginationLink, {
+        /* @__PURE__ */ jsx90(PaginationItem, {
+          children: /* @__PURE__ */ jsx90(PaginationLink, {
             href: "#",
             isActive: true,
             children: "2"
           })
         }),
-        /* @__PURE__ */ jsx89(PaginationItem, {
-          children: /* @__PURE__ */ jsx89(PaginationLink, {
+        /* @__PURE__ */ jsx90(PaginationItem, {
+          children: /* @__PURE__ */ jsx90(PaginationLink, {
             href: "#",
             children: "3"
           })
         }),
-        /* @__PURE__ */ jsx89(PaginationItem, {
-          children: /* @__PURE__ */ jsx89(PaginationEllipsis, {
+        /* @__PURE__ */ jsx90(PaginationItem, {
+          children: /* @__PURE__ */ jsx90(PaginationEllipsis, {
             spriteUrl
           })
         }),
-        /* @__PURE__ */ jsx89(PaginationItem, {
-          children: /* @__PURE__ */ jsx89(PaginationNext, {
+        /* @__PURE__ */ jsx90(PaginationItem, {
+          children: /* @__PURE__ */ jsx90(PaginationNext, {
             spriteUrl,
             href: "#"
           })
@@ -4781,88 +4870,88 @@ function PaginationDemo({ spriteUrl }) {
 }
 
 // src/shadcn-ui/examples/popover-demo.tsx
-import { jsx as jsx90, jsxs as jsxs56 } from "react/jsx-runtime";
+import { jsx as jsx91, jsxs as jsxs57 } from "react/jsx-runtime";
 function PopoverDemo() {
-  return /* @__PURE__ */ jsxs56(Popover, {
+  return /* @__PURE__ */ jsxs57(Popover, {
     children: [
-      /* @__PURE__ */ jsx90(PopoverTrigger, {
+      /* @__PURE__ */ jsx91(PopoverTrigger, {
         asChild: true,
-        children: /* @__PURE__ */ jsx90(Button, {
+        children: /* @__PURE__ */ jsx91(Button, {
           variant: "outline",
           children: "Open popover"
         })
       }),
-      /* @__PURE__ */ jsx90(PopoverContent, {
+      /* @__PURE__ */ jsx91(PopoverContent, {
         className: "w-80",
-        children: /* @__PURE__ */ jsxs56("div", {
+        children: /* @__PURE__ */ jsxs57("div", {
           className: "grid gap-4",
           children: [
-            /* @__PURE__ */ jsxs56("div", {
+            /* @__PURE__ */ jsxs57("div", {
               className: "space-y-2",
               children: [
-                /* @__PURE__ */ jsx90("h4", {
+                /* @__PURE__ */ jsx91("h4", {
                   className: "font-medium leading-none",
                   children: "Dimensions"
                 }),
-                /* @__PURE__ */ jsx90("p", {
+                /* @__PURE__ */ jsx91("p", {
                   className: "text-muted-foreground text-sm",
                   children: "Set the dimensions for the layer."
                 })
               ]
             }),
-            /* @__PURE__ */ jsxs56("div", {
+            /* @__PURE__ */ jsxs57("div", {
               className: "grid gap-2",
               children: [
-                /* @__PURE__ */ jsxs56("div", {
+                /* @__PURE__ */ jsxs57("div", {
                   className: "grid grid-cols-3 items-center gap-4",
                   children: [
-                    /* @__PURE__ */ jsx90(Label, {
+                    /* @__PURE__ */ jsx91(Label, {
                       htmlFor: "width",
                       children: "Width"
                     }),
-                    /* @__PURE__ */ jsx90(Input, {
+                    /* @__PURE__ */ jsx91(Input, {
                       id: "width",
                       defaultValue: "100%",
                       className: "col-span-2 h-8"
                     })
                   ]
                 }),
-                /* @__PURE__ */ jsxs56("div", {
+                /* @__PURE__ */ jsxs57("div", {
                   className: "grid grid-cols-3 items-center gap-4",
                   children: [
-                    /* @__PURE__ */ jsx90(Label, {
+                    /* @__PURE__ */ jsx91(Label, {
                       htmlFor: "maxWidth",
                       children: "Max. width"
                     }),
-                    /* @__PURE__ */ jsx90(Input, {
+                    /* @__PURE__ */ jsx91(Input, {
                       id: "maxWidth",
                       defaultValue: "300px",
                       className: "col-span-2 h-8"
                     })
                   ]
                 }),
-                /* @__PURE__ */ jsxs56("div", {
+                /* @__PURE__ */ jsxs57("div", {
                   className: "grid grid-cols-3 items-center gap-4",
                   children: [
-                    /* @__PURE__ */ jsx90(Label, {
+                    /* @__PURE__ */ jsx91(Label, {
                       htmlFor: "height",
                       children: "Height"
                     }),
-                    /* @__PURE__ */ jsx90(Input, {
+                    /* @__PURE__ */ jsx91(Input, {
                       id: "height",
                       defaultValue: "25px",
                       className: "col-span-2 h-8"
                     })
                   ]
                 }),
-                /* @__PURE__ */ jsxs56("div", {
+                /* @__PURE__ */ jsxs57("div", {
                   className: "grid grid-cols-3 items-center gap-4",
                   children: [
-                    /* @__PURE__ */ jsx90(Label, {
+                    /* @__PURE__ */ jsx91(Label, {
                       htmlFor: "maxHeight",
                       children: "Max. height"
                     }),
-                    /* @__PURE__ */ jsx90(Input, {
+                    /* @__PURE__ */ jsx91(Input, {
                       id: "maxHeight",
                       defaultValue: "none",
                       className: "col-span-2 h-8"
@@ -4882,15 +4971,15 @@ function PopoverDemo() {
 import React13 from "react";
 
 // src/shadcn-ui/components/progress.tsx
-import clsx32 from "clsx";
+import clsx33 from "clsx";
 import { Progress as ProgressPrimitive } from "radix-ui";
-import { jsx as jsx91 } from "react/jsx-runtime";
+import { jsx as jsx92 } from "react/jsx-runtime";
 function Progress({ className, value, ...props }) {
-  return /* @__PURE__ */ jsx91(ProgressPrimitive.Root, {
+  return /* @__PURE__ */ jsx92(ProgressPrimitive.Root, {
     "data-slot": "progress",
-    className: clsx32("relative h-2 w-full overflow-hidden rounded-full bg-primary/20", className),
+    className: clsx33("relative h-2 w-full overflow-hidden rounded-full bg-primary/20", className),
     ...props,
-    children: /* @__PURE__ */ jsx91(ProgressPrimitive.Indicator, {
+    children: /* @__PURE__ */ jsx92(ProgressPrimitive.Indicator, {
       "data-slot": "progress-indicator",
       className: "h-full w-full flex-1 bg-primary transition-all",
       style: { transform: `translateX(-${100 - (value || 0)}%)` }
@@ -4899,39 +4988,39 @@ function Progress({ className, value, ...props }) {
 }
 
 // src/shadcn-ui/examples/progress-demo.tsx
-import { jsx as jsx92 } from "react/jsx-runtime";
+import { jsx as jsx93 } from "react/jsx-runtime";
 function ProgressDemo() {
   const [progress, setProgress] = React13.useState(13);
   React13.useEffect(() => {
     const timer = setTimeout(() => setProgress(66), 500);
     return () => clearTimeout(timer);
   }, []);
-  return /* @__PURE__ */ jsx92(Progress, {
+  return /* @__PURE__ */ jsx93(Progress, {
     value: progress,
     className: "w-[60%]"
   });
 }
 
 // src/shadcn-ui/components/radio-group.tsx
-import clsx33 from "clsx";
+import clsx34 from "clsx";
 import { RadioGroup as RadioGroupPrimitive } from "radix-ui";
-import { jsx as jsx93 } from "react/jsx-runtime";
+import { jsx as jsx94 } from "react/jsx-runtime";
 function RadioGroup({ className, ...props }) {
-  return /* @__PURE__ */ jsx93(RadioGroupPrimitive.Root, {
+  return /* @__PURE__ */ jsx94(RadioGroupPrimitive.Root, {
     "data-slot": "radio-group",
-    className: clsx33("grid gap-3", className),
+    className: clsx34("grid gap-3", className),
     ...props
   });
 }
 function RadioGroupItem({ className, spriteUrl, ...props }) {
-  return /* @__PURE__ */ jsx93(RadioGroupPrimitive.Item, {
+  return /* @__PURE__ */ jsx94(RadioGroupPrimitive.Item, {
     "data-slot": "radio-group-item",
-    className: clsx33("aspect-square size-4 shrink-0 rounded-full border border-input text-primary shadow-xs outline-none transition-[color,box-shadow] focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:bg-input/30 dark:aria-invalid:ring-destructive/40", className),
+    className: clsx34("aspect-square size-4 shrink-0 rounded-full border border-input text-primary shadow-xs outline-none transition-[color,box-shadow] focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:bg-input/30 dark:aria-invalid:ring-destructive/40", className),
     ...props,
-    children: /* @__PURE__ */ jsx93(RadioGroupPrimitive.Indicator, {
+    children: /* @__PURE__ */ jsx94(RadioGroupPrimitive.Indicator, {
       "data-slot": "radio-group-indicator",
       className: "relative flex items-center justify-center",
-      children: /* @__PURE__ */ jsx93(SpriteIcon, {
+      children: /* @__PURE__ */ jsx94(SpriteIcon, {
         id: "Circle",
         url: spriteUrl,
         className: "-translate-x-1/2 -translate-y-1/2 absolute top-1/2 left-1/2 size-2 fill-primary"
@@ -4941,48 +5030,48 @@ function RadioGroupItem({ className, spriteUrl, ...props }) {
 }
 
 // src/shadcn-ui/examples/radio-group-demo.tsx
-import { jsx as jsx94, jsxs as jsxs57 } from "react/jsx-runtime";
+import { jsx as jsx95, jsxs as jsxs58 } from "react/jsx-runtime";
 function RadioGroupDemo({ spriteUrl }) {
-  return /* @__PURE__ */ jsxs57(RadioGroup, {
+  return /* @__PURE__ */ jsxs58(RadioGroup, {
     defaultValue: "comfortable",
     children: [
-      /* @__PURE__ */ jsxs57("div", {
+      /* @__PURE__ */ jsxs58("div", {
         className: "flex items-center gap-3",
         children: [
-          /* @__PURE__ */ jsx94(RadioGroupItem, {
+          /* @__PURE__ */ jsx95(RadioGroupItem, {
             spriteUrl,
             value: "default",
             id: "r1"
           }),
-          /* @__PURE__ */ jsx94(Label, {
+          /* @__PURE__ */ jsx95(Label, {
             htmlFor: "r1",
             children: "Default"
           })
         ]
       }),
-      /* @__PURE__ */ jsxs57("div", {
+      /* @__PURE__ */ jsxs58("div", {
         className: "flex items-center gap-3",
         children: [
-          /* @__PURE__ */ jsx94(RadioGroupItem, {
+          /* @__PURE__ */ jsx95(RadioGroupItem, {
             spriteUrl,
             value: "comfortable",
             id: "r2"
           }),
-          /* @__PURE__ */ jsx94(Label, {
+          /* @__PURE__ */ jsx95(Label, {
             htmlFor: "r2",
             children: "Comfortable"
           })
         ]
       }),
-      /* @__PURE__ */ jsxs57("div", {
+      /* @__PURE__ */ jsxs58("div", {
         className: "flex items-center gap-3",
         children: [
-          /* @__PURE__ */ jsx94(RadioGroupItem, {
+          /* @__PURE__ */ jsx95(RadioGroupItem, {
             spriteUrl,
             value: "compact",
             id: "r3"
           }),
-          /* @__PURE__ */ jsx94(Label, {
+          /* @__PURE__ */ jsx95(Label, {
             htmlFor: "r3",
             children: "Compact"
           })
@@ -4994,79 +5083,79 @@ function RadioGroupDemo({ spriteUrl }) {
 
 // src/shadcn-ui/examples/radio-group-form.tsx
 import { toast as toast5 } from "sonner";
-import { jsx as jsx95, jsxs as jsxs58 } from "react/jsx-runtime";
+import { jsx as jsx96, jsxs as jsxs59 } from "react/jsx-runtime";
 function RadioGroupForm({ spriteUrl }) {
   function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     const type = formData.get("type");
     toast5("You submitted the following values", {
-      description: /* @__PURE__ */ jsx95("pre", {
+      description: /* @__PURE__ */ jsx96("pre", {
         className: "mt-2 w-[320px] rounded-md bg-neutral-950 p-4",
-        children: /* @__PURE__ */ jsx95("code", {
+        children: /* @__PURE__ */ jsx96("code", {
           className: "text-white",
           children: JSON.stringify({ type }, null, 2)
         })
       })
     });
   }
-  return /* @__PURE__ */ jsxs58(Form, {
+  return /* @__PURE__ */ jsxs59(Form, {
     onSubmit: handleSubmit,
     className: "w-2/3 space-y-6",
     children: [
-      /* @__PURE__ */ jsx95(FormField, {
+      /* @__PURE__ */ jsx96(FormField, {
         name: "type",
-        children: /* @__PURE__ */ jsxs58(FormItem, {
+        children: /* @__PURE__ */ jsxs59(FormItem, {
           className: "space-y-3",
           children: [
-            /* @__PURE__ */ jsx95(FormLabel, {
+            /* @__PURE__ */ jsx96(FormLabel, {
               children: "Notify me about..."
             }),
-            /* @__PURE__ */ jsx95(FormControl, {
-              children: /* @__PURE__ */ jsxs58(RadioGroup, {
+            /* @__PURE__ */ jsx96(FormControl, {
+              children: /* @__PURE__ */ jsxs59(RadioGroup, {
                 name: "type",
                 className: "flex flex-col",
                 children: [
-                  /* @__PURE__ */ jsxs58(FormItem, {
+                  /* @__PURE__ */ jsxs59(FormItem, {
                     className: "flex items-center gap-3",
                     children: [
-                      /* @__PURE__ */ jsx95(FormControl, {
-                        children: /* @__PURE__ */ jsx95(RadioGroupItem, {
+                      /* @__PURE__ */ jsx96(FormControl, {
+                        children: /* @__PURE__ */ jsx96(RadioGroupItem, {
                           spriteUrl,
                           value: "all"
                         })
                       }),
-                      /* @__PURE__ */ jsx95(FormLabel, {
+                      /* @__PURE__ */ jsx96(FormLabel, {
                         className: "font-normal",
                         children: "All new messages"
                       })
                     ]
                   }),
-                  /* @__PURE__ */ jsxs58(FormItem, {
+                  /* @__PURE__ */ jsxs59(FormItem, {
                     className: "flex items-center gap-3",
                     children: [
-                      /* @__PURE__ */ jsx95(FormControl, {
-                        children: /* @__PURE__ */ jsx95(RadioGroupItem, {
+                      /* @__PURE__ */ jsx96(FormControl, {
+                        children: /* @__PURE__ */ jsx96(RadioGroupItem, {
                           spriteUrl,
                           value: "mentions"
                         })
                       }),
-                      /* @__PURE__ */ jsx95(FormLabel, {
+                      /* @__PURE__ */ jsx96(FormLabel, {
                         className: "font-normal",
                         children: "Direct messages and mentions"
                       })
                     ]
                   }),
-                  /* @__PURE__ */ jsxs58(FormItem, {
+                  /* @__PURE__ */ jsxs59(FormItem, {
                     className: "flex items-center gap-3",
                     children: [
-                      /* @__PURE__ */ jsx95(FormControl, {
-                        children: /* @__PURE__ */ jsx95(RadioGroupItem, {
+                      /* @__PURE__ */ jsx96(FormControl, {
+                        children: /* @__PURE__ */ jsx96(RadioGroupItem, {
                           spriteUrl,
                           value: "none"
                         })
                       }),
-                      /* @__PURE__ */ jsx95(FormLabel, {
+                      /* @__PURE__ */ jsx96(FormLabel, {
                         className: "font-normal",
                         children: "Nothing"
                       })
@@ -5075,11 +5164,11 @@ function RadioGroupForm({ spriteUrl }) {
                 ]
               })
             }),
-            /* @__PURE__ */ jsx95(FormMessage, {})
+            /* @__PURE__ */ jsx96(FormMessage, {})
           ]
         })
       }),
-      /* @__PURE__ */ jsx95(Button, {
+      /* @__PURE__ */ jsx96(Button, {
         type: "submit",
         children: "Submit"
       })
@@ -5091,32 +5180,32 @@ function RadioGroupForm({ spriteUrl }) {
 import React14 from "react";
 
 // src/shadcn-ui/components/scroll-area.tsx
-import clsx34 from "clsx";
+import clsx35 from "clsx";
 import { ScrollArea as ScrollAreaPrimitive } from "radix-ui";
-import { jsx as jsx96, jsxs as jsxs59 } from "react/jsx-runtime";
+import { jsx as jsx97, jsxs as jsxs60 } from "react/jsx-runtime";
 function ScrollArea({ className, children, ...props }) {
-  return /* @__PURE__ */ jsxs59(ScrollAreaPrimitive.Root, {
+  return /* @__PURE__ */ jsxs60(ScrollAreaPrimitive.Root, {
     "data-slot": "scroll-area",
-    className: clsx34("relative", className),
+    className: clsx35("relative", className),
     ...props,
     children: [
-      /* @__PURE__ */ jsx96(ScrollAreaPrimitive.Viewport, {
+      /* @__PURE__ */ jsx97(ScrollAreaPrimitive.Viewport, {
         "data-slot": "scroll-area-viewport",
         className: "size-full rounded-[inherit] outline-none transition-[color,box-shadow] focus-visible:outline-1 focus-visible:ring-[3px] focus-visible:ring-ring/50",
         children
       }),
-      /* @__PURE__ */ jsx96(ScrollBar, {}),
-      /* @__PURE__ */ jsx96(ScrollAreaPrimitive.Corner, {})
+      /* @__PURE__ */ jsx97(ScrollBar, {}),
+      /* @__PURE__ */ jsx97(ScrollAreaPrimitive.Corner, {})
     ]
   });
 }
 function ScrollBar({ className, orientation = "vertical", ...props }) {
-  return /* @__PURE__ */ jsx96(ScrollAreaPrimitive.ScrollAreaScrollbar, {
+  return /* @__PURE__ */ jsx97(ScrollAreaPrimitive.ScrollAreaScrollbar, {
     "data-slot": "scroll-area-scrollbar",
     orientation,
-    className: clsx34("flex touch-none select-none p-px transition-colors", orientation === "vertical" && "h-full w-2.5 border-l border-l-transparent", orientation === "horizontal" && "h-2.5 flex-col border-t border-t-transparent", className),
+    className: clsx35("flex touch-none select-none p-px transition-colors", orientation === "vertical" && "h-full w-2.5 border-l border-l-transparent", orientation === "horizontal" && "h-2.5 flex-col border-t border-t-transparent", className),
     ...props,
-    children: /* @__PURE__ */ jsx96(ScrollAreaPrimitive.ScrollAreaThumb, {
+    children: /* @__PURE__ */ jsx97(ScrollAreaPrimitive.ScrollAreaThumb, {
       "data-slot": "scroll-area-thumb",
       className: "relative flex-1 rounded-full bg-border"
     })
@@ -5124,39 +5213,39 @@ function ScrollBar({ className, orientation = "vertical", ...props }) {
 }
 
 // src/shadcn-ui/components/separator.tsx
-import clsx35 from "clsx";
+import clsx36 from "clsx";
 import { Separator as SeparatorPrimitive } from "radix-ui";
-import { jsx as jsx97 } from "react/jsx-runtime";
+import { jsx as jsx98 } from "react/jsx-runtime";
 function Separator({ className, orientation = "horizontal", decorative = true, ...props }) {
-  return /* @__PURE__ */ jsx97(SeparatorPrimitive.Root, {
+  return /* @__PURE__ */ jsx98(SeparatorPrimitive.Root, {
     "data-slot": "separator",
     decorative,
     orientation,
-    className: clsx35("shrink-0 bg-border data-[orientation=horizontal]:h-px data-[orientation=vertical]:h-full data-[orientation=horizontal]:w-full data-[orientation=vertical]:w-px", className),
+    className: clsx36("shrink-0 bg-border data-[orientation=horizontal]:h-px data-[orientation=vertical]:h-full data-[orientation=horizontal]:w-full data-[orientation=vertical]:w-px", className),
     ...props
   });
 }
 
 // src/shadcn-ui/examples/scroll-area-demo.tsx
-import { jsx as jsx98, jsxs as jsxs60 } from "react/jsx-runtime";
+import { jsx as jsx99, jsxs as jsxs61 } from "react/jsx-runtime";
 var tags = Array.from({ length: 50 }).map((_, i, a) => `v1.2.0-beta.${a.length - i}`);
 function ScrollAreaDemo() {
-  return /* @__PURE__ */ jsx98(ScrollArea, {
+  return /* @__PURE__ */ jsx99(ScrollArea, {
     className: "h-72 w-48 rounded-md border",
-    children: /* @__PURE__ */ jsxs60("div", {
+    children: /* @__PURE__ */ jsxs61("div", {
       className: "p-4",
       children: [
-        /* @__PURE__ */ jsx98("h4", {
+        /* @__PURE__ */ jsx99("h4", {
           className: "mb-4 font-medium text-sm leading-none",
           children: "Tags"
         }),
-        tags.map((tag) => /* @__PURE__ */ jsxs60(React14.Fragment, {
+        tags.map((tag) => /* @__PURE__ */ jsxs61(React14.Fragment, {
           children: [
-            /* @__PURE__ */ jsx98("div", {
+            /* @__PURE__ */ jsx99("div", {
               className: "text-sm",
               children: tag
             }),
-            /* @__PURE__ */ jsx98(Separator, {
+            /* @__PURE__ */ jsx99(Separator, {
               className: "my-2"
             })
           ]
@@ -5166,7 +5255,7 @@ function ScrollAreaDemo() {
   });
 }
 // src/shadcn-ui/examples/scroll-area-horizontal-demo.tsx
-import { jsx as jsx99, jsxs as jsxs61 } from "react/jsx-runtime";
+import { jsx as jsx100, jsxs as jsxs62 } from "react/jsx-runtime";
 var works = [
   {
     artist: "Ornella Binni",
@@ -5182,17 +5271,17 @@ var works = [
   }
 ];
 function ScrollAreaHorizontalDemo() {
-  return /* @__PURE__ */ jsxs61(ScrollArea, {
+  return /* @__PURE__ */ jsxs62(ScrollArea, {
     className: "w-96 whitespace-nowrap rounded-md border",
     children: [
-      /* @__PURE__ */ jsx99("div", {
+      /* @__PURE__ */ jsx100("div", {
         className: "flex w-max space-x-4 p-4",
-        children: works.map((artwork) => /* @__PURE__ */ jsxs61("figure", {
+        children: works.map((artwork) => /* @__PURE__ */ jsxs62("figure", {
           className: "shrink-0",
           children: [
-            /* @__PURE__ */ jsx99("div", {
+            /* @__PURE__ */ jsx100("div", {
               className: "overflow-hidden rounded-md",
-              children: /* @__PURE__ */ jsx99(LazyImage, {
+              children: /* @__PURE__ */ jsx100(LazyImage, {
                 src: artwork.art,
                 alt: `Photo by ${artwork.artist}`,
                 className: "aspect-[3/4] h-fit w-fit object-cover",
@@ -5200,11 +5289,11 @@ function ScrollAreaHorizontalDemo() {
                 height: 400
               })
             }),
-            /* @__PURE__ */ jsxs61("figcaption", {
+            /* @__PURE__ */ jsxs62("figcaption", {
               className: "pt-2 text-muted-foreground text-xs",
               children: [
                 "Photo by ",
-                /* @__PURE__ */ jsx99("span", {
+                /* @__PURE__ */ jsx100("span", {
                   className: "font-semibold text-foreground",
                   children: artwork.artist
                 })
@@ -5213,7 +5302,7 @@ function ScrollAreaHorizontalDemo() {
           ]
         }, artwork.artist))
       }),
-      /* @__PURE__ */ jsx99(ScrollBar, {
+      /* @__PURE__ */ jsx100(ScrollBar, {
         orientation: "horizontal"
       })
     ]
@@ -5221,45 +5310,45 @@ function ScrollAreaHorizontalDemo() {
 }
 
 // src/shadcn-ui/examples/select-demo.tsx
-import { jsx as jsx100, jsxs as jsxs62 } from "react/jsx-runtime";
+import { jsx as jsx101, jsxs as jsxs63 } from "react/jsx-runtime";
 function SelectDemo({ spriteUrl }) {
-  return /* @__PURE__ */ jsxs62(Select, {
+  return /* @__PURE__ */ jsxs63(Select, {
     children: [
-      /* @__PURE__ */ jsx100(SelectTrigger, {
+      /* @__PURE__ */ jsx101(SelectTrigger, {
         spriteUrl,
         className: "w-[180px]",
-        children: /* @__PURE__ */ jsx100(SelectValue, {
+        children: /* @__PURE__ */ jsx101(SelectValue, {
           placeholder: "Select a fruit"
         })
       }),
-      /* @__PURE__ */ jsx100(SelectContent, {
+      /* @__PURE__ */ jsx101(SelectContent, {
         spriteUrl,
-        children: /* @__PURE__ */ jsxs62(SelectGroup, {
+        children: /* @__PURE__ */ jsxs63(SelectGroup, {
           children: [
-            /* @__PURE__ */ jsx100(SelectLabel, {
+            /* @__PURE__ */ jsx101(SelectLabel, {
               children: "Fruits"
             }),
-            /* @__PURE__ */ jsx100(SelectItem, {
+            /* @__PURE__ */ jsx101(SelectItem, {
               spriteUrl,
               value: "apple",
               children: "Apple"
             }),
-            /* @__PURE__ */ jsx100(SelectItem, {
+            /* @__PURE__ */ jsx101(SelectItem, {
               spriteUrl,
               value: "banana",
               children: "Banana"
             }),
-            /* @__PURE__ */ jsx100(SelectItem, {
+            /* @__PURE__ */ jsx101(SelectItem, {
               spriteUrl,
               value: "blueberry",
               children: "Blueberry"
             }),
-            /* @__PURE__ */ jsx100(SelectItem, {
+            /* @__PURE__ */ jsx101(SelectItem, {
               spriteUrl,
               value: "grapes",
               children: "Grapes"
             }),
-            /* @__PURE__ */ jsx100(SelectItem, {
+            /* @__PURE__ */ jsx101(SelectItem, {
               spriteUrl,
               value: "pineapple",
               children: "Pineapple"
@@ -5273,58 +5362,58 @@ function SelectDemo({ spriteUrl }) {
 
 // src/shadcn-ui/examples/select-form.tsx
 import { toast as toast6 } from "sonner";
-import { jsx as jsx101, jsxs as jsxs63 } from "react/jsx-runtime";
+import { jsx as jsx102, jsxs as jsxs64 } from "react/jsx-runtime";
 function SelectForm({ spriteUrl }) {
   function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     const email = formData.get("email");
     toast6("You submitted the following values", {
-      description: /* @__PURE__ */ jsx101("pre", {
+      description: /* @__PURE__ */ jsx102("pre", {
         className: "mt-2 w-[320px] rounded-md bg-neutral-950 p-4",
-        children: /* @__PURE__ */ jsx101("code", {
+        children: /* @__PURE__ */ jsx102("code", {
           className: "text-white",
           children: JSON.stringify({ email }, null, 2)
         })
       })
     });
   }
-  return /* @__PURE__ */ jsxs63(Form, {
+  return /* @__PURE__ */ jsxs64(Form, {
     onSubmit: handleSubmit,
     className: "w-2/3 space-y-6",
     children: [
-      /* @__PURE__ */ jsx101(FormField, {
+      /* @__PURE__ */ jsx102(FormField, {
         name: "email",
-        children: /* @__PURE__ */ jsxs63(FormItem, {
+        children: /* @__PURE__ */ jsxs64(FormItem, {
           children: [
-            /* @__PURE__ */ jsx101(FormLabel, {
+            /* @__PURE__ */ jsx102(FormLabel, {
               children: "Email"
             }),
-            /* @__PURE__ */ jsxs63(Select, {
+            /* @__PURE__ */ jsxs64(Select, {
               name: "email",
               children: [
-                /* @__PURE__ */ jsx101(FormControl, {
-                  children: /* @__PURE__ */ jsx101(SelectTrigger, {
+                /* @__PURE__ */ jsx102(FormControl, {
+                  children: /* @__PURE__ */ jsx102(SelectTrigger, {
                     spriteUrl,
-                    children: /* @__PURE__ */ jsx101(SelectValue, {
+                    children: /* @__PURE__ */ jsx102(SelectValue, {
                       placeholder: "Select a verified email to display"
                     })
                   })
                 }),
-                /* @__PURE__ */ jsxs63(SelectContent, {
+                /* @__PURE__ */ jsxs64(SelectContent, {
                   spriteUrl,
                   children: [
-                    /* @__PURE__ */ jsx101(SelectItem, {
+                    /* @__PURE__ */ jsx102(SelectItem, {
                       spriteUrl,
                       value: "joe@example.com",
                       children: "joe@example.com"
                     }),
-                    /* @__PURE__ */ jsx101(SelectItem, {
+                    /* @__PURE__ */ jsx102(SelectItem, {
                       spriteUrl,
                       value: "joe@google.com",
                       children: "joe@google.com"
                     }),
-                    /* @__PURE__ */ jsx101(SelectItem, {
+                    /* @__PURE__ */ jsx102(SelectItem, {
                       spriteUrl,
                       value: "joe@support.com",
                       children: "joe@support.com"
@@ -5333,21 +5422,21 @@ function SelectForm({ spriteUrl }) {
                 })
               ]
             }),
-            /* @__PURE__ */ jsxs63(FormDescription, {
+            /* @__PURE__ */ jsxs64(FormDescription, {
               children: [
                 "You can manage email addresses in your ",
-                /* @__PURE__ */ jsx101(Link, {
+                /* @__PURE__ */ jsx102(Link, {
                   href: "/examples/forms",
                   children: "email settings"
                 }),
                 "."
               ]
             }),
-            /* @__PURE__ */ jsx101(FormMessage, {})
+            /* @__PURE__ */ jsx102(FormMessage, {})
           ]
         })
       }),
-      /* @__PURE__ */ jsx101(Button, {
+      /* @__PURE__ */ jsx102(Button, {
         type: "submit",
         children: "Submit"
       })
@@ -5356,184 +5445,184 @@ function SelectForm({ spriteUrl }) {
 }
 
 // src/shadcn-ui/examples/select-scrollable.tsx
-import { jsx as jsx102, jsxs as jsxs64 } from "react/jsx-runtime";
+import { jsx as jsx103, jsxs as jsxs65 } from "react/jsx-runtime";
 function SelectScrollable({ spriteUrl }) {
-  return /* @__PURE__ */ jsxs64(Select, {
+  return /* @__PURE__ */ jsxs65(Select, {
     children: [
-      /* @__PURE__ */ jsx102(SelectTrigger, {
+      /* @__PURE__ */ jsx103(SelectTrigger, {
         spriteUrl,
         className: "w-[280px]",
-        children: /* @__PURE__ */ jsx102(SelectValue, {
+        children: /* @__PURE__ */ jsx103(SelectValue, {
           placeholder: "Select a timezone"
         })
       }),
-      /* @__PURE__ */ jsxs64(SelectContent, {
+      /* @__PURE__ */ jsxs65(SelectContent, {
         spriteUrl,
         children: [
-          /* @__PURE__ */ jsxs64(SelectGroup, {
+          /* @__PURE__ */ jsxs65(SelectGroup, {
             children: [
-              /* @__PURE__ */ jsx102(SelectLabel, {
+              /* @__PURE__ */ jsx103(SelectLabel, {
                 children: "North America"
               }),
-              /* @__PURE__ */ jsx102(SelectItem, {
+              /* @__PURE__ */ jsx103(SelectItem, {
                 spriteUrl,
                 value: "est",
                 children: "Eastern Standard Time (EST)"
               }),
-              /* @__PURE__ */ jsx102(SelectItem, {
+              /* @__PURE__ */ jsx103(SelectItem, {
                 spriteUrl,
                 value: "cst",
                 children: "Central Standard Time (CST)"
               }),
-              /* @__PURE__ */ jsx102(SelectItem, {
+              /* @__PURE__ */ jsx103(SelectItem, {
                 spriteUrl,
                 value: "mst",
                 children: "Mountain Standard Time (MST)"
               }),
-              /* @__PURE__ */ jsx102(SelectItem, {
+              /* @__PURE__ */ jsx103(SelectItem, {
                 spriteUrl,
                 value: "pst",
                 children: "Pacific Standard Time (PST)"
               }),
-              /* @__PURE__ */ jsx102(SelectItem, {
+              /* @__PURE__ */ jsx103(SelectItem, {
                 spriteUrl,
                 value: "akst",
                 children: "Alaska Standard Time (AKST)"
               }),
-              /* @__PURE__ */ jsx102(SelectItem, {
+              /* @__PURE__ */ jsx103(SelectItem, {
                 spriteUrl,
                 value: "hst",
                 children: "Hawaii Standard Time (HST)"
               })
             ]
           }),
-          /* @__PURE__ */ jsxs64(SelectGroup, {
+          /* @__PURE__ */ jsxs65(SelectGroup, {
             children: [
-              /* @__PURE__ */ jsx102(SelectLabel, {
+              /* @__PURE__ */ jsx103(SelectLabel, {
                 children: "Europe & Africa"
               }),
-              /* @__PURE__ */ jsx102(SelectItem, {
+              /* @__PURE__ */ jsx103(SelectItem, {
                 spriteUrl,
                 value: "gmt",
                 children: "Greenwich Mean Time (GMT)"
               }),
-              /* @__PURE__ */ jsx102(SelectItem, {
+              /* @__PURE__ */ jsx103(SelectItem, {
                 spriteUrl,
                 value: "cet",
                 children: "Central European Time (CET)"
               }),
-              /* @__PURE__ */ jsx102(SelectItem, {
+              /* @__PURE__ */ jsx103(SelectItem, {
                 spriteUrl,
                 value: "eet",
                 children: "Eastern European Time (EET)"
               }),
-              /* @__PURE__ */ jsx102(SelectItem, {
+              /* @__PURE__ */ jsx103(SelectItem, {
                 spriteUrl,
                 value: "west",
                 children: "Western European Summer Time (WEST)"
               }),
-              /* @__PURE__ */ jsx102(SelectItem, {
+              /* @__PURE__ */ jsx103(SelectItem, {
                 spriteUrl,
                 value: "cat",
                 children: "Central Africa Time (CAT)"
               }),
-              /* @__PURE__ */ jsx102(SelectItem, {
+              /* @__PURE__ */ jsx103(SelectItem, {
                 spriteUrl,
                 value: "eat",
                 children: "East Africa Time (EAT)"
               })
             ]
           }),
-          /* @__PURE__ */ jsxs64(SelectGroup, {
+          /* @__PURE__ */ jsxs65(SelectGroup, {
             children: [
-              /* @__PURE__ */ jsx102(SelectLabel, {
+              /* @__PURE__ */ jsx103(SelectLabel, {
                 children: "Asia"
               }),
-              /* @__PURE__ */ jsx102(SelectItem, {
+              /* @__PURE__ */ jsx103(SelectItem, {
                 spriteUrl,
                 value: "msk",
                 children: "Moscow Time (MSK)"
               }),
-              /* @__PURE__ */ jsx102(SelectItem, {
+              /* @__PURE__ */ jsx103(SelectItem, {
                 spriteUrl,
                 value: "ist",
                 children: "India Standard Time (IST)"
               }),
-              /* @__PURE__ */ jsx102(SelectItem, {
+              /* @__PURE__ */ jsx103(SelectItem, {
                 spriteUrl,
                 value: "cst_china",
                 children: "China Standard Time (CST)"
               }),
-              /* @__PURE__ */ jsx102(SelectItem, {
+              /* @__PURE__ */ jsx103(SelectItem, {
                 spriteUrl,
                 value: "jst",
                 children: "Japan Standard Time (JST)"
               }),
-              /* @__PURE__ */ jsx102(SelectItem, {
+              /* @__PURE__ */ jsx103(SelectItem, {
                 spriteUrl,
                 value: "kst",
                 children: "Korea Standard Time (KST)"
               }),
-              /* @__PURE__ */ jsx102(SelectItem, {
+              /* @__PURE__ */ jsx103(SelectItem, {
                 spriteUrl,
                 value: "ist_indonesia",
                 children: "Indonesia Central Standard Time (WITA)"
               })
             ]
           }),
-          /* @__PURE__ */ jsxs64(SelectGroup, {
+          /* @__PURE__ */ jsxs65(SelectGroup, {
             children: [
-              /* @__PURE__ */ jsx102(SelectLabel, {
+              /* @__PURE__ */ jsx103(SelectLabel, {
                 children: "Australia & Pacific"
               }),
-              /* @__PURE__ */ jsx102(SelectItem, {
+              /* @__PURE__ */ jsx103(SelectItem, {
                 spriteUrl,
                 value: "awst",
                 children: "Australian Western Standard Time (AWST)"
               }),
-              /* @__PURE__ */ jsx102(SelectItem, {
+              /* @__PURE__ */ jsx103(SelectItem, {
                 spriteUrl,
                 value: "acst",
                 children: "Australian Central Standard Time (ACST)"
               }),
-              /* @__PURE__ */ jsx102(SelectItem, {
+              /* @__PURE__ */ jsx103(SelectItem, {
                 spriteUrl,
                 value: "aest",
                 children: "Australian Eastern Standard Time (AEST)"
               }),
-              /* @__PURE__ */ jsx102(SelectItem, {
+              /* @__PURE__ */ jsx103(SelectItem, {
                 spriteUrl,
                 value: "nzst",
                 children: "New Zealand Standard Time (NZST)"
               }),
-              /* @__PURE__ */ jsx102(SelectItem, {
+              /* @__PURE__ */ jsx103(SelectItem, {
                 spriteUrl,
                 value: "fjt",
                 children: "Fiji Time (FJT)"
               })
             ]
           }),
-          /* @__PURE__ */ jsxs64(SelectGroup, {
+          /* @__PURE__ */ jsxs65(SelectGroup, {
             children: [
-              /* @__PURE__ */ jsx102(SelectLabel, {
+              /* @__PURE__ */ jsx103(SelectLabel, {
                 children: "South America"
               }),
-              /* @__PURE__ */ jsx102(SelectItem, {
+              /* @__PURE__ */ jsx103(SelectItem, {
                 spriteUrl,
                 value: "art",
                 children: "Argentina Time (ART)"
               }),
-              /* @__PURE__ */ jsx102(SelectItem, {
+              /* @__PURE__ */ jsx103(SelectItem, {
                 spriteUrl,
                 value: "bot",
                 children: "Bolivia Time (BOT)"
               }),
-              /* @__PURE__ */ jsx102(SelectItem, {
+              /* @__PURE__ */ jsx103(SelectItem, {
                 spriteUrl,
                 value: "brt",
                 children: "Brasilia Time (BRT)"
               }),
-              /* @__PURE__ */ jsx102(SelectItem, {
+              /* @__PURE__ */ jsx103(SelectItem, {
                 spriteUrl,
                 value: "clt",
                 children: "Chile Standard Time (CLT)"
@@ -5547,140 +5636,47 @@ function SelectScrollable({ spriteUrl }) {
 }
 
 // src/shadcn-ui/examples/separator-demo.tsx
-import { jsx as jsx103, jsxs as jsxs65 } from "react/jsx-runtime";
+import { jsx as jsx104, jsxs as jsxs66 } from "react/jsx-runtime";
 function SeparatorDemo() {
-  return /* @__PURE__ */ jsxs65("div", {
+  return /* @__PURE__ */ jsxs66("div", {
     children: [
-      /* @__PURE__ */ jsxs65("div", {
+      /* @__PURE__ */ jsxs66("div", {
         className: "space-y-1",
         children: [
-          /* @__PURE__ */ jsx103("h4", {
+          /* @__PURE__ */ jsx104("h4", {
             className: "font-medium text-sm leading-none",
             children: "Radix Primitives"
           }),
-          /* @__PURE__ */ jsx103("p", {
+          /* @__PURE__ */ jsx104("p", {
             className: "text-muted-foreground text-sm",
             children: "An open-source UI component library."
           })
         ]
       }),
-      /* @__PURE__ */ jsx103(Separator, {
+      /* @__PURE__ */ jsx104(Separator, {
         className: "my-4"
       }),
-      /* @__PURE__ */ jsxs65("div", {
+      /* @__PURE__ */ jsxs66("div", {
         className: "flex h-5 items-center space-x-4 text-sm",
         children: [
-          /* @__PURE__ */ jsx103("div", {
+          /* @__PURE__ */ jsx104("div", {
             children: "Blog"
           }),
-          /* @__PURE__ */ jsx103(Separator, {
+          /* @__PURE__ */ jsx104(Separator, {
             orientation: "vertical"
           }),
-          /* @__PURE__ */ jsx103("div", {
+          /* @__PURE__ */ jsx104("div", {
             children: "Docs"
           }),
-          /* @__PURE__ */ jsx103(Separator, {
+          /* @__PURE__ */ jsx104(Separator, {
             orientation: "vertical"
           }),
-          /* @__PURE__ */ jsx103("div", {
+          /* @__PURE__ */ jsx104("div", {
             children: "Source"
           })
         ]
       })
     ]
-  });
-}
-
-// src/shadcn-ui/components/sheet.tsx
-import clsx36 from "clsx";
-import { Dialog as SheetPrimitive } from "radix-ui";
-import { jsx as jsx104, jsxs as jsxs66 } from "react/jsx-runtime";
-function Sheet({ ...props }) {
-  return /* @__PURE__ */ jsx104(SheetPrimitive.Root, {
-    "data-slot": "sheet",
-    ...props
-  });
-}
-function SheetTrigger({ ...props }) {
-  return /* @__PURE__ */ jsx104(SheetPrimitive.Trigger, {
-    "data-slot": "sheet-trigger",
-    ...props
-  });
-}
-function SheetClose({ ...props }) {
-  return /* @__PURE__ */ jsx104(SheetPrimitive.Close, {
-    "data-slot": "sheet-close",
-    ...props
-  });
-}
-function SheetPortal({ ...props }) {
-  return /* @__PURE__ */ jsx104(SheetPrimitive.Portal, {
-    "data-slot": "sheet-portal",
-    ...props
-  });
-}
-function SheetOverlay({ className, ...props }) {
-  return /* @__PURE__ */ jsx104(SheetPrimitive.Overlay, {
-    "data-slot": "sheet-overlay",
-    className: clsx36("data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/50 data-[state=closed]:animate-out data-[state=open]:animate-in", className),
-    ...props
-  });
-}
-function SheetContent({ className, children, side = "right", spriteUrl, ...props }) {
-  return /* @__PURE__ */ jsxs66(SheetPortal, {
-    children: [
-      /* @__PURE__ */ jsx104(SheetOverlay, {}),
-      /* @__PURE__ */ jsxs66(SheetPrimitive.Content, {
-        "data-slot": "sheet-content",
-        className: clsx36("fixed z-50 flex flex-col gap-4 bg-background shadow-lg transition ease-in-out data-[state=closed]:animate-out data-[state=open]:animate-in data-[state=closed]:duration-300 data-[state=open]:duration-500", side === "right" && "data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right inset-y-0 right-0 h-full w-3/4 border-l sm:max-w-sm", side === "left" && "data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left inset-y-0 left-0 h-full w-3/4 border-r sm:max-w-sm", side === "top" && "data-[state=closed]:slide-out-to-top data-[state=open]:slide-in-from-top inset-x-0 top-0 h-auto border-b", side === "bottom" && "data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom inset-x-0 bottom-0 h-auto border-t", className),
-        ...props,
-        children: [
-          children,
-          /* @__PURE__ */ jsxs66(SheetPrimitive.Close, {
-            className: "absolute top-4 right-4 rounded-xs opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-hidden focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary",
-            children: [
-              /* @__PURE__ */ jsx104(SpriteIcon, {
-                id: "X",
-                url: spriteUrl,
-                className: "size-4"
-              }),
-              /* @__PURE__ */ jsx104("span", {
-                className: "sr-only",
-                children: "Close"
-              })
-            ]
-          })
-        ]
-      })
-    ]
-  });
-}
-function SheetHeader({ className, ...props }) {
-  return /* @__PURE__ */ jsx104("div", {
-    "data-slot": "sheet-header",
-    className: clsx36("flex flex-col gap-1.5 p-4", className),
-    ...props
-  });
-}
-function SheetFooter({ className, ...props }) {
-  return /* @__PURE__ */ jsx104("div", {
-    "data-slot": "sheet-footer",
-    className: clsx36("mt-auto flex flex-col gap-2 p-4", className),
-    ...props
-  });
-}
-function SheetTitle({ className, ...props }) {
-  return /* @__PURE__ */ jsx104(SheetPrimitive.Title, {
-    "data-slot": "sheet-title",
-    className: clsx36("font-semibold text-foreground", className),
-    ...props
-  });
-}
-function SheetDescription({ className, ...props }) {
-  return /* @__PURE__ */ jsx104(SheetPrimitive.Description, {
-    "data-slot": "sheet-description",
-    className: clsx36("text-muted-foreground text-sm", className),
-    ...props
   });
 }
 
@@ -8357,4 +8353,4 @@ export {
   ComponentExamples
 };
 
-//# debugId=1D30FD366784EA2164756E2164756E21
+//# debugId=C771CCB5F417BBB564756E2164756E21
