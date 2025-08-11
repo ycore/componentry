@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { Button } from '../components/button';
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '../components/command';
 import { Popover, PopoverContent, PopoverTrigger } from '../components/popover';
@@ -31,7 +31,7 @@ const statuses: Status[] = [
   },
 ];
 
-export default function ComboboxPopover() {
+export default function ComboboxPopover({ spriteUrl }: { spriteUrl: string }) {
   const [open, setOpen] = React.useState(false);
   const [selectedStatus, setSelectedStatus] = React.useState<Status | null>(null);
 
@@ -46,7 +46,7 @@ export default function ComboboxPopover() {
         </PopoverTrigger>
         <PopoverContent className="p-0" side="right" align="start">
           <Command>
-            <CommandInput placeholder="Change status..." />
+            <CommandInput spriteUrl={spriteUrl} placeholder="Change status..." />
             <CommandList>
               <CommandEmpty>No results found.</CommandEmpty>
               <CommandGroup>

@@ -1,12 +1,8 @@
 import clsx from 'clsx';
 import { DropdownMenu as DropdownMenuPrimitive } from 'radix-ui';
-import type * as React from 'react';
-
-import { createSpriteIcon } from '../../images/SpriteIcon';
+import type React from 'react';
+import { SpriteIcon } from '../../images/SpriteIcon';
 import type { IconName } from '../@types/lucide-sprites';
-import svgSpriteUrl from '../assets/lucide-sprites.svg?url';
-
-const SpriteIcon = createSpriteIcon<IconName>(svgSpriteUrl);
 
 function DropdownMenu({ ...props }: React.ComponentProps<typeof DropdownMenuPrimitive.Root>) {
   return <DropdownMenuPrimitive.Root data-slot="dropdown-menu" {...props} />;
@@ -40,15 +36,7 @@ function DropdownMenuGroup({ ...props }: React.ComponentProps<typeof DropdownMen
   return <DropdownMenuPrimitive.Group data-slot="dropdown-menu-group" {...props} />;
 }
 
-function DropdownMenuItem({
-  className,
-  inset,
-  variant = 'default',
-  ...props
-}: React.ComponentProps<typeof DropdownMenuPrimitive.Item> & {
-  inset?: boolean;
-  variant?: 'default' | 'destructive';
-}) {
+function DropdownMenuItem({ className, inset, variant = 'default', ...props }: React.ComponentProps<typeof DropdownMenuPrimitive.Item> & { inset?: boolean; variant?: 'default' | 'destructive' }) {
   return (
     <DropdownMenuPrimitive.Item
       data-slot="dropdown-menu-item"
@@ -63,7 +51,7 @@ function DropdownMenuItem({
   );
 }
 
-function DropdownMenuCheckboxItem({ className, children, checked, ...props }: React.ComponentProps<typeof DropdownMenuPrimitive.CheckboxItem>) {
+function DropdownMenuCheckboxItem({ className, children, checked, spriteUrl, ...props }: React.ComponentProps<typeof DropdownMenuPrimitive.CheckboxItem> & { spriteUrl: string }) {
   return (
     <DropdownMenuPrimitive.CheckboxItem
       data-slot="dropdown-menu-checkbox-item"
@@ -76,7 +64,7 @@ function DropdownMenuCheckboxItem({ className, children, checked, ...props }: Re
     >
       <span className="pointer-events-none absolute left-2 flex size-3.5 items-center justify-center">
         <DropdownMenuPrimitive.ItemIndicator>
-          <SpriteIcon id="Check" className="size-4" />
+          <SpriteIcon<IconName> id="Check" className="size-4" url={spriteUrl} />
         </DropdownMenuPrimitive.ItemIndicator>
       </span>
       {children}
@@ -88,7 +76,7 @@ function DropdownMenuRadioGroup({ ...props }: React.ComponentProps<typeof Dropdo
   return <DropdownMenuPrimitive.RadioGroup data-slot="dropdown-menu-radio-group" {...props} />;
 }
 
-function DropdownMenuRadioItem({ className, children, ...props }: React.ComponentProps<typeof DropdownMenuPrimitive.RadioItem>) {
+function DropdownMenuRadioItem({ className, children, spriteUrl, ...props }: React.ComponentProps<typeof DropdownMenuPrimitive.RadioItem> & { spriteUrl: string }) {
   return (
     <DropdownMenuPrimitive.RadioItem
       data-slot="dropdown-menu-radio-item"
@@ -100,7 +88,7 @@ function DropdownMenuRadioItem({ className, children, ...props }: React.Componen
     >
       <span className="pointer-events-none absolute left-2 flex size-3.5 items-center justify-center">
         <DropdownMenuPrimitive.ItemIndicator>
-          <SpriteIcon id="Circle" className="size-2 fill-current" />
+          <SpriteIcon<IconName> id="Circle" className="size-2 fill-current" url={spriteUrl} />
         </DropdownMenuPrimitive.ItemIndicator>
       </span>
       {children}
@@ -108,13 +96,7 @@ function DropdownMenuRadioItem({ className, children, ...props }: React.Componen
   );
 }
 
-function DropdownMenuLabel({
-  className,
-  inset,
-  ...props
-}: React.ComponentProps<typeof DropdownMenuPrimitive.Label> & {
-  inset?: boolean;
-}) {
+function DropdownMenuLabel({ className, inset, ...props }: React.ComponentProps<typeof DropdownMenuPrimitive.Label> & { inset?: boolean }) {
   return <DropdownMenuPrimitive.Label data-slot="dropdown-menu-label" data-inset={inset} className={clsx('px-2 py-1.5 font-medium text-sm data-[inset]:pl-8', className)} {...props} />;
 }
 
@@ -130,14 +112,7 @@ function DropdownMenuSub({ ...props }: React.ComponentProps<typeof DropdownMenuP
   return <DropdownMenuPrimitive.Sub data-slot="dropdown-menu-sub" {...props} />;
 }
 
-function DropdownMenuSubTrigger({
-  className,
-  inset,
-  children,
-  ...props
-}: React.ComponentProps<typeof DropdownMenuPrimitive.SubTrigger> & {
-  inset?: boolean;
-}) {
+function DropdownMenuSubTrigger({ className, inset, children, spriteUrl, ...props }: React.ComponentProps<typeof DropdownMenuPrimitive.SubTrigger> & { inset?: boolean } & { spriteUrl: string }) {
   return (
     <DropdownMenuPrimitive.SubTrigger
       data-slot="dropdown-menu-sub-trigger"
@@ -149,7 +124,7 @@ function DropdownMenuSubTrigger({
       {...props}
     >
       {children}
-      <SpriteIcon id="ChevronRight" className="ml-auto size-4" />
+      <SpriteIcon<IconName> id="ChevronRight" className="ml-auto size-4" url={spriteUrl} />
     </DropdownMenuPrimitive.SubTrigger>
   );
 }

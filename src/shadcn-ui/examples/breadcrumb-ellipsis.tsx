@@ -1,7 +1,8 @@
+import React from 'react';
 import { Breadcrumb, BreadcrumbEllipsis, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '../components/breadcrumb';
 import { Link } from '../custom/link';
 
-export default function BreadcrumbCollapsed() {
+export default function BreadcrumbCollapsed({ spriteUrl }: { spriteUrl: string }) {
   return (
     <Breadcrumb>
       <BreadcrumbList>
@@ -10,17 +11,17 @@ export default function BreadcrumbCollapsed() {
             <Link href="/">Home</Link>
           </BreadcrumbLink>
         </BreadcrumbItem>
-        <BreadcrumbSeparator />
+        <BreadcrumbSeparator spriteUrl={spriteUrl} />
         <BreadcrumbItem>
-          <BreadcrumbEllipsis />
+          <BreadcrumbEllipsis spriteUrl={spriteUrl} />
         </BreadcrumbItem>
-        <BreadcrumbSeparator />
+        <BreadcrumbSeparator spriteUrl={spriteUrl} />
         <BreadcrumbItem>
           <BreadcrumbLink asChild>
             <Link href="/docs/components">Components</Link>
           </BreadcrumbLink>
         </BreadcrumbItem>
-        <BreadcrumbSeparator />
+        <BreadcrumbSeparator spriteUrl={spriteUrl} />
         <BreadcrumbItem>
           <BreadcrumbPage>Breadcrumb</BreadcrumbPage>
         </BreadcrumbItem>

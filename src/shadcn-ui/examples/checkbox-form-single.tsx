@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { toast } from 'sonner';
 
 import { Button } from '../components/button';
@@ -8,7 +8,7 @@ import { Link } from '../custom/link';
 
 type CheckedState = boolean | 'indeterminate';
 
-export default function CheckboxReactHookFormSingle() {
+export default function CheckboxReactHookFormSingle({ spriteUrl }: { spriteUrl: string }) {
   // const [mobileEnabled, setMobileEnabled] = React.useState(true);
   const [mobileEnabled, setMobileEnabled] = React.useState<CheckedState>(false);
 
@@ -31,7 +31,7 @@ export default function CheckboxReactHookFormSingle() {
       <FormField name="mobile">
         <FormItem className="flex flex-row items-start gap-2 rounded-md border p-4 shadow-sm">
           <FormControl>
-            <Checkbox name="mobile" checked={mobileEnabled} onCheckedChange={setMobileEnabled} />
+            <Checkbox spriteUrl={spriteUrl} name="mobile" checked={mobileEnabled} onCheckedChange={setMobileEnabled} />
           </FormControl>
           <div className="space-y-1 leading-none">
             <FormLabel>Use different settings for my mobile devices</FormLabel>

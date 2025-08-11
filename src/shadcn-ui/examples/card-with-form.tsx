@@ -1,11 +1,11 @@
-import * as React from 'react';
+import React from 'react';
 import { Button } from '../components/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../components/card';
 import { Input } from '../components/input';
 import { Label } from '../components/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/select';
 
-export default function CardWithForm() {
+export default function CardWithForm({ spriteUrl }: { spriteUrl: string }) {
   return (
     <Card className="w-[350px]">
       <CardHeader>
@@ -22,14 +22,14 @@ export default function CardWithForm() {
             <div className="flex flex-col gap-3">
               <Label htmlFor="framework">Framework</Label>
               <Select>
-                <SelectTrigger id="framework" className="w-full">
+                <SelectTrigger spriteUrl={spriteUrl} id="framework" className="w-full">
                   <SelectValue placeholder="Select" />
                 </SelectTrigger>
-                <SelectContent position="popper">
-                  <SelectItem value="next">Next.js</SelectItem>
-                  <SelectItem value="sveltekit">SvelteKit</SelectItem>
-                  <SelectItem value="astro">Astro</SelectItem>
-                  <SelectItem value="nuxt">Nuxt.js</SelectItem>
+                <SelectContent spriteUrl={spriteUrl} position="popper">
+                  <SelectItem spriteUrl={spriteUrl} value="next">Next.js</SelectItem>
+                  <SelectItem spriteUrl={spriteUrl} value="sveltekit">SvelteKit</SelectItem>
+                  <SelectItem spriteUrl={spriteUrl} value="astro">Astro</SelectItem>
+                  <SelectItem spriteUrl={spriteUrl} value="nuxt">Nuxt.js</SelectItem>
                 </SelectContent>
               </Select>
             </div>

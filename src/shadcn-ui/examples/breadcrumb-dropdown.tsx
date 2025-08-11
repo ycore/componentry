@@ -1,13 +1,11 @@
-import { createSpriteIcon } from '../../images/SpriteIcon';
+import React from 'react';
+import { SpriteIcon } from '../../images/SpriteIcon';
 import type { IconName } from '../@types/lucide-sprites';
-import svgSpriteUrl from '../assets/lucide-sprites.svg?url';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '../components/breadcrumb';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '../components/dropdown-menu';
 import { Link } from '../custom/link';
 
-const SpriteIcon = createSpriteIcon<IconName>(svgSpriteUrl);
-
-export default function BreadcrumbWithDropdown() {
+export default function BreadcrumbWithDropdown({ spriteUrl }: { spriteUrl: string }) {
   return (
     <Breadcrumb>
       <BreadcrumbList>
@@ -16,14 +14,14 @@ export default function BreadcrumbWithDropdown() {
             <Link href="/">Home</Link>
           </BreadcrumbLink>
         </BreadcrumbItem>
-        <BreadcrumbSeparator>
-          <SpriteIcon id="Slash" />
+        <BreadcrumbSeparator spriteUrl={spriteUrl}>
+          <SpriteIcon<IconName> id="Slash" url={spriteUrl} />
         </BreadcrumbSeparator>
         <BreadcrumbItem>
           <DropdownMenu>
             <DropdownMenuTrigger className="flex items-center gap-1 [&_svg:not([class*='size-'])]:size-3.5 [&_svg]:pointer-events-none [&_svg]:shrink-0">
               Components
-              <SpriteIcon id="ChevronDown" />
+              <SpriteIcon<IconName> id="ChevronDown" url={spriteUrl} />
             </DropdownMenuTrigger>
             <DropdownMenuContent align="start">
               <DropdownMenuItem>Documentation</DropdownMenuItem>
@@ -32,8 +30,8 @@ export default function BreadcrumbWithDropdown() {
             </DropdownMenuContent>
           </DropdownMenu>
         </BreadcrumbItem>
-        <BreadcrumbSeparator>
-          <SpriteIcon id="Slash" />
+        <BreadcrumbSeparator spriteUrl={spriteUrl}>
+          <SpriteIcon<IconName> id="Slash" url={spriteUrl} />
         </BreadcrumbSeparator>
         <BreadcrumbItem>
           <BreadcrumbPage>Breadcrumb</BreadcrumbPage>

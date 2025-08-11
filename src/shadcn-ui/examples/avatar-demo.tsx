@@ -1,3 +1,4 @@
+import React from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '../components/avatar';
 
 export default function AvatarDemo() {

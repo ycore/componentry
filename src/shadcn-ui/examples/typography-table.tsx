@@ -1,3 +1,5 @@
+import React from 'react';
+
 export default function TypographyTable() {
   return (
     <div className="my-6 w-full overflow-y-auto">

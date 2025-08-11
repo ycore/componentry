@@ -1,12 +1,8 @@
 import clsx from 'clsx';
 import { ContextMenu as ContextMenuPrimitive } from 'radix-ui';
-import type * as React from 'react';
-
-import { createSpriteIcon } from '../../images/SpriteIcon';
+import type React from 'react';
+import { SpriteIcon } from '../../images/SpriteIcon';
 import type { IconName } from '../@types/lucide-sprites';
-import svgSpriteUrl from '../assets/lucide-sprites.svg?url';
-
-const SpriteIcon = createSpriteIcon<IconName>(svgSpriteUrl);
 
 function ContextMenu({ ...props }: React.ComponentProps<typeof ContextMenuPrimitive.Root>) {
   return <ContextMenuPrimitive.Root data-slot="context-menu" {...props} />;
@@ -32,14 +28,7 @@ function ContextMenuRadioGroup({ ...props }: React.ComponentProps<typeof Context
   return <ContextMenuPrimitive.RadioGroup data-slot="context-menu-radio-group" {...props} />;
 }
 
-function ContextMenuSubTrigger({
-  className,
-  inset,
-  children,
-  ...props
-}: React.ComponentProps<typeof ContextMenuPrimitive.SubTrigger> & {
-  inset?: boolean;
-}) {
+function ContextMenuSubTrigger({ className, inset, children, spriteUrl, ...props }: React.ComponentProps<typeof ContextMenuPrimitive.SubTrigger> & { inset?: boolean } & { spriteUrl: string }) {
   return (
     <ContextMenuPrimitive.SubTrigger
       data-slot="context-menu-sub-trigger"
@@ -51,7 +40,7 @@ function ContextMenuSubTrigger({
       {...props}
     >
       {children}
-      <SpriteIcon id="ChevronRight" className="ml-auto" />
+      <SpriteIcon<IconName> id="ChevronRight" className="ml-auto" url={spriteUrl} />
     </ContextMenuPrimitive.SubTrigger>
   );
 }
@@ -84,15 +73,7 @@ function ContextMenuContent({ className, ...props }: React.ComponentProps<typeof
   );
 }
 
-function ContextMenuItem({
-  className,
-  inset,
-  variant = 'default',
-  ...props
-}: React.ComponentProps<typeof ContextMenuPrimitive.Item> & {
-  inset?: boolean;
-  variant?: 'default' | 'destructive';
-}) {
+function ContextMenuItem({ className, inset, variant = 'default', ...props }: React.ComponentProps<typeof ContextMenuPrimitive.Item> & { inset?: boolean; variant?: 'default' | 'destructive'; }) {
   return (
     <ContextMenuPrimitive.Item
       data-slot="context-menu-item"
@@ -107,7 +88,7 @@ function ContextMenuItem({
   );
 }
 
-function ContextMenuCheckboxItem({ className, children, checked, ...props }: React.ComponentProps<typeof ContextMenuPrimitive.CheckboxItem>) {
+function ContextMenuCheckboxItem({ className, children, checked, spriteUrl, ...props }: React.ComponentProps<typeof ContextMenuPrimitive.CheckboxItem> & { spriteUrl: string }) {
   return (
     <ContextMenuPrimitive.CheckboxItem
       data-slot="context-menu-checkbox-item"
@@ -120,7 +101,7 @@ function ContextMenuCheckboxItem({ className, children, checked, ...props }: Rea
     >
       <span className="pointer-events-none absolute left-2 flex size-3.5 items-center justify-center">
         <ContextMenuPrimitive.ItemIndicator>
-          <SpriteIcon id="Check" className="size-4" />
+          <SpriteIcon<IconName> id="Check" className="size-4" url={spriteUrl} />
         </ContextMenuPrimitive.ItemIndicator>
       </span>
       {children}
@@ -128,7 +109,7 @@ function ContextMenuCheckboxItem({ className, children, checked, ...props }: Rea
   );
 }
 
-function ContextMenuRadioItem({ className, children, ...props }: React.ComponentProps<typeof ContextMenuPrimitive.RadioItem>) {
+function ContextMenuRadioItem({ className, children, spriteUrl, ...props }: React.ComponentProps<typeof ContextMenuPrimitive.RadioItem> & { spriteUrl: string }) {
   return (
     <ContextMenuPrimitive.RadioItem
       data-slot="context-menu-radio-item"
@@ -140,7 +121,7 @@ function ContextMenuRadioItem({ className, children, ...props }: React.Component
     >
       <span className="pointer-events-none absolute left-2 flex size-3.5 items-center justify-center">
         <ContextMenuPrimitive.ItemIndicator>
-          <SpriteIcon id="Circle" className="size-2 fill-current" />
+          <SpriteIcon<IconName> id="Circle" className="size-2 fill-current" url={spriteUrl} />
         </ContextMenuPrimitive.ItemIndicator>
       </span>
       {children}
@@ -148,13 +129,7 @@ function ContextMenuRadioItem({ className, children, ...props }: React.Component
   );
 }
 
-function ContextMenuLabel({
-  className,
-  inset,
-  ...props
-}: React.ComponentProps<typeof ContextMenuPrimitive.Label> & {
-  inset?: boolean;
-}) {
+function ContextMenuLabel({ className, inset, ...props }: React.ComponentProps<typeof ContextMenuPrimitive.Label> & { inset?: boolean; }) {
   return <ContextMenuPrimitive.Label data-slot="context-menu-label" data-inset={inset} className={clsx('px-2 py-1.5 font-medium text-foreground text-sm data-[inset]:pl-8', className)} {...props} />;
 }
 

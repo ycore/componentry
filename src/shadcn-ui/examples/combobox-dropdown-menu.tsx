@@ -1,8 +1,6 @@
-import * as React from 'react';
-
-import { createSpriteIcon } from '../../images/SpriteIcon';
+import React from 'react';
+import { SpriteIcon } from '../../images/SpriteIcon';
 import type { IconName } from '../@types/lucide-sprites';
-import svgSpriteUrl from '../assets/lucide-sprites.svg?url';
 import { Button } from '../components/button';
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '../components/command';
 import {
@@ -19,11 +17,9 @@ import {
   DropdownMenuTrigger,
 } from '../components/dropdown-menu';
 
-const SpriteIcon = createSpriteIcon<IconName>(svgSpriteUrl);
-
 const labels = ['feature', 'bug', 'enhancement', 'documentation', 'design', 'question', 'maintenance'];
 
-export default function ComboboxDropdownMenu() {
+export default function ComboboxDropdownMenu({ spriteUrl }: { spriteUrl: string }) {
   const [label, setLabel] = React.useState('feature');
   const [open, setOpen] = React.useState(false);
 
@@ -36,7 +32,7 @@ export default function ComboboxDropdownMenu() {
       <DropdownMenu open={open} onOpenChange={setOpen}>
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" size="sm">
-            <SpriteIcon id="Ellipsis" />
+            <SpriteIcon<IconName> id="Ellipsis" url={spriteUrl} />
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-[200px]">
@@ -46,10 +42,10 @@ export default function ComboboxDropdownMenu() {
             <DropdownMenuItem>Set due date...</DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuSub>
-              <DropdownMenuSubTrigger>Apply label</DropdownMenuSubTrigger>
+              <DropdownMenuSubTrigger spriteUrl={spriteUrl}>Apply label</DropdownMenuSubTrigger>
               <DropdownMenuSubContent className="p-0">
                 <Command>
-                  <CommandInput placeholder="Filter label..." autoFocus={true} className="h-9" />
+                  <CommandInput spriteUrl={spriteUrl} placeholder="Filter label..." autoFocus={true} className="h-9" />
                   <CommandList>
                     <CommandEmpty>No label found.</CommandEmpty>
                     <CommandGroup>

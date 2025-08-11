@@ -1,21 +1,19 @@
-import { createSpriteIcon } from '../../images/SpriteIcon';
+import React from 'react';
+import { SpriteIcon } from '../../images/SpriteIcon';
 import type { IconName } from '../@types/example-sprites';
-import svgSpriteUrl from '../assets/example-sprites.svg?url';
 import { ToggleGroup, ToggleGroupItem } from '../components/toggle-group';
 
-const SpriteIcon = createSpriteIcon<IconName>(svgSpriteUrl);
-
-export default function ToggleGroupDemo() {
+export default function ToggleGroupDemo({ spriteUrl }: { spriteUrl: string }) {
   return (
     <ToggleGroup type="multiple" disabled>
       <ToggleGroupItem value="bold" aria-label="Toggle bold">
-        <SpriteIcon id="Bold" className="h-4 w-4" />
+        <SpriteIcon<IconName> id="Bold" className="h-4 w-4" url={spriteUrl} />
       </ToggleGroupItem>
       <ToggleGroupItem value="italic" aria-label="Toggle italic">
-        <SpriteIcon id="Italic" className="h-4 w-4" />
+        <SpriteIcon<IconName> id="Italic" className="h-4 w-4" url={spriteUrl} />
       </ToggleGroupItem>
       <ToggleGroupItem value="strikethrough" aria-label="Toggle strikethrough">
-        <SpriteIcon id="Underline" className="h-4 w-4" />
+        <SpriteIcon<IconName> id="Underline" className="h-4 w-4" url={spriteUrl} />
       </ToggleGroupItem>
     </ToggleGroup>
   );

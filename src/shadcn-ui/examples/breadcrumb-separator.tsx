@@ -1,12 +1,10 @@
-import { createSpriteIcon } from '../../images/SpriteIcon';
+import React from 'react';
+import { SpriteIcon } from '../../images/SpriteIcon';
 import type { IconName } from '../@types/lucide-sprites';
-import svgSpriteUrl from '../assets/lucide-sprites.svg?url';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '../components/breadcrumb';
 import { Link } from '../custom/link';
 
-const SpriteIcon = createSpriteIcon<IconName>(svgSpriteUrl);
-
-export default function BreadcrumbWithCustomSeparator() {
+export default function BreadcrumbWithCustomSeparator({ spriteUrl }: { spriteUrl: string }) {
   return (
     <Breadcrumb>
       <BreadcrumbList>
@@ -15,16 +13,16 @@ export default function BreadcrumbWithCustomSeparator() {
             <Link href="/">Home</Link>
           </BreadcrumbLink>
         </BreadcrumbItem>
-        <BreadcrumbSeparator>
-          <SpriteIcon id="Slash" />
+        <BreadcrumbSeparator spriteUrl={spriteUrl}>
+          <SpriteIcon<IconName> id="Slash" url={spriteUrl} />
         </BreadcrumbSeparator>
         <BreadcrumbItem>
           <BreadcrumbLink asChild>
             <Link href="/components">Components</Link>
           </BreadcrumbLink>
         </BreadcrumbItem>
-        <BreadcrumbSeparator>
-          <SpriteIcon id="Slash" />
+        <BreadcrumbSeparator spriteUrl={spriteUrl}>
+          <SpriteIcon<IconName> id="Slash" url={spriteUrl} />
         </BreadcrumbSeparator>
         <BreadcrumbItem>
           <BreadcrumbPage>Breadcrumb</BreadcrumbPage>

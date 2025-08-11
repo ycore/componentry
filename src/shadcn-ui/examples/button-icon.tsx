@@ -1,14 +1,12 @@
-import { createSpriteIcon } from '../../images/SpriteIcon';
+import React from 'react';
+import { SpriteIcon } from '../../images/SpriteIcon';
 import type { IconName } from '../@types/lucide-sprites';
-import svgSpriteUrl from '../assets/lucide-sprites.svg?url';
 import { Button } from '../components/button';
 
-const SpriteIcon = createSpriteIcon<IconName>(svgSpriteUrl);
-
-export default function ButtonIcon() {
+export default function ButtonIcon({ spriteUrl }: { spriteUrl: string }) {
   return (
     <Button variant="secondary" size="icon" className="size-8">
-      <SpriteIcon id="ChevronRight" />
+      <SpriteIcon<IconName> id="ChevronRight" url={spriteUrl} />
     </Button>
   );
 }

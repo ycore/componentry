@@ -1,10 +1,9 @@
 import clsx from 'clsx';
 import { Accordion as AccordionPrimitive } from 'radix-ui';
-import type * as React from 'react';
+import type React from 'react';
 
 import { SpriteIcon } from '../../images/SpriteIcon';
 import type { IconName } from '../@types/lucide-sprites';
-import svgSpriteUrl from '../assets/lucide-sprites.svg?url';
 
 function Accordion({ ...props }: React.ComponentProps<typeof AccordionPrimitive.Root>) {
   return <AccordionPrimitive.Root data-slot="accordion" {...props} />;
@@ -14,7 +13,7 @@ function AccordionItem({ className, ...props }: React.ComponentProps<typeof Acco
   return <AccordionPrimitive.Item data-slot="accordion-item" className={clsx('border-b last:border-b-0', className)} {...props} />;
 }
 
-function AccordionTrigger({ className, children, ...props }: React.ComponentProps<typeof AccordionPrimitive.Trigger>) {
+function AccordionTrigger({ className, children, spriteUrl, ...props }: React.ComponentProps<typeof AccordionPrimitive.Trigger> & { spriteUrl: string; }) {
   return (
     <AccordionPrimitive.Header className="flex">
       <AccordionPrimitive.Trigger
@@ -26,7 +25,7 @@ function AccordionTrigger({ className, children, ...props }: React.ComponentProp
         {...props}
       >
         {children}
-        <SpriteIcon<IconName> id="ChevronDown" url={svgSpriteUrl} className="pointer-events-none size-4 shrink-0 translate-y-0.5 text-muted-foreground transition-transform duration-200" />
+        <SpriteIcon<IconName> id="ChevronDown" url={spriteUrl} className="pointer-events-none size-4 shrink-0 translate-y-0.5 text-muted-foreground transition-transform duration-200" />
       </AccordionPrimitive.Trigger>
     </AccordionPrimitive.Header>
   );

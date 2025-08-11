@@ -1,3 +1,4 @@
+import React from 'react';
 import { Skeleton } from '../components/skeleton';
 
 export default function SkeletonDemo() {

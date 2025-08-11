@@ -1,3 +1,4 @@
+import React from 'react';
 import { Button } from '../components/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../components/card';
 import { Input } from '../components/input';

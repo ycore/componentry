@@ -1,15 +1,16 @@
+import React from 'react';
 import { Button } from '../components/button';
 import { Input } from '../components/input';
 import { Label } from '../components/label';
 import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from '../components/sheet';
 
-export default function SheetDemo() {
+export default function SheetDemo({ spriteUrl }: { spriteUrl: string }) {
   return (
     <Sheet>
       <SheetTrigger asChild>
         <Button variant="outline">Open</Button>
       </SheetTrigger>
-      <SheetContent>
+      <SheetContent spriteUrl={spriteUrl}>
         <SheetHeader>
           <SheetTitle>Edit profile</SheetTitle>
           <SheetDescription>Make changes to your profile here. Click save when you&apos;re done.</SheetDescription>

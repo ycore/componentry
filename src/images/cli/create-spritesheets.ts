@@ -1,4 +1,4 @@
-import { iconSpriteConfig } from '../../../../../@config/sprites.config';
+import { staticSpriteConfig } from '../../shadcn-ui/sprites.config';
 import type { IconSpriteConfig } from '../@types/icon-spritesheet.types';
 import { createSpritesheet } from '../plugins/icon-spritesheet';
 
@@ -10,4 +10,4 @@ async function createSpritesheets(args: IconSpriteConfig | IconSpriteConfig[]) {
   });
 }
 
-createSpritesheets(iconSpriteConfig).catch(console.error);
+createSpritesheets(staticSpriteConfig).catch(console.error);

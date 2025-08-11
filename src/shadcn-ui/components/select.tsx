@@ -1,12 +1,8 @@
 import clsx from 'clsx';
 import { Select as SelectPrimitive } from 'radix-ui';
-import type * as React from 'react';
-
-import { createSpriteIcon } from '../../images/SpriteIcon';
+import type React from 'react';
+import { SpriteIcon } from '../../images/SpriteIcon';
 import type { IconName } from '../@types/lucide-sprites';
-import svgSpriteUrl from '../assets/lucide-sprites.svg?url';
-
-const SpriteIcon = createSpriteIcon<IconName>(svgSpriteUrl);
 
 function Select({ ...props }: React.ComponentProps<typeof SelectPrimitive.Root>) {
   return <SelectPrimitive.Root data-slot="select" {...props} />;
@@ -20,14 +16,7 @@ function SelectValue({ ...props }: React.ComponentProps<typeof SelectPrimitive.V
   return <SelectPrimitive.Value data-slot="select-value" {...props} />;
 }
 
-function SelectTrigger({
-  className,
-  size = 'default',
-  children,
-  ...props
-}: React.ComponentProps<typeof SelectPrimitive.Trigger> & {
-  size?: 'sm' | 'default';
-}) {
+function SelectTrigger({ className, size = 'default', children, spriteUrl, ...props }: React.ComponentProps<typeof SelectPrimitive.Trigger> & { size?: 'sm' | 'default'; } & { spriteUrl: string }) {
   return (
     <SelectPrimitive.Trigger
       data-slot="select-trigger"
@@ -40,13 +29,13 @@ function SelectTrigger({
     >
       {children}
       <SelectPrimitive.Icon asChild>
-        <SpriteIcon id="ChevronDown" className="size-4 opacity-50" />
+        <SpriteIcon<IconName> id="ChevronDown" className="size-4 opacity-50" url={spriteUrl} />
       </SelectPrimitive.Icon>
     </SelectPrimitive.Trigger>
   );
 }
 
-function SelectContent({ className, children, position = 'popper', ...props }: React.ComponentProps<typeof SelectPrimitive.Content>) {
+function SelectContent({ className, children, position = 'popper', spriteUrl, ...props }: React.ComponentProps<typeof SelectPrimitive.Content> & { spriteUrl: string }) {
   return (
     <SelectPrimitive.Portal>
       <SelectPrimitive.Content
@@ -59,9 +48,9 @@ function SelectContent({ className, children, position = 'popper', ...props }: R
         position={position}
         {...props}
       >
-        <SelectScrollUpButton />
+        <SelectScrollUpButton spriteUrl={spriteUrl} />
         <SelectPrimitive.Viewport className={clsx('p-1', position === 'popper' && 'h-[var(--radix-select-trigger-height)] w-full min-w-[var(--radix-select-trigger-width)] scroll-my-1')}>{children}</SelectPrimitive.Viewport>
-        <SelectScrollDownButton />
+        <SelectScrollDownButton spriteUrl={spriteUrl} />
       </SelectPrimitive.Content>
     </SelectPrimitive.Portal>
   );
@@ -71,7 +60,7 @@ function SelectLabel({ className, ...props }: React.ComponentProps<typeof Select
   return <SelectPrimitive.Label data-slot="select-label" className={clsx('px-2 py-1.5 text-muted-foreground text-xs', className)} {...props} />;
 }
 
-function SelectItem({ className, children, ...props }: React.ComponentProps<typeof SelectPrimitive.Item>) {
+function SelectItem({ className, spriteUrl, children, ...props }: React.ComponentProps<typeof SelectPrimitive.Item> & { spriteUrl: string }) {
   return (
     <SelectPrimitive.Item
       data-slot="select-item"
@@ -83,7 +72,7 @@ function SelectItem({ className, children, ...props }: React.ComponentProps<type
     >
       <span className="absolute right-2 flex size-3.5 items-center justify-center">
         <SelectPrimitive.ItemIndicator>
-          <SpriteIcon id="Check" className="size-4" />
+          <SpriteIcon<IconName> id="Check" className="size-4" url={spriteUrl} />
         </SelectPrimitive.ItemIndicator>
       </span>
       <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
@@ -95,18 +84,18 @@ function SelectSeparator({ className, ...props }: React.ComponentProps<typeof Se
   return <SelectPrimitive.Separator data-slot="select-separator" className={clsx('-mx-1 pointer-events-none my-1 h-px bg-border', className)} {...props} />;
 }
 
-function SelectScrollUpButton({ className, ...props }: React.ComponentProps<typeof SelectPrimitive.ScrollUpButton>) {
+function SelectScrollUpButton({ className, spriteUrl, ...props }: React.ComponentProps<typeof SelectPrimitive.ScrollUpButton> & { spriteUrl: string }) {
   return (
     <SelectPrimitive.ScrollUpButton data-slot="select-scroll-up-button" className={clsx('flex cursor-default items-center justify-center py-1', className)} {...props}>
-      <SpriteIcon id="ChevronUp" className="size-4" />
+      <SpriteIcon<IconName> id="ChevronUp" className="size-4" url={spriteUrl} />
     </SelectPrimitive.ScrollUpButton>
   );
 }
 
-function SelectScrollDownButton({ className, ...props }: React.ComponentProps<typeof SelectPrimitive.ScrollDownButton>) {
+function SelectScrollDownButton({ className, spriteUrl, ...props }: React.ComponentProps<typeof SelectPrimitive.ScrollDownButton> & { spriteUrl: string }) {
   return (
     <SelectPrimitive.ScrollDownButton data-slot="select-scroll-down-button" className={clsx('flex cursor-default items-center justify-center py-1', className)} {...props}>
-      <SpriteIcon id="ChevronDown" className="size-4" />
+      <SpriteIcon<IconName> id="ChevronDown" className="size-4" url={spriteUrl} />
     </SelectPrimitive.ScrollDownButton>
   );
 }

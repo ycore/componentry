@@ -1,11 +1,8 @@
 import clsx from 'clsx';
-import type * as React from 'react';
-import { createSpriteIcon } from '../../images/SpriteIcon';
+import type React from 'react';
+import { SpriteIcon } from '../../images/SpriteIcon';
 import type { IconName } from '../@types/lucide-sprites';
-import svgSpriteUrl from '../assets/lucide-sprites.svg?url';
 import { type Button, buttonVariants } from './button';
-
-const SpriteIcon = createSpriteIcon<IconName>(svgSpriteUrl);
 
 function Pagination({ className, ...props }: React.ComponentProps<'nav'>) {
   return <nav aria-label="pagination" data-slot="pagination" className={clsx('mx-auto flex w-full justify-center', className)} {...props} />;
@@ -42,28 +39,28 @@ function PaginationLink({ className, isActive, size = 'icon', ...props }: Pagina
   );
 }
 
-function PaginationPrevious({ className, ...props }: React.ComponentProps<typeof PaginationLink>) {
+function PaginationPrevious({ className, spriteUrl, ...props }: React.ComponentProps<typeof PaginationLink> & { spriteUrl: string }) {
   return (
     <PaginationLink aria-label="Go to previous page" size="default" className={clsx('gap-1 px-2.5 sm:pl-2.5', className)} {...props}>
-      <SpriteIcon id="ChevronLeft" />
+      <SpriteIcon<IconName> id="ChevronLeft" url={spriteUrl} />
       <span className="hidden sm:block">Previous</span>
     </PaginationLink>
   );
 }
 
-function PaginationNext({ className, ...props }: React.ComponentProps<typeof PaginationLink>) {
+function PaginationNext({ className, spriteUrl, ...props }: React.ComponentProps<typeof PaginationLink> & { spriteUrl: string }) {
   return (
     <PaginationLink aria-label="Go to next page" size="default" className={clsx('gap-1 px-2.5 sm:pr-2.5', className)} {...props}>
       <span className="hidden sm:block">Next</span>
-      <SpriteIcon id="ChevronRight" />
+      <SpriteIcon<IconName> id="ChevronRight" url={spriteUrl} />
     </PaginationLink>
   );
 }
 
-function PaginationEllipsis({ className, ...props }: React.ComponentProps<'span'>) {
+function PaginationEllipsis({ className, spriteUrl, ...props }: React.ComponentProps<'span'> & { spriteUrl: string }) {
   return (
     <span aria-hidden data-slot="pagination-ellipsis" className={clsx('flex size-9 items-center justify-center', className)} {...props}>
-      <SpriteIcon id="Ellipsis" className="size-4" />
+      <SpriteIcon<IconName> id="Ellipsis" className="size-4" url={spriteUrl} />
       <span className="sr-only">More pages</span>
     </span>
   );

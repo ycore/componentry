@@ -1,15 +1,12 @@
-import { createSpriteIcon } from '../../images/SpriteIcon';
+import React from 'react';
+import { SpriteIcon } from '../../images/SpriteIcon';
 import type { IconName } from '../@types/example-sprites';
-import svgSpriteUrl from '../assets/example-sprites.svg?url';
-
-const SpriteIcon = createSpriteIcon<IconName>(svgSpriteUrl);
-
 import { Toggle } from '../components/toggle';
 
-export default function ToggleSm() {
+export default function ToggleSm({ spriteUrl }: { spriteUrl: string }) {
   return (
     <Toggle size="sm" aria-label="Toggle italic">
-      <SpriteIcon id="Italic" />
+      <SpriteIcon<IconName> id="Italic" url={spriteUrl} />
     </Toggle>
   );
 }

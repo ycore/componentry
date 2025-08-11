@@ -1,20 +1,12 @@
 import { cva } from 'class-variance-authority';
 import clsx from 'clsx';
 import { NavigationMenu as NavigationMenuPrimitive } from 'radix-ui';
-import type * as React from 'react';
+import type React from 'react';
 
 import { SpriteIcon } from '../../images/SpriteIcon';
 import type { IconName } from '../@types/lucide-sprites';
-import svgSpriteUrl from '../assets/lucide-sprites.svg?url';
 
-function NavigationMenu({
-  className,
-  children,
-  viewport = true,
-  ...props
-}: React.ComponentProps<typeof NavigationMenuPrimitive.Root> & {
-  viewport?: boolean;
-}) {
+function NavigationMenu({ className, children, viewport = true, ...props }: React.ComponentProps<typeof NavigationMenuPrimitive.Root> & { viewport?: boolean; }) {
   return (
     <NavigationMenuPrimitive.Root data-slot="navigation-menu" data-viewport={viewport} className={clsx('group/navigation-menu relative flex max-w-max flex-1 items-center justify-center', className)} {...props}>
       {children}
@@ -35,10 +27,10 @@ const navigationMenuTriggerStyle = cva(
   'group inline-flex h-9 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground disabled:pointer-events-none disabled:opacity-50 data-[state=open]:hover:bg-accent data-[state=open]:text-accent-foreground data-[state=open]:focus:bg-accent data-[state=open]:bg-accent/50 focus-visible:ring-ring/50 outline-none transition-[color,box-shadow] focus-visible:ring-[3px] focus-visible:outline-1'
 );
 
-function NavigationMenuTrigger({ className, children, ...props }: React.ComponentProps<typeof NavigationMenuPrimitive.Trigger>) {
+function NavigationMenuTrigger({ className, children, spriteUrl, ...props }: React.ComponentProps<typeof NavigationMenuPrimitive.Trigger> & { spriteUrl: string }) {
   return (
     <NavigationMenuPrimitive.Trigger data-slot="navigation-menu-trigger" className={clsx(navigationMenuTriggerStyle(), 'group', className)} {...props}>
-      {children} <SpriteIcon<IconName> id="ChevronDown" url={svgSpriteUrl} className="relative top-[1px] ml-1 size-3 transition duration-300 group-data-[state=open]:rotate-180" aria-hidden="true" />
+      {children} <SpriteIcon<IconName> id="ChevronDown" url={spriteUrl} className="relative top-[1px] ml-1 size-3 transition duration-300 group-data-[state=open]:rotate-180" aria-hidden="true" />
     </NavigationMenuPrimitive.Trigger>
   );
 }
@@ -92,7 +84,7 @@ function NavigationMenuIndicator({ className, ...props }: React.ComponentProps<t
       className={clsx('data-[state=hidden]:fade-out data-[state=visible]:fade-in top-full z-[1] flex h-1.5 items-end justify-center overflow-hidden data-[state=hidden]:animate-out data-[state=visible]:animate-in', className)}
       {...props}
     >
-      <div className='relative top-[60%] h-2 w-2 rotate-45 rounded-tl-sm bg-border shadow-md' />
+      <div className="relative top-[60%] h-2 w-2 rotate-45 rounded-tl-sm bg-border shadow-md" />
     </NavigationMenuPrimitive.Indicator>
   );
 }

@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { Avatar as AvatarPrimitive } from 'radix-ui';
-import type * as React from 'react';
+import React from 'react';
 
 function Avatar({ className, ...props }: React.ComponentProps<typeof AvatarPrimitive.Root>) {
   return <AvatarPrimitive.Root data-slot="avatar" className={clsx('relative flex size-8 shrink-0 overflow-hidden rounded-full', className)} {...props} />;

@@ -1,12 +1,8 @@
-import type * as React from 'react';
-
-import { createSpriteIcon } from '../../images/SpriteIcon';
+import type React from 'react';
+import { SpriteIcon } from '../../images/SpriteIcon';
 import type { IconName } from '../@types/lucide-sprites';
-import svgSpriteUrl from '../assets/lucide-sprites.svg?url';
 import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger, navigationMenuTriggerStyle } from '../components/navigation-menu';
 import { Link } from '../custom/link';
-
-const SpriteIcon = createSpriteIcon<IconName>(svgSpriteUrl);
 
 const components: { title: string; href: string; description: string }[] = [
   {
@@ -41,12 +37,12 @@ const components: { title: string; href: string; description: string }[] = [
   },
 ];
 
-export default function NavigationMenuDemo() {
+export default function NavigationMenuDemo({ spriteUrl }: { spriteUrl: string }) {
   return (
     <NavigationMenu viewport={false}>
       <NavigationMenuList>
         <NavigationMenuItem>
-          <NavigationMenuTrigger>Home</NavigationMenuTrigger>
+          <NavigationMenuTrigger spriteUrl={spriteUrl}>Home</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid gap-2 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
               <li className="row-span-3">
@@ -70,7 +66,7 @@ export default function NavigationMenuDemo() {
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <NavigationMenuTrigger>Components</NavigationMenuTrigger>
+          <NavigationMenuTrigger spriteUrl={spriteUrl}>Components</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid w-[400px] gap-2 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
               {components.map(component => (
@@ -87,7 +83,7 @@ export default function NavigationMenuDemo() {
           </NavigationMenuLink>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <NavigationMenuTrigger>List</NavigationMenuTrigger>
+          <NavigationMenuTrigger spriteUrl={spriteUrl}>List</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid w-[300px] gap-4">
               <li>
@@ -114,7 +110,7 @@ export default function NavigationMenuDemo() {
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <NavigationMenuTrigger>Simple</NavigationMenuTrigger>
+          <NavigationMenuTrigger spriteUrl={spriteUrl}>Simple</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid w-[200px] gap-4">
               <li>
@@ -132,25 +128,25 @@ export default function NavigationMenuDemo() {
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <NavigationMenuTrigger>With Icon</NavigationMenuTrigger>
+          <NavigationMenuTrigger spriteUrl={spriteUrl}>With Icon</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid w-[200px] gap-4">
               <li>
                 <NavigationMenuLink asChild>
                   <Link href="#" className="flex-row items-center gap-2">
-                    <SpriteIcon id="CircleQuestionMark" />
+                    <SpriteIcon<IconName> id="CircleQuestionMark" url={spriteUrl} />
                     Backlog
                   </Link>
                 </NavigationMenuLink>
                 <NavigationMenuLink asChild>
                   <Link href="#" className="flex-row items-center gap-2">
-                    <SpriteIcon id="Circle" />
+                    <SpriteIcon<IconName> id="Circle" url={spriteUrl} />
                     To Do
                   </Link>
                 </NavigationMenuLink>
                 <NavigationMenuLink asChild>
                   <Link href="#" className="flex-row items-center gap-2">
-                    <SpriteIcon id="CircleCheck" />
+                    <SpriteIcon<IconName> id="CircleCheck" url={spriteUrl} />
                     Done
                   </Link>
                 </NavigationMenuLink>

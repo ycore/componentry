@@ -1,14 +1,10 @@
 import clsx from 'clsx';
-import * as React from 'react';
-
-import { createSpriteIcon } from '../../images/SpriteIcon';
+import React from 'react';
+import { SpriteIcon } from '../../images/SpriteIcon';
 import type { IconName } from '../@types/lucide-sprites';
-import svgSpriteUrl from '../assets/lucide-sprites.svg?url';
 import { Button } from '../components/button';
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '../components/command';
 import { Popover, PopoverContent, PopoverTrigger } from '../components/popover';
-
-const SpriteIcon = createSpriteIcon<IconName>(svgSpriteUrl);
 
 const frameworks = [
   {
@@ -33,7 +29,7 @@ const frameworks = [
   },
 ];
 
-export default function ComboboxDemo() {
+export default function ComboboxDemo({ spriteUrl }: { spriteUrl: string }) {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState('');
 
@@ -42,12 +38,12 @@ export default function ComboboxDemo() {
       <PopoverTrigger asChild>
         <Button variant="outline" role="combobox" aria-expanded={open} className="w-[200px] justify-between">
           {value ? frameworks.find(framework => framework.value === value)?.label : 'Select framework...'}
-          <SpriteIcon id="ChevronsUpDown" className="opacity-50" />
+          <SpriteIcon<IconName> id="ChevronsUpDown" className="opacity-50" url={spriteUrl} />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-[200px] p-0">
         <Command>
-          <CommandInput placeholder="Search framework..." className="h-9" />
+          <CommandInput spriteUrl={spriteUrl} placeholder="Search framework..." className="h-9" />
           <CommandList>
             <CommandEmpty>No framework found.</CommandEmpty>
             <CommandGroup>
@@ -61,7 +57,7 @@ export default function ComboboxDemo() {
                   }}
                 >
                   {framework.label}
-                  <SpriteIcon id="Check" className={clsx('ml-auto', value === framework.value ? 'opacity-100' : 'opacity-0')} />
+                  <SpriteIcon<IconName> id="Check" className={clsx('ml-auto', value === framework.value ? 'opacity-100' : 'opacity-0')} url={spriteUrl} />
                 </CommandItem>
               ))}
             </CommandGroup>

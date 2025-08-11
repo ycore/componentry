@@ -1,11 +1,12 @@
+import React from 'react';
 import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from '../components/pagination';
 
-export default function PaginationDemo() {
+export default function PaginationDemo({ spriteUrl }: { spriteUrl: string }) {
   return (
     <Pagination>
       <PaginationContent>
         <PaginationItem>
-          <PaginationPrevious href="#" />
+          <PaginationPrevious spriteUrl={spriteUrl} href="#" />
         </PaginationItem>
         <PaginationItem>
           <PaginationLink href="#">1</PaginationLink>
@@ -19,10 +20,10 @@ export default function PaginationDemo() {
           <PaginationLink href="#">3</PaginationLink>
         </PaginationItem>
         <PaginationItem>
-          <PaginationEllipsis />
+          <PaginationEllipsis spriteUrl={spriteUrl} />
         </PaginationItem>
         <PaginationItem>
-          <PaginationNext href="#" />
+          <PaginationNext spriteUrl={spriteUrl} href="#" />
         </PaginationItem>
       </PaginationContent>
     </Pagination>

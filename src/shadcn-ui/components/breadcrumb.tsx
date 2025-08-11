@@ -1,11 +1,8 @@
 import clsx from 'clsx';
 import { Slot as SlotPrimitive } from 'radix-ui';
-import type * as React from 'react';
-import { createSpriteIcon } from '../../images/SpriteIcon';
+import type React from 'react';
+import { SpriteIcon } from '../../images/SpriteIcon';
 import type { IconName } from '../@types/lucide-sprites';
-import svgSpriteUrl from '../assets/lucide-sprites.svg?url';
-
-const SpriteIcon = createSpriteIcon<IconName>(svgSpriteUrl);
 
 function Breadcrumb({ ...props }: React.ComponentProps<'nav'>) {
   return <nav aria-label="breadcrumb" data-slot="breadcrumb" {...props} />;
@@ -19,13 +16,7 @@ function BreadcrumbItem({ className, ...props }: React.ComponentProps<'li'>) {
   return <li data-slot="breadcrumb-item" className={clsx('inline-flex items-center gap-1.5', className)} {...props} />;
 }
 
-function BreadcrumbLink({
-  asChild,
-  className,
-  ...props
-}: React.ComponentProps<'a'> & {
-  asChild?: boolean;
-}) {
+function BreadcrumbLink({ asChild, className, ...props }: React.ComponentProps<'a'> & { asChild?: boolean; }) {
   const Comp = asChild ? SlotPrimitive.Slot : 'a';
 
   return <Comp data-slot="breadcrumb-link" className={clsx('transition-colors hover:text-foreground', className)} {...props} />;
@@ -36,18 +27,18 @@ function BreadcrumbPage({ className, ...props }: React.ComponentProps<'span'>) {
   return <span data-slot="breadcrumb-page" role="link" aria-disabled="true" aria-current="page" className={clsx('font-normal text-foreground', className)} {...props} />;
 }
 
-function BreadcrumbSeparator({ children, className, ...props }: React.ComponentProps<'li'>) {
+function BreadcrumbSeparator({ children, className, spriteUrl, ...props }: React.ComponentProps<'li'> & { spriteUrl: string }) {
   return (
     <li data-slot="breadcrumb-separator" role="presentation" aria-hidden="true" className={clsx('[&>svg]:size-3.5', className)} {...props}>
-      {children ?? <SpriteIcon id="ChevronRight" />}
+      {children ?? <SpriteIcon<IconName> id="ChevronRight" url={spriteUrl} />}
     </li>
   );
 }
 
-function BreadcrumbEllipsis({ className, ...props }: React.ComponentProps<'span'>) {
+function BreadcrumbEllipsis({ className, spriteUrl, ...props }: React.ComponentProps<'span'> & { spriteUrl: string }) {
   return (
     <span data-slot="breadcrumb-ellipsis" role="presentation" aria-hidden="true" className={clsx('flex size-9 items-center justify-center', className)} {...props}>
-      <SpriteIcon id="Ellipsis" className="size-4" />
+      <SpriteIcon<IconName> id="Ellipsis" className="size-4" url={spriteUrl} />
       <span className="sr-only">More</span>
     </span>
   );

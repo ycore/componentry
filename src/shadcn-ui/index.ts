@@ -1,13 +1,13 @@
-import * as AccordionComponents from './accordion.js';
-import { Accordion as AccordionComponent } from './accordion.js';
+import * as AccordionComponents from './components/accordion';
+import { Accordion as AccordionComponent } from './components/accordion';
 export const Accordion = Object.assign(AccordionComponent, {
   Item: AccordionComponents.AccordionItem,
   Trigger: AccordionComponents.AccordionTrigger,
   Content: AccordionComponents.AccordionContent,
 });
 
-import * as AlertDialogComponents from './alert-dialog.js';
-import { AlertDialog as AlertDialogComponent } from './alert-dialog.js';
+import * as AlertDialogComponents from './components/alert-dialog';
+import { AlertDialog as AlertDialogComponent } from './components/alert-dialog';
 export const AlertDialog = Object.assign(AlertDialogComponent, {
   Portal: AlertDialogComponents.AlertDialogPortal,
   Overlay: AlertDialogComponents.AlertDialogOverlay,
@@ -21,30 +21,30 @@ export const AlertDialog = Object.assign(AlertDialogComponent, {
   Cancel: AlertDialogComponents.AlertDialogCancel,
 });
 
-import * as AlertComponents from './alert.js';
-import { Alert as AlertComponent } from './alert.js';
+import * as AlertComponents from './components/alert';
+import { Alert as AlertComponent } from './components/alert';
 export const Alert = Object.assign(AlertComponent, {
   Title: AlertComponents.AlertTitle,
   Description: AlertComponents.AlertDescription,
 });
 
-export { AspectRatio } from './aspect-ratio.js';
+export { AspectRatio } from './components/aspect-ratio';
 
-import * as AvatarComponents from './avatar.js';
-import { Avatar as AvatarComponent } from './avatar.js';
+import * as AvatarComponents from './components/avatar';
+import { Avatar as AvatarComponent } from './components/avatar';
 export const Avatar = Object.assign(AvatarComponent, {
   Image: AvatarComponents.AvatarImage,
   Fallback: AvatarComponents.AvatarFallback,
 });
 
-import * as BadgeComponents from './badge.js';
-import { Badge as BadgeComponent } from './badge.js';
+import * as BadgeComponents from './components/badge';
+import { Badge as BadgeComponent } from './components/badge';
 export const Badge = Object.assign(BadgeComponent, {
   Variants: BadgeComponents.badgeVariants,
 });
 
-import * as BreadcrumbComponents from './breadcrumb.js';
-import { Breadcrumb as BreadcrumbComponent } from './breadcrumb.js';
+import * as BreadcrumbComponents from './components/breadcrumb';
+import { Breadcrumb as BreadcrumbComponent } from './components/breadcrumb';
 export const Breadcrumb = Object.assign(BreadcrumbComponent, {
   List: BreadcrumbComponents.BreadcrumbList,
   Item: BreadcrumbComponents.BreadcrumbItem,
@@ -54,14 +54,14 @@ export const Breadcrumb = Object.assign(BreadcrumbComponent, {
   Ellipsis: BreadcrumbComponents.BreadcrumbEllipsis,
 });
 
-import * as ButtonComponents from './button.js';
-import { Button as ButtonComponent } from './button.js';
+import * as ButtonComponents from './components/button';
+import { Button as ButtonComponent } from './components/button';
 export const Button = Object.assign(ButtonComponent, {
   Variants: ButtonComponents.buttonVariants,
 });
 
-import * as CardComponents from './card.js';
-import { Card as CardComponent } from './card.js';
+import * as CardComponents from './components/card';
+import { Card as CardComponent } from './components/card';
 export const Card = Object.assign(CardComponent, {
   Header: CardComponents.CardHeader,
   Footer: CardComponents.CardFooter,
@@ -71,17 +71,17 @@ export const Card = Object.assign(CardComponent, {
   Content: CardComponents.CardContent,
 });
 
-export { Checkbox } from './checkbox.js';
+export { Checkbox } from './components/checkbox';
 
-import * as CollapsibleComponents from './collapsible.js';
-import { Collapsible as CollapsibleComponent } from './collapsible.js';
+import * as CollapsibleComponents from './components/collapsible';
+import { Collapsible as CollapsibleComponent } from './components/collapsible';
 export const Collapsible = Object.assign(CollapsibleComponent, {
   Trigger: CollapsibleComponents.CollapsibleTrigger,
   Content: CollapsibleComponents.CollapsibleContent,
 });
 
-import * as CommandComponents from './command.js';
-import { Command as CommandComponent } from './command.js';
+import * as CommandComponents from './components/command';
+import { Command as CommandComponent } from './components/command';
 export const Command = Object.assign(CommandComponent, {
   Dialog: CommandComponents.CommandDialog,
   Input: CommandComponents.CommandInput,
@@ -93,8 +93,8 @@ export const Command = Object.assign(CommandComponent, {
   Separator: CommandComponents.CommandSeparator,
 });
 
-import * as ContextMenuComponents from './context-menu.js';
-import { ContextMenu as ContextMenuComponent } from './context-menu.js';
+import * as ContextMenuComponents from './components/context-menu';
+import { ContextMenu as ContextMenuComponent } from './components/context-menu';
 export const ContextMenu = Object.assign(ContextMenuComponent, {
   Trigger: ContextMenuComponents.ContextMenuTrigger,
   Content: ContextMenuComponents.ContextMenuContent,
@@ -112,8 +112,8 @@ export const ContextMenu = Object.assign(ContextMenuComponent, {
   RadioGroup: ContextMenuComponents.ContextMenuRadioGroup,
 });
 
-import * as DialogComponents from './dialog.js';
-import { Dialog as DialogComponent } from './dialog.js';
+import * as DialogComponents from './components/dialog';
+import { Dialog as DialogComponent } from './components/dialog';
 export const Dialog = Object.assign(DialogComponent, {
   Close: DialogComponents.DialogClose,
   Content: DialogComponents.DialogContent,
@@ -126,8 +126,8 @@ export const Dialog = Object.assign(DialogComponent, {
   Trigger: DialogComponents.DialogTrigger,
 });
 
-import * as DropdownMenuComponents from './dropdown-menu.js';
-import { DropdownMenu as DropdownMenuComponent } from './dropdown-menu.js';
+import * as DropdownMenuComponents from './components/dropdown-menu';
+import { DropdownMenu as DropdownMenuComponent } from './components/dropdown-menu';
 export const DropdownMenu = Object.assign(DropdownMenuComponent, {
   Portal: DropdownMenuComponents.DropdownMenuPortal,
   Trigger: DropdownMenuComponents.DropdownMenuTrigger,
@@ -145,19 +145,19 @@ export const DropdownMenu = Object.assign(DropdownMenuComponent, {
   SubContent: DropdownMenuComponents.DropdownMenuSubContent,
 });
 
-import * as HoverCardComponents from './hover-card.js';
-import { HoverCard as HoverCardComponent } from './hover-card.js';
+import * as HoverCardComponents from './components/hover-card';
+import { HoverCard as HoverCardComponent } from './components/hover-card';
 export const HoverCard = Object.assign(HoverCardComponent, {
   Trigger: HoverCardComponents.HoverCardTrigger,
   Content: HoverCardComponents.HoverCardContent,
 });
 
-export { Input } from './input.js';
+export { Input } from './components/input';
 
-export { Label } from './label.js';
+export { Label } from './components/label';
 
-import * as MenubarComponents from './menubar.js';
-import { Menubar as MenubarComponent } from './menubar.js';
+import * as MenubarComponents from './components/menubar';
+import { Menubar as MenubarComponent } from './components/menubar';
 export const Menubar = Object.assign(MenubarComponent, {
   Portal: MenubarComponents.MenubarPortal,
   Menu: MenubarComponents.MenubarMenu,
@@ -176,8 +176,8 @@ export const Menubar = Object.assign(MenubarComponent, {
   SubContent: MenubarComponents.MenubarSubContent,
 });
 
-import * as NavigationMenuComponents from './navigation-menu.js';
-import { NavigationMenu as NavigationMenuComponent } from './navigation-menu.js';
+import * as NavigationMenuComponents from './components/navigation-menu';
+import { NavigationMenu as NavigationMenuComponent } from './components/navigation-menu';
 export const NavigationMenu = Object.assign(NavigationMenuComponent, {
   List: NavigationMenuComponents.NavigationMenuList,
   Item: NavigationMenuComponents.NavigationMenuItem,
@@ -189,8 +189,8 @@ export const NavigationMenu = Object.assign(NavigationMenuComponent, {
   NavigationMenuTriggerStyle: NavigationMenuComponents.navigationMenuTriggerStyle,
 });
 
-import * as PaginationComponents from './pagination.js';
-import { Pagination as PaginationComponent } from './pagination.js';
+import * as PaginationComponents from './components/pagination';
+import { Pagination as PaginationComponent } from './components/pagination';
 export const Pagination = Object.assign(PaginationComponent, {
   Content: PaginationComponents.PaginationContent,
   Link: PaginationComponents.PaginationLink,
@@ -200,30 +200,30 @@ export const Pagination = Object.assign(PaginationComponent, {
   Ellipsis: PaginationComponents.PaginationEllipsis,
 });
 
-import * as PopoverComponents from './popover.js';
-import { Popover as PopoverComponent } from './popover.js';
+import * as PopoverComponents from './components/popover';
+import { Popover as PopoverComponent } from './components/popover';
 export const Popover = Object.assign(PopoverComponent, {
   Trigger: PopoverComponents.PopoverTrigger,
   Content: PopoverComponents.PopoverContent,
   Anchor: PopoverComponents.PopoverAnchor,
 });
 
-export { Progress } from './progress.js';
+export { Progress } from './components/progress';
 
-import * as RadioGroupComponents from './radio-group.js';
-import { RadioGroup as RadioGroupComponent } from './radio-group.js';
+import * as RadioGroupComponents from './components/radio-group';
+import { RadioGroup as RadioGroupComponent } from './components/radio-group';
 export const RadioGroup = Object.assign(RadioGroupComponent, {
   Item: RadioGroupComponents.RadioGroupItem,
 });
 
-import * as ScrollAreaComponents from './scroll-area.js';
-import { ScrollArea as ScrollAreaComponent } from './scroll-area.js';
+import * as ScrollAreaComponents from './components/scroll-area';
+import { ScrollArea as ScrollAreaComponent } from './components/scroll-area';
 export const ScrollArea = Object.assign(ScrollAreaComponent, {
   ScrollBar: ScrollAreaComponents.ScrollBar,
 });
 
-import * as SelectComponents from './select.js';
-import { Select as SelectComponent } from './select.js';
+import * as SelectComponents from './components/select';
+import { Select as SelectComponent } from './components/select';
 export const Select = Object.assign(SelectComponent, {
   Content: SelectComponents.SelectContent,
   Group: SelectComponents.SelectGroup,
@@ -236,10 +236,10 @@ export const Select = Object.assign(SelectComponent, {
   Value: SelectComponents.SelectValue,
 });
 
-export { Separator } from './separator.js';
+export { Separator } from './components/separator';
 
-import * as SheetComponents from './sheet.js';
-import { Sheet as SheetComponent } from './sheet.js';
+import * as SheetComponents from './components/sheet';
+import { Sheet as SheetComponent } from './components/sheet';
 export const Sheet = Object.assign(SheetComponent, {
   Trigger: SheetComponents.SheetTrigger,
   Close: SheetComponents.SheetClose,
@@ -250,10 +250,10 @@ export const Sheet = Object.assign(SheetComponent, {
   Description: SheetComponents.SheetDescription,
 });
 
-export { useSidebar } from './sidebar.js';
+export { useSidebar } from './components/sidebar';
 
-import * as SidebarComponents from './sidebar.js';
-import { Sidebar as SidebarComponent } from './sidebar.js';
+import * as SidebarComponents from './components/sidebar';
+import { Sidebar as SidebarComponent } from './components/sidebar';
 export const Sidebar = Object.assign(SidebarComponent, {
   Content: SidebarComponents.SidebarContent,
   Footer: SidebarComponents.SidebarFooter,
@@ -279,16 +279,16 @@ export const Sidebar = Object.assign(SidebarComponent, {
   Trigger: SidebarComponents.SidebarTrigger,
 });
 
-export { Skeleton } from './skeleton.js';
+export { Skeleton } from './components/skeleton';
 
-export { Slider } from './slider.js';
+export { Slider } from './components/slider';
 
-export { Toaster } from './sonner.js';
+export { Toaster } from './components/sonner';
 
-export { Switch } from './switch.js';
+export { Switch } from './components/switch';
 
-import * as TableComponents from './table.js';
-import { Table as TableComponent } from './table.js';
+import * as TableComponents from './components/table';
+import { Table as TableComponent } from './components/table';
 export const Table = Object.assign(TableComponent, {
   Header: TableComponents.TableHeader,
   Body: TableComponents.TableBody,
@@ -299,40 +299,40 @@ export const Table = Object.assign(TableComponent, {
   Caption: TableComponents.TableCaption,
 });
 
-import * as TabsComponents from './tabs.js';
-import { Tabs as TabsComponent } from './tabs.js';
+import * as TabsComponents from './components/tabs';
+import { Tabs as TabsComponent } from './components/tabs';
 export const Tabs = Object.assign(TabsComponent, {
   List: TabsComponents.TabsList,
   Trigger: TabsComponents.TabsTrigger,
   Content: TabsComponents.TabsContent,
 });
 
-export { Textarea } from './textarea.js';
+export { Textarea } from './components/textarea';
 
-import * as ToggleGroupComponents from './toggle-group.js';
-import { ToggleGroup as ToggleGroupComponent } from './toggle-group.js';
+import * as ToggleGroupComponents from './components/toggle-group';
+import { ToggleGroup as ToggleGroupComponent } from './components/toggle-group';
 export const ToggleGroup = Object.assign(ToggleGroupComponent, {
   Item: ToggleGroupComponents.ToggleGroupItem,
 });
 
-import * as ToggleComponents from './toggle.js';
-import { Toggle as ToggleComponent } from './toggle.js';
+import * as ToggleComponents from './components/toggle';
+import { Toggle as ToggleComponent } from './components/toggle';
 export const Toggle = Object.assign(ToggleComponent, {
   Variants: ToggleComponents.toggleVariants,
 });
 
-import * as TooltipComponents from './tooltip.js';
-import { Tooltip as TooltipComponent } from './tooltip.js';
+import * as TooltipComponents from './components/tooltip';
+import { Tooltip as TooltipComponent } from './components/tooltip';
 export const Tooltip = Object.assign(TooltipComponent, {
   Trigger: TooltipComponents.TooltipTrigger,
   Content: TooltipComponents.TooltipContent,
   Provider: TooltipComponents.TooltipProvider,
 });
 
-export { useFormField } from '../custom/form.js';
+export { useFormField } from './custom/form';
 
-import * as FormComponents from '../custom/form.js';
-import { Form as FormComponent } from '../custom/form.js';
+import * as FormComponents from './custom/form';
+import { Form as FormComponent } from './custom/form';
 export const Form = Object.assign(FormComponent, {
   Item: FormComponents.FormItem,
   Label: FormComponents.FormLabel,
@@ -342,10 +342,7 @@ export const Form = Object.assign(FormComponent, {
   Field: FormComponents.FormField,
 });
 
-export { Link } from '../custom/link.js';
-
-export { Spinner } from '../custom/spinner.js';
-
-export { ComponentExamples } from '../examples/index.js';
-
-export type { IconName } from '../@types/lucide-sprites.js';
+export type { IconName as ExampleIconName } from './@types/example-sprites';
+export { type IconName, iconNames } from './@types/lucide-sprites';
+export { Link } from './custom/link';
+export { Spinner } from './custom/spinner';

@@ -1,16 +1,12 @@
 import clsx from 'clsx';
-import * as React from 'react';
+import React from 'react';
 import { toast } from 'sonner';
-
-import { createSpriteIcon } from '../../images/SpriteIcon';
+import { SpriteIcon } from '../../images/SpriteIcon';
 import type { IconName } from '../@types/lucide-sprites';
-import svgSpriteUrl from '../assets/lucide-sprites.svg?url';
 import { Button } from '../components/button';
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '../components/command';
 import { Popover, PopoverContent, PopoverTrigger } from '../components/popover';
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '../custom/form';
-
-const SpriteIcon = createSpriteIcon<IconName>(svgSpriteUrl);
 
 const languages = [
   { label: 'English', value: 'en' },
@@ -24,7 +20,7 @@ const languages = [
   { label: 'Chinese', value: 'zh' },
 ] as const;
 
-export default function ComboboxForm() {
+export default function ComboboxForm({ spriteUrl }: { spriteUrl: string }) {
   const [selectedLanguage, setSelectedLanguage] = React.useState('');
   const [open, setOpen] = React.useState(false);
 
@@ -52,13 +48,13 @@ export default function ComboboxForm() {
               <FormControl>
                 <Button variant="outline" role="combobox" aria-expanded={open} className={clsx('w-[200px] justify-between', !selectedLanguage && 'text-muted-foreground')}>
                   {selectedLanguage ? languages.find(language => language.value === selectedLanguage)?.label : 'Select language'}
-                  <SpriteIcon id="ChevronsUpDown" className="opacity-50" />
+                  <SpriteIcon<IconName> id="ChevronsUpDown" className="opacity-50" url={spriteUrl} />
                 </Button>
               </FormControl>
             </PopoverTrigger>
             <PopoverContent className="w-[200px] p-0">
               <Command>
-                <CommandInput placeholder="Search language..." className="h-9" />
+                <CommandInput spriteUrl={spriteUrl} placeholder="Search language..." className="h-9" />
                 <CommandList>
                   <CommandEmpty>No language found.</CommandEmpty>
                   <CommandGroup>
@@ -72,7 +68,7 @@ export default function ComboboxForm() {
                         }}
                       >
                         {language.label}
-                        <SpriteIcon id="Check" className={clsx('ml-auto', language.value === selectedLanguage ? 'opacity-100' : 'opacity-0')} />
+                        <SpriteIcon<IconName> id="Check" className={clsx('ml-auto', language.value === selectedLanguage ? 'opacity-100' : 'opacity-0')} url={spriteUrl} />
                       </CommandItem>
                     ))}
                   </CommandGroup>

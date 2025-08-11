@@ -1,4 +1,4 @@
-'use client';
+import React from 'react';
 
 import { Button } from '../components/button';
 import { Input } from '../components/input';
@@ -9,7 +9,7 @@ const SHEET_SIDES = ['top', 'right', 'bottom', 'left'] as const;
 
 type SheetSide = (typeof SHEET_SIDES)[number];
 
-export default function SheetSide() {
+export default function SheetSide({ spriteUrl }: { spriteUrl: string }) {
   return (
     <div className="grid grid-cols-2 gap-2">
       {SHEET_SIDES.map(side => (
@@ -17,7 +17,7 @@ export default function SheetSide() {
           <SheetTrigger asChild>
             <Button variant="outline">{side}</Button>
           </SheetTrigger>
-          <SheetContent side={side}>
+          <SheetContent spriteUrl={spriteUrl} side={side}>
             <SheetHeader>
               <SheetTitle>Edit profile</SheetTitle>
               <SheetDescription>Make changes to your profile here. Click save when you're done.</SheetDescription>
