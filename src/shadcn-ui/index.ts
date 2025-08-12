@@ -346,3 +346,5 @@ export type { IconName as ExampleIconName } from './@types/example-sprites';
 export { type IconName, iconNames } from './@types/lucide-sprites';
 export { Link } from './custom/link';
 export { Spinner } from './custom/spinner';
+export { useMediaQuery } from './hooks/use-media-query';
+export { useIsMobile } from './hooks/use-mobile';
