@@ -1,6 +1,3 @@
-// src/impetus/index.ts
-import { ThemeProvider } from "next-themes";
-
 // src/impetus/LoadingBar.tsx
 import clsx from "clsx";
 import { memo } from "react";
@@ -662,22 +659,39 @@ function Footer({ children, className }) {
     })
   });
 }
+// src/impetus/ThemeProvider.tsx
+import { ThemeProvider as NextThemeProvider } from "next-themes";
+var ThemeProvider = NextThemeProvider;
+var themeProviderProps = {
+  attribute: "class",
+  defaultTheme: "light",
+  enableSystem: true,
+  disableTransitionOnChange: false
+};
 // src/impetus/ThemeSwitch.tsx
 import clsx7 from "clsx";
-import { useTheme } from "next-themes";
 import { useEffect, useState as useState2 } from "react";
+
+// src/impetus/useTheme.tsx
+import { useTheme as useNextTheme } from "next-themes";
+var useTheme = useNextTheme;
+
+// src/impetus/ThemeSwitch.tsx
 import { jsx as jsx9 } from "react/jsx-runtime";
 var THEME_OPTIONS = { theme: { light: "light", dark: "dark" } };
-var ThemeSwitch = ({ theme = THEME_OPTIONS, spriteUrl, className, classTheme }) => {
+var ThemeSwitchButton = ({ themeContext, theme, spriteUrl, className, classTheme }) => {
   const [mounted, setMounted] = useState2(false);
-  const { resolvedTheme, setTheme } = useTheme();
   useEffect(() => setMounted(true), []);
+  const resolvedTheme = themeContext?.resolvedTheme;
+  const setTheme = themeContext?.setTheme;
   if (!mounted)
     return null;
   return /* @__PURE__ */ jsx9("button", {
     type: "button",
     className: clsx7("size-5 hover:animate-rotate", classTheme),
     onClick: (e) => {
+      if (!setTheme)
+        return;
       setTheme(resolvedTheme === theme.theme.dark ? theme.theme.light : theme.theme.dark);
       e.preventDefault();
       e.stopPropagation();
@@ -694,7 +708,28 @@ var ThemeSwitch = ({ theme = THEME_OPTIONS, spriteUrl, className, classTheme }) 
     })
   });
 };
+var ThemeSwitch = ({ theme = THEME_OPTIONS, spriteUrl, className, classTheme, children }) => {
+  let themeContext = null;
+  try {
+    const nextThemeContext = useTheme();
+    themeContext = nextThemeContext ? { resolvedTheme: nextThemeContext.resolvedTheme, setTheme: nextThemeContext.setTheme } : null;
+  } catch {
+    themeContext = null;
+  }
+  if (children) {
+    return children({ themeContext, theme, spriteUrl, className, classTheme });
+  }
+  return /* @__PURE__ */ jsx9(ThemeSwitchButton, {
+    themeContext,
+    theme,
+    spriteUrl,
+    className,
+    classTheme
+  });
+};
 export {
+  useTheme,
+  themeProviderProps,
   ThemeSwitch,
   ThemeProvider,
   THEME_OPTIONS,
@@ -704,4 +739,4 @@ export {
   Footer
 };
 
-//# debugId=F7D38E73D3781A1B64756E2164756E21
+//# debugId=B092A406EEED574E64756E2164756E21
