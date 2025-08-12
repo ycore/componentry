@@ -11,9 +11,6 @@ function SpriteIcon({ url, id, ...props }) {
   });
 }
 
-// src/impetus/index.ts
-import { ThemeProvider } from "next-themes";
-
 // src/impetus/LoadingBar.tsx
 import clsx from "clsx";
 import { memo } from "react";
@@ -326,22 +323,32 @@ var MenubarContext = createContext(null);
 // src/impetus/Page.tsx
 import clsx6 from "clsx";
 import { jsx as jsx8 } from "react/jsx-runtime";
+// src/impetus/ThemeProvider.tsx
+import { ThemeProvider as NextThemeProvider } from "next-themes";
 // src/impetus/ThemeSwitch.tsx
 import clsx7 from "clsx";
-import { useTheme } from "next-themes";
 import { useEffect, useState as useState2 } from "react";
+
+// src/impetus/useTheme.tsx
+import { useTheme as useNextTheme } from "next-themes";
+var useTheme = useNextTheme;
+
+// src/impetus/ThemeSwitch.tsx
 import { jsx as jsx9 } from "react/jsx-runtime";
 var THEME_OPTIONS = { theme: { light: "light", dark: "dark" } };
-var ThemeSwitch = ({ theme = THEME_OPTIONS, spriteUrl, className, classTheme }) => {
+var ThemeSwitchButton = ({ themeContext, theme, spriteUrl, className, classTheme }) => {
   const [mounted, setMounted] = useState2(false);
-  const { resolvedTheme, setTheme } = useTheme();
   useEffect(() => setMounted(true), []);
+  const resolvedTheme = themeContext?.resolvedTheme;
+  const setTheme = themeContext?.setTheme;
   if (!mounted)
     return null;
   return /* @__PURE__ */ jsx9("button", {
     type: "button",
     className: clsx7("size-5 hover:animate-rotate", classTheme),
     onClick: (e) => {
+      if (!setTheme)
+        return;
       setTheme(resolvedTheme === theme.theme.dark ? theme.theme.light : theme.theme.dark);
       e.preventDefault();
       e.stopPropagation();
@@ -356,6 +363,25 @@ var ThemeSwitch = ({ theme = THEME_OPTIONS, spriteUrl, className, classTheme }) 
       id: "Sun",
       className: clsx7("size-5", className)
     })
+  });
+};
+var ThemeSwitch = ({ theme = THEME_OPTIONS, spriteUrl, className, classTheme, children }) => {
+  let themeContext = null;
+  try {
+    const nextThemeContext = useTheme();
+    themeContext = nextThemeContext ? { resolvedTheme: nextThemeContext.resolvedTheme, setTheme: nextThemeContext.setTheme } : null;
+  } catch {
+    themeContext = null;
+  }
+  if (children) {
+    return children({ themeContext, theme, spriteUrl, className, classTheme });
+  }
+  return /* @__PURE__ */ jsx9(ThemeSwitchButton, {
+    themeContext,
+    theme,
+    spriteUrl,
+    className,
+    classTheme
   });
 };
 // src/shadcn-ui/@types/lucide-sprites.ts
@@ -7455,9 +7481,22 @@ function ComponentExamples({ spriteUrl, exampleUrl }) {
                 className: "mb-4 font-bold text-4xl",
                 children: "shadcn/ui Examples"
               }),
-              /* @__PURE__ */ jsx156(ThemeSwitch, {
-                spriteUrl,
-                theme: THEME_OPTIONS
+              /* @__PURE__ */ jsxs91("div", {
+                className: "flex items-center gap-x-4",
+                children: [
+                  /* @__PURE__ */ jsx156(ThemeSwitch, {
+                    spriteUrl
+                  }),
+                  /* @__PURE__ */ jsx156(Link, {
+                    href: "/",
+                    children: /* @__PURE__ */ jsx156(SpriteIcon, {
+                      url: spriteUrl,
+                      id: "House",
+                      className: "size-5 text-accent-foreground",
+                      viewBox: "0 0 24 24"
+                    })
+                  })
+                ]
               })
             ]
           }),
@@ -8353,4 +8392,4 @@ export {
   ComponentExamples
 };
 
-//# debugId=C771CCB5F417BBB564756E2164756E21
+//# debugId=78580DA3CD00CFE764756E2164756E21

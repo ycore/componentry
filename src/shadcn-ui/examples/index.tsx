@@ -1,8 +1,9 @@
 import type React from 'react';
 import { SpriteIcon } from '../../images/SpriteIcon';
-import { THEME_OPTIONS, ThemeSwitch } from '../../impetus';
+import { ThemeSwitch } from '../../impetus';
 import { type IconName, iconNames } from '../@types/lucide-sprites';
 import { Tooltip, TooltipContent, TooltipTrigger } from '../components/tooltip';
+import { Link } from '../custom/link';
 import AccordionDemo from './accordion-demo';
 import AlertDemo from './alert-demo';
 import AlertDestructive from './alert-destructive';
@@ -171,7 +172,7 @@ function SpriteExamples({ spriteUrl }: { spriteUrl: string }) {
   );
 }
 
-export function ComponentExamples({ spriteUrl, exampleUrl }: { spriteUrl: string, exampleUrl: string }) {
+export function ComponentExamples({ spriteUrl, exampleUrl }: { spriteUrl: string; exampleUrl: string }) {
   const sections = [
     { id: 'accordion', title: 'Accordion' },
     { id: 'alerts', title: 'Alerts' },
@@ -213,7 +214,12 @@ export function ComponentExamples({ spriteUrl, exampleUrl }: { spriteUrl: string
       <div className="mb-8">
         <div className="flex flex-row justify-between">
           <h1 className="mb-4 font-bold text-4xl">shadcn/ui Examples</h1>
-          <ThemeSwitch spriteUrl={spriteUrl} theme={THEME_OPTIONS} />
+          <div className='flex items-center gap-x-4'>
+            <ThemeSwitch spriteUrl={spriteUrl} />
+            <Link href="/">
+              <SpriteIcon<IconName> url={spriteUrl} id="House" className="size-5 text-accent-foreground" viewBox="0 0 24 24" />
+            </Link>
+          </div>
         </div>
         <p className="mb-6 text-lg text-muted-foreground">A comprehensive showcase of all shadcn/ui components with live examples.</p>
 
