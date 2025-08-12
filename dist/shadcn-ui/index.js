@@ -2580,6 +2580,21 @@ function Spinner({ className, spriteUrl, iconId = "Loader" }) {
     className: clsx38(className, "animate-spin")
   });
 }
+// src/shadcn-ui/hooks/use-media-query.ts
+import * as React7 from "react";
+function useMediaQuery(query) {
+  const [value, setValue] = React7.useState(false);
+  React7.useEffect(() => {
+    function onChange(event) {
+      setValue(event.matches);
+    }
+    const result = matchMedia(query);
+    result.addEventListener("change", onChange);
+    setValue(result.matches);
+    return () => result.removeEventListener("change", onChange);
+  }, [query]);
+  return value;
+}
 
 // src/shadcn-ui/index.ts
 var Accordion2 = Object.assign(Accordion, {
@@ -2815,6 +2830,8 @@ var Form2 = Object.assign(Form, {
 });
 export {
   useSidebar,
+  useMediaQuery,
+  useIsMobile,
   useFormField,
   iconNames,
   Tooltip2 as Tooltip,
@@ -2861,4 +2878,4 @@ export {
   Accordion2 as Accordion
 };
 
-//# debugId=300AFAE493DE164A64756E2164756E21
+//# debugId=F852BA6084A88DC564756E2164756E21
