@@ -69,6 +69,7 @@
   "devDependencies": {
     "@total-typescript/tsconfig": "catalog:dev",
     "@types/react": "catalog:dev",
+    "glob": "catalog:dev",
     "heroicons": "catalog:dev",
     "lucide-static": "catalog:dev",
     "vite": "catalog:dev"
