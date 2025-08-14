@@ -1,233 +1,216 @@
-var __create = Object.create;
-var __getProtoOf = Object.getPrototypeOf;
-var __defProp = Object.defineProperty;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __toESM = (mod, isNodeMode, target) => {
-  target = mod != null ? __create(__getProtoOf(mod)) : {};
-  const to = isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target;
-  for (let key of __getOwnPropNames(mod))
-    if (!__hasOwnProp.call(to, key))
-      __defProp(to, key, {
-        get: () => mod[key],
-        enumerable: true
-      });
-  return to;
-};
-var __commonJS = (cb, mod) => () => (mod || cb((mod = { exports: {} }).exports, mod), mod.exports);
-
-// ../../node_modules/balanced-match/index.js
-var require_balanced_match = __commonJS((exports, module) => {
-  module.exports = balanced;
-  function balanced(a, b, str) {
-    if (a instanceof RegExp)
-      a = maybeMatch(a, str);
-    if (b instanceof RegExp)
-      b = maybeMatch(b, str);
-    var r = range(a, b, str);
-    return r && {
-      start: r[0],
-      end: r[1],
-      pre: str.slice(0, r[0]),
-      body: str.slice(r[0] + a.length, r[1]),
-      post: str.slice(r[1] + b.length)
-    };
-  }
-  function maybeMatch(reg, str) {
-    var m = str.match(reg);
-    return m ? m[0] : null;
-  }
-  balanced.range = range;
-  function range(a, b, str) {
-    var begs, beg, left, right, result;
-    var ai = str.indexOf(a);
-    var bi = str.indexOf(b, ai + 1);
-    var i = ai;
-    if (ai >= 0 && bi > 0) {
-      if (a === b) {
-        return [ai, bi];
-      }
-      begs = [];
-      left = str.length;
-      while (i >= 0 && !result) {
-        if (i == ai) {
-          begs.push(i);
-          ai = str.indexOf(a, i + 1);
-        } else if (begs.length == 1) {
-          result = [begs.pop(), bi];
-        } else {
-          beg = begs.pop();
-          if (beg < left) {
-            left = beg;
-            right = bi;
-          }
-          bi = str.indexOf(b, i + 1);
-        }
-        i = ai < bi && ai >= 0 ? ai : bi;
-      }
-      if (begs.length) {
-        result = [left, right];
-      }
-    }
-    return result;
-  }
-});
-
-// ../../node_modules/brace-expansion/index.js
-var require_brace_expansion = __commonJS((exports, module) => {
-  var balanced = require_balanced_match();
-  module.exports = expandTop;
-  var escSlash = "\x00SLASH" + Math.random() + "\x00";
-  var escOpen = "\x00OPEN" + Math.random() + "\x00";
-  var escClose = "\x00CLOSE" + Math.random() + "\x00";
-  var escComma = "\x00COMMA" + Math.random() + "\x00";
-  var escPeriod = "\x00PERIOD" + Math.random() + "\x00";
-  function numeric(str) {
-    return parseInt(str, 10) == str ? parseInt(str, 10) : str.charCodeAt(0);
-  }
-  function escapeBraces(str) {
-    return str.split("\\\\").join(escSlash).split("\\{").join(escOpen).split("\\}").join(escClose).split("\\,").join(escComma).split("\\.").join(escPeriod);
-  }
-  function unescapeBraces(str) {
-    return str.split(escSlash).join("\\").split(escOpen).join("{").split(escClose).join("}").split(escComma).join(",").split(escPeriod).join(".");
-  }
-  function parseCommaParts(str) {
-    if (!str)
-      return [""];
-    var parts = [];
-    var m = balanced("{", "}", str);
-    if (!m)
-      return str.split(",");
-    var pre = m.pre;
-    var body = m.body;
-    var post = m.post;
-    var p = pre.split(",");
-    p[p.length - 1] += "{" + body + "}";
-    var postParts = parseCommaParts(post);
-    if (post.length) {
-      p[p.length - 1] += postParts.shift();
-      p.push.apply(p, postParts);
-    }
-    parts.push.apply(parts, p);
-    return parts;
-  }
-  function expandTop(str) {
-    if (!str)
-      return [];
-    if (str.substr(0, 2) === "{}") {
-      str = "\\{\\}" + str.substr(2);
-    }
-    return expand(escapeBraces(str), true).map(unescapeBraces);
-  }
-  function embrace(str) {
-    return "{" + str + "}";
-  }
-  function isPadded(el) {
-    return /^-?0\d/.test(el);
-  }
-  function lte(i, y) {
-    return i <= y;
-  }
-  function gte(i, y) {
-    return i >= y;
-  }
-  function expand(str, isTop) {
-    var expansions = [];
-    var m = balanced("{", "}", str);
-    if (!m)
-      return [str];
-    var pre = m.pre;
-    var post = m.post.length ? expand(m.post, false) : [""];
-    if (/\$$/.test(m.pre)) {
-      for (var k = 0;k < post.length; k++) {
-        var expansion = pre + "{" + m.body + "}" + post[k];
-        expansions.push(expansion);
-      }
-    } else {
-      var isNumericSequence = /^-?\d+\.\.-?\d+(?:\.\.-?\d+)?$/.test(m.body);
-      var isAlphaSequence = /^[a-zA-Z]\.\.[a-zA-Z](?:\.\.-?\d+)?$/.test(m.body);
-      var isSequence = isNumericSequence || isAlphaSequence;
-      var isOptions = m.body.indexOf(",") >= 0;
-      if (!isSequence && !isOptions) {
-        if (m.post.match(/,(?!,).*\}/)) {
-          str = m.pre + "{" + m.body + escClose + m.post;
-          return expand(str);
-        }
-        return [str];
-      }
-      var n;
-      if (isSequence) {
-        n = m.body.split(/\.\./);
-      } else {
-        n = parseCommaParts(m.body);
-        if (n.length === 1) {
-          n = expand(n[0], false).map(embrace);
-          if (n.length === 1) {
-            return post.map(function(p) {
-              return m.pre + n[0] + p;
-            });
-          }
-        }
-      }
-      var N;
-      if (isSequence) {
-        var x = numeric(n[0]);
-        var y = numeric(n[1]);
-        var width = Math.max(n[0].length, n[1].length);
-        var incr = n.length == 3 ? Math.abs(numeric(n[2])) : 1;
-        var test = lte;
-        var reverse = y < x;
-        if (reverse) {
-          incr *= -1;
-          test = gte;
-        }
-        var pad = n.some(isPadded);
-        N = [];
-        for (var i = x;test(i, y); i += incr) {
-          var c;
-          if (isAlphaSequence) {
-            c = String.fromCharCode(i);
-            if (c === "\\")
-              c = "";
-          } else {
-            c = String(i);
-            if (pad) {
-              var need = width - c.length;
-              if (need > 0) {
-                var z = new Array(need + 1).join("0");
-                if (i < 0)
-                  c = "-" + z + c.slice(1);
-                else
-                  c = z + c;
-              }
-            }
-          }
-          N.push(c);
-        }
-      } else {
-        N = [];
-        for (var j = 0;j < n.length; j++) {
-          N.push.apply(N, expand(n[j], false));
-        }
-      }
-      for (var j = 0;j < N.length; j++) {
-        for (var k = 0;k < post.length; k++) {
-          var expansion = pre + N[j] + post[k];
-          if (!isTop || isSequence || expansion)
-            expansions.push(expansion);
-        }
-      }
-    }
-    return expansions;
-  }
-});
-
 // src/images/plugins/icon-spritesheet.ts
 import fs from "node:fs/promises";
 import path2 from "node:path";
 
-// ../../node_modules/minimatch/dist/esm/index.js
-var import_brace_expansion = __toESM(require_brace_expansion(), 1);
+// ../../node_modules/@isaacs/balanced-match/dist/esm/index.js
+var balanced = (a, b, str) => {
+  const ma = a instanceof RegExp ? maybeMatch(a, str) : a;
+  const mb = b instanceof RegExp ? maybeMatch(b, str) : b;
+  const r = ma !== null && mb != null && range(ma, mb, str);
+  return r && {
+    start: r[0],
+    end: r[1],
+    pre: str.slice(0, r[0]),
+    body: str.slice(r[0] + ma.length, r[1]),
+    post: str.slice(r[1] + mb.length)
+  };
+};
+var maybeMatch = (reg, str) => {
+  const m = str.match(reg);
+  return m ? m[0] : null;
+};
+var range = (a, b, str) => {
+  let begs, beg, left, right = undefined, result;
+  let ai = str.indexOf(a);
+  let bi = str.indexOf(b, ai + 1);
+  let i = ai;
+  if (ai >= 0 && bi > 0) {
+    if (a === b) {
+      return [ai, bi];
+    }
+    begs = [];
+    left = str.length;
+    while (i >= 0 && !result) {
+      if (i === ai) {
+        begs.push(i);
+        ai = str.indexOf(a, i + 1);
+      } else if (begs.length === 1) {
+        const r = begs.pop();
+        if (r !== undefined)
+          result = [r, bi];
+      } else {
+        beg = begs.pop();
+        if (beg !== undefined && beg < left) {
+          left = beg;
+          right = bi;
+        }
+        bi = str.indexOf(b, i + 1);
+      }
+      i = ai < bi && ai >= 0 ? ai : bi;
+    }
+    if (begs.length && right !== undefined) {
+      result = [left, right];
+    }
+  }
+  return result;
+};
+
+// ../../node_modules/@isaacs/brace-expansion/dist/esm/index.js
+var escSlash = "\x00SLASH" + Math.random() + "\x00";
+var escOpen = "\x00OPEN" + Math.random() + "\x00";
+var escClose = "\x00CLOSE" + Math.random() + "\x00";
+var escComma = "\x00COMMA" + Math.random() + "\x00";
+var escPeriod = "\x00PERIOD" + Math.random() + "\x00";
+var escSlashPattern = new RegExp(escSlash, "g");
+var escOpenPattern = new RegExp(escOpen, "g");
+var escClosePattern = new RegExp(escClose, "g");
+var escCommaPattern = new RegExp(escComma, "g");
+var escPeriodPattern = new RegExp(escPeriod, "g");
+var slashPattern = /\\\\/g;
+var openPattern = /\\{/g;
+var closePattern = /\\}/g;
+var commaPattern = /\\,/g;
+var periodPattern = /\\./g;
+function numeric(str) {
+  return !isNaN(str) ? parseInt(str, 10) : str.charCodeAt(0);
+}
+function escapeBraces(str) {
+  return str.replace(slashPattern, escSlash).replace(openPattern, escOpen).replace(closePattern, escClose).replace(commaPattern, escComma).replace(periodPattern, escPeriod);
+}
+function unescapeBraces(str) {
+  return str.replace(escSlashPattern, "\\").replace(escOpenPattern, "{").replace(escClosePattern, "}").replace(escCommaPattern, ",").replace(escPeriodPattern, ".");
+}
+function parseCommaParts(str) {
+  if (!str) {
+    return [""];
+  }
+  const parts = [];
+  const m = balanced("{", "}", str);
+  if (!m) {
+    return str.split(",");
+  }
+  const { pre, body, post } = m;
+  const p = pre.split(",");
+  p[p.length - 1] += "{" + body + "}";
+  const postParts = parseCommaParts(post);
+  if (post.length) {
+    p[p.length - 1] += postParts.shift();
+    p.push.apply(p, postParts);
+  }
+  parts.push.apply(parts, p);
+  return parts;
+}
+function expand(str) {
+  if (!str) {
+    return [];
+  }
+  if (str.slice(0, 2) === "{}") {
+    str = "\\{\\}" + str.slice(2);
+  }
+  return expand_(escapeBraces(str), true).map(unescapeBraces);
+}
+function embrace(str) {
+  return "{" + str + "}";
+}
+function isPadded(el) {
+  return /^-?0\d/.test(el);
+}
+function lte(i, y) {
+  return i <= y;
+}
+function gte(i, y) {
+  return i >= y;
+}
+function expand_(str, isTop) {
+  const expansions = [];
+  const m = balanced("{", "}", str);
+  if (!m)
+    return [str];
+  const pre = m.pre;
+  const post = m.post.length ? expand_(m.post, false) : [""];
+  if (/\$$/.test(m.pre)) {
+    for (let k = 0;k < post.length; k++) {
+      const expansion = pre + "{" + m.body + "}" + post[k];
+      expansions.push(expansion);
+    }
+  } else {
+    const isNumericSequence = /^-?\d+\.\.-?\d+(?:\.\.-?\d+)?$/.test(m.body);
+    const isAlphaSequence = /^[a-zA-Z]\.\.[a-zA-Z](?:\.\.-?\d+)?$/.test(m.body);
+    const isSequence = isNumericSequence || isAlphaSequence;
+    const isOptions = m.body.indexOf(",") >= 0;
+    if (!isSequence && !isOptions) {
+      if (m.post.match(/,(?!,).*\}/)) {
+        str = m.pre + "{" + m.body + escClose + m.post;
+        return expand_(str);
+      }
+      return [str];
+    }
+    let n;
+    if (isSequence) {
+      n = m.body.split(/\.\./);
+    } else {
+      n = parseCommaParts(m.body);
+      if (n.length === 1 && n[0] !== undefined) {
+        n = expand_(n[0], false).map(embrace);
+        if (n.length === 1) {
+          return post.map((p) => m.pre + n[0] + p);
+        }
+      }
+    }
+    let N;
+    if (isSequence && n[0] !== undefined && n[1] !== undefined) {
+      const x = numeric(n[0]);
+      const y = numeric(n[1]);
+      const width = Math.max(n[0].length, n[1].length);
+      let incr = n.length === 3 && n[2] !== undefined ? Math.abs(numeric(n[2])) : 1;
+      let test = lte;
+      const reverse = y < x;
+      if (reverse) {
+        incr *= -1;
+        test = gte;
+      }
+      const pad = n.some(isPadded);
+      N = [];
+      for (let i = x;test(i, y); i += incr) {
+        let c;
+        if (isAlphaSequence) {
+          c = String.fromCharCode(i);
+          if (c === "\\") {
+            c = "";
+          }
+        } else {
+          c = String(i);
+          if (pad) {
+            const need = width - c.length;
+            if (need > 0) {
+              const z = new Array(need + 1).join("0");
+              if (i < 0) {
+                c = "-" + z + c.slice(1);
+              } else {
+                c = z + c;
+              }
+            }
+          }
+        }
+        N.push(c);
+      }
+    } else {
+      N = [];
+      for (let j = 0;j < n.length; j++) {
+        N.push.apply(N, expand_(n[j], false));
+      }
+    }
+    for (let j = 0;j < N.length; j++) {
+      for (let k = 0;k < post.length; k++) {
+        const expansion = pre + N[j] + post[k];
+        if (!isTop || isSequence || expansion) {
+          expansions.push(expansion);
+        }
+      }
+    }
+  }
+  return expansions;
+}
 
 // ../../node_modules/minimatch/dist/esm/assert-valid-pattern.js
 var MAX_PATTERN_LENGTH = 1024 * 64;
@@ -872,7 +855,7 @@ var braceExpand = (pattern, options = {}) => {
   if (options.nobrace || !/\{(?:(?!\{).)*\}/.test(pattern)) {
     return [pattern];
   }
-  return import_brace_expansion.default(pattern);
+  return expand(pattern);
 };
 minimatch.braceExpand = braceExpand;
 var makeRe = (pattern, options = {}) => new Minimatch(pattern, options).makeRe();
@@ -1442,7 +1425,7 @@ minimatch.unescape = unescape;
 // ../../node_modules/glob/dist/esm/glob.js
 import { fileURLToPath as fileURLToPath2 } from "node:url";
 
-// ../../node_modules/path-scurry/node_modules/lru-cache/dist/esm/index.js
+// ../../node_modules/lru-cache/dist/esm/index.js
 var perf = typeof performance === "object" && performance && typeof performance.now === "function" ? performance : Date;
 var warned = new Set;
 var PROCESS = typeof process === "object" && !!process ? process : {};
@@ -1529,6 +1512,7 @@ class LRUCache {
   #max;
   #maxSize;
   #dispose;
+  #onInsert;
   #disposeAfter;
   #fetchMethod;
   #memoMethod;
@@ -1564,6 +1548,7 @@ class LRUCache {
   #hasDispose;
   #hasFetchMethod;
   #hasDisposeAfter;
+  #hasOnInsert;
   static unsafeExposeInternals(c) {
     return {
       starts: c.#starts,
@@ -1610,11 +1595,14 @@ class LRUCache {
   get dispose() {
     return this.#dispose;
   }
+  get onInsert() {
+    return this.#onInsert;
+  }
   get disposeAfter() {
     return this.#disposeAfter;
   }
   constructor(options) {
-    const { max = 0, ttl, ttlResolution = 1, ttlAutopurge, updateAgeOnGet, updateAgeOnHas, allowStale, dispose, disposeAfter, noDisposeOnSet, noUpdateTTL, maxSize = 0, maxEntrySize = 0, sizeCalculation, fetchMethod, memoMethod, noDeleteOnFetchRejection, noDeleteOnStaleGet, allowStaleOnFetchRejection, allowStaleOnFetchAbort, ignoreFetchAbort } = options;
+    const { max = 0, ttl, ttlResolution = 1, ttlAutopurge, updateAgeOnGet, updateAgeOnHas, allowStale, dispose, onInsert, disposeAfter, noDisposeOnSet, noUpdateTTL, maxSize = 0, maxEntrySize = 0, sizeCalculation, fetchMethod, memoMethod, noDeleteOnFetchRejection, noDeleteOnStaleGet, allowStaleOnFetchRejection, allowStaleOnFetchAbort, ignoreFetchAbort } = options;
     if (max !== 0 && !isPosInt(max)) {
       throw new TypeError("max option must be a nonnegative integer");
     }
@@ -1656,6 +1644,9 @@ class LRUCache {
     if (typeof dispose === "function") {
       this.#dispose = dispose;
     }
+    if (typeof onInsert === "function") {
+      this.#onInsert = onInsert;
+    }
     if (typeof disposeAfter === "function") {
       this.#disposeAfter = disposeAfter;
       this.#disposed = [];
@@ -1664,6 +1655,7 @@ class LRUCache {
       this.#disposed = undefined;
     }
     this.#hasDispose = !!this.#dispose;
+    this.#hasOnInsert = !!this.#onInsert;
     this.#hasDisposeAfter = !!this.#disposeAfter;
     this.noDisposeOnSet = !!noDisposeOnSet;
     this.noUpdateTTL = !!noUpdateTTL;
@@ -2040,6 +2032,9 @@ class LRUCache {
       if (status)
         status.set = "add";
       noUpdateTTL = false;
+      if (this.#hasOnInsert) {
+        this.#onInsert?.(v, k, "add");
+      }
     } else {
       this.#moveToTail(index);
       const oldVal = this.#valList[index];
@@ -2074,6 +2069,9 @@ class LRUCache {
         }
       } else if (status) {
         status.set = "update";
+      }
+      if (this.#hasOnInsert) {
+        this.onInsert?.(v, k, v === oldVal ? "update" : "replace");
       }
     }
     if (ttl !== 0 && !this.#ttls) {
@@ -5609,4 +5607,4 @@ export {
   iconSpritesheets
 };
 
-//# debugId=4F2C30EB3F8DA2E164756E2164756E21
+//# debugId=67995DDB9DA9AF3C64756E2164756E21
