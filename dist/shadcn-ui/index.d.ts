@@ -31,7 +31,7 @@ export declare const Avatar: typeof AvatarComponents.Avatar & {
 import * as BadgeComponents from './components/badge';
 export declare const Badge: typeof BadgeComponents.Badge & {
     Variants: (props?: ({
-        variant?: "default" | "outline" | "destructive" | "secondary" | null | undefined;
+        variant?: "default" | "destructive" | "outline" | "secondary" | null | undefined;
     } & import("class-variance-authority/types").ClassProp) | undefined) => string;
 };
 import * as BreadcrumbComponents from './components/breadcrumb';
@@ -46,7 +46,7 @@ export declare const Breadcrumb: typeof BreadcrumbComponents.Breadcrumb & {
 import * as ButtonComponents from './components/button';
 export declare const Button: typeof ButtonComponents.Button & {
     Variants: (props?: ({
-        variant?: "link" | "default" | "outline" | "destructive" | "secondary" | "ghost" | null | undefined;
+        variant?: "default" | "link" | "destructive" | "outline" | "secondary" | "ghost" | null | undefined;
         size?: "default" | "sm" | "lg" | "icon" | null | undefined;
     } & import("class-variance-authority/types").ClassProp) | undefined) => string;
 };
@@ -277,10 +277,7 @@ export declare const Form: import("react").ForwardRefExoticComponent<import("rea
     Control: typeof FormComponents.FormControl;
     Description: typeof FormComponents.FormDescription;
     Message: typeof FormComponents.FormMessage;
-    Field: ({ name, children }: {
-        name: string;
-        children: React.ReactNode;
-    }) => import("react/jsx-runtime").JSX.Element;
+    Field: ({ name, children }: import("./custom/@types/form.types").FormFieldProps) => import("react/jsx-runtime").JSX.Element;
 };
 export type { IconName as ExampleIconName } from './@types/example-sprites';
 export { type IconName, iconNames } from './@types/lucide-sprites';

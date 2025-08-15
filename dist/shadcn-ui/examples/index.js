@@ -11,6 +11,8 @@ function SpriteIcon({ url, id, ...props }) {
   });
 }
 
+// src/impetus/@types/ThemeProvider.types.ts
+import { ThemeProvider as NextThemeProvider } from "next-themes";
 // src/impetus/LoadingBar.tsx
 import clsx from "clsx";
 import { memo } from "react";
@@ -323,8 +325,6 @@ var MenubarContext = createContext(null);
 // src/impetus/Page.tsx
 import clsx6 from "clsx";
 import { jsx as jsx8 } from "react/jsx-runtime";
-// src/impetus/ThemeProvider.tsx
-import { ThemeProvider as NextThemeProvider } from "next-themes";
 // src/impetus/ThemeSwitch.tsx
 import clsx7 from "clsx";
 import { useEffect, useState as useState2 } from "react";
@@ -8392,4 +8392,4 @@ export {
   ComponentExamples
 };
 
-//# debugId=78580DA3CD00CFE764756E2164756E21
+//# debugId=6AA75C273235616964756E2164756E21
