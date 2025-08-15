@@ -1,9 +1,5 @@
-import { ThemeProvider as NextThemeProvider } from 'next-themes';
-import type { ComponentProps } from 'react';
+import type { ThemeProviderProps } from './@types/ThemeProvider.types';
 
-export type ThemeProviderProps = ComponentProps<typeof NextThemeProvider>;
-// Re-export ThemeProvider with the same interface
-export const ThemeProvider = NextThemeProvider;
 // Default props for consistent setup
 export const themeProviderProps: Partial<ThemeProviderProps> = {
   attribute: 'class',

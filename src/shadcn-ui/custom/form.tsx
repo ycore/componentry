@@ -2,22 +2,11 @@ import clsx from 'clsx';
 import { type Label as LabelPrimitive, Slot as SlotPrimitive } from 'radix-ui';
 import React from 'react';
 import { Form as RouterForm } from 'react-router';
-
 import { Label } from '../components/label';
+import type { FormFieldContextValue, FormFieldProps, FormItemContextValue } from './@types/form.types';
 
 const Form = RouterForm;
-
-type FormFieldContextValue = {
-  name: string;
-};
-
 const FormFieldContext = React.createContext<FormFieldContextValue>({} as FormFieldContextValue);
-
-type FormFieldProps = {
-  name: string;
-  children: React.ReactNode;
-};
-
 const FormField = ({ name, children }: FormFieldProps) => {
   return <FormFieldContext.Provider value={{ name }}>{children}</FormFieldContext.Provider>;
 };
@@ -41,11 +30,6 @@ const useFormField = () => {
     error: undefined, // React Router handles validation differently
   };
 };
-
-type FormItemContextValue = {
-  id: string;
-};
-
 const FormItemContext = React.createContext<FormItemContextValue>({} as FormItemContextValue);
 
 function FormItem({ className, ...props }: React.ComponentProps<'div'>) {

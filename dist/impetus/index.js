@@ -1,3 +1,6 @@
+// src/impetus/@types/ThemeProvider.types.ts
+import { ThemeProvider as NextThemeProvider } from "next-themes";
+var ThemeProvider = NextThemeProvider;
 // src/impetus/LoadingBar.tsx
 import clsx from "clsx";
 import { memo } from "react";
@@ -660,8 +663,6 @@ function Footer({ children, className }) {
   });
 }
 // src/impetus/ThemeProvider.tsx
-import { ThemeProvider as NextThemeProvider } from "next-themes";
-var ThemeProvider = NextThemeProvider;
 var themeProviderProps = {
   attribute: "class",
   defaultTheme: "light",
@@ -739,4 +740,4 @@ export {
   Footer
 };
 
-//# debugId=B092A406EEED574E64756E2164756E21
+//# debugId=94D30FA78453786764756E2164756E21

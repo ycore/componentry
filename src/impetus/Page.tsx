@@ -1,15 +1,6 @@
 import clsx from 'clsx';
-import type { PropsWithChildren } from 'react';
-
 import { Link } from '../shadcn-ui/custom/link';
-
-type HeaderProps = PropsWithChildren & {
-  className?: string;
-};
-
-type FooterProps = PropsWithChildren & {
-  className?: string;
-};
+import type { FooterProps, HeaderProps } from './@types/Page.types';
 
 export function Header({ children, className }: HeaderProps) {
   return (

@@ -1,10 +1,11 @@
 export type { MenubarConfig, MenubarConfigItem, MenubarContextValue, MenubarItemConfig, NavMenubarProps } from './@types/NavMenu.types';
+export type { ThemeProviderProps } from './@types/ThemeProvider.types';
+export { ThemeProvider } from './@types/ThemeProvider.types';
 export type { ThemeContext, Themes } from './@types/ThemeSwitch.types';
+export type { UseThemeReturn } from './@types/useTheme.types';
 export { LoadingBar } from './LoadingBar';
 export { NavMenu } from './NavMenu';
 export { Footer, Header } from './Page';
-export type { ThemeProviderProps } from './ThemeProvider';
-export { ThemeProvider, themeProviderProps } from './ThemeProvider';
+export { themeProviderProps } from './ThemeProvider';
 export { THEME_OPTIONS, ThemeSwitch } from './ThemeSwitch';
-export type { UseThemeReturn } from './useTheme';
 export { useTheme } from './useTheme';
