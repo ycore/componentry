@@ -8,11 +8,6 @@
     "url": "git+ssh://git@github.com/ycore/componentry.git"
   },
   "exports": {
-    "./catalyst": {
-      "import": "./dist/catalyst/index.js",
-      "types": "./dist/catalyst/index.d.ts",
-      "default": "./src/catalyst/index.ts"
-    },
     "./images": {
       "import": "./dist/images/index.js",
       "types": "./dist/images/index.d.ts",
