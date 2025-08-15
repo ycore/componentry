@@ -1,0 +1,47 @@
+import clsx from 'clsx';
+import { Slot as SlotPrimitive } from 'radix-ui';
+import type React from 'react';
+import { SpriteIcon } from '../../images/SpriteIcon';
+import type { IconName } from '../@types/lucide-sprites';
+
+function Breadcrumb({ ...props }: React.ComponentProps<'nav'>) {
+  return <nav aria-label="breadcrumb" data-slot="breadcrumb" {...props} />;
+}
+
+function BreadcrumbList({ className, ...props }: React.ComponentProps<'ol'>) {
+  return <ol data-slot="breadcrumb-list" className={clsx('flex flex-wrap items-center gap-1.5 break-words text-muted-foreground text-sm sm:gap-2.5', className)} {...props} />;
+}
+
+function BreadcrumbItem({ className, ...props }: React.ComponentProps<'li'>) {
+  return <li data-slot="breadcrumb-item" className={clsx('inline-flex items-center gap-1.5', className)} {...props} />;
+}
+
+function BreadcrumbLink({ asChild, className, ...props }: React.ComponentProps<'a'> & { asChild?: boolean; }) {
+  const Comp = asChild ? SlotPrimitive.Slot : 'a';
+
+  return <Comp data-slot="breadcrumb-link" className={clsx('transition-colors hover:text-foreground', className)} {...props} />;
+}
+
+function BreadcrumbPage({ className, ...props }: React.ComponentProps<'span'>) {
+  // biome-ignore lint/a11y/useFocusableInteractive: acceptable
+  return <span data-slot="breadcrumb-page" role="link" aria-disabled="true" aria-current="page" className={clsx('font-normal text-foreground', className)} {...props} />;
+}
+
+function BreadcrumbSeparator({ children, className, spriteUrl, ...props }: React.ComponentProps<'li'> & { spriteUrl: string }) {
+  return (
+    <li data-slot="breadcrumb-separator" role="presentation" aria-hidden="true" className={clsx('[&>svg]:size-3.5', className)} {...props}>
+      {children ?? <SpriteIcon<IconName> id="ChevronRight" url={spriteUrl} />}
+    </li>
+  );
+}
+
+function BreadcrumbEllipsis({ className, spriteUrl, ...props }: React.ComponentProps<'span'> & { spriteUrl: string }) {
+  return (
+    <span data-slot="breadcrumb-ellipsis" role="presentation" aria-hidden="true" className={clsx('flex size-9 items-center justify-center', className)} {...props}>
+      <SpriteIcon<IconName> id="Ellipsis" className="size-4" url={spriteUrl} />
+      <span className="sr-only">More</span>
+    </span>
+  );
+}
+
+export { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator, BreadcrumbEllipsis };

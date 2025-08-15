@@ -1,0 +1,93 @@
+{
+  "name": "@ycore/componentry",
+  "version": "2.2.4",
+  "private": true,
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/ycore/componentry.git"
+  },
+  "exports": {
+    "./catalyst": {
+      "import": "./dist/catalyst/index.js",
+      "types": "./dist/catalyst/index.d.ts",
+      "default": "./src/catalyst/index.ts"
+    },
+    "./images": {
+      "import": "./dist/images/index.js",
+      "types": "./dist/images/index.d.ts",
+      "default": "./src/images/index.ts"
+    },
+    "./images/plugins": {
+      "node": {
+        "import": "./dist/images/plugins/index.js",
+        "types": "./dist/images/plugins/index.d.ts",
+        "default": "./src/images/plugins/index.ts"
+      }
+    },
+    "./impetus": {
+      "import": "./dist/impetus/index.js",
+      "types": "./dist/impetus/index.d.ts",
+      "default": "./src/impetus/index.ts"
+    },
+    "./impetus/loading-bar.css": "./dist/impetus/loading-bar.css",
+    "./impetus/theme-switch.css": "./dist/impetus/theme-switch.css",
+    "./shadcn-ui": {
+      "import": "./dist/shadcn-ui/index.js",
+      "types": "./dist/shadcn-ui/index.d.ts",
+      "default": "./src/shadcn-ui/index.ts"
+    },
+    "./shadcn-ui/examples": {
+      "import": "./dist/shadcn-ui/examples/index.js",
+      "types": "./dist/shadcn-ui/examples/index.d.ts",
+      "default": "./src/shadcn-ui/examples/index.tsx"
+    },
+    "./shadcn-ui/styles/shadcn-ui.css": "./dist/shadcn-ui/styles/shadcn-ui.css",
+    "./shadcn-ui/styles/gray.css": "./dist/shadcn-ui/styles/gray.css",
+    "./shadcn-ui/styles/neutral.css": "./dist/shadcn-ui/styles/neutral.css",
+    "./shadcn-ui/styles/slate.css": "./dist/shadcn-ui/styles/slate.css",
+    "./shadcn-ui/styles/stone.css": "./dist/shadcn-ui/styles/stone.css",
+    "./shadcn-ui/styles/zinc.css": "./dist/shadcn-ui/styles/zinc.css",
+    "./shadcn-ui/assets/example-sprites.svg": "./dist/shadcn-ui/assets/example-sprites.svg",
+    "./shadcn-ui/assets/lucide-sprites.svg": "./dist/shadcn-ui/assets/lucide-sprites.svg",
+    "./shadcn-ui/types/sprites": "./src/shadcn-ui/@types/sprites-index.ts",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "dependencies": {
+    "@headlessui/react": "^2.2.4",
+    "class-variance-authority": "^0.7.1",
+    "cmdk": "^1.1.1",
+    "next-themes": "^0.4.6",
+    "node-html-parser": "^7.0.1",
+    "radix-ui": "^1.4.2",
+    "sonner": "^2.0.6"
+  },
+  "devDependencies": {
+    "@total-typescript/tsconfig": "catalog:dev",
+    "@types/react": "catalog:dev",
+    "glob": "catalog:dev",
+    "heroicons": "catalog:dev",
+    "lucide-static": "catalog:dev",
+    "vite": "catalog:dev"
+  },
+  "peerDependencies": {
+    "clsx": "catalog:peer",
+    "react": "catalog:peer",
+    "react-router": "catalog:peer"
+  },
+  "scripts": {
+    "build": "bun run clean && bun run build:browser && bun run build:node && bun run build:types",
+    "build:browser": "vite build",
+    "build:node": "vite build --config vite.node.config.ts",
+    "build:types": "tsc --declaration --emitDeclarationOnly --outDir dist",
+    "build-catalyst": "bun ./scripts/build-catalyst.ts",
+    "build-shadcn": "bun ./scripts/build-shadcn.ts",
+    "clean": "rm -rf dist",
+    "ws:sprites": "bun ./src/images/cli/create-spritesheets.ts",
+    "ws:types": "tsc --noEmit"
+  }
+}
