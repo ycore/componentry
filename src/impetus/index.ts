@@ -3,6 +3,7 @@ export type { ThemeProviderProps } from './@types/ThemeProvider.types';
 export { ThemeProvider } from './@types/ThemeProvider.types';
 export type { ThemeContext, Themes } from './@types/ThemeSwitch.types';
 export type { UseThemeReturn } from './@types/useTheme.types';
+export { GeneralErrorBoundary } from './error-boundary';
 export { LoadingBar } from './LoadingBar';
 export { NavMenu } from './NavMenu';
 export { Footer, Header } from './Page';
