@@ -1,6 +1,6 @@
 import type React from 'react';
 import { SpriteIcon } from '../../images/SpriteIcon';
-import { ThemeSwitch } from '../../impetus';
+import { ThemeSwitch } from '../../impetus/theme/ThemeSwitch';
 import { type IconName, iconNames } from '../@types/lucide-sprites';
 import { Tooltip, TooltipContent, TooltipTrigger } from '../components/tooltip';
 import { Link } from '../custom/link';

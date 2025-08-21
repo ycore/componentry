@@ -1,6 +1,6 @@
 import clsx from 'clsx';
-import { Link } from '../shadcn-ui/custom/link';
-import type { FooterProps, HeaderProps } from './@types/Page.types';
+import { Link } from '../../shadcn-ui/custom/link';
+import type { FooterProps, HeaderProps } from '../@types/Page.types';
 
 export function Header({ children, className }: HeaderProps) {
   return (

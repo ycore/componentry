@@ -1,4 +1,4 @@
-import type { ThemeProviderProps } from './@types/ThemeProvider.types';
+import type { ThemeProviderProps } from '../@types/ThemeProvider.types';
 
 // Default props for consistent setup
 export const themeProviderProps: Partial<ThemeProviderProps> = {
