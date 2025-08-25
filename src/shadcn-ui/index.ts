@@ -345,6 +345,7 @@ export const Form = Object.assign(FormComponent, {
 export type { IconName as ExampleIconName } from './@types/example-sprites';
 export { type IconName, iconNames } from './@types/lucide-sprites';
 export { FormError } from './custom/form-error';
+export { Intent } from './custom/intent';
 export { Link } from './custom/link';
 export { Spinner } from './custom/spinner';
 export { useMediaQuery } from './hooks/use-media-query';
