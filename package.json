@@ -88,7 +88,7 @@
   "scripts": {
     "build-catalyst": "bun ./scripts/build-catalyst.ts",
     "build-shadcn": "bun ./scripts/build-shadcn.ts",
-    "clean": "rm -rf dist",
+    "clean": "rm -rf dist node_modules",
     "ws:sprites": "bun ./src/images/cli/create-spritesheets.ts",
     "ws:types": "bun ../../scripts/build-package.ts . --types-only"
   }
