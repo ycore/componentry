@@ -1,6 +1,7 @@
 import type { unstable_RouterContextProvider } from 'react-router';
 import { setToast as setToastVendor } from 'remix-toast/middleware';
 
+export { dataWithError, dataWithSuccess, dataWithToast } from 'remix-toast';
 export { getToast, unstable_toastMiddleware } from 'remix-toast/middleware';
 export { toast as notify } from 'sonner';
 

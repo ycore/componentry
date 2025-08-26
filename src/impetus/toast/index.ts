@@ -1,2 +1,2 @@
 export { useToast } from './useToast';
-export { getToast, notify, setToast, unstable_toastMiddleware } from './vendor';
+export { dataWithError, dataWithSuccess, dataWithToast, getToast, notify, setToast, unstable_toastMiddleware } from './vendor';
