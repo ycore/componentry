@@ -311,7 +311,7 @@ export function NavMenu({ navConfigItems, spriteUrl, navFilters, className }: Na
           <Menubar className={clsx(className)}>
             {filteredSections.map((section: any, sectionIndex: number) => (
               // biome-ignore lint/suspicious/noArrayIndexKey: acceptable
-              <div key={`section-${sectionIndex}`} className="flex">
+              <div key={`section-${sectionIndex}`} className="flex gap-x-2">
                 {section.menus.map((configItem: MenubarConfigItem, menuIndex: number) => renderMenuConfigItem(configItem, sectionIndex + menuIndex, contextValue))}
               </div>
             ))}
