@@ -329,6 +329,7 @@ export const Tooltip = Object.assign(TooltipComponent, {
   Provider: TooltipComponents.TooltipProvider,
 });
 
+export { DataPagination } from './custom/data-pagination';
 export { useFormField } from './custom/form';
 
 import * as FormComponents from './custom/form';
