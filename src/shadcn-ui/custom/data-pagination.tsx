@@ -3,8 +3,8 @@ import type React from 'react';
 import type { useFetcher } from 'react-router';
 import { createSpriteIcon } from '../../images/SpriteIcon';
 import type { IconName } from '../@types/lucide-sprites';
-import { Pagination } from '../components/pagination';
-import { Select } from '../components/select';
+import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from '../components/pagination';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/select';
 
 const SpriteIcon = createSpriteIcon<IconName>(svgSpriteUrl);
 
@@ -43,16 +43,16 @@ export function RowsPerPageSelector({ currentLimit, options, onLimitChange, disa
         }}
         disabled={disabled}
       >
-        <Select.Trigger className="w-20" spriteUrl={svgSpriteUrl}>
-          <Select.Value />
-        </Select.Trigger>
-        <Select.Content spriteUrl={svgSpriteUrl}>
+        <SelectTrigger className="w-20" spriteUrl={svgSpriteUrl}>
+          <SelectValue />
+        </SelectTrigger>
+        <SelectContent spriteUrl={svgSpriteUrl}>
           {options.map(option => (
-            <Select.Item key={option} value={option.toString()} spriteUrl={svgSpriteUrl}>
+            <SelectItem key={option} value={option.toString()} spriteUrl={svgSpriteUrl}>
               {option}
-            </Select.Item>
+            </SelectItem>
           ))}
-        </Select.Content>
+        </SelectContent>
       </Select>
     </div>
   );
@@ -128,58 +128,58 @@ export function PaginationControls({ currentPage, hasNextPage, hasPreviousPage, 
   return (
     <div className="">
       <Pagination>
-        <Pagination.Content>
-          <Pagination.Item>
-            <Pagination.Previous spriteUrl={svgSpriteUrl} href="#" className={hasPreviousPage ? '' : 'pointer-events-none opacity-50'} onClick={e => handleNavigationClick(currentPage - 1, e)} />
-          </Pagination.Item>
+        <PaginationContent>
+          <PaginationItem>
+            <PaginationPrevious spriteUrl={svgSpriteUrl} href="#" className={hasPreviousPage ? '' : 'pointer-events-none opacity-50'} onClick={(e: React.MouseEvent) => handleNavigationClick(currentPage - 1, e)} />
+          </PaginationItem>
 
           {currentPage > 2 && (
             <>
-              <Pagination.Item>
-                <Pagination.Link href="#" onClick={e => handlePageClick(1, e)}>
+              <PaginationItem>
+                <PaginationLink href="#" onClick={(e: React.MouseEvent) => handlePageClick(1, e)}>
                   1
-                </Pagination.Link>
-              </Pagination.Item>
+                </PaginationLink>
+              </PaginationItem>
               {currentPage > 3 && (
-                <Pagination.Item>
-                  <Pagination.Ellipsis spriteUrl={svgSpriteUrl} />
-                </Pagination.Item>
+                <PaginationItem>
+                  <PaginationEllipsis spriteUrl={svgSpriteUrl} />
+                </PaginationItem>
               )}
             </>
           )}
 
           {hasPreviousPage && (
-            <Pagination.Item>
-              <Pagination.Link href="#" onClick={e => handlePageClick(currentPage - 1, e)}>
+            <PaginationItem>
+              <PaginationLink href="#" onClick={(e: React.MouseEvent) => handlePageClick(currentPage - 1, e)}>
                 {currentPage - 1}
-              </Pagination.Link>
-            </Pagination.Item>
+              </PaginationLink>
+            </PaginationItem>
           )}
 
-          <Pagination.Item>
-            <Pagination.Link href="#" isActive>
+          <PaginationItem>
+            <PaginationLink href="#" isActive>
               {currentPage}
-            </Pagination.Link>
-          </Pagination.Item>
+            </PaginationLink>
+          </PaginationItem>
 
           {hasNextPage && (
-            <Pagination.Item>
-              <Pagination.Link href="#" onClick={e => handlePageClick(currentPage + 1, e)}>
+            <PaginationItem>
+              <PaginationLink href="#" onClick={(e: React.MouseEvent) => handlePageClick(currentPage + 1, e)}>
                 {currentPage + 1}
-              </Pagination.Link>
-            </Pagination.Item>
+              </PaginationLink>
+            </PaginationItem>
           )}
 
           {hasNextPage && (
-            <Pagination.Item>
-              <Pagination.Ellipsis spriteUrl={svgSpriteUrl} />
-            </Pagination.Item>
+            <PaginationItem>
+              <PaginationEllipsis spriteUrl={svgSpriteUrl} />
+            </PaginationItem>
           )}
 
-          <Pagination.Item>
-            <Pagination.Next spriteUrl={svgSpriteUrl} href="#" className={hasNextPage ? '' : 'pointer-events-none opacity-50'} onClick={e => handleNavigationClick(currentPage + 1, e)} />
-          </Pagination.Item>
-        </Pagination.Content>
+          <PaginationItem>
+            <PaginationNext spriteUrl={svgSpriteUrl} href="#" className={hasNextPage ? '' : 'pointer-events-none opacity-50'} onClick={(e: React.MouseEvent) => handleNavigationClick(currentPage + 1, e)} />
+          </PaginationItem>
+        </PaginationContent>
       </Pagination>
     </div>
   );
