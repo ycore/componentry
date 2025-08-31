@@ -31,7 +31,7 @@ function SheetOverlay({ className, ...props }: React.ComponentProps<typeof Sheet
   );
 }
 
-function SheetContent({ className, children, side = 'right', spriteUrl, ...props }: React.ComponentProps<typeof SheetPrimitive.Content> & { side?: 'top' | 'right' | 'bottom' | 'left'; } & { spriteUrl: string }) {
+function SheetContent({ className, children, side = 'right', spriteUrl, ...props }: React.ComponentProps<typeof SheetPrimitive.Content> & { side?: 'top' | 'right' | 'bottom' | 'left' } & { spriteUrl: string }) {
   return (
     <SheetPortal>
       <SheetOverlay />

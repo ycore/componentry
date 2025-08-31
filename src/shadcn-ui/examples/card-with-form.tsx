@@ -26,10 +26,18 @@ export default function CardWithForm({ spriteUrl }: { spriteUrl: string }) {
                   <SelectValue placeholder="Select" />
                 </SelectTrigger>
                 <SelectContent spriteUrl={spriteUrl} position="popper">
-                  <SelectItem spriteUrl={spriteUrl} value="next">Next.js</SelectItem>
-                  <SelectItem spriteUrl={spriteUrl} value="sveltekit">SvelteKit</SelectItem>
-                  <SelectItem spriteUrl={spriteUrl} value="astro">Astro</SelectItem>
-                  <SelectItem spriteUrl={spriteUrl} value="nuxt">Nuxt.js</SelectItem>
+                  <SelectItem spriteUrl={spriteUrl} value="next">
+                    Next.js
+                  </SelectItem>
+                  <SelectItem spriteUrl={spriteUrl} value="sveltekit">
+                    SvelteKit
+                  </SelectItem>
+                  <SelectItem spriteUrl={spriteUrl} value="astro">
+                    Astro
+                  </SelectItem>
+                  <SelectItem spriteUrl={spriteUrl} value="nuxt">
+                    Nuxt.js
+                  </SelectItem>
                 </SelectContent>
               </Select>
             </div>

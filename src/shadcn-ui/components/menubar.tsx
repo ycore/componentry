@@ -141,7 +141,7 @@ function MenubarSub({ ...props }: React.ComponentProps<typeof MenubarPrimitive.S
   return <MenubarPrimitive.Sub data-slot="menubar-sub" {...props} />;
 }
 
-function MenubarSubTrigger({ className, inset, children, spriteUrl, ...props }: React.ComponentProps<typeof MenubarPrimitive.SubTrigger> & { inset?: boolean; } & { spriteUrl: string }) {
+function MenubarSubTrigger({ className, inset, children, spriteUrl, ...props }: React.ComponentProps<typeof MenubarPrimitive.SubTrigger> & { inset?: boolean } & { spriteUrl: string }) {
   return (
     <MenubarPrimitive.SubTrigger
       data-slot="menubar-sub-trigger"

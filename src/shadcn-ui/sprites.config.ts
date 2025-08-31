@@ -1,4 +1,4 @@
-import type { IconSpriteConfig } from "../images/@types/icon-spritesheet.types";
+import type { IconSpriteConfig } from '../images/@types/icon-spritesheet.types';
 
 // Used with manual run using ws:sprites to create static assets
 export const staticSpriteConfig: IconSpriteConfig[] = [

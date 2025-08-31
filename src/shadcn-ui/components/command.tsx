@@ -23,9 +23,7 @@ function CommandDialog({
   description?: string;
   className?: string;
   showCloseButton?: boolean;
-}
-  & { spriteUrl: string }
-) {
+} & { spriteUrl: string }) {
   return (
     <Dialog {...props}>
       <DialogHeader className="sr-only">

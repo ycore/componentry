@@ -22,16 +22,7 @@ export const createRemoteImagePromise = (src: string, alt: string, width?: numbe
   });
 };
 
-export function LazyImage({
-  image,
-  src,
-  alt,
-  width,
-  height,
-  className,
-  spriteUrl,
-  fallback = spriteUrl ? <Spinner spriteUrl={spriteUrl} /> : <div className="text-slate-500/50">Loading...</div>,
-}: LazyImageProps) {
+export function LazyImage({ image, src, alt, width, height, className, spriteUrl, fallback = spriteUrl ? <Spinner spriteUrl={spriteUrl} /> : <div className="text-slate-500/50">Loading...</div> }: LazyImageProps) {
   const imagePromise = image || (src ? createRemoteImagePromise(src, alt || '', width, height) : null);
 
   if (!imagePromise) {
@@ -40,10 +31,7 @@ export function LazyImage({
 
   return (
     <React.Suspense fallback={fallback}>
-      <TypedAwait<ImageData>
-        resolve={imagePromise}
-        errorElement={spriteUrl ? <Spinner spriteUrl={spriteUrl} className="text-slate-500/50" /> : <div className="text-slate-500/50">Error loading image</div>}
-      >
+      <TypedAwait<ImageData> resolve={imagePromise} errorElement={spriteUrl ? <Spinner spriteUrl={spriteUrl} className="text-slate-500/50" /> : <div className="text-slate-500/50">Error loading image</div>}>
         {(imageData: ImageData) => <ImageElement {...imageData} className={clsx(imageData.className, className)} />}
       </TypedAwait>
     </React.Suspense>
@@ -66,7 +54,7 @@ export function LazyGallery({
   );
 }
 
-function TypedAwait<T>({ resolve, children, ...props }: { resolve: Promise<T>; children: (data: T) => React.ReactNode;[key: string]: unknown }) {
+function TypedAwait<T>({ resolve, children, ...props }: { resolve: Promise<T>; children: (data: T) => React.ReactNode; [key: string]: unknown }) {
   return (
     <Await resolve={resolve} {...props}>
       {data => children(data as T)}

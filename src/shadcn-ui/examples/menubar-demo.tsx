@@ -1,6 +1,20 @@
 import React from 'react';
 
-import { Menubar, MenubarCheckboxItem, MenubarContent, MenubarItem, MenubarMenu, MenubarRadioGroup, MenubarRadioItem, MenubarSeparator, MenubarShortcut, MenubarSub, MenubarSubContent, MenubarSubTrigger, MenubarTrigger, } from '../components/menubar';
+import {
+  Menubar,
+  MenubarCheckboxItem,
+  MenubarContent,
+  MenubarItem,
+  MenubarMenu,
+  MenubarRadioGroup,
+  MenubarRadioItem,
+  MenubarSeparator,
+  MenubarShortcut,
+  MenubarSub,
+  MenubarSubContent,
+  MenubarSubTrigger,
+  MenubarTrigger,
+} from '../components/menubar';
 
 export default function MenubarDemo({ spriteUrl }: { spriteUrl: string }) {
   return (
@@ -60,7 +74,9 @@ export default function MenubarDemo({ spriteUrl }: { spriteUrl: string }) {
         <MenubarTrigger>View</MenubarTrigger>
         <MenubarContent>
           <MenubarCheckboxItem spriteUrl={spriteUrl}>Always Show Bookmarks Bar</MenubarCheckboxItem>
-          <MenubarCheckboxItem spriteUrl={spriteUrl} checked>Always Show Full URLs</MenubarCheckboxItem>
+          <MenubarCheckboxItem spriteUrl={spriteUrl} checked>
+            Always Show Full URLs
+          </MenubarCheckboxItem>
           <MenubarSeparator />
           <MenubarItem inset>
             Reload <MenubarShortcut>⌘R</MenubarShortcut>
@@ -78,9 +94,15 @@ export default function MenubarDemo({ spriteUrl }: { spriteUrl: string }) {
         <MenubarTrigger>Profiles</MenubarTrigger>
         <MenubarContent>
           <MenubarRadioGroup value="benoit">
-            <MenubarRadioItem spriteUrl={spriteUrl} value="andy">Andy</MenubarRadioItem>
-            <MenubarRadioItem spriteUrl={spriteUrl} value="benoit">Benoit</MenubarRadioItem>
-            <MenubarRadioItem spriteUrl={spriteUrl} value="Luis">Luis</MenubarRadioItem>
+            <MenubarRadioItem spriteUrl={spriteUrl} value="andy">
+              Andy
+            </MenubarRadioItem>
+            <MenubarRadioItem spriteUrl={spriteUrl} value="benoit">
+              Benoit
+            </MenubarRadioItem>
+            <MenubarRadioItem spriteUrl={spriteUrl} value="Luis">
+              Luis
+            </MenubarRadioItem>
           </MenubarRadioGroup>
           <MenubarSeparator />
           <MenubarItem inset>Edit...</MenubarItem>

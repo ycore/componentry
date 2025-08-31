@@ -1,5 +1,19 @@
 import React from 'react';
-import { ContextMenu, ContextMenuCheckboxItem, ContextMenuContent, ContextMenuItem, ContextMenuLabel, ContextMenuRadioGroup, ContextMenuRadioItem, ContextMenuSeparator, ContextMenuShortcut, ContextMenuSub, ContextMenuSubContent, ContextMenuSubTrigger, ContextMenuTrigger, } from '../components/context-menu';
+import {
+  ContextMenu,
+  ContextMenuCheckboxItem,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuLabel,
+  ContextMenuRadioGroup,
+  ContextMenuRadioItem,
+  ContextMenuSeparator,
+  ContextMenuShortcut,
+  ContextMenuSub,
+  ContextMenuSubContent,
+  ContextMenuSubTrigger,
+  ContextMenuTrigger,
+} from '../components/context-menu';
 
 export default function ContextMenuDemo({ spriteUrl }: { spriteUrl: string }) {
   return (
@@ -19,7 +33,9 @@ export default function ContextMenuDemo({ spriteUrl }: { spriteUrl: string }) {
           <ContextMenuShortcut>⌘R</ContextMenuShortcut>
         </ContextMenuItem>
         <ContextMenuSub>
-          <ContextMenuSubTrigger spriteUrl={spriteUrl} inset>More Tools</ContextMenuSubTrigger>
+          <ContextMenuSubTrigger spriteUrl={spriteUrl} inset>
+            More Tools
+          </ContextMenuSubTrigger>
           <ContextMenuSubContent className="w-44">
             <ContextMenuItem>Save Page...</ContextMenuItem>
             <ContextMenuItem>Create Shortcut...</ContextMenuItem>
@@ -31,13 +47,19 @@ export default function ContextMenuDemo({ spriteUrl }: { spriteUrl: string }) {
           </ContextMenuSubContent>
         </ContextMenuSub>
         <ContextMenuSeparator />
-        <ContextMenuCheckboxItem spriteUrl={spriteUrl} checked>Show Bookmarks</ContextMenuCheckboxItem>
+        <ContextMenuCheckboxItem spriteUrl={spriteUrl} checked>
+          Show Bookmarks
+        </ContextMenuCheckboxItem>
         <ContextMenuCheckboxItem spriteUrl={spriteUrl}>Show Full URLs</ContextMenuCheckboxItem>
         <ContextMenuSeparator />
         <ContextMenuRadioGroup value="pedro">
           <ContextMenuLabel inset>People</ContextMenuLabel>
-          <ContextMenuRadioItem spriteUrl={spriteUrl} value="pedro">Pedro Duarte</ContextMenuRadioItem>
-          <ContextMenuRadioItem spriteUrl={spriteUrl} value="colm">Colm Tuite</ContextMenuRadioItem>
+          <ContextMenuRadioItem spriteUrl={spriteUrl} value="pedro">
+            Pedro Duarte
+          </ContextMenuRadioItem>
+          <ContextMenuRadioItem spriteUrl={spriteUrl} value="colm">
+            Colm Tuite
+          </ContextMenuRadioItem>
         </ContextMenuRadioGroup>
       </ContextMenuContent>
     </ContextMenu>

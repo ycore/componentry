@@ -59,7 +59,7 @@ export function ProductionErrorDisplay({ message, detail }: ErrorDisplayProps) {
       <div className="mx-auto flex max-w-sm flex-col items-center gap-4 text-center">
         <div className="space-y-1">
           <h1 className="text-lg">{message}</h1>
-          <p className='text-base text-muted-foreground italic'>{detail}</p>
+          <p className="text-base text-muted-foreground italic">{detail}</p>
         </div>
         <Link to={href('/')} className="rounded-xl bg-accent px-8 py-2">
           Back to home

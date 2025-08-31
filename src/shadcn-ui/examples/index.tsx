@@ -214,7 +214,7 @@ export function ComponentExamples({ spriteUrl, exampleUrl }: { spriteUrl: string
       <div className="mb-8">
         <div className="flex flex-row justify-between">
           <h1 className="mb-4 font-bold text-4xl">shadcn/ui Examples</h1>
-          <div className='flex items-center gap-x-4'>
+          <div className="flex items-center gap-x-4">
             <ThemeSwitch spriteUrl={spriteUrl} />
             <Link href="/">
               <SpriteIcon<IconName> url={spriteUrl} id="House" className="size-5 text-accent-foreground" viewBox="0 0 24 24" />

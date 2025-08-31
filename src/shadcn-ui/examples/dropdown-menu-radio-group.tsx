@@ -14,9 +14,15 @@ export default function DropdownMenuRadioGroupDemo({ spriteUrl }: { spriteUrl: s
         <DropdownMenuLabel>Panel Position</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuRadioGroup value={position} onValueChange={setPosition}>
-          <DropdownMenuRadioItem spriteUrl={spriteUrl} value="top">Top</DropdownMenuRadioItem>
-          <DropdownMenuRadioItem spriteUrl={spriteUrl} value="bottom">Bottom</DropdownMenuRadioItem>
-          <DropdownMenuRadioItem spriteUrl={spriteUrl} value="right">Right</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem spriteUrl={spriteUrl} value="top">
+            Top
+          </DropdownMenuRadioItem>
+          <DropdownMenuRadioItem spriteUrl={spriteUrl} value="bottom">
+            Bottom
+          </DropdownMenuRadioItem>
+          <DropdownMenuRadioItem spriteUrl={spriteUrl} value="right">
+            Right
+          </DropdownMenuRadioItem>
         </DropdownMenuRadioGroup>
       </DropdownMenuContent>
     </DropdownMenu>

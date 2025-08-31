@@ -73,7 +73,7 @@ function ContextMenuContent({ className, ...props }: React.ComponentProps<typeof
   );
 }
 
-function ContextMenuItem({ className, inset, variant = 'default', ...props }: React.ComponentProps<typeof ContextMenuPrimitive.Item> & { inset?: boolean; variant?: 'default' | 'destructive'; }) {
+function ContextMenuItem({ className, inset, variant = 'default', ...props }: React.ComponentProps<typeof ContextMenuPrimitive.Item> & { inset?: boolean; variant?: 'default' | 'destructive' }) {
   return (
     <ContextMenuPrimitive.Item
       data-slot="context-menu-item"
@@ -129,7 +129,7 @@ function ContextMenuRadioItem({ className, children, spriteUrl, ...props }: Reac
   );
 }
 
-function ContextMenuLabel({ className, inset, ...props }: React.ComponentProps<typeof ContextMenuPrimitive.Label> & { inset?: boolean; }) {
+function ContextMenuLabel({ className, inset, ...props }: React.ComponentProps<typeof ContextMenuPrimitive.Label> & { inset?: boolean }) {
   return <ContextMenuPrimitive.Label data-slot="context-menu-label" data-inset={inset} className={clsx('px-2 py-1.5 font-medium text-foreground text-sm data-[inset]:pl-8', className)} {...props} />;
 }
 

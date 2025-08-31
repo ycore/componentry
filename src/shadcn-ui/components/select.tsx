@@ -16,7 +16,7 @@ function SelectValue({ ...props }: React.ComponentProps<typeof SelectPrimitive.V
   return <SelectPrimitive.Value data-slot="select-value" {...props} />;
 }
 
-function SelectTrigger({ className, size = 'default', children, spriteUrl, ...props }: React.ComponentProps<typeof SelectPrimitive.Trigger> & { size?: 'sm' | 'default'; } & { spriteUrl: string }) {
+function SelectTrigger({ className, size = 'default', children, spriteUrl, ...props }: React.ComponentProps<typeof SelectPrimitive.Trigger> & { size?: 'sm' | 'default' } & { spriteUrl: string }) {
   return (
     <SelectPrimitive.Trigger
       data-slot="select-trigger"

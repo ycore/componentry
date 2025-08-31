@@ -6,7 +6,7 @@ import type React from 'react';
 import { SpriteIcon } from '../../images/SpriteIcon';
 import type { IconName } from '../@types/lucide-sprites';
 
-function NavigationMenu({ className, children, viewport = true, ...props }: React.ComponentProps<typeof NavigationMenuPrimitive.Root> & { viewport?: boolean; }) {
+function NavigationMenu({ className, children, viewport = true, ...props }: React.ComponentProps<typeof NavigationMenuPrimitive.Root> & { viewport?: boolean }) {
   return (
     <NavigationMenuPrimitive.Root data-slot="navigation-menu" data-viewport={viewport} className={clsx('group/navigation-menu relative flex max-w-max flex-1 items-center justify-center', className)} {...props}>
       {children}
