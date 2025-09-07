@@ -3,3 +3,4 @@ export { GeneralErrorBoundary, ProductionErrorDisplay } from './components/error
 export { LoadingBar } from './components/LoadingBar';
 export { NavMenu } from './components/NavMenu';
 export { Footer, Header } from './components/Page';
+export type { ToastData } from './toast/useToast';

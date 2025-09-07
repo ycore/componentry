@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { notify } from './vendor';
 
-type ToastData = {
+export type ToastData = {
   message: string;
   type: 'success' | 'error' | 'info' | 'warning';
 } | null;

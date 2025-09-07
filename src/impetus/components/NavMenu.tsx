@@ -5,21 +5,7 @@ import { useLocation } from 'react-router';
 
 import { createSpriteIcon } from '../../images/SpriteIcon';
 import { Button } from '../../shadcn-ui/components/button';
-import {
-  Menubar,
-  MenubarCheckboxItem,
-  MenubarContent,
-  MenubarItem,
-  MenubarMenu,
-  MenubarRadioGroup,
-  MenubarRadioItem,
-  MenubarSeparator,
-  MenubarShortcut,
-  MenubarSub,
-  MenubarSubContent,
-  MenubarSubTrigger,
-  MenubarTrigger,
-} from '../../shadcn-ui/components/menubar';
+import { Menubar, MenubarCheckboxItem, MenubarContent, MenubarItem, MenubarMenu, MenubarRadioGroup, MenubarRadioItem, MenubarSeparator, MenubarShortcut, MenubarSub, MenubarSubContent, MenubarSubTrigger, MenubarTrigger } from '../../shadcn-ui/components/menubar';
 import { Sheet, SheetContent, SheetTrigger } from '../../shadcn-ui/components/sheet';
 import { Link } from '../../shadcn-ui/custom/link';
 import type { MenubarConfigItem, MenubarContextValue, MenubarItemConfig, NavMenubarProps } from '../@types/NavMenu.types';
@@ -281,20 +267,19 @@ export function NavMenu({ navConfigItems, spriteUrl, navFilters, className }: Na
   // Filter sections/menus if navFilters is provided
   const filteredSections = navFilters
     ? sections
-        // biome-ignore lint/suspicious/noExplicitAny: acceptable
-        .map((section: any) => ({
-          ...section,
-          menus: section.menus.filter((menu: MenubarConfigItem) => {
-            // Check if menu has filter property and if any of the filters match
-            if (menu.filter && Array.isArray(menu.filter)) {
-              return menu.filter.some((filterValue: string) => navFilters.includes(filterValue));
-            }
-            // Fallback to label-based filtering for backward compatibility
-            return navFilters.includes(menu.label || 'radioGroup');
-          }),
-        }))
-        // biome-ignore lint/suspicious/noExplicitAny: acceptable
-        .filter((section: any) => section.menus.length > 0)
+      // biome-ignore lint/suspicious/noExplicitAny: acceptable
+      .map((section: any) => ({
+        ...section,
+        menus: section.menus.filter((menu: MenubarConfigItem) => {
+          // If no filter property exists, always show
+          if (!menu.filter || !Array.isArray(menu.filter)) {
+            return true;
+          }
+          return menu.filter.some((filterValue: string) => navFilters.includes(filterValue));
+        }),
+      }))
+      // biome-ignore lint/suspicious/noExplicitAny: acceptable
+      .filter((section: any) => section.menus.length > 0)
     : sections;
 
   // Get all menus for mobile
