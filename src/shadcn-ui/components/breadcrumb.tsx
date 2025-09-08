@@ -24,13 +24,14 @@ function BreadcrumbLink({ asChild, className, ...props }: React.ComponentProps<'
 
 function BreadcrumbPage({ className, ...props }: React.ComponentProps<'span'>) {
   // biome-ignore lint/a11y/useFocusableInteractive: acceptable
+  // biome-ignore lint/a11y/useSemanticElements: breadcrumb pattern requires role="link" for current page
   return <span data-slot="breadcrumb-page" role="link" aria-disabled="true" aria-current="page" className={clsx('font-normal text-foreground', className)} {...props} />;
 }
 
 function BreadcrumbSeparator({ children, className, spriteUrl, ...props }: React.ComponentProps<'li'> & { spriteUrl: string }) {
   return (
     <li data-slot="breadcrumb-separator" role="presentation" aria-hidden="true" className={clsx('[&>svg]:size-3.5', className)} {...props}>
-      {children ?? <SpriteIcon<IconName> id="ChevronRight" url={spriteUrl} />}
+      {children ?? <SpriteIcon<IconName> iconId="ChevronRight" url={spriteUrl} />}
     </li>
   );
 }
@@ -38,7 +39,7 @@ function BreadcrumbSeparator({ children, className, spriteUrl, ...props }: React
 function BreadcrumbEllipsis({ className, spriteUrl, ...props }: React.ComponentProps<'span'> & { spriteUrl: string }) {
   return (
     <span data-slot="breadcrumb-ellipsis" role="presentation" aria-hidden="true" className={clsx('flex size-9 items-center justify-center', className)} {...props}>
-      <SpriteIcon<IconName> id="Ellipsis" className="size-4" url={spriteUrl} />
+      <SpriteIcon<IconName> iconId="Ellipsis" className="size-4" url={spriteUrl} />
       <span className="sr-only">More</span>
     </span>
   );

@@ -40,7 +40,7 @@ function ContextMenuSubTrigger({ className, inset, children, spriteUrl, ...props
       {...props}
     >
       {children}
-      <SpriteIcon<IconName> id="ChevronRight" className="ml-auto" url={spriteUrl} />
+      <SpriteIcon<IconName> iconId="ChevronRight" className="ml-auto" url={spriteUrl} />
     </ContextMenuPrimitive.SubTrigger>
   );
 }
@@ -101,7 +101,7 @@ function ContextMenuCheckboxItem({ className, children, checked, spriteUrl, ...p
     >
       <span className="pointer-events-none absolute left-2 flex size-3.5 items-center justify-center">
         <ContextMenuPrimitive.ItemIndicator>
-          <SpriteIcon<IconName> id="Check" className="size-4" url={spriteUrl} />
+          <SpriteIcon<IconName> iconId="Check" className="size-4" url={spriteUrl} />
         </ContextMenuPrimitive.ItemIndicator>
       </span>
       {children}
@@ -121,7 +121,7 @@ function ContextMenuRadioItem({ className, children, spriteUrl, ...props }: Reac
     >
       <span className="pointer-events-none absolute left-2 flex size-3.5 items-center justify-center">
         <ContextMenuPrimitive.ItemIndicator>
-          <SpriteIcon<IconName> id="Circle" className="size-2 fill-current" url={spriteUrl} />
+          <SpriteIcon<IconName> iconId="Circle" className="size-2 fill-current" url={spriteUrl} />
         </ContextMenuPrimitive.ItemIndicator>
       </span>
       {children}

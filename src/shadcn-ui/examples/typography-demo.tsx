@@ -9,7 +9,7 @@ export default function TypographyDemo() {
       <h2 className="mt-10 scroll-m-20 border-b pb-2 font-semibold text-3xl tracking-tight transition-colors first:mt-0">The King&apos;s Plan</h2>
       <p className="leading-7 [&:not(:first-child)]:mt-6">
         The king thought long and hard, and finally came up with{' '}
-        <a href="#" className="font-medium text-primary underline underline-offset-4">
+        <a href="#brilliant-plan" className="font-medium text-primary underline underline-offset-4">
           a brilliant plan
         </a>
         : he would tax the jokes in the kingdom.

@@ -30,22 +30,15 @@ const ThemeSwitchButton = ({ themeContext, theme, spriteUrl, className, classThe
       }}
       aria-label="theme switch"
     >
-      {resolvedTheme === theme.theme.dark ? <SpriteIcon url={spriteUrl} id="Moon" className={clsx('size-5', className)} /> : <SpriteIcon url={spriteUrl} id="Sun" className={clsx('size-5', className)} />}
+      {resolvedTheme === theme.theme.dark ? <SpriteIcon url={spriteUrl} iconId="Moon" className={clsx('size-5', className)} /> : <SpriteIcon url={spriteUrl} iconId="Sun" className={clsx('size-5', className)} />}
     </button>
   );
 };
 
 // Main ThemeSwitch component with render props pattern
 export const ThemeSwitch = ({ theme = THEME_OPTIONS, spriteUrl, className, classTheme, children }: ThemeSwitchProps) => {
-  // Try to get theme context, but don't fail if it's not available
-  let themeContext: ThemeContext | null = null;
-  try {
-    const nextThemeContext = useTheme();
-    themeContext = nextThemeContext ? { resolvedTheme: nextThemeContext.resolvedTheme, setTheme: nextThemeContext.setTheme } : null;
-  } catch {
-    // If useTheme hook fails (no provider), themeContext remains null
-    themeContext = null;
-  }
+  const nextThemeContext = useTheme();
+  const themeContext: ThemeContext | null = nextThemeContext ? { resolvedTheme: nextThemeContext.resolvedTheme, setTheme: nextThemeContext.setTheme } : null;
 
   // If children prop is provided, use render props pattern
   if (children) {

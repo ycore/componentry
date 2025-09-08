@@ -7,16 +7,16 @@ export default function AlertDemo({ spriteUrl }: { spriteUrl: string }) {
   return (
     <div className="grid w-full max-w-xl items-start gap-4">
       <Alert>
-        <SpriteIcon<IconName> id="CircleCheck" url={spriteUrl} />
+        <SpriteIcon<IconName> iconId="CircleCheck" url={spriteUrl} />
         <AlertTitle>Success! Your changes have been saved</AlertTitle>
         <AlertDescription>This is an alert with icon, title and description.</AlertDescription>
       </Alert>
       <Alert>
-        <SpriteIcon<IconName> id="Calendar" url={spriteUrl} />
+        <SpriteIcon<IconName> iconId="Calendar" url={spriteUrl} />
         <AlertTitle>This Alert has a title and an icon. No description.</AlertTitle>
       </Alert>
       <Alert variant="destructive">
-        <SpriteIcon<IconName> id="CircleAlert" url={spriteUrl} />
+        <SpriteIcon<IconName> iconId="CircleAlert" url={spriteUrl} />
         <AlertTitle>Unable to process your payment.</AlertTitle>
         <AlertDescription>
           <p>Please verify your billing information and try again.</p>

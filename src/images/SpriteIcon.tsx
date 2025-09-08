@@ -10,10 +10,10 @@ import type { SpriteIconProps } from './@types/SpriteIcon.types';
  * @param props.id - The ID of the icon within the sprite sheet. If not provided, the entire sprite is used.
  * @returns An SVG element referencing the specified icon from the sprite sheet.
  */
-export function SpriteIcon<IconId extends string = string>({ url, id, ...props }: SpriteIconProps<string, IconId>) {
+export function SpriteIcon<IconId extends string = string>({ url, iconId, ...props }: SpriteIconProps<string, IconId>) {
   return (
     // biome-ignore lint/a11y/noSvgWithoutTitle: acceptable
-    <svg {...props}>{id ? <use href={`${url}#${id}`} /> : <use href={`${url}`} />}</svg>
+    <svg {...props}>{iconId ? <use href={`${url}#${iconId}`} /> : <use href={`${url}`} />}</svg>
   );
 }
 
@@ -25,7 +25,7 @@ export function SpriteIcon<IconId extends string = string>({ url, id, ...props }
  * @returns A configured SpriteIcon component that only requires the icon ID
  */
 export function createSpriteIcon<IconId extends string>(spriteUrl: string) {
-  return function SpriteIconComponent({ id, ...props }: { id: IconId } & Omit<SpriteIconProps<string, IconId>, 'url'>) {
-    return <SpriteIcon url={spriteUrl} id={id} {...props} />;
+  return function SpriteIconComponent({ iconId, ...props }: { iconId: IconId } & Omit<SpriteIconProps<string, IconId>, 'url'>) {
+    return <SpriteIcon url={spriteUrl} iconId={iconId} {...props} />;
   };
 }

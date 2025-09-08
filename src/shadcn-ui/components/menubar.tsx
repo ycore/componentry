@@ -91,7 +91,7 @@ function MenubarCheckboxItem({ className, children, checked, spriteUrl, ...props
     >
       <span className="pointer-events-none absolute left-2 flex size-3.5 items-center justify-center">
         <MenubarPrimitive.ItemIndicator>
-          <SpriteIcon<IconName> id="Check" className="size-4" url={spriteUrl} />
+          <SpriteIcon<IconName> iconId="Check" className="size-4" url={spriteUrl} />
         </MenubarPrimitive.ItemIndicator>
       </span>
       {children}
@@ -111,7 +111,7 @@ function MenubarRadioItem({ className, children, spriteUrl, ...props }: React.Co
     >
       <span className="pointer-events-none absolute left-2 flex size-3.5 items-center justify-center">
         <MenubarPrimitive.ItemIndicator>
-          <SpriteIcon<IconName> id="Circle" className="size-2 fill-current" url={spriteUrl} />
+          <SpriteIcon<IconName> iconId="Circle" className="size-2 fill-current" url={spriteUrl} />
         </MenubarPrimitive.ItemIndicator>
       </span>
       {children}
@@ -153,7 +153,7 @@ function MenubarSubTrigger({ className, inset, children, spriteUrl, ...props }: 
       {...props}
     >
       {children}
-      <SpriteIcon<IconName> id="ChevronRight" className="ml-auto h-4 w-4" url={spriteUrl} />
+      <SpriteIcon<IconName> iconId="ChevronRight" className="ml-auto h-4 w-4" url={spriteUrl} />
     </MenubarPrimitive.SubTrigger>
   );
 }

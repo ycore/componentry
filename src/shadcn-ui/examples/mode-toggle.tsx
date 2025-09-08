@@ -12,8 +12,8 @@ export default function ModeToggle({ spriteUrl }: { spriteUrl: string }) {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="outline" size="icon">
-          <SpriteIcon<IconName> id="Sun" className="dark:-rotate-90 h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:scale-0" url={spriteUrl} />
-          <SpriteIcon<IconName> id="Moon" className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" url={spriteUrl} />
+          <SpriteIcon<IconName> iconId="Sun" className="dark:-rotate-90 h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:scale-0" url={spriteUrl} />
+          <SpriteIcon<IconName> iconId="Moon" className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" url={spriteUrl} />
           <span className="sr-only">Toggle theme</span>
         </Button>
       </DropdownMenuTrigger>

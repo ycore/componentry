@@ -38,7 +38,7 @@ export default function ComboboxDemo({ spriteUrl }: { spriteUrl: string }) {
       <PopoverTrigger asChild>
         <Button variant="outline" role="combobox" aria-expanded={open} className="w-[200px] justify-between">
           {value ? frameworks.find(framework => framework.value === value)?.label : 'Select framework...'}
-          <SpriteIcon<IconName> id="ChevronsUpDown" className="opacity-50" url={spriteUrl} />
+          <SpriteIcon<IconName> iconId="ChevronsUpDown" className="opacity-50" url={spriteUrl} />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-[200px] p-0">
@@ -57,7 +57,7 @@ export default function ComboboxDemo({ spriteUrl }: { spriteUrl: string }) {
                   }}
                 >
                   {framework.label}
-                  <SpriteIcon<IconName> id="Check" className={clsx('ml-auto', value === framework.value ? 'opacity-100' : 'opacity-0')} url={spriteUrl} />
+                  <SpriteIcon<IconName> iconId="Check" className={clsx('ml-auto', value === framework.value ? 'opacity-100' : 'opacity-0')} url={spriteUrl} />
                 </CommandItem>
               ))}
             </CommandGroup>

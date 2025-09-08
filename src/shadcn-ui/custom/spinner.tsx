@@ -5,5 +5,5 @@ import type { IconName } from '../@types/lucide-sprites';
 import type { SpinnerProps } from './@types/spinner.types';
 
 export function Spinner({ className, spriteUrl, iconId = 'Loader' }: SpinnerProps) {
-  return <SpriteIcon<IconName> id={iconId} url={spriteUrl} className={clsx(className, 'animate-spin')} />;
+  return <SpriteIcon<IconName> iconId={iconId} url={spriteUrl} className={clsx(className, 'animate-spin')} />;
 }

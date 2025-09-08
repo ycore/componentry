@@ -30,7 +30,7 @@ const navigationMenuTriggerStyle = cva(
 function NavigationMenuTrigger({ className, children, spriteUrl, ...props }: React.ComponentProps<typeof NavigationMenuPrimitive.Trigger> & { spriteUrl: string }) {
   return (
     <NavigationMenuPrimitive.Trigger data-slot="navigation-menu-trigger" className={clsx(navigationMenuTriggerStyle(), 'group', className)} {...props}>
-      {children} <SpriteIcon<IconName> id="ChevronDown" url={spriteUrl} className="relative top-[1px] ml-1 size-3 transition duration-300 group-data-[state=open]:rotate-180" aria-hidden="true" />
+      {children} <SpriteIcon<IconName> iconId="ChevronDown" url={spriteUrl} className="relative top-[1px] ml-1 size-3 transition duration-300 group-data-[state=open]:rotate-180" aria-hidden="true" />
     </NavigationMenuPrimitive.Trigger>
   );
 }

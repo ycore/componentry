@@ -61,7 +61,7 @@ function FormDescription({ className, ...props }: React.ComponentProps<'p'>) {
 }
 
 function FormMessage({ className, ...props }: React.ComponentProps<'p'>) {
-  const { error, formMessageId } = useFormField();
+  const { formMessageId } = useFormField();
   const body = props.children;
 
   if (!body) {

@@ -64,7 +64,7 @@ function DropdownMenuCheckboxItem({ className, children, checked, spriteUrl, ...
     >
       <span className="pointer-events-none absolute left-2 flex size-3.5 items-center justify-center">
         <DropdownMenuPrimitive.ItemIndicator>
-          <SpriteIcon<IconName> id="Check" className="size-4" url={spriteUrl} />
+          <SpriteIcon<IconName> iconId="Check" className="size-4" url={spriteUrl} />
         </DropdownMenuPrimitive.ItemIndicator>
       </span>
       {children}
@@ -88,7 +88,7 @@ function DropdownMenuRadioItem({ className, children, spriteUrl, ...props }: Rea
     >
       <span className="pointer-events-none absolute left-2 flex size-3.5 items-center justify-center">
         <DropdownMenuPrimitive.ItemIndicator>
-          <SpriteIcon<IconName> id="Circle" className="size-2 fill-current" url={spriteUrl} />
+          <SpriteIcon<IconName> iconId="Circle" className="size-2 fill-current" url={spriteUrl} />
         </DropdownMenuPrimitive.ItemIndicator>
       </span>
       {children}
@@ -124,7 +124,7 @@ function DropdownMenuSubTrigger({ className, inset, children, spriteUrl, ...prop
       {...props}
     >
       {children}
-      <SpriteIcon<IconName> id="ChevronRight" className="ml-auto size-4" url={spriteUrl} />
+      <SpriteIcon<IconName> iconId="ChevronRight" className="ml-auto size-4" url={spriteUrl} />
     </DropdownMenuPrimitive.SubTrigger>
   );
 }

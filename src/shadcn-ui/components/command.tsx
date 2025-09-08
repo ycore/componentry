@@ -42,7 +42,7 @@ function CommandDialog({
 function CommandInput({ className, spriteUrl, ...props }: React.ComponentProps<typeof CommandPrimitive.Input> & { spriteUrl: string }) {
   return (
     <div data-slot="command-input-wrapper" className="flex h-9 items-center gap-2 border-b px-3">
-      <SpriteIcon<IconName> id="Search" url={spriteUrl} className="size-4 shrink-0 opacity-50" />
+      <SpriteIcon<IconName> iconId="Search" url={spriteUrl} className="size-4 shrink-0 opacity-50" />
       <CommandPrimitive.Input
         data-slot="command-input"
         className={clsx('flex h-10 w-full rounded-md bg-transparent py-3 text-sm outline-hidden placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50', className)}

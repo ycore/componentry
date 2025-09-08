@@ -42,7 +42,7 @@ function PaginationLink({ className, isActive, size = 'icon', ...props }: Pagina
 function PaginationPrevious({ className, spriteUrl, ...props }: React.ComponentProps<typeof PaginationLink> & { spriteUrl: string }) {
   return (
     <PaginationLink aria-label="Go to previous page" size="default" className={clsx('gap-1 px-2.5 sm:pl-2.5', className)} {...props}>
-      <SpriteIcon<IconName> id="ChevronLeft" url={spriteUrl} />
+      <SpriteIcon<IconName> iconId="ChevronLeft" url={spriteUrl} />
       <span className="hidden sm:block">Previous</span>
     </PaginationLink>
   );
@@ -52,7 +52,7 @@ function PaginationNext({ className, spriteUrl, ...props }: React.ComponentProps
   return (
     <PaginationLink aria-label="Go to next page" size="default" className={clsx('gap-1 px-2.5 sm:pr-2.5', className)} {...props}>
       <span className="hidden sm:block">Next</span>
-      <SpriteIcon<IconName> id="ChevronRight" url={spriteUrl} />
+      <SpriteIcon<IconName> iconId="ChevronRight" url={spriteUrl} />
     </PaginationLink>
   );
 }
@@ -60,7 +60,7 @@ function PaginationNext({ className, spriteUrl, ...props }: React.ComponentProps
 function PaginationEllipsis({ className, spriteUrl, ...props }: React.ComponentProps<'span'> & { spriteUrl: string }) {
   return (
     <span aria-hidden data-slot="pagination-ellipsis" className={clsx('flex size-9 items-center justify-center', className)} {...props}>
-      <SpriteIcon<IconName> id="Ellipsis" className="size-4" url={spriteUrl} />
+      <SpriteIcon<IconName> iconId="Ellipsis" className="size-4" url={spriteUrl} />
       <span className="sr-only">More pages</span>
     </span>
   );

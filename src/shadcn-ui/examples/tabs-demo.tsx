@@ -6,6 +6,11 @@ import { Label } from '../components/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/tabs';
 
 export default function TabsDemo() {
+  const nameId = React.useId();
+  const usernameId = React.useId();
+  const currentPasswordId = React.useId();
+  const newPasswordId = React.useId();
+  
   return (
     <div className="flex w-full max-w-sm flex-col gap-6">
       <Tabs defaultValue="account">
@@ -21,12 +26,12 @@ export default function TabsDemo() {
             </CardHeader>
             <CardContent className="grid gap-6">
               <div className="grid gap-3">
-                <Label htmlFor="tabs-demo-name">Name</Label>
-                <Input id="tabs-demo-name" defaultValue="Pedro Duarte" />
+                <Label htmlFor={nameId}>Name</Label>
+                <Input id={nameId} defaultValue="Pedro Duarte" />
               </div>
               <div className="grid gap-3">
-                <Label htmlFor="tabs-demo-username">Username</Label>
-                <Input id="tabs-demo-username" defaultValue="@peduarte" />
+                <Label htmlFor={usernameId}>Username</Label>
+                <Input id={usernameId} defaultValue="@peduarte" />
               </div>
             </CardContent>
             <CardFooter>
@@ -42,12 +47,12 @@ export default function TabsDemo() {
             </CardHeader>
             <CardContent className="grid gap-6">
               <div className="grid gap-3">
-                <Label htmlFor="tabs-demo-current">Current password</Label>
-                <Input id="tabs-demo-current" type="password" />
+                <Label htmlFor={currentPasswordId}>Current password</Label>
+                <Input id={currentPasswordId} type="password" />
               </div>
               <div className="grid gap-3">
-                <Label htmlFor="tabs-demo-new">New password</Label>
-                <Input id="tabs-demo-new" type="password" />
+                <Label htmlFor={newPasswordId}>New password</Label>
+                <Input id={newPasswordId} type="password" />
               </div>
             </CardContent>
             <CardFooter>

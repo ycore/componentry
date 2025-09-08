@@ -6,7 +6,7 @@ import { Toggle } from '../components/toggle';
 export default function ToggleDisabled({ spriteUrl }: { spriteUrl: string }) {
   return (
     <Toggle aria-label="Toggle italic" disabled>
-      <SpriteIcon<IconName> id="Underline" className="h-4 w-4" url={spriteUrl} />
+      <SpriteIcon<IconName> iconId="Underline" className="h-4 w-4" url={spriteUrl} />
     </Toggle>
   );
 }

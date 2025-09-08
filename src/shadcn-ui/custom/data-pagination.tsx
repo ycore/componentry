@@ -39,7 +39,7 @@ export function RowsPerPageSelector({ currentLimit, options, onLimitChange, disa
       <Select
         value={currentLimit.toString()}
         onValueChange={value => {
-          onLimitChange(Number.parseInt(value));
+          onLimitChange(Number.parseInt(value, 10));
         }}
         disabled={disabled}
       >
@@ -259,7 +259,7 @@ export function DataPagination({ currentRecords, pagination, totalRecords, baseR
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <PaginationControls currentPage={pagination.page} hasNextPage={pagination.hasNextPage} hasPreviousPage={pagination.hasPreviousPage} onPageChange={handlePageChange} disabled={isLoading} />
-          {isLoading && loadingIcon && <SpriteIcon id="LoaderCircle" className="h-4 w-4 animate-spin text-muted-foreground" />}
+          {isLoading && loadingIcon && <SpriteIcon iconId="LoaderCircle" className="h-4 w-4 animate-spin text-muted-foreground" />}
         </div>
 
         <div className="flex items-center gap-4">

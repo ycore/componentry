@@ -5,6 +5,8 @@ import { Input } from '../components/input';
 import { Label } from '../components/label';
 
 export default function DialogCloseButton({ spriteUrl }: { spriteUrl: string }) {
+  const linkId = React.useId();
+  
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -17,10 +19,10 @@ export default function DialogCloseButton({ spriteUrl }: { spriteUrl: string }) 
         </DialogHeader>
         <div className="flex items-center gap-2">
           <div className="grid flex-1 gap-2">
-            <Label htmlFor="link" className="sr-only">
+            <Label htmlFor={linkId} className="sr-only">
               Link
             </Label>
-            <Input id="link" defaultValue="https://ui.shadcn.com/docs/installation" readOnly />
+            <Input id={linkId} defaultValue="https://ui.shadcn.com/docs/installation" readOnly />
           </div>
         </div>
         <DialogFooter className="sm:justify-start">

@@ -1,4 +1,5 @@
 import type React from 'react';
+import { useId } from 'react';
 import { SpriteIcon } from '../../images/SpriteIcon';
 import { ThemeSwitch } from '../../impetus/theme/ThemeSwitch';
 import { type IconName, iconNames } from '../@types/lucide-sprites';
@@ -115,24 +116,24 @@ import TypographyP from './typography-p';
 import TypographySmall from './typography-small';
 import TypographyTable from './typography-table';
 
-function ReturnToTop({ spriteUrl }: { spriteUrl: string }) {
+function ReturnToTop({ spriteUrl, tableOfContentsId }: { spriteUrl: string; tableOfContentsId: string }) {
   return (
     <a
-      href="#table-of-contents"
+      href={`#${tableOfContentsId}`}
       className="inline-flex items-center gap-2 rounded-md bg-primary px-3 py-2 font-medium text-primary-foreground text-sm transition-colors hover:bg-primary/80 hover:text-foreground"
       aria-label="Return to table of contents"
     >
-      <SpriteIcon url={spriteUrl} id="ArrowUp" className="h-4 w-4" />
+      <SpriteIcon url={spriteUrl} iconId="ArrowUp" className="h-4 w-4" />
     </a>
   );
 }
 
-function ComponentSection({ id, title, spriteUrl, children }: { id: string; title: string; spriteUrl: string; children: React.ReactNode }) {
+function ComponentSection({ id, title, spriteUrl, tableOfContentsId, children }: { id: string; title: string; spriteUrl: string; tableOfContentsId: string; children: React.ReactNode }) {
   return (
     <section id={id} className="mb-12">
       <div className="mb-6 flex items-center justify-between border-b pb-2">
         <h2 className="font-bold text-3xl">{title}</h2>
-        <ReturnToTop spriteUrl={spriteUrl} />
+        <ReturnToTop spriteUrl={spriteUrl} tableOfContentsId={tableOfContentsId} />
       </div>
       {children}
     </section>
@@ -159,7 +160,7 @@ function SpriteExamples({ spriteUrl }: { spriteUrl: string }) {
           <div key={iconName} className="flex flex-col items-center rounded-lg border bg-background p-3 transition-colors hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:hover:bg-input/50">
             <Tooltip>
               <TooltipTrigger asChild>
-                <SpriteIcon<IconName> url={spriteUrl} id={iconName} className="h-6 w-6 text-accent-foreground" viewBox="0 0 24 24" />
+                <SpriteIcon<IconName> url={spriteUrl} iconId={iconName} className="h-6 w-6 text-accent-foreground" viewBox="0 0 24 24" />
               </TooltipTrigger>
               <TooltipContent>
                 <p>{iconName}</p>
@@ -173,40 +174,77 @@ function SpriteExamples({ spriteUrl }: { spriteUrl: string }) {
 }
 
 export function ComponentExamples({ spriteUrl, exampleUrl }: { spriteUrl: string; exampleUrl: string }) {
+  // Generate unique IDs for each section
+  const spritesId = useId();
+  const accordionId = useId();
+  const alertsId = useId();
+  const avatarId = useId();
+  const badgesId = useId();
+  const breadcrumbsId = useId();
+  const buttonsId = useId();
+  const cardsId = useId();
+  const checkboxesId = useId();
+  const collapsibleId = useId();
+  const comboboxId = useId();
+  const menusId = useId();
+  const dataId = useId();
+  const datePickerId = useId();
+  const dialogsId = useId();
+  const inputsId = useId();
+  const labelsId = useId();
+  const navigationId = useId();
+  const overlaysId = useId();
+  const radioId = useId();
+  const scrollId = useId();
+  const selectsId = useId();
+  const separatorsId = useId();
+  const sheetsId = useId();
+  const skeletonId = useId();
+  const slidersId = useId();
+  const switchesId = useId();
+  const tablesId = useId();
+  const tabsId = useId();
+  const textareasId = useId();
+  const togglesId = useId();
+  const tooltipsId = useId();
+  const typographyId = useId();
+  const notificationsId = useId();
+  const tableOfContentsId = useId();
+
   const sections = [
-    { id: 'accordion', title: 'Accordion' },
-    { id: 'alerts', title: 'Alerts' },
-    { id: 'avatar', title: 'Avatar' },
-    { id: 'badges', title: 'Badges' },
-    { id: 'breadcrumbs', title: 'Breadcrumbs' },
-    { id: 'buttons', title: 'Buttons' },
-    { id: 'cards', title: 'Cards' },
-    { id: 'checkboxes', title: 'Checkboxes' },
-    { id: 'collapsible', title: 'Collapsible' },
-    { id: 'combobox', title: 'Combobox' },
-    { id: 'menus', title: 'Menus' },
-    { id: 'data', title: 'Data Display' },
-    { id: 'date-picker', title: 'Date Picker' },
-    { id: 'dialogs', title: 'Dialogs' },
-    { id: 'inputs', title: 'Inputs' },
-    { id: 'labels', title: 'Labels' },
-    { id: 'navigation', title: 'Navigation' },
-    { id: 'overlays', title: 'Overlays' },
-    { id: 'radio', title: 'Radio Groups' },
-    { id: 'scroll', title: 'Scroll Areas' },
-    { id: 'selects', title: 'Selects' },
-    { id: 'separators', title: 'Separators' },
-    { id: 'sheets', title: 'Sheets' },
-    { id: 'skeleton', title: 'Skeleton' },
-    { id: 'sliders', title: 'Sliders' },
-    { id: 'switches', title: 'Switches' },
-    { id: 'tables', title: 'Tables' },
-    { id: 'tabs', title: 'Tabs' },
-    { id: 'textareas', title: 'Textareas' },
-    { id: 'toggles', title: 'Toggles' },
-    { id: 'tooltips', title: 'Tooltips' },
-    { id: 'typography', title: 'Typography' },
-    { id: 'notifications', title: 'Notifications' },
+    { id: accordionId, title: 'Accordion' },
+    { id: alertsId, title: 'Alerts' },
+    { id: avatarId, title: 'Avatar' },
+    { id: badgesId, title: 'Badges' },
+    { id: breadcrumbsId, title: 'Breadcrumbs' },
+    { id: buttonsId, title: 'Buttons' },
+    { id: cardsId, title: 'Cards' },
+    { id: checkboxesId, title: 'Checkboxes' },
+    { id: collapsibleId, title: 'Collapsible' },
+    { id: comboboxId, title: 'Combobox' },
+    { id: menusId, title: 'Menus' },
+    { id: dataId, title: 'Data Display' },
+    { id: datePickerId, title: 'Date Picker' },
+    { id: dialogsId, title: 'Dialogs' },
+    { id: inputsId, title: 'Inputs' },
+    { id: labelsId, title: 'Labels' },
+    { id: navigationId, title: 'Navigation' },
+    { id: overlaysId, title: 'Overlays' },
+    { id: radioId, title: 'Radio Groups' },
+    { id: scrollId, title: 'Scroll Areas' },
+    { id: selectsId, title: 'Selects' },
+    { id: separatorsId, title: 'Separators' },
+    { id: sheetsId, title: 'Sheets' },
+    { id: skeletonId, title: 'Skeleton' },
+    { id: slidersId, title: 'Sliders' },
+    { id: switchesId, title: 'Switches' },
+    { id: tablesId, title: 'Tables' },
+    { id: tabsId, title: 'Tabs' },
+    { id: textareasId, title: 'Textareas' },
+    { id: togglesId, title: 'Toggles' },
+    { id: tooltipsId, title: 'Tooltips' },
+    { id: typographyId, title: 'Typography' },
+    { id: notificationsId, title: 'Notifications' },
   ];
 
   return (
@@ -217,14 +255,14 @@ export function ComponentExamples({ spriteUrl, exampleUrl }: { spriteUrl: string
           <div className="flex items-center gap-x-4">
             <ThemeSwitch spriteUrl={spriteUrl} />
             <Link href="/">
-              <SpriteIcon<IconName> url={spriteUrl} id="House" className="size-5 text-accent-foreground" viewBox="0 0 24 24" />
+              <SpriteIcon<IconName> url={spriteUrl} iconId="House" className="size-5 text-accent-foreground" viewBox="0 0 24 24" />
             </Link>
           </div>
         </div>
         <p className="mb-6 text-lg text-muted-foreground">A comprehensive showcase of all shadcn/ui components with live examples.</p>
 
         {/* Table of Contents */}
-        <div id="table-of-contents" className="mb-8 rounded-lg border bg-muted/10 p-6">
+        <div id={tableOfContentsId} className="mb-8 rounded-lg border bg-muted/10 p-6">
           <h2 className="mb-4 font-semibold text-xl">Table of Contents</h2>
           <div className="columns-1 gap-8 sm:columns-2 lg:columns-4">
             {sections.map(section => (
@@ -238,7 +276,7 @@ export function ComponentExamples({ spriteUrl, exampleUrl }: { spriteUrl: string
 
       <div className="space-y-16">
         {/* SpriteExamples */}
-        <ComponentSection id="sprites" title="Sprite Examples" spriteUrl={spriteUrl}>
+        <ComponentSection id={spritesId} title="Sprite Examples" spriteUrl={spriteUrl} tableOfContentsId={tableOfContentsId}>
           <div className="max-w-2xl">
             <SpriteExamples spriteUrl={spriteUrl} />
           </div>
@@ -247,7 +285,7 @@ export function ComponentExamples({ spriteUrl, exampleUrl }: { spriteUrl: string
         <h2 className="mb-4 font-bold text-4xl">Component Examples</h2>
 
         {/* Accordion */}
-        <ComponentSection id="accordion" title="Accordion" spriteUrl={spriteUrl}>
+        <ComponentSection id={accordionId} title="Accordion" spriteUrl={spriteUrl} tableOfContentsId={tableOfContentsId}>
           <div className="max-w-2xl">
             <ComponentExample name="Accordion Demo">
               <AccordionDemo spriteUrl={spriteUrl} />
@@ -256,7 +294,7 @@ export function ComponentExamples({ spriteUrl, exampleUrl }: { spriteUrl: string
         </ComponentSection>
 
         {/* Alerts */}
-        <ComponentSection id="alerts" title="Alerts" spriteUrl={spriteUrl}>
+        <ComponentSection id={alertsId} title="Alerts" spriteUrl={spriteUrl} tableOfContentsId={tableOfContentsId}>
           <div className="flex max-w-2xl flex-col gap-6">
             <ComponentExample name="Alert Demo">
               <AlertDemo spriteUrl={spriteUrl} />
@@ -271,7 +309,7 @@ export function ComponentExamples({ spriteUrl, exampleUrl }: { spriteUrl: string
         </ComponentSection>
 
         {/* Avatar */}
-        <ComponentSection id="avatar" title="Avatar" spriteUrl={spriteUrl}>
+        <ComponentSection id={avatarId} title="Avatar" spriteUrl={spriteUrl} tableOfContentsId={tableOfContentsId}>
           <div className="flex flex-row gap-6">
             <ComponentExample name="Avatar Demo">
               <AvatarDemo />
@@ -283,7 +321,7 @@ export function ComponentExamples({ spriteUrl, exampleUrl }: { spriteUrl: string
         </ComponentSection>
 
         {/* Badges */}
-        <ComponentSection id="badges" title="Badges" spriteUrl={spriteUrl}>
+        <ComponentSection id={badgesId} title="Badges" spriteUrl={spriteUrl} tableOfContentsId={tableOfContentsId}>
           <div className="flex flex-row gap-6">
             <ComponentExample name="Badge Demo">
               <BadgeDemo spriteUrl={spriteUrl} />
@@ -301,7 +339,7 @@ export function ComponentExamples({ spriteUrl, exampleUrl }: { spriteUrl: string
         </ComponentSection>
 
         {/* Breadcrumbs */}
-        <ComponentSection id="breadcrumbs" title="Breadcrumbs" spriteUrl={spriteUrl}>
+        <ComponentSection id={breadcrumbsId} title="Breadcrumbs" spriteUrl={spriteUrl} tableOfContentsId={tableOfContentsId}>
           <div className="flex max-w-2xl flex-col gap-6">
             <ComponentExample name="Breadcrumb Demo">
               <BreadcrumbDemo spriteUrl={spriteUrl} />
@@ -325,7 +363,7 @@ export function ComponentExamples({ spriteUrl, exampleUrl }: { spriteUrl: string
         </ComponentSection>
 
         {/* Buttons */}
-        <ComponentSection id="buttons" title="Buttons" spriteUrl={spriteUrl}>
+        <ComponentSection id={buttonsId} title="Buttons" spriteUrl={spriteUrl} tableOfContentsId={tableOfContentsId}>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             <ComponentExample name="Button Demo">
               <ButtonDemo />
@@ -361,7 +399,7 @@ export function ComponentExamples({ spriteUrl, exampleUrl }: { spriteUrl: string
         </ComponentSection>
 
         {/* Cards */}
-        <ComponentSection id="cards" title="Cards" spriteUrl={spriteUrl}>
+        <ComponentSection id={cardsId} title="Cards" spriteUrl={spriteUrl} tableOfContentsId={tableOfContentsId}>
           <div className="flex flex-col gap-6 lg:flex-row">
             <ComponentExample name="Card Demo">
               <CardDemo />
@@ -373,7 +411,7 @@ export function ComponentExamples({ spriteUrl, exampleUrl }: { spriteUrl: string
         </ComponentSection>
 
         {/* Checkboxes */}
-        <ComponentSection id="checkboxes" title="Checkboxes" spriteUrl={spriteUrl}>
+        <ComponentSection id={checkboxesId} title="Checkboxes" spriteUrl={spriteUrl} tableOfContentsId={tableOfContentsId}>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             <ComponentExample name="Checkbox Demo">
               <CheckboxDemo spriteUrl={spriteUrl} />
@@ -394,7 +432,7 @@ export function ComponentExamples({ spriteUrl, exampleUrl }: { spriteUrl: string
         </ComponentSection>
 
         {/* Collapsible */}
-        <ComponentSection id="collapsible" title="Collapsible" spriteUrl={spriteUrl}>
+        <ComponentSection id={collapsibleId} title="Collapsible" spriteUrl={spriteUrl} tableOfContentsId={tableOfContentsId}>
           <div className="max-w-md">
             <ComponentExample name="Collapsible Demo">
               <CollapsibleDemo spriteUrl={spriteUrl} />
@@ -403,7 +441,7 @@ export function ComponentExamples({ spriteUrl, exampleUrl }: { spriteUrl: string
         </ComponentSection>
 
         {/* Combobox */}
-        <ComponentSection id="combobox" title="Combobox" spriteUrl={spriteUrl}>
+        <ComponentSection id={comboboxId} title="Combobox" spriteUrl={spriteUrl} tableOfContentsId={tableOfContentsId}>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             <ComponentExample name="Combobox Demo">
               <ComboboxDemo spriteUrl={spriteUrl} />
@@ -424,7 +462,7 @@ export function ComponentExamples({ spriteUrl, exampleUrl }: { spriteUrl: string
         </ComponentSection>
 
         {/* Menus */}
-        <ComponentSection id="menus" title="Menus" spriteUrl={spriteUrl}>
+        <ComponentSection id={menusId} title="Menus" spriteUrl={spriteUrl} tableOfContentsId={tableOfContentsId}>
           <div className="flex flex-row gap-6">
             <ComponentExample name="Context Menu Demo">
               <ContextMenuDemo spriteUrl={spriteUrl} />
@@ -472,7 +510,7 @@ export function ComponentExamples({ spriteUrl, exampleUrl }: { spriteUrl: string
         </ComponentSection> */}
 
         {/* Dialogs */}
-        <ComponentSection id="dialogs" title="Dialogs" spriteUrl={spriteUrl}>
+        <ComponentSection id={dialogsId} title="Dialogs" spriteUrl={spriteUrl} tableOfContentsId={tableOfContentsId}>
           <div className="flex flex-row gap-6">
             <ComponentExample name="Dialog Demo">
               <DialogDemo spriteUrl={spriteUrl} />
@@ -484,7 +522,7 @@ export function ComponentExamples({ spriteUrl, exampleUrl }: { spriteUrl: string
         </ComponentSection>
 
         {/* Inputs */}
-        <ComponentSection id="inputs" title="Inputs" spriteUrl={spriteUrl}>
+        <ComponentSection id={inputsId} title="Inputs" spriteUrl={spriteUrl} tableOfContentsId={tableOfContentsId}>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             <ComponentExample name="Input Demo">
               <InputDemo />
@@ -511,7 +549,7 @@ export function ComponentExamples({ spriteUrl, exampleUrl }: { spriteUrl: string
         </ComponentSection>
 
         {/* Labels */}
-        <ComponentSection id="labels" title="Labels" spriteUrl={spriteUrl}>
+        <ComponentSection id={labelsId} title="Labels" spriteUrl={spriteUrl} tableOfContentsId={tableOfContentsId}>
           <div className="max-w-md">
             <ComponentExample name="Label Demo">
               <LabelDemo spriteUrl={spriteUrl} />
@@ -520,7 +558,7 @@ export function ComponentExamples({ spriteUrl, exampleUrl }: { spriteUrl: string
         </ComponentSection>
 
         {/* Navigation */}
-        <ComponentSection id="navigation" title="Navigation" spriteUrl={spriteUrl}>
+        <ComponentSection id={navigationId} title="Navigation" spriteUrl={spriteUrl} tableOfContentsId={tableOfContentsId}>
           <div className="flex flex-col gap-6">
             <ComponentExample name="Navigation Menu Demo">
               <NavigationMenuDemo spriteUrl={spriteUrl} />
@@ -532,7 +570,7 @@ export function ComponentExamples({ spriteUrl, exampleUrl }: { spriteUrl: string
         </ComponentSection>
 
         {/* Overlays */}
-        <ComponentSection id="overlays" title="Overlays" spriteUrl={spriteUrl}>
+        <ComponentSection id={overlaysId} title="Overlays" spriteUrl={spriteUrl} tableOfContentsId={tableOfContentsId}>
           <div className="flex flex-row gap-6">
             <ComponentExample name="Hover Card Demo">
               <HoverCardDemo />
@@ -547,7 +585,7 @@ export function ComponentExamples({ spriteUrl, exampleUrl }: { spriteUrl: string
         </ComponentSection>
 
         {/* Radio Groups */}
-        <ComponentSection id="radio" title="Radio Groups" spriteUrl={spriteUrl}>
+        <ComponentSection id={radioId} title="Radio Groups" spriteUrl={spriteUrl} tableOfContentsId={tableOfContentsId}>
           <div className="flex flex-row gap-6">
             <ComponentExample name="Radio Group Demo">
               <RadioGroupDemo spriteUrl={spriteUrl} />
@@ -559,7 +597,7 @@ export function ComponentExamples({ spriteUrl, exampleUrl }: { spriteUrl: string
         </ComponentSection>
 
         {/* Scroll Areas */}
-        <ComponentSection id="scroll" title="Scroll Areas" spriteUrl={spriteUrl}>
+        <ComponentSection id={scrollId} title="Scroll Areas" spriteUrl={spriteUrl} tableOfContentsId={tableOfContentsId}>
           <div className="flex flex-col gap-6 lg:flex-row">
             <ComponentExample name="Scroll Area Demo">
               <ScrollAreaDemo />
@@ -571,7 +609,7 @@ export function ComponentExamples({ spriteUrl, exampleUrl }: { spriteUrl: string
         </ComponentSection>
 
         {/* Selects */}
-        <ComponentSection id="selects" title="Selects" spriteUrl={spriteUrl}>
+        <ComponentSection id={selectsId} title="Selects" spriteUrl={spriteUrl} tableOfContentsId={tableOfContentsId}>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             <ComponentExample name="Select Demo">
               <SelectDemo spriteUrl={spriteUrl} />
@@ -586,7 +624,7 @@ export function ComponentExamples({ spriteUrl, exampleUrl }: { spriteUrl: string
         </ComponentSection>
 
         {/* Separators */}
-        <ComponentSection id="separators" title="Separators" spriteUrl={spriteUrl}>
+        <ComponentSection id={separatorsId} title="Separators" spriteUrl={spriteUrl} tableOfContentsId={tableOfContentsId}>
           <div className="max-w-md">
             <ComponentExample name="Separator Demo">
               <SeparatorDemo />
@@ -595,7 +633,7 @@ export function ComponentExamples({ spriteUrl, exampleUrl }: { spriteUrl: string
         </ComponentSection>
 
         {/* Sheets */}
-        <ComponentSection id="sheets" title="Sheets" spriteUrl={spriteUrl}>
+        <ComponentSection id={sheetsId} title="Sheets" spriteUrl={spriteUrl} tableOfContentsId={tableOfContentsId}>
           <div className="flex flex-row gap-6">
             <ComponentExample name="Sheet Demo">
               <SheetDemo spriteUrl={spriteUrl} />
@@ -607,7 +645,7 @@ export function ComponentExamples({ spriteUrl, exampleUrl }: { spriteUrl: string
         </ComponentSection>
 
         {/* Skeleton */}
-        <ComponentSection id="skeleton" title="Skeleton" spriteUrl={spriteUrl}>
+        <ComponentSection id={skeletonId} title="Skeleton" spriteUrl={spriteUrl} tableOfContentsId={tableOfContentsId}>
           <div className="flex flex-col gap-6 lg:flex-row">
             <ComponentExample name="Skeleton Demo">
               <SkeletonDemo />
@@ -619,7 +657,7 @@ export function ComponentExamples({ spriteUrl, exampleUrl }: { spriteUrl: string
         </ComponentSection>
 
         {/* Sliders */}
-        <ComponentSection id="sliders" title="Sliders" spriteUrl={spriteUrl}>
+        <ComponentSection id={slidersId} title="Sliders" spriteUrl={spriteUrl} tableOfContentsId={tableOfContentsId}>
           <div className="max-w-md">
             <ComponentExample name="Slider Demo">
               <SliderDemo />
@@ -631,7 +669,7 @@ export function ComponentExamples({ spriteUrl, exampleUrl }: { spriteUrl: string
         </ComponentSection>
 
         {/* Switches */}
-        <ComponentSection id="switches" title="Switches" spriteUrl={spriteUrl}>
+        <ComponentSection id={switchesId} title="Switches" spriteUrl={spriteUrl} tableOfContentsId={tableOfContentsId}>
           <div className="flex flex-row gap-6">
             <ComponentExample name="Switch Demo">
               <SwitchDemo />
@@ -643,7 +681,7 @@ export function ComponentExamples({ spriteUrl, exampleUrl }: { spriteUrl: string
         </ComponentSection>
 
         {/* Tables */}
-        <ComponentSection id="tables" title="Tables" spriteUrl={spriteUrl}>
+        <ComponentSection id={tablesId} title="Tables" spriteUrl={spriteUrl} tableOfContentsId={tableOfContentsId}>
           <div className="max-w-4xl">
             <ComponentExample name="Table Demo">
               <TableDemo />
@@ -652,7 +690,7 @@ export function ComponentExamples({ spriteUrl, exampleUrl }: { spriteUrl: string
         </ComponentSection>
 
         {/* Tabs */}
-        <ComponentSection id="tabs" title="Tabs" spriteUrl={spriteUrl}>
+        <ComponentSection id={tabsId} title="Tabs" spriteUrl={spriteUrl} tableOfContentsId={tableOfContentsId}>
           <div className="max-w-2xl">
             <ComponentExample name="Tabs Demo">
               <TabsDemo />
@@ -661,7 +699,7 @@ export function ComponentExamples({ spriteUrl, exampleUrl }: { spriteUrl: string
         </ComponentSection>
 
         {/* Textareas */}
-        <ComponentSection id="textareas" title="Textareas" spriteUrl={spriteUrl}>
+        <ComponentSection id={textareasId} title="Textareas" spriteUrl={spriteUrl} tableOfContentsId={tableOfContentsId}>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             <ComponentExample name="Textarea Demo">
               <TextareaDemo />
@@ -685,7 +723,7 @@ export function ComponentExamples({ spriteUrl, exampleUrl }: { spriteUrl: string
         </ComponentSection>
 
         {/* Toggles */}
-        <ComponentSection id="toggles" title="Toggles" spriteUrl={spriteUrl}>
+        <ComponentSection id={togglesId} title="Toggles" spriteUrl={spriteUrl} tableOfContentsId={tableOfContentsId}>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             <ComponentExample name="Toggle Demo">
               <ToggleDemo spriteUrl={exampleUrl} />
@@ -727,7 +765,7 @@ export function ComponentExamples({ spriteUrl, exampleUrl }: { spriteUrl: string
         </ComponentSection>
 
         {/* Tooltips */}
-        <ComponentSection id="tooltips" title="Tooltips" spriteUrl={spriteUrl}>
+        <ComponentSection id={tooltipsId} title="Tooltips" spriteUrl={spriteUrl} tableOfContentsId={tableOfContentsId}>
           <div className="max-w-md">
             <ComponentExample name="Tooltip Demo">
               <TooltipDemo />
@@ -736,7 +774,7 @@ export function ComponentExamples({ spriteUrl, exampleUrl }: { spriteUrl: string
         </ComponentSection>
 
         {/* Typography */}
-        <ComponentSection id="typography" title="Typography" spriteUrl={spriteUrl}>
+        <ComponentSection id={typographyId} title="Typography" spriteUrl={spriteUrl} tableOfContentsId={tableOfContentsId}>
           <div className="flex max-w-4xl flex-col gap-6">
             <ComponentExample name="Typography Demo">
               <TypographyDemo />
@@ -786,7 +824,7 @@ export function ComponentExamples({ spriteUrl, exampleUrl }: { spriteUrl: string
         </ComponentSection>
 
         {/* Notifications */}
-        <ComponentSection id="notifications" title="Notifications" spriteUrl={spriteUrl}>
+        <ComponentSection id={notificationsId} title="Notifications" spriteUrl={spriteUrl} tableOfContentsId={tableOfContentsId}>
           <div className="max-w-md">
             <ComponentExample name="Sonner Demo">
               <SonnerDemo />

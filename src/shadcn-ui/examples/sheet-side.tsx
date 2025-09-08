@@ -7,9 +7,10 @@ import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHe
 
 const SHEET_SIDES = ['top', 'right', 'bottom', 'left'] as const;
 
-type SheetSide = (typeof SHEET_SIDES)[number];
-
 export default function SheetSide({ spriteUrl }: { spriteUrl: string }) {
+  const nameId = React.useId();
+  const usernameId = React.useId();
+  
   return (
     <div className="grid grid-cols-2 gap-2">
       {SHEET_SIDES.map(side => (
@@ -24,16 +25,16 @@ export default function SheetSide({ spriteUrl }: { spriteUrl: string }) {
             </SheetHeader>
             <div className="grid gap-4 py-4">
               <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="name" className="text-right">
+                <Label htmlFor={nameId} className="text-right">
                   Name
                 </Label>
-                <Input id="name" value="Pedro Duarte" className="col-span-3" />
+                <Input id={nameId} value="Pedro Duarte" className="col-span-3" />
               </div>
               <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="username" className="text-right">
+                <Label htmlFor={usernameId} className="text-right">
                   Username
                 </Label>
-                <Input id="username" value="@peduarte" className="col-span-3" />
+                <Input id={usernameId} value="@peduarte" className="col-span-3" />
               </div>
             </div>
             <SheetFooter>

@@ -16,7 +16,7 @@ function Checkbox({ className, spriteUrl, ...props }: React.ComponentProps<typeo
       {...props}
     >
       <CheckboxPrimitive.Indicator data-slot="checkbox-indicator" className="flex items-center justify-center text-current transition-none">
-        <SpriteIcon<IconName> id="Check" url={spriteUrl} className="size-3.5" />
+        <SpriteIcon<IconName> iconId="Check" url={spriteUrl} className="size-3.5" />
       </CheckboxPrimitive.Indicator>
     </CheckboxPrimitive.Root>
   );

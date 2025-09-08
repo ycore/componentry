@@ -14,7 +14,7 @@ export default function BreadcrumbWithCustomSeparator({ spriteUrl }: { spriteUrl
           </BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator spriteUrl={spriteUrl}>
-          <SpriteIcon<IconName> id="Slash" url={spriteUrl} />
+          <SpriteIcon<IconName> iconId="Slash" url={spriteUrl} />
         </BreadcrumbSeparator>
         <BreadcrumbItem>
           <BreadcrumbLink asChild>
@@ -22,7 +22,7 @@ export default function BreadcrumbWithCustomSeparator({ spriteUrl }: { spriteUrl
           </BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator spriteUrl={spriteUrl}>
-          <SpriteIcon<IconName> id="Slash" url={spriteUrl} />
+          <SpriteIcon<IconName> iconId="Slash" url={spriteUrl} />
         </BreadcrumbSeparator>
         <BreadcrumbItem>
           <BreadcrumbPage>Breadcrumb</BreadcrumbPage>

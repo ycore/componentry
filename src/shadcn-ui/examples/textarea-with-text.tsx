@@ -3,10 +3,12 @@ import { Label } from '../components/label';
 import { Textarea } from '../components/textarea';
 
 export default function TextareaWithText() {
+  const messageId = React.useId();
+  
   return (
     <div className="grid w-full gap-3">
-      <Label htmlFor="message-2">Your Message</Label>
-      <Textarea placeholder="Type your message here." id="message-2" />
+      <Label htmlFor={messageId}>Your Message</Label>
+      <Textarea placeholder="Type your message here." id={messageId} />
       <p className="text-muted-foreground text-sm">Your message will be copied to the support team.</p>
     </div>
   );

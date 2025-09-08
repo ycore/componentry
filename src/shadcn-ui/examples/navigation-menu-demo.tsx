@@ -134,19 +134,19 @@ export default function NavigationMenuDemo({ spriteUrl }: { spriteUrl: string })
               <li>
                 <NavigationMenuLink asChild>
                   <Link href="#" className="flex-row items-center gap-2">
-                    <SpriteIcon<IconName> id="CircleQuestionMark" url={spriteUrl} />
+                    <SpriteIcon<IconName> iconId="CircleQuestionMark" url={spriteUrl} />
                     Backlog
                   </Link>
                 </NavigationMenuLink>
                 <NavigationMenuLink asChild>
                   <Link href="#" className="flex-row items-center gap-2">
-                    <SpriteIcon<IconName> id="Circle" url={spriteUrl} />
+                    <SpriteIcon<IconName> iconId="Circle" url={spriteUrl} />
                     To Do
                   </Link>
                 </NavigationMenuLink>
                 <NavigationMenuLink asChild>
                   <Link href="#" className="flex-row items-center gap-2">
-                    <SpriteIcon<IconName> id="CircleCheck" url={spriteUrl} />
+                    <SpriteIcon<IconName> iconId="CircleCheck" url={spriteUrl} />
                     Done
                   </Link>
                 </NavigationMenuLink>

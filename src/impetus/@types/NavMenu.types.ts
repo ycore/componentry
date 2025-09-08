@@ -9,7 +9,7 @@ export interface MenubarItemConfig {
   inset?: boolean;
   variant?: 'default' | 'destructive';
   shortcut?: string;
-  component?: React.ComponentType<any>;
+  component?: React.ComponentType<unknown>;
   separator?: boolean;
 
   // For checkbox items
@@ -50,5 +50,5 @@ export interface NavMenubarProps {
 export interface MenubarContextValue {
   currentPath: string;
   spriteUrl: string;
-  IconSprite: React.ComponentType<{ id: IconName } & React.ComponentProps<'svg'>>;
+  IconSprite: React.ComponentType<{ iconId: IconName } & React.ComponentProps<'svg'>>;
 }

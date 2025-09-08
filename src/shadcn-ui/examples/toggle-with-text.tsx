@@ -6,7 +6,7 @@ import { Toggle } from '../components/toggle';
 export default function ToggleWithText({ spriteUrl }: { spriteUrl: string }) {
   return (
     <Toggle aria-label="Toggle italic">
-      <SpriteIcon<IconName> id="Italic" url={spriteUrl} />
+      <SpriteIcon<IconName> iconId="Italic" url={spriteUrl} />
       Italic
     </Toggle>
   );

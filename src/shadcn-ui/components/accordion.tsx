@@ -25,7 +25,7 @@ function AccordionTrigger({ className, children, spriteUrl, ...props }: React.Co
         {...props}
       >
         {children}
-        <SpriteIcon<IconName> id="ChevronDown" url={spriteUrl} className="pointer-events-none size-4 shrink-0 translate-y-0.5 text-muted-foreground transition-transform duration-200" />
+        <SpriteIcon<IconName> iconId="ChevronDown" url={spriteUrl} className="pointer-events-none size-4 shrink-0 translate-y-0.5 text-muted-foreground transition-transform duration-200" />
       </AccordionPrimitive.Trigger>
     </AccordionPrimitive.Header>
   );

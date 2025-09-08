@@ -80,7 +80,7 @@ function SidebarProvider({
   // Helper to toggle the sidebar.
   const toggleSidebar = React.useCallback(() => {
     return isMobile ? setOpenMobile(open => !open) : setOpen(open => !open);
-  }, [isMobile, setOpen, setOpenMobile]);
+  }, [isMobile, setOpen]);
 
   // Adds a keyboard shortcut to toggle the sidebar.
   React.useEffect(() => {
@@ -109,7 +109,7 @@ function SidebarProvider({
       setOpenMobile,
       toggleSidebar,
     }),
-    [state, open, setOpen, isMobile, openMobile, setOpenMobile, toggleSidebar]
+    [state, open, setOpen, isMobile, openMobile, toggleSidebar]
   );
 
   return (
@@ -236,7 +236,7 @@ function SidebarTrigger({ className, onClick, spriteUrl, ...props }: React.Compo
       }}
       {...props}
     >
-      <SpriteIcon<IconName> id="PanelLeft" url={spriteUrl} />
+      <SpriteIcon<IconName> iconId="PanelLeft" url={spriteUrl} />
       <span className="sr-only">Toggle Sidebar</span>
     </Button>
   );

@@ -36,7 +36,7 @@ function renderMenubarItem(item: MenubarItemConfig, index: number, context: Menu
     return (
       <MenubarSub key={`sub-${index}`}>
         <MenubarSubTrigger spriteUrl={itemSpriteUrl} inset={item.inset}>
-          {item.iconId && <IconSprite id={item.iconId} />}
+          {item.iconId && <IconSprite iconId={item.iconId} />}
           {item.label}
         </MenubarSubTrigger>
         <MenubarSubContent>{item.items.map((subItem: MenubarItemConfig, subIndex: number) => renderMenubarItem(subItem, subIndex, context))}</MenubarSubContent>
@@ -48,7 +48,7 @@ function renderMenubarItem(item: MenubarItemConfig, index: number, context: Menu
   if (item.checked !== undefined) {
     return (
       <MenubarCheckboxItem key={`checkbox-${index}`} spriteUrl={itemSpriteUrl} checked={item.checked} disabled={item.disabled}>
-        {item.iconId && <IconSprite id={item.iconId} />}
+        {item.iconId && <IconSprite iconId={item.iconId} />}
         {item.label}
         {item.shortcut && <MenubarShortcut>{item.shortcut}</MenubarShortcut>}
       </MenubarCheckboxItem>
@@ -59,7 +59,7 @@ function renderMenubarItem(item: MenubarItemConfig, index: number, context: Menu
   if (item.value !== undefined) {
     return (
       <MenubarRadioItem key={`radio-${index}`} spriteUrl={itemSpriteUrl} value={item.value} disabled={item.disabled}>
-        {item.iconId && <IconSprite id={item.iconId} />}
+        {item.iconId && <IconSprite iconId={item.iconId} />}
         {item.label}
         {item.shortcut && <MenubarShortcut>{item.shortcut}</MenubarShortcut>}
       </MenubarRadioItem>
@@ -69,7 +69,7 @@ function renderMenubarItem(item: MenubarItemConfig, index: number, context: Menu
   // Regular item
   const ItemContent = (
     <>
-      {item.iconId && <IconSprite id={item.iconId} />}
+      {item.iconId && <IconSprite iconId={item.iconId} />}
       {item.label}
       {item.shortcut && <MenubarShortcut>{item.shortcut}</MenubarShortcut>}
     </>
@@ -130,7 +130,7 @@ function renderMenuConfigItem(configItem: MenubarConfigItem, index: number, cont
       <MenubarMenu key={`nav-link-${index}`}>
         <MenubarTrigger asChild className={clsx(isActive && 'bg-accent text-accent-foreground')}>
           <Link href={configItem.href}>
-            {configItem.iconId && <IconSprite id={configItem.iconId} className="mr-2 size-4" />}
+            {configItem.iconId && <IconSprite iconId={configItem.iconId} className="mr-2 size-4" />}
             {configItem.label}
           </Link>
         </MenubarTrigger>
@@ -144,7 +144,7 @@ function renderMenuConfigItem(configItem: MenubarConfigItem, index: number, cont
       <MenubarTrigger>
         {configItem.iconId && <IconSprite id={configItem.iconId} className="mr-2 size-4" />}
         {configItem.label || 'Menu'}
-        <IconSprite id="ChevronDown" className="ml-2 size-3" />
+        <IconSprite iconId="ChevronDown" className="ml-2 size-3" />
       </MenubarTrigger>
       <MenubarContent>{configItem.items?.map((item: MenubarItemConfig, itemIndex: number) => renderMenubarItem(item, itemIndex, context))}</MenubarContent>
     </MenubarMenu>
@@ -174,7 +174,7 @@ function renderSheetItem(item: MenubarItemConfig, index: number, context: Menuba
     return (
       <div key={`submenu-${index}`} className="space-y-2">
         <div className="px-4 py-2 font-medium text-muted-foreground text-sm">
-          {item.iconId && <IconSprite id={item.iconId} className="mr-2 inline size-4" />}
+          {item.iconId && <IconSprite iconId={item.iconId} className="mr-2 inline size-4" />}
           {item.label}
         </div>
         <div className="space-y-1 pl-4">{item.items.map((subItem: MenubarItemConfig, subIndex: number) => renderSheetItem(subItem, index + subIndex, context, onItemClick))}</div>
@@ -185,7 +185,7 @@ function renderSheetItem(item: MenubarItemConfig, index: number, context: Menuba
   // Regular item
   const ItemContent = (
     <div className={clsx('flex items-center gap-3 rounded-md px-4 py-1 transition-colors hover:bg-accent hover:text-accent-foreground', isActive && 'bg-accent text-accent-foreground')}>
-      {item.iconId && <IconSprite id={item.iconId} className="size-4" />}
+      {item.iconId && <IconSprite iconId={item.iconId} className="size-4" />}
       <span>{item.label}</span>
     </div>
   );
@@ -218,7 +218,7 @@ function renderSheetMenuSection(configItem: MenubarConfigItem, index: number, co
     return (
       <Link key={`nav-link-${index}`} href={configItem.href} onClick={onItemClick}>
         <div className={clsx('flex items-center gap-3 rounded-md px-4 py-1 transition-colors hover:bg-accent hover:text-accent-foreground', isActive && 'bg-accent text-accent-foreground')}>
-          {configItem.iconId && <context.IconSprite id={configItem.iconId} className="size-4" />}
+          {configItem.iconId && <context.IconSprite iconId={configItem.iconId} className="size-4" />}
           <span>{configItem.label}</span>
         </div>
       </Link>
@@ -230,7 +230,7 @@ function renderSheetMenuSection(configItem: MenubarConfigItem, index: number, co
     return (
       <div key={`menu-${index}`} className="space-y-1">
         <div className="border-b px-4 py-2 font-medium text-muted-foreground text-sm">
-          {configItem.iconId && <context.IconSprite id={configItem.iconId} className="mr-2 inline size-4" />}
+          {configItem.iconId && <context.IconSprite iconId={configItem.iconId} className="mr-2 inline size-4" />}
           {configItem.label || 'Menu'}
         </div>
         <div className="space-y-1">{configItem.items.map((item: MenubarItemConfig, itemIndex: number) => renderSheetItem(item, itemIndex, context, onItemClick))}</div>
@@ -267,8 +267,7 @@ export function NavMenu({ navConfigItems, spriteUrl, navFilters, className }: Na
   // Filter sections/menus if navFilters is provided
   const filteredSections = navFilters
     ? sections
-      // biome-ignore lint/suspicious/noExplicitAny: acceptable
-      .map((section: any) => ({
+      .map((section: { menus: MenubarConfigItem[] }) => ({
         ...section,
         menus: section.menus.filter((menu: MenubarConfigItem) => {
           // If no filter property exists, always show
@@ -278,13 +277,11 @@ export function NavMenu({ navConfigItems, spriteUrl, navFilters, className }: Na
           return menu.filter.some((filterValue: string) => navFilters.includes(filterValue));
         }),
       }))
-      // biome-ignore lint/suspicious/noExplicitAny: acceptable
-      .filter((section: any) => section.menus.length > 0)
+      .filter((section: { menus: MenubarConfigItem[] }) => section.menus.length > 0)
     : sections;
 
   // Get all menus for mobile
-  // biome-ignore lint/suspicious/noExplicitAny: acceptable
-  const allMenus = filteredSections.flatMap((section: any) => section.menus);
+  const allMenus = filteredSections.flatMap((section: { menus: MenubarConfigItem[] }) => section.menus);
 
   return (
     <MenubarContext.Provider value={contextValue}>
@@ -293,7 +290,7 @@ export function NavMenu({ navConfigItems, spriteUrl, navFilters, className }: Na
         <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
           <SheetTrigger asChild>
             <Button variant="outline" size="sm" className="flex items-center gap-2 shadow-lg">
-              <IconSprite id="EllipsisVertical" className="size-4" />
+              <IconSprite iconId="EllipsisVertical" className="size-4" />
             </Button>
           </SheetTrigger>
           <SheetContent side="left" spriteUrl={spriteUrl} className="w-80 px-2 pt-4">
@@ -308,7 +305,7 @@ export function NavMenu({ navConfigItems, spriteUrl, navFilters, className }: Na
           <Menubar className={clsx(className)}>{allMenus.map((configItem: MenubarConfigItem, index: number) => renderMenuConfigItem(configItem, index, contextValue))}</Menubar>
         ) : (
           <Menubar className={clsx(className)}>
-            {filteredSections.map((section: any, sectionIndex: number) => (
+            {filteredSections.map((section: { menus: MenubarConfigItem[] }, sectionIndex: number) => (
               // biome-ignore lint/suspicious/noArrayIndexKey: acceptable
               <div key={`section-${sectionIndex}`} className="flex gap-x-2">
                 {section.menus.map((configItem: MenubarConfigItem, menuIndex: number) => renderMenuConfigItem(configItem, sectionIndex + menuIndex, contextValue))}

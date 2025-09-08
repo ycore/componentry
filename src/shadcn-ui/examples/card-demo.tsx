@@ -19,15 +19,18 @@ export default function CardDemo() {
           <div className="flex flex-col gap-6">
             <div className="grid gap-2">
               <Label htmlFor="cardemail">cardemail</Label>
+              {/** biome-ignore lint/correctness/useUniqueElementIds: used only once per form */}
               <Input id="cardemail" type="email" placeholder="place@example.com" required />
             </div>
             <div className="grid gap-2">
               <div className="flex items-center">
                 <Label htmlFor="password">Password</Label>
+                {/** biome-ignore lint/a11y/useValidAnchor: demo only */}
                 <a href="#" className="ml-auto inline-block text-sm underline-offset-4 hover:underline">
                   Forgot your password?
                 </a>
               </div>
+              {/** biome-ignore lint/correctness/useUniqueElementIds: used only once per form */}
               <Input id="password" type="password" required />
             </div>
           </div>

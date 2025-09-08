@@ -5,6 +5,9 @@ import { Label } from '../components/label';
 import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from '../components/sheet';
 
 export default function SheetDemo({ spriteUrl }: { spriteUrl: string }) {
+  const nameId = React.useId();
+  const usernameId = React.useId();
+  
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -17,12 +20,12 @@ export default function SheetDemo({ spriteUrl }: { spriteUrl: string }) {
         </SheetHeader>
         <div className="grid flex-1 auto-rows-min gap-6 px-4">
           <div className="grid gap-3">
-            <Label htmlFor="sheet-demo-name">Name</Label>
-            <Input id="sheet-demo-name" defaultValue="Pedro Duarte" />
+            <Label htmlFor={nameId}>Name</Label>
+            <Input id={nameId} defaultValue="Pedro Duarte" />
           </div>
           <div className="grid gap-3">
-            <Label htmlFor="sheet-demo-username">Username</Label>
-            <Input id="sheet-demo-username" defaultValue="@peduarte" />
+            <Label htmlFor={usernameId}>Username</Label>
+            <Input id={usernameId} defaultValue="@peduarte" />
           </div>
         </div>
         <SheetFooter>

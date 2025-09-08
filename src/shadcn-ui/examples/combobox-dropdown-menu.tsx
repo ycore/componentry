@@ -32,7 +32,7 @@ export default function ComboboxDropdownMenu({ spriteUrl }: { spriteUrl: string 
       <DropdownMenu open={open} onOpenChange={setOpen}>
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" size="sm">
-            <SpriteIcon<IconName> id="Ellipsis" url={spriteUrl} />
+            <SpriteIcon<IconName> iconId="Ellipsis" url={spriteUrl} />
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-[200px]">

@@ -41,7 +41,7 @@ export default function ComboboxPopover({ spriteUrl }: { spriteUrl: string }) {
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button variant="outline" className="w-[150px] justify-start">
-            {selectedStatus ? <>{selectedStatus.label}</> : <>+ Set status</>}
+            {selectedStatus ? selectedStatus.label : "+ Set status"}
           </Button>
         </PopoverTrigger>
         <PopoverContent className="p-0" side="right" align="start">

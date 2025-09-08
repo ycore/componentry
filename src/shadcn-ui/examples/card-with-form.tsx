@@ -6,6 +6,8 @@ import { Label } from '../components/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/select';
 
 export default function CardWithForm({ spriteUrl }: { spriteUrl: string }) {
+  const nameId = React.useId();
+  const frameworkId = React.useId();
   return (
     <Card className="w-[350px]">
       <CardHeader>
@@ -16,13 +18,13 @@ export default function CardWithForm({ spriteUrl }: { spriteUrl: string }) {
         <form>
           <div className="grid w-full items-center gap-6">
             <div className="flex flex-col gap-3">
-              <Label htmlFor="name">Name</Label>
-              <Input id="name" placeholder="Name of your project" />
+              <Label htmlFor={nameId}>Name</Label>
+              <Input id={nameId} placeholder="Name of your project" />
             </div>
             <div className="flex flex-col gap-3">
-              <Label htmlFor="framework">Framework</Label>
+              <Label htmlFor={frameworkId}>Framework</Label>
               <Select>
-                <SelectTrigger spriteUrl={spriteUrl} id="framework" className="w-full">
+                <SelectTrigger spriteUrl={spriteUrl} id={frameworkId} className="w-full">
                   <SelectValue placeholder="Select" />
                 </SelectTrigger>
                 <SelectContent spriteUrl={spriteUrl} position="popper">

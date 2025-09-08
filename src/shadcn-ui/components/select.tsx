@@ -29,7 +29,7 @@ function SelectTrigger({ className, size = 'default', children, spriteUrl, ...pr
     >
       {children}
       <SelectPrimitive.Icon asChild>
-        <SpriteIcon<IconName> id="ChevronDown" className="size-4 opacity-50" url={spriteUrl} />
+        <SpriteIcon<IconName> iconId="ChevronDown" className="size-4 opacity-50" url={spriteUrl} />
       </SelectPrimitive.Icon>
     </SelectPrimitive.Trigger>
   );
@@ -72,7 +72,7 @@ function SelectItem({ className, spriteUrl, children, ...props }: React.Componen
     >
       <span className="absolute right-2 flex size-3.5 items-center justify-center">
         <SelectPrimitive.ItemIndicator>
-          <SpriteIcon<IconName> id="Check" className="size-4" url={spriteUrl} />
+          <SpriteIcon<IconName> iconId="Check" className="size-4" url={spriteUrl} />
         </SelectPrimitive.ItemIndicator>
       </span>
       <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
@@ -87,7 +87,7 @@ function SelectSeparator({ className, ...props }: React.ComponentProps<typeof Se
 function SelectScrollUpButton({ className, spriteUrl, ...props }: React.ComponentProps<typeof SelectPrimitive.ScrollUpButton> & { spriteUrl: string }) {
   return (
     <SelectPrimitive.ScrollUpButton data-slot="select-scroll-up-button" className={clsx('flex cursor-default items-center justify-center py-1', className)} {...props}>
-      <SpriteIcon<IconName> id="ChevronUp" className="size-4" url={spriteUrl} />
+      <SpriteIcon<IconName> iconId="ChevronUp" className="size-4" url={spriteUrl} />
     </SelectPrimitive.ScrollUpButton>
   );
 }
@@ -95,7 +95,7 @@ function SelectScrollUpButton({ className, spriteUrl, ...props }: React.Componen
 function SelectScrollDownButton({ className, spriteUrl, ...props }: React.ComponentProps<typeof SelectPrimitive.ScrollDownButton> & { spriteUrl: string }) {
   return (
     <SelectPrimitive.ScrollDownButton data-slot="select-scroll-down-button" className={clsx('flex cursor-default items-center justify-center py-1', className)} {...props}>
-      <SpriteIcon<IconName> id="ChevronDown" className="size-4" url={spriteUrl} />
+      <SpriteIcon<IconName> iconId="ChevronDown" className="size-4" url={spriteUrl} />
     </SelectPrimitive.ScrollDownButton>
   );
 }
