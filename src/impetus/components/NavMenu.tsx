@@ -142,7 +142,7 @@ function renderMenuConfigItem(configItem: MenubarConfigItem, index: number, cont
   return (
     <MenubarMenu key={`menu-${index}`}>
       <MenubarTrigger>
-        {configItem.iconId && <IconSprite id={configItem.iconId} className="mr-2 size-4" />}
+        {configItem.iconId && <IconSprite iconId={configItem.iconId} className="mr-2 size-4" />}
         {configItem.label || 'Menu'}
         <IconSprite iconId="ChevronDown" className="ml-2 size-3" />
       </MenubarTrigger>
