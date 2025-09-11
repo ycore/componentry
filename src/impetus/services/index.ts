@@ -1,0 +1,1 @@
+export { withIntent } from './vendor';

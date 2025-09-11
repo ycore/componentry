@@ -1,5 +1,6 @@
 export type { MenubarConfig, MenubarConfigItem, MenubarContextValue, MenubarItemConfig, NavMenubarProps } from './@types/NavMenu.types';
 export { GeneralErrorBoundary, ProductionErrorDisplay } from './components/error-boundary';
+export { Intent } from './components/Intent';
 export { LoadingBar } from './components/LoadingBar';
 export { NavMenu } from './components/NavMenu';
 export { Footer, Header } from './components/Page';

@@ -9,52 +9,49 @@
   },
   "exports": {
     "./images": {
-      "import": "./dist/images/index.js",
-      "types": "./dist/images/index.d.ts",
-      "default": "./src/images/index.ts"
+      "import": "./src/images/index.ts",
+      "types": "./src/images/index.ts"
     },
     "./images/plugins": {
       "node": {
-        "import": "./dist/images/plugins/index.js",
-        "types": "./dist/images/plugins/index.d.ts",
-        "default": "./src/images/plugins/index.ts"
+        "import": "./src/images/plugins/index.ts",
+        "types": "./src/images/plugins/index.ts"
       }
     },
     "./impetus": {
-      "import": "./dist/impetus/index.js",
-      "types": "./dist/impetus/index.d.ts",
-      "default": "./src/impetus/index.ts"
+      "import": "./src/impetus/index.ts",
+      "types": "./src/impetus/index.ts"
+    },
+    "./impetus/services": {
+      "import": "./src/impetus/services/index.ts",
+      "types": "./src/impetus/services/index.ts"
     },
     "./impetus/theme": {
-      "import": "./dist/impetus/theme/index.js",
-      "types": "./dist/impetus/theme/index.d.ts",
-      "default": "./src/impetus/theme/index.ts"
+      "import": "./src/impetus/theme/index.ts",
+      "types": "./src/impetus/theme/index.ts"
     },
     "./impetus/toast": {
-      "import": "./dist/impetus/toast/index.js",
-      "types": "./dist/impetus/toast/index.d.ts",
-      "default": "./src/impetus/toast/index.ts"
+      "import": "./src/impetus/toast/index.ts",
+      "types": "./src/impetus/toast/index.ts"
     },
-    "./impetus/components/loading-bar.css": "./dist/impetus/components/loading-bar.css",
-    "./impetus/theme/theme-switch.css": "./dist/impetus/theme/theme-switch.css",
+    "./impetus/components/loading-bar.css": "./src/impetus/components/loading-bar.css",
+    "./impetus/theme/theme-switch.css": "./src/impetus/theme/theme-switch.css",
     "./shadcn-ui": {
-      "import": "./dist/shadcn-ui/index.js",
-      "types": "./dist/shadcn-ui/index.d.ts",
-      "default": "./src/shadcn-ui/index.ts"
+      "import": "./src/shadcn-ui/index.ts",
+      "types": "./src/shadcn-ui/index.ts"
     },
     "./shadcn-ui/examples": {
-      "import": "./dist/shadcn-ui/examples/index.js",
-      "types": "./dist/shadcn-ui/examples/index.d.ts",
-      "default": "./src/shadcn-ui/examples/index.tsx"
+      "import": "./src/shadcn-ui/examples/index.ts",
+      "types": "./src/shadcn-ui/examples/index.ts"
     },
-    "./shadcn-ui/styles/shadcn-ui.css": "./dist/shadcn-ui/styles/shadcn-ui.css",
-    "./shadcn-ui/styles/gray.css": "./dist/shadcn-ui/styles/gray.css",
-    "./shadcn-ui/styles/neutral.css": "./dist/shadcn-ui/styles/neutral.css",
-    "./shadcn-ui/styles/slate.css": "./dist/shadcn-ui/styles/slate.css",
-    "./shadcn-ui/styles/stone.css": "./dist/shadcn-ui/styles/stone.css",
-    "./shadcn-ui/styles/zinc.css": "./dist/shadcn-ui/styles/zinc.css",
-    "./shadcn-ui/assets/example-sprites.svg": "./dist/shadcn-ui/assets/example-sprites.svg",
-    "./shadcn-ui/assets/lucide-sprites.svg": "./dist/shadcn-ui/assets/lucide-sprites.svg",
+    "./shadcn-ui/styles/shadcn-ui.css": "./src/shadcn-ui/styles/shadcn-ui.css",
+    "./shadcn-ui/styles/gray.css": "./src/shadcn-ui/styles/gray.css",
+    "./shadcn-ui/styles/neutral.css": "./src/shadcn-ui/styles/neutral.css",
+    "./shadcn-ui/styles/slate.css": "./src/shadcn-ui/styles/slate.css",
+    "./shadcn-ui/styles/stone.css": "./src/shadcn-ui/styles/stone.css",
+    "./shadcn-ui/styles/zinc.css": "./src/shadcn-ui/styles/zinc.css",
+    "./shadcn-ui/assets/example-sprites.svg": "./src/shadcn-ui/assets/example-sprites.svg",
+    "./shadcn-ui/assets/lucide-sprites.svg": "./src/shadcn-ui/assets/lucide-sprites.svg",
     "./shadcn-ui/types/sprites": "./src/shadcn-ui/@types/sprites-index.ts",
     "./package.json": "./package.json"
   },
@@ -90,6 +87,6 @@
     "build-shadcn": "bun ./scripts/build-shadcn.ts",
     "clean": "rm -rf dist node_modules",
     "ws:sprites": "bun ./src/images/cli/create-spritesheets.ts",
-    "ws:types": "bun ../../scripts/build-package.ts . --types-only"
+    "ws:types": "tsc --noEmit"
   }
 }

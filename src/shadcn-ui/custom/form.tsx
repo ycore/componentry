@@ -1,78 +1,85 @@
 import clsx from 'clsx';
-import { type Label as LabelPrimitive, Slot as SlotPrimitive } from 'radix-ui';
 import React from 'react';
-import { Form as RouterForm } from 'react-router';
 import { Label } from '../components/label';
-import type { FormFieldContextValue, FormFieldProps, FormItemContextValue } from './@types/form.types';
+import type { FormErrorProps, FormFieldContextValue, FormFieldProps } from './@types/form.types';
 
-const Form = RouterForm;
-const FormFieldContext = React.createContext<FormFieldContextValue>({} as FormFieldContextValue);
-const FormField = ({ name, children }: FormFieldProps) => {
-  return <FormFieldContext.Provider value={{ name }}>{children}</FormFieldContext.Provider>;
-};
+const FormFieldContext = React.createContext<FormFieldContextValue | null>(null);
 
-const useFormField = () => {
-  const fieldContext = React.useContext(FormFieldContext);
-  const itemContext = React.useContext(FormItemContext);
+export { Form } from 'react-router';
 
-  if (!fieldContext) {
-    throw new Error('useFormField should be used within <FormField>');
-  }
-
-  const { id } = itemContext;
-
-  return {
-    id,
-    name: fieldContext.name,
-    formItemId: `${id}-form-item`,
-    formDescriptionId: `${id}-form-item-description`,
-    formMessageId: `${id}-form-item-message`,
-    error: undefined, // React Router handles validation differently
-  };
-};
-const FormItemContext = React.createContext<FormItemContextValue>({} as FormItemContextValue);
-
-function FormItem({ className, ...props }: React.ComponentProps<'div'>) {
+export function FormField({ label, description, error, className, children }: FormFieldProps) {
   const id = React.useId();
+  const fieldId = `${id}-field`;
+  const descriptionId = `${id}-description`;
+  const errorId = `${id}-error`;
+  const hasError = Boolean(error);
+
+  const contextValue = React.useMemo(
+    () => ({ fieldId, descriptionId, errorId, hasError }),
+    [fieldId, descriptionId, errorId, hasError]
+  );
+
+  const enhancedChildren = React.Children.map(children, (child) => {
+    if (!React.isValidElement(child)) return child;
+
+    // Check if this element has a name attribute (form control)
+    if (child.props.name) {
+      const ariaDescribedBy = [description && descriptionId, error && errorId].filter(Boolean).join(' ') || undefined;
+
+      return React.cloneElement(child as React.ReactElement<any>, {
+        id: child.props.id || fieldId,
+        'aria-invalid': hasError || undefined,
+        'aria-describedby': ariaDescribedBy,
+        'data-error': hasError || undefined,
+      });
+    }
+
+    // Non-form controls pass through unchanged
+    return child;
+  });
 
   return (
-    <FormItemContext.Provider value={{ id }}>
-      <div data-slot="form-item" className={clsx('grid gap-2', className)} {...props} />
-    </FormItemContext.Provider>
+    <FormFieldContext.Provider value={contextValue}>
+      <div className={className} data-slot="form-field">
+        {label && (
+          <Label htmlFor={fieldId} data-slot="form-label" data-error={hasError} className={clsx(hasError && 'text-destructive')} >
+            {label}
+          </Label>
+        )}
+
+        {enhancedChildren}
+
+        {description && !error && (
+          <p id={descriptionId} data-slot="form-description" className="text-muted-foreground text-sm" >
+            {description}
+          </p>
+        )}
+
+        {error && (
+          <FormError id={errorId} error={error} />
+        )}
+      </div>
+    </FormFieldContext.Provider>
   );
 }
 
-function FormLabel({ className, ...props }: React.ComponentProps<typeof LabelPrimitive.Root>) {
-  const { error, formItemId } = useFormField();
-
-  return <Label data-slot="form-label" data-error={!!error} className={clsx('data-[error=true]:text-destructive', className)} htmlFor={formItemId} {...props} />;
-}
-
-function FormControl({ ...props }: React.ComponentProps<typeof SlotPrimitive.Slot>) {
-  const { error, formItemId, formDescriptionId, formMessageId } = useFormField();
-
-  return <SlotPrimitive.Slot data-slot="form-control" id={formItemId} aria-describedby={!error ? `${formDescriptionId}` : `${formDescriptionId} ${formMessageId}`} aria-invalid={!!error} {...props} />;
-}
-
-function FormDescription({ className, ...props }: React.ComponentProps<'p'>) {
-  const { formDescriptionId } = useFormField();
-
-  return <p data-slot="form-description" id={formDescriptionId} className={clsx('text-muted-foreground text-sm', className)} {...props} />;
-}
-
-function FormMessage({ className, ...props }: React.ComponentProps<'p'>) {
-  const { formMessageId } = useFormField();
-  const body = props.children;
-
-  if (!body) {
+export function FormError({ error, className, id }: FormErrorProps) {
+  if (!error) {
     return null;
   }
 
   return (
-    <p data-slot="form-message" id={formMessageId} className={clsx('text-destructive text-sm', className)} {...props}>
-      {body}
+    <p id={id} data-slot="form-error" className={clsx('text-destructive text-sm', className)} >
+      {error}
     </p>
   );
 }
 
-export { useFormField, Form, FormItem, FormLabel, FormControl, FormDescription, FormMessage, FormField };
+// Export hook for advanced use cases
+export function useFormField() {
+  const context = React.useContext(FormFieldContext);
+  if (!context) {
+    throw new Error('useFormField must be used within Form.Field');
+  }
+  return context;
+}

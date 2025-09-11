@@ -335,17 +335,12 @@ export { useFormField } from './custom/form';
 import * as FormComponents from './custom/form';
 import { Form as FormComponent } from './custom/form';
 export const Form = Object.assign(FormComponent, {
-  Item: FormComponents.FormItem,
-  Label: FormComponents.FormLabel,
-  Control: FormComponents.FormControl,
-  Description: FormComponents.FormDescription,
-  Message: FormComponents.FormMessage,
+  Error: FormComponents.FormError,
   Field: FormComponents.FormField,
 });
 
 export type { IconName as ExampleIconName } from './@types/example-sprites';
 export { type IconName, iconNames } from './@types/lucide-sprites';
-export { Intent } from './custom/intent';
 export { Link } from './custom/link';
 export { Spinner } from './custom/spinner';
 export { useMediaQuery } from './hooks/use-media-query';
