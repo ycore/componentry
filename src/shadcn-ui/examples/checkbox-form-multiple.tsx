@@ -3,7 +3,8 @@ import { toast } from 'sonner';
 
 import { Button } from '../components/button';
 import { Checkbox } from '../components/checkbox';
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '../custom/form';
+
+// import { Form, FormField } from '../custom/form';
 
 const items = [
   {
@@ -58,25 +59,20 @@ export default function CheckboxReactHookFormMultiple({ spriteUrl }: { spriteUrl
   }
 
   return (
-    <Form onSubmit={handleSubmit} className="space-y-8">
-      <FormField name="items">
-        <FormItem>
-          <div className="mb-4">
-            <FormLabel className="text-base">Sidebar</FormLabel>
-            <FormDescription>Select the items you want to display in the sidebar.</FormDescription>
-          </div>
-          {items.map(item => (
-            <FormItem key={item.id} className="flex flex-row items-center gap-2">
-              <FormControl>
-                <Checkbox spriteUrl={spriteUrl} name="items" value={item.id} checked={selectedItems.includes(item.id)} onCheckedChange={checked => handleCheckboxChange(item.id, !!checked)} />
-              </FormControl>
-              <FormLabel className="font-normal text-sm">{item.label}</FormLabel>
-            </FormItem>
-          ))}
-          <FormMessage />
-        </FormItem>
-      </FormField>
+    <form onSubmit={handleSubmit} className="space-y-8">
+      {/* <FormField name="items"> */}
+      <div className="mb-4">
+        <div className="text-base">Sidebar</div>
+        <div>Select the items you want to display in the sidebar.</div>
+      </div>
+      {items.map(item => (
+        <div key={item.id} className="flex flex-row items-center gap-2">
+          <Checkbox spriteUrl={spriteUrl} name="items" value={item.id} checked={selectedItems.includes(item.id)} onCheckedChange={checked => handleCheckboxChange(item.id, !!checked)} />
+          <div className="font-normal text-sm">{item.label}</div>
+        </div>
+      ))}
+      {/* </FormField> */}
       <Button type="submit">Submit</Button>
-    </Form>
+    </form>
   );
 }

@@ -1,8 +1,9 @@
 import React from 'react';
 import { toast } from 'sonner';
 import { Button } from '../components/button';
+import { Label } from '../components/label';
 import { Switch } from '../components/switch';
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel } from '../custom/form';
+// import { Form, div, FormDescription, div, div, Label } from '../custom/form';
 
 export default function SwitchForm() {
   const [marketingEmails, setMarketingEmails] = React.useState(false);
@@ -24,35 +25,33 @@ export default function SwitchForm() {
   }
 
   return (
-    <Form onSubmit={handleSubmit} className="w-full space-y-6">
+    <form onSubmit={handleSubmit} className="w-full space-y-6">
       <div>
         <h3 className="mb-4 font-medium text-lg">Email Notifications</h3>
         <div className="space-y-4">
-          <FormField name="marketing_emails">
-            <FormItem className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm">
+          <div name="marketing_emails">
+            <div className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm">
               <div className="space-y-0.5">
-                <FormLabel>Marketing emails</FormLabel>
-                <FormDescription>Receive emails about new products, features, and more.</FormDescription>
+                <Label>Marketing emails</Label>
               </div>
-              <FormControl>
+              <div>
                 <Switch name="marketing_emails" checked={marketingEmails} onCheckedChange={setMarketingEmails} />
-              </FormControl>
-            </FormItem>
-          </FormField>
-          <FormField name="security_emails">
-            <FormItem className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm">
-              <div className="space-y-0.5">
-                <FormLabel>Security emails</FormLabel>
-                <FormDescription>Receive emails about your account security.</FormDescription>
               </div>
-              <FormControl>
+            </div>
+          </div>
+          <div name="security_emails">
+            <div className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm">
+              <div className="space-y-0.5">
+                <Label>Security emails</Label>
+              </div>
+              <div>
                 <Switch name="security_emails" checked={securityEmails} onCheckedChange={setSecurityEmails} disabled aria-readonly />
-              </FormControl>
-            </FormItem>
-          </FormField>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <Button type="submit">Submit</Button>
-    </Form>
+    </form>
   );
 }

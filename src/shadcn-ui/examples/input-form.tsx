@@ -2,7 +2,7 @@ import React from 'react';
 import { toast } from 'sonner';
 import { Button } from '../components/button';
 import { Input } from '../components/input';
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '../custom/form';
+// import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '../custom/form';
 
 export default function InputForm() {
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -20,18 +20,18 @@ export default function InputForm() {
   }
 
   return (
-    <Form onSubmit={handleSubmit} className="w-2/3 space-y-6">
-      <FormField name="username">
+    <form onSubmit={handleSubmit} className="w-2/3 space-y-6">
+      <Input name="username" placeholder="shadcn" />
+      {/* <FormField name="username">
         <FormItem>
           <FormLabel>Username</FormLabel>
           <FormControl>
-            <Input name="username" placeholder="shadcn" />
           </FormControl>
           <FormDescription>This is your public display name.</FormDescription>
           <FormMessage />
         </FormItem>
-      </FormField>
+      </FormField> */}
       <Button type="submit">Submit</Button>
-    </Form>
+    </form>
   );
 }

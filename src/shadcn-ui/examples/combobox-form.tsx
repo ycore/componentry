@@ -6,7 +6,8 @@ import type { IconName } from '../@types/lucide-sprites';
 import { Button } from '../components/button';
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '../components/command';
 import { Popover, PopoverContent, PopoverTrigger } from '../components/popover';
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '../custom/form';
+
+// import { Form, FormField } from '../custom/form';
 
 const languages = [
   { label: 'English', value: 'en' },
@@ -39,49 +40,50 @@ export default function ComboboxForm({ spriteUrl }: { spriteUrl: string }) {
   }
 
   return (
-    <Form onSubmit={handleSubmit} className="space-y-6">
-      <FormField name="language">
-        <FormItem className="flex flex-col">
-          <FormLabel>Language</FormLabel>
-          <Popover open={open} onOpenChange={setOpen}>
-            <PopoverTrigger asChild>
-              <FormControl>
-                <Button variant="outline" role="combobox" aria-expanded={open} className={clsx('w-[200px] justify-between', !selectedLanguage && 'text-muted-foreground')}>
-                  {selectedLanguage ? languages.find(language => language.value === selectedLanguage)?.label : 'Select language'}
-                  <SpriteIcon<IconName> iconId="ChevronsUpDown" className="opacity-50" url={spriteUrl} />
-                </Button>
-              </FormControl>
-            </PopoverTrigger>
-            <PopoverContent className="w-[200px] p-0">
-              <Command>
-                <CommandInput spriteUrl={spriteUrl} placeholder="Search language..." className="h-9" />
-                <CommandList>
-                  <CommandEmpty>No language found.</CommandEmpty>
-                  <CommandGroup>
-                    {languages.map(language => (
-                      <CommandItem
-                        value={language.label}
-                        key={language.value}
-                        onSelect={() => {
-                          setSelectedLanguage(language.value);
-                          setOpen(false);
-                        }}
-                      >
-                        {language.label}
-                        <SpriteIcon<IconName> iconId="Check" className={clsx('ml-auto', language.value === selectedLanguage ? 'opacity-100' : 'opacity-0')} url={spriteUrl} />
-                      </CommandItem>
-                    ))}
-                  </CommandGroup>
-                </CommandList>
-              </Command>
-            </PopoverContent>
-          </Popover>
-          <input type="hidden" name="language" value={selectedLanguage} />
-          <FormDescription>This is the language that will be used in the dashboard.</FormDescription>
-          <FormMessage />
-        </FormItem>
-      </FormField>
+    <form onSubmit={handleSubmit} className="space-y-6">
+      {/* <FormField name="language"> */}
+      <Button variant="outline" role="combobox" aria-expanded={open} className={clsx('w-[200px] justify-between', !selectedLanguage && 'text-muted-foreground')}>
+        {selectedLanguage ? languages.find(language => language.value === selectedLanguage)?.label : 'Select language'}
+        <SpriteIcon<IconName> iconId="ChevronsUpDown" className="opacity-50" url={spriteUrl} />
+      </Button>
+
+      <div className="flex flex-col">
+        {/* <FormLabel>Language</FormLabel> */}
+        <Popover open={open} onOpenChange={setOpen}>
+          <PopoverTrigger asChild>
+            {/* <FormControl>
+              </FormControl> */}
+          </PopoverTrigger>
+          <PopoverContent className="w-[200px] p-0">
+            <Command>
+              <CommandInput spriteUrl={spriteUrl} placeholder="Search language..." className="h-9" />
+              <CommandList>
+                <CommandEmpty>No language found.</CommandEmpty>
+                <CommandGroup>
+                  {languages.map(language => (
+                    <CommandItem
+                      value={language.label}
+                      key={language.value}
+                      onSelect={() => {
+                        setSelectedLanguage(language.value);
+                        setOpen(false);
+                      }}
+                    >
+                      {language.label}
+                      <SpriteIcon<IconName> iconId="Check" className={clsx('ml-auto', language.value === selectedLanguage ? 'opacity-100' : 'opacity-0')} url={spriteUrl} />
+                    </CommandItem>
+                  ))}
+                </CommandGroup>
+              </CommandList>
+            </Command>
+          </PopoverContent>
+        </Popover>
+        <input type="hidden" name="language" value={selectedLanguage} />
+        {/* <FormDescription>This is the language that will be used in the dashboard.</FormDescription> */}
+        {/* <FormMessage /> */}
+      </div>
+      {/* </FormField> */}
       <Button type="submit">Submit</Button>
-    </Form>
+    </form>
   );
 }

@@ -2,7 +2,7 @@ import type React from 'react';
 import { toast } from 'sonner';
 import { Button } from '../components/button';
 import { RadioGroup, RadioGroupItem } from '../components/radio-group';
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '../custom/form';
+// import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '../custom/form';
 
 export default function RadioGroupForm({ spriteUrl }: { spriteUrl: string }) {
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -20,36 +20,36 @@ export default function RadioGroupForm({ spriteUrl }: { spriteUrl: string }) {
   }
 
   return (
-    <Form onSubmit={handleSubmit} className="w-2/3 space-y-6">
-      <FormField name="type">
+    <form onSubmit={handleSubmit} className="w-2/3 space-y-6">
+      {/* <FormField name="type">
         <FormItem className="space-y-3">
           <FormLabel>Notify me about...</FormLabel>
-          <FormControl>
-            <RadioGroup name="type" className="flex flex-col">
-              <FormItem className="flex items-center gap-3">
-                <FormControl>
-                  <RadioGroupItem spriteUrl={spriteUrl} value="all" />
-                </FormControl>
+          <FormControl> */}
+      <RadioGroup name="type" className="flex flex-col">
+        {/* <FormItem className="flex items-center gap-3">
+                <FormControl> */}
+        <RadioGroupItem spriteUrl={spriteUrl} value="all" />
+        {/* </FormControl>
                 <FormLabel className="font-normal">All new messages</FormLabel>
               </FormItem>
               <FormItem className="flex items-center gap-3">
-                <FormControl>
-                  <RadioGroupItem spriteUrl={spriteUrl} value="mentions" />
-                </FormControl>
+                <FormControl> */}
+        <RadioGroupItem spriteUrl={spriteUrl} value="mentions" />
+        {/* </FormControl>
                 <FormLabel className="font-normal">Direct messages and mentions</FormLabel>
               </FormItem>
               <FormItem className="flex items-center gap-3">
-                <FormControl>
-                  <RadioGroupItem spriteUrl={spriteUrl} value="none" />
-                </FormControl>
+                <FormControl> */}
+        <RadioGroupItem spriteUrl={spriteUrl} value="none" />
+        {/* </FormControl>
                 <FormLabel className="font-normal">Nothing</FormLabel>
-              </FormItem>
-            </RadioGroup>
-          </FormControl>
+              </FormItem> */}
+      </RadioGroup>
+      {/* </FormControl>
           <FormMessage />
         </FormItem>
-      </FormField>
+      </FormField> */}
       <Button type="submit">Submit</Button>
-    </Form>
+    </form>
   );
 }

@@ -3,7 +3,7 @@ import { toast } from 'sonner';
 
 import { Button } from '../components/button';
 import { Checkbox } from '../components/checkbox';
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel } from '../custom/form';
+// import { Form, FormField } from '../custom/form';
 import { Link } from '../custom/link';
 
 type CheckedState = boolean | 'indeterminate';
@@ -27,11 +27,11 @@ export default function CheckboxReactHookFormSingle({ spriteUrl }: { spriteUrl: 
   }
 
   return (
-    <Form onSubmit={handleSubmit} className="flex flex-col items-start gap-4">
-      <FormField name="mobile">
-        <FormItem className="flex flex-row items-start gap-2 rounded-md border p-4 shadow-sm">
+    <form onSubmit={handleSubmit} className="flex flex-col items-start gap-4">
+      {/* <FormField name="mobile"> */}
+      <Checkbox spriteUrl={spriteUrl} name="mobile" checked={mobileEnabled} onCheckedChange={setMobileEnabled} />
+      {/* <FormItem className="flex flex-row items-start gap-2 rounded-md border p-4 shadow-sm">
           <FormControl>
-            <Checkbox spriteUrl={spriteUrl} name="mobile" checked={mobileEnabled} onCheckedChange={setMobileEnabled} />
           </FormControl>
           <div className="space-y-1 leading-none">
             <FormLabel>Use different settings for my mobile devices</FormLabel>
@@ -39,9 +39,9 @@ export default function CheckboxReactHookFormSingle({ spriteUrl }: { spriteUrl: 
               You can manage your mobile notifications in the <Link href="/examples/forms">mobile settings</Link> page.
             </FormDescription>
           </div>
-        </FormItem>
-      </FormField>
+        </FormItem> */}
+      {/* </FormField> */}
       <Button type="submit">Submit</Button>
-    </Form>
+    </form>
   );
 }

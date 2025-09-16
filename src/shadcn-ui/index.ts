@@ -330,14 +330,6 @@ export const Tooltip = Object.assign(TooltipComponent, {
 });
 
 export { DataPagination } from './custom/data-pagination';
-export { useFormField } from './custom/form';
-
-import * as FormComponents from './custom/form';
-import { Form as FormComponent } from './custom/form';
-export const Form = Object.assign(FormComponent, {
-  Error: FormComponents.FormError,
-  Field: FormComponents.FormField,
-});
 
 export type { IconName as ExampleIconName } from './@types/example-sprites';
 export { type IconName, iconNames } from './@types/lucide-sprites';
