@@ -25,7 +25,7 @@ function renderMenubarItem(item: MenubarItemConfig, index: number, context: Menu
 
   if (item.component) {
     const Component = item.component;
-    return <Component key={`component-${index}`} spriteUrl={item.spriteUrl || defaultSpriteUrl} />;
+    return <Component key={`component-${index}`} />;
   }
 
   const itemSpriteUrl = item.spriteUrl || defaultSpriteUrl;
@@ -164,7 +164,7 @@ function renderSheetItem(item: MenubarItemConfig, index: number, context: Menuba
 
   if (item.component) {
     const Component = item.component;
-    return <Component key={`component-${index}`} spriteUrl={item.spriteUrl || defaultSpriteUrl} />;
+    return <Component key={`component-${index}`} />;
   }
 
   const isActive = item.href && currentPath === item.href;
