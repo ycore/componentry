@@ -22,6 +22,10 @@
       "types": "./src/impetus/index.ts",
       "import": "./src/impetus/index.ts"
     },
+    "./impetus/intl": {
+      "types": "./src/impetus/intl/index.ts",
+      "import": "./src/impetus/intl/index.ts"
+    },
     "./impetus/services": {
       "types": "./src/impetus/services/index.ts",
       "import": "./src/impetus/services/index.ts"
