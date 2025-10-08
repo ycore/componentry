@@ -2,8 +2,8 @@
 // Internationalization Components Export
 // ============================================================================
 
-import { DisplayDate, DisplayNumber, DisplayCurrency } from './Display';
-import type { DisplayDateProps, DisplayNumberProps, DisplayCurrencyProps } from './@types/intl.types';
+import type { DisplayCurrencyProps, DisplayDateProps, DisplayNumberProps } from './@types/intl.types';
+import { DisplayCurrency, DisplayDate, DisplayNumber } from './Display';
 
 // ============================================================================
 // Date Component with Preset Shortcuts
@@ -76,13 +76,7 @@ export const Currency = Object.assign(DisplayCurrency, {
 /**
  * Component for displaying monetary amounts with automatic currency detection
  */
-export const Money = ({
-  amount,
-  locale,
-  className,
-  intlConfig,
-  ...props
-}: Omit<DisplayCurrencyProps, 'currency' | 'preset'>) => 
+export const Money = ({ amount, locale, className, intlConfig, ...props }: Omit<DisplayCurrencyProps, 'currency' | 'preset'>) =>
   DisplayCurrency({
     amount,
     locale,
@@ -95,17 +89,11 @@ export const Money = ({
 /**
  * Component for displaying prices (always positive, with currency symbol)
  */
-export const Price = ({
-  amount,
-  className,
-  ...props
-}: Omit<DisplayCurrencyProps, 'preset'>) => {
+export const Price = ({ amount, className, ...props }: Omit<DisplayCurrencyProps, 'preset'>) => {
   // Parse amount and make positive
   const numericAmount = typeof amount === 'string' ? Number.parseFloat(amount) : amount;
-  const positiveAmount = typeof numericAmount === 'number' && !Number.isNaN(numericAmount) 
-    ? Math.abs(numericAmount) 
-    : amount;
-  
+  const positiveAmount = typeof numericAmount === 'number' && !Number.isNaN(numericAmount) ? Math.abs(numericAmount) : amount;
+
   return DisplayCurrency({
     amount: positiveAmount,
     className,
@@ -118,6 +106,5 @@ export const Price = ({
 // Configuration and Utility Exports
 // ============================================================================
 
+export type { CurrencyFormatPreset, DateFormatPreset, DisplayCurrencyProps, DisplayDateProps, DisplayNumberProps, IntlConfig, NumberFormatPreset, SupportedCurrency, SupportedLocale } from './@types/intl.types';
 export { defaultIntlConfig } from './config';
-export type { IntlConfig, SupportedLocale, SupportedCurrency, DateFormatPreset, NumberFormatPreset, CurrencyFormatPreset } from './@types/intl.types';
-export type { DisplayDateProps, DisplayNumberProps, DisplayCurrencyProps } from './@types/intl.types';

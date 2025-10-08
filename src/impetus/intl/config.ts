@@ -2,14 +2,7 @@
 // Default Internationalization Configuration
 // ============================================================================
 
-import type {
-  SupportedLocale,
-  SupportedCurrency,
-  DateFormatPreset,
-  NumberFormatPreset,
-  CurrencyFormatPreset,
-  IntlConfig,
-} from './@types/intl.types';
+import type { CurrencyFormatPreset, DateFormatPreset, IntlConfig, NumberFormatPreset, SupportedCurrency, SupportedLocale } from './@types/intl.types';
 
 // ============================================================================
 // Date Format Configurations
@@ -180,7 +173,7 @@ export function getLocaleFromBrowser(): SupportedLocale {
 
   const browserLocale = navigator.language;
   const supportedLocales = Object.keys(localeCurrencyMap) as SupportedLocale[];
-  
+
   // Try exact match first
   if (supportedLocales.includes(browserLocale as SupportedLocale)) {
     return browserLocale as SupportedLocale;
@@ -188,9 +181,7 @@ export function getLocaleFromBrowser(): SupportedLocale {
 
   // Try language match (e.g., 'en' matches 'en-US')
   const languageCode = browserLocale.split('-')[0];
-  const languageMatch = supportedLocales.find(locale => 
-    locale.startsWith(languageCode)
-  );
+  const languageMatch = supportedLocales.find(locale => locale.startsWith(languageCode));
 
   return languageMatch || defaultIntlConfig.fallbackLocale;
 }
