@@ -4,6 +4,9 @@ import type React from 'react';
 import { SpriteIcon } from '../../images/SpriteIcon';
 import type { IconName } from '../@types/lucide-sprites';
 
+export type DropdownMenuCheckboxItemProps = React.ComponentProps<typeof DropdownMenuCheckboxItem>;
+export type DropdownMenuRadioItemProps = React.ComponentProps<typeof DropdownMenuRadioItem>;
+
 function DropdownMenu({ ...props }: React.ComponentProps<typeof DropdownMenuPrimitive.Root>) {
   return <DropdownMenuPrimitive.Root data-slot="dropdown-menu" {...props} />;
 }
