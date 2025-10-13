@@ -23,14 +23,6 @@ const COMPONENTS_CONFIG = {
       relativePath: 'components',
       fileSpec: '*.tsx'
     },
-    {
-      relativePath: 'custom',
-      fileSpec: '*.tsx'
-    },
-    {
-      relativePath: '\@types',
-      fileSpec: 'lucide-sprites.ts'
-    }
   ]
 } as const;
 const SUFFIX = '';
