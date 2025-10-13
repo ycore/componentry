@@ -10,10 +10,10 @@ import type { SpriteIconProps } from './@types/SpriteIcon.types';
  * @param props.id - The ID of the icon within the sprite sheet. If not provided, the entire sprite is used.
  * @returns An SVG element referencing the specified icon from the sprite sheet.
  */
-export function SpriteIcon<IconId extends string = string>({ url, iconId, ...props }: SpriteIconProps<string, IconId>) {
+export function SpriteIcon<IconId extends string = string>({ url, iconId, ...svgProps }: SpriteIconProps<string, IconId>) {
   return (
     // biome-ignore lint/a11y/noSvgWithoutTitle: acceptable
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" {...props}>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" {...svgProps}>
       {iconId ? <use href={`${url}#${iconId}`} /> : <use href={`${url}`} />}
     </svg>
   );
