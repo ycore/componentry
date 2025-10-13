@@ -1,9 +1,7 @@
 import clsx from 'clsx';
 import { Command as CommandPrimitive } from 'cmdk';
-import type React from 'react';
-
-import { SpriteIcon } from '../../images/SpriteIcon';
-import type { IconName } from '../@types/lucide-sprites';
+import React from 'react';
+import { Icon } from '../../vibrant/lib/icon';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from './dialog';
 
 function Command({ className, ...props }: React.ComponentProps<typeof CommandPrimitive>) {
@@ -16,21 +14,20 @@ function CommandDialog({
   children,
   className,
   showCloseButton = true,
-  spriteUrl,
   ...props
 }: React.ComponentProps<typeof Dialog> & {
   title?: string;
   description?: string;
   className?: string;
   showCloseButton?: boolean;
-} & { spriteUrl: string }) {
+}) {
   return (
     <Dialog {...props}>
       <DialogHeader className="sr-only">
         <DialogTitle>{title}</DialogTitle>
         <DialogDescription>{description}</DialogDescription>
       </DialogHeader>
-      <DialogContent spriteUrl={spriteUrl} className={clsx('overflow-hidden p-0', className)} showCloseButton={showCloseButton}>
+      <DialogContent className={clsx('overflow-hidden p-0', className)} showCloseButton={showCloseButton}>
         <Command className="**:data-[slot=command-input-wrapper]:h-12 [&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-group]]:px-2 [&_[cmdk-input-wrapper]_svg]:h-5 [&_[cmdk-input-wrapper]_svg]:w-5 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-2 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-5 [&_[cmdk-item]_svg]:w-5">
           {children}
         </Command>
@@ -39,10 +36,10 @@ function CommandDialog({
   );
 }
 
-function CommandInput({ className, spriteUrl, ...props }: React.ComponentProps<typeof CommandPrimitive.Input> & { spriteUrl: string }) {
+function CommandInput({ className, ...props }: React.ComponentProps<typeof CommandPrimitive.Input>) {
   return (
     <div data-slot="command-input-wrapper" className="flex h-9 items-center gap-2 border-b px-3">
-      <SpriteIcon<IconName> iconId="Search" url={spriteUrl} className="size-4 shrink-0 opacity-50" />
+      <Icon iconId="Search" className="size-4 shrink-0 opacity-50" />
       <CommandPrimitive.Input
         data-slot="command-input"
         className={clsx('flex h-10 w-full rounded-md bg-transparent py-3 text-sm outline-hidden placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50', className)}

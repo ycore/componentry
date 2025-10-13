@@ -5,11 +5,11 @@ import { Button } from '../components/button';
 import { Checkbox } from '../components/checkbox';
 
 // import { Form, FormField } from '../custom/form';
-// import { Link } from '../custom/link';
+// import { Link } from '../../vibrant/components/link';
 
 type CheckedState = boolean | 'indeterminate';
 
-export default function CheckboxReactHookFormSingle({ spriteUrl }: { spriteUrl: string }) {
+export default function CheckboxReactHookFormSingle() {
   // const [mobileEnabled, setMobileEnabled] = React.useState(true);
   const [mobileEnabled, setMobileEnabled] = React.useState<CheckedState>(false);
 
@@ -30,7 +30,7 @@ export default function CheckboxReactHookFormSingle({ spriteUrl }: { spriteUrl: 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col items-start gap-4">
       {/* <FormField name="mobile"> */}
-      <Checkbox spriteUrl={spriteUrl} name="mobile" checked={mobileEnabled} onCheckedChange={setMobileEnabled} />
+      <Checkbox name="mobile" checked={mobileEnabled} onCheckedChange={setMobileEnabled} />
       {/* <FormItem className="flex flex-row items-start gap-2 rounded-md border p-4 shadow-sm">
           <FormControl>
           </FormControl>

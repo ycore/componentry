@@ -42,10 +42,10 @@ export default function ComboboxDropdownMenu({ spriteUrl }: { spriteUrl: string 
             <DropdownMenuItem>Set due date...</DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuSub>
-              <DropdownMenuSubTrigger spriteUrl={spriteUrl}>Apply label</DropdownMenuSubTrigger>
+              <DropdownMenuSubTrigger>Apply label</DropdownMenuSubTrigger>
               <DropdownMenuSubContent className="p-0">
                 <Command>
-                  <CommandInput spriteUrl={spriteUrl} placeholder="Filter label..." autoFocus={true} className="h-9" />
+                  <CommandInput placeholder="Filter label..." autoFocus={true} className="h-9" />
                   <CommandList>
                     <CommandEmpty>No label found.</CommandEmpty>
                     <CommandGroup>

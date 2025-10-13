@@ -1,8 +1,8 @@
 import React from 'react';
+import { Link } from '../../vibrant/components/link';
 import { Breadcrumb, BreadcrumbEllipsis, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '../components/breadcrumb';
-import { Link } from '../custom/link';
 
-export default function BreadcrumbCollapsed({ spriteUrl }: { spriteUrl: string }) {
+export default function BreadcrumbCollapsed() {
   return (
     <Breadcrumb>
       <BreadcrumbList>
@@ -11,17 +11,17 @@ export default function BreadcrumbCollapsed({ spriteUrl }: { spriteUrl: string }
             <Link href="/">Home</Link>
           </BreadcrumbLink>
         </BreadcrumbItem>
-        <BreadcrumbSeparator spriteUrl={spriteUrl} />
+        <BreadcrumbSeparator />
         <BreadcrumbItem>
-          <BreadcrumbEllipsis spriteUrl={spriteUrl} />
+          <BreadcrumbEllipsis />
         </BreadcrumbItem>
-        <BreadcrumbSeparator spriteUrl={spriteUrl} />
+        <BreadcrumbSeparator />
         <BreadcrumbItem>
           <BreadcrumbLink asChild>
             <Link href="/docs/components">Components</Link>
           </BreadcrumbLink>
         </BreadcrumbItem>
-        <BreadcrumbSeparator spriteUrl={spriteUrl} />
+        <BreadcrumbSeparator />
         <BreadcrumbItem>
           <BreadcrumbPage>Breadcrumb</BreadcrumbPage>
         </BreadcrumbItem>

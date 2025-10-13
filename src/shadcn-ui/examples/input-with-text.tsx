@@ -4,7 +4,7 @@ import { Label } from '../components/label';
 
 export default function InputWithText() {
   const emailId = React.useId();
-  
+
   return (
     <div className="grid w-full max-w-sm items-center gap-3">
       <Label htmlFor={emailId}>Email</Label>

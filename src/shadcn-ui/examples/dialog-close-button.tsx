@@ -4,15 +4,15 @@ import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, Di
 import { Input } from '../components/input';
 import { Label } from '../components/label';
 
-export default function DialogCloseButton({ spriteUrl }: { spriteUrl: string }) {
+export default function DialogCloseButton() {
   const linkId = React.useId();
-  
+
   return (
     <Dialog>
       <DialogTrigger asChild>
         <Button variant="outline">Share</Button>
       </DialogTrigger>
-      <DialogContent spriteUrl={spriteUrl} className="sm:max-w-md">
+      <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>Share link</DialogTitle>
           <DialogDescription>Anyone who has this link will be able to view this.</DialogDescription>

@@ -1,9 +1,9 @@
 import React from 'react';
 import { SpriteIcon } from '../../images/SpriteIcon';
-import type { IconName } from '../@types/lucide-sprites';
+import type { IconName } from '../../vibrant/@types/lucide-sprites';
+import { Link } from '../../vibrant/components/link';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '../components/breadcrumb';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '../components/dropdown-menu';
-import { Link } from '../custom/link';
 
 export default function BreadcrumbWithDropdown({ spriteUrl }: { spriteUrl: string }) {
   return (
@@ -14,7 +14,7 @@ export default function BreadcrumbWithDropdown({ spriteUrl }: { spriteUrl: strin
             <Link href="/">Home</Link>
           </BreadcrumbLink>
         </BreadcrumbItem>
-        <BreadcrumbSeparator spriteUrl={spriteUrl}>
+        <BreadcrumbSeparator>
           <SpriteIcon<IconName> iconId="Slash" url={spriteUrl} />
         </BreadcrumbSeparator>
         <BreadcrumbItem>
@@ -30,7 +30,7 @@ export default function BreadcrumbWithDropdown({ spriteUrl }: { spriteUrl: strin
             </DropdownMenuContent>
           </DropdownMenu>
         </BreadcrumbItem>
-        <BreadcrumbSeparator spriteUrl={spriteUrl}>
+        <BreadcrumbSeparator>
           <SpriteIcon<IconName> iconId="Slash" url={spriteUrl} />
         </BreadcrumbSeparator>
         <BreadcrumbItem>

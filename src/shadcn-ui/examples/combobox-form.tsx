@@ -56,7 +56,7 @@ export default function ComboboxForm({ spriteUrl }: { spriteUrl: string }) {
           </PopoverTrigger>
           <PopoverContent className="w-[200px] p-0">
             <Command>
-              <CommandInput spriteUrl={spriteUrl} placeholder="Search language..." className="h-9" />
+              <CommandInput placeholder="Search language..." className="h-9" />
               <CommandList>
                 <CommandEmpty>No language found.</CommandEmpty>
                 <CommandGroup>

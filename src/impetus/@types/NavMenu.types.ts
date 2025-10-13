@@ -1,4 +1,4 @@
-import type { IconName } from '../../shadcn-ui/@types/lucide-sprites';
+import type { IconName } from '../../vibrant/@types/lucide-sprites';
 
 export interface MenubarItemConfig {
   label?: string;

@@ -5,7 +5,7 @@ import { Input } from '../components/input';
 import { Label } from '../components/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/select';
 
-export default function CardWithForm({ spriteUrl }: { spriteUrl: string }) {
+export default function CardWithForm() {
   const nameId = React.useId();
   const frameworkId = React.useId();
   return (
@@ -24,22 +24,14 @@ export default function CardWithForm({ spriteUrl }: { spriteUrl: string }) {
             <div className="flex flex-col gap-3">
               <Label htmlFor={frameworkId}>Framework</Label>
               <Select>
-                <SelectTrigger spriteUrl={spriteUrl} id={frameworkId} className="w-full">
+                <SelectTrigger id={frameworkId} className="w-full">
                   <SelectValue placeholder="Select" />
                 </SelectTrigger>
-                <SelectContent spriteUrl={spriteUrl} position="popper">
-                  <SelectItem spriteUrl={spriteUrl} value="next">
-                    Next.js
-                  </SelectItem>
-                  <SelectItem spriteUrl={spriteUrl} value="sveltekit">
-                    SvelteKit
-                  </SelectItem>
-                  <SelectItem spriteUrl={spriteUrl} value="astro">
-                    Astro
-                  </SelectItem>
-                  <SelectItem spriteUrl={spriteUrl} value="nuxt">
-                    Nuxt.js
-                  </SelectItem>
+                <SelectContent position="popper">
+                  <SelectItem value="next">Next.js</SelectItem>
+                  <SelectItem value="sveltekit">SvelteKit</SelectItem>
+                  <SelectItem value="astro">Astro</SelectItem>
+                  <SelectItem value="nuxt">Nuxt.js</SelectItem>
                 </SelectContent>
               </Select>
             </div>

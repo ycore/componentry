@@ -1,4 +1,3 @@
-// tsx workspaces/componentry/scripts/build-shadcn.ts
 import fs from 'node:fs';
 import path from 'node:path';
 
@@ -13,102 +12,290 @@ import path from 'node:path';
 // lucide-react, class-variance-authority, react-hook-form, input-otp
 // @/registry/new-york/ui/button
 
-const COMPONENTS_PATH = new URL('../src/shadcn-ui', import.meta.url);
-const COMPONENTS_ADD = [
-  {
-    relativePath: 'components',
-    fileSpec: '*.tsx'
-  },
-  {
-    relativePath: 'custom',
-    fileSpec: '*.tsx'
-  },
-  {
-    relativePath: '\@types',
-    fileSpec: 'lucide-sprites.ts'
-  }
-] as const;
+console.log(import.meta.url);
+const COMPONENTS_READ = new URL('../src/temp-shadcn/apps/v4/registry/new-york-v4/ui', import.meta.url);
+const COMPONENTS_WRITE = new URL('../src/shadcn-ui/components', import.meta.url);
+const COMPONENTS_CONFIG = {
+  path: new URL('../src/shadcn-ui', import.meta.url),
+  index: 'index.ts',
+  folders: [
+    {
+      relativePath: 'components',
+      fileSpec: '*.tsx'
+    },
+    {
+      relativePath: 'custom',
+      fileSpec: '*.tsx'
+    },
+    {
+      relativePath: '\@types',
+      fileSpec: 'lucide-sprites.ts'
+    }
+  ]
+} as const;
 const SUFFIX = '';
-const REMOVE_COMPONENTS = ['calendar', 'carousel', 'chart', 'drawer', 'input-otp', 'resizable', 'toast', 'toaster'];
+const IGNORE_COMPONENTS = ['calendar', 'carousel', 'chart', 'drawer', 'input-otp', 'resizable', 'toast', 'toaster'];
+const ORPHANED_ICONS = ['CircleIcon'];
+const ICON_NAME_MAP: Record<string, string> = {
+  'MoreHorizontal': 'Ellipsis',
+  'Loader2': 'Loader',
+};
 
-console.log('Reading', COMPONENTS_PATH.pathname);
+console.log('Reading from:', COMPONENTS_READ.pathname);
+console.log('Writing to:', COMPONENTS_WRITE.pathname);
+console.log('Index output:', path.join(COMPONENTS_CONFIG.path.pathname, COMPONENTS_CONFIG.index));
 
-async function processFiles(basePath: string, relativePath: string = '', fileSpec?: string) {
+/**
+ * Apply shadcn-specific transformations (use client, cn → clsx, path aliases)
+ */
+function applyShadcnTransformations(fileContent: string): string {
+  return fileContent
+    .replace(/["']use client["']\s*;?\s*/g, '') // Remove "use client"
+    .replace(/import\s+{\s*cn\s*}\s+from\s+["'].*?\/utils["']/g, 'import clsx from \'clsx\'') // Replace cn import
+    .replace(/\bcn\(/g, 'clsx(') // Replace cn() calls with clsx()
+    .replace(/@\/registry\/new-york\//g, './') // Replace @/registry/new-york/ with ./
+    .replace(/@\/registry\/new-york-v4\/ui\//g, './') // Replace @/registry/new-york-v4/ui/ with ./
+    .replace(/@\/registry\/new-york-v4\/hooks\/(.*)/g, '../hooks/\$1') // Replace @/registry/new-york-v4/hooks/ with ../
+    .replace(/bg-white/g, 'bg-background'); // Replace @/registry/new-york-v4/hooks/ with ./
+}
+
+/**
+ * Transform lucide-react icons to Icon (pre-configured SpriteIcon)
+ */
+function transformLucideIcons(fileContent: string): string {
+  const lucideImportMatch = fileContent.match(/import\s+{\s*([^}]+)\s*}\s+from\s+['"]lucide-react['"]/);
+  if (!lucideImportMatch) return fileContent;
+
+  // Extract icon names and build map
+  const iconImports = lucideImportMatch[1].split(',').map(name => name.trim());
+  const iconMap = new Map<string, string>();
+
+  for (const iconImport of iconImports) {
+    const iconId = iconImport.endsWith('Icon') ? iconImport.replace(/Icon$/, '') : iconImport;
+    iconMap.set(iconImport, iconId);
+  }
+
+  // Remove lucide-react import
+  fileContent = fileContent.replace(/import\s+{\s*[^}]+\s*}\s+from\s+['"]lucide-react['"];?\s*\n?/g, '');
+
+  // Add Icon import - find position after the last import statement
+  const importRegex = /^import\s+.*?from\s+['"][^'"]+['"];?\s*$/gm;
+  let lastImportEnd = 0;
+  let match;
+  while ((match = importRegex.exec(fileContent)) !== null) {
+    lastImportEnd = match.index + match[0].length;
+  }
+
+  if (lastImportEnd > 0) {
+    const iconImport = `\nimport { Icon } from '../../vibrant/lib/icon';\n`;
+    fileContent = fileContent.slice(0, lastImportEnd) + iconImport + fileContent.slice(lastImportEnd);
+  }
+
+  // Replace icon JSX elements with Icon
+  for (const [iconName, iconId] of iconMap.entries()) {
+    const mappedIconId = ICON_NAME_MAP[iconId] || iconId;
+
+    // Escape icon name for use in regex
+    const escapedIconName = iconName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+    // Pattern 1: Self-closing without props (e.g., <Check />)
+    const iconRegexNoProp = new RegExp(`<${escapedIconName}\\s*\\/>`, 'g');
+    fileContent = fileContent.replace(iconRegexNoProp, () => {
+      return `<Icon iconId="${mappedIconId}" />`;
+    });
+
+    // Pattern 2: With props - handles multi-line and complex props (e.g., <Check className="..." />)
+    const iconRegexWithProps = new RegExp(`<${escapedIconName}\\s+([\\s\\S]*?)\\/>`, 'g');
+    fileContent = fileContent.replace(iconRegexWithProps, (match, attrs) => {
+      return `<Icon iconId="${mappedIconId}" ${attrs.trim()} />`;
+    });
+  }
+
+  return fileContent;
+}
+
+/**
+ * Replace orphaned icon components with Icon
+ * Handles partially transformed source files
+ */
+function replaceOrphanedIcons(fileContent: string): string {
+  let hasReplacements = false;
+
+  for (const iconName of ORPHANED_ICONS) {
+    // Check if this icon exists in the file
+    if (!fileContent.includes(`<${iconName}`)) {
+      continue;
+    }
+
+    hasReplacements = true;
+
+    // Extract icon ID (remove "Icon" suffix if present)
+    const iconId = iconName.endsWith('Icon') ? iconName.replace(/Icon$/, '') : iconName;
+    const mappedIconId = ICON_NAME_MAP[iconId] || iconId;
+
+    // Escape icon name for regex
+    const escapedIconName = iconName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+    // Pattern 1: Self-closing without props (e.g., <CircleIcon />)
+    const iconRegexNoProp = new RegExp(`<${escapedIconName}\\s*\\/>`, 'g');
+    fileContent = fileContent.replace(iconRegexNoProp, () => {
+      return `<Icon iconId="${mappedIconId}" />`;
+    });
+
+    // Pattern 2: With props - handles multi-line and complex props
+    const iconRegexWithProps = new RegExp(`<${escapedIconName}\\s+([\\s\\S]*?)\\/>`, 'g');
+    fileContent = fileContent.replace(iconRegexWithProps, (match, attrs) => {
+      return `<Icon iconId="${mappedIconId}" ${attrs.trim()} />`;
+    });
+  }
+
+  // Add Icon import if we made replacements and it doesn't exist
+  if (hasReplacements && !fileContent.includes("from '../lib/icon'")) {
+    const lastImportMatch = fileContent.match(/(import\s+.*?;\s*\n)+/);
+    if (lastImportMatch) {
+      const insertionPoint = lastImportMatch[0].length;
+      const iconImport = `\nimport { Icon } from '../lib/icon';\n`;
+      fileContent = fileContent.slice(0, insertionPoint) + iconImport + fileContent.slice(insertionPoint);
+    }
+  }
+
+  return fileContent;
+}
+
+/**
+ * Fix React imports (namespace imports, type imports, add missing imports)
+ */
+function fixReactImports(fileContent: string): string {
+  const usesReact = /(<[A-Z][^>]*>|React\.|jsx|tsx)/g.test(fileContent);
+  const hasReactImport = /import\s+.*?React.*?from\s+['"]react['"]/.test(fileContent);
+  const hasReactTypeImport = /import\s+type\s+.*?React.*?from\s+['"]react['"]/.test(fileContent);
+  const hasReactNamespaceImport = /import\s+(\*\s+as\s+React|type\s+\*\s+as\s+React)\s+from\s+['"]react['"]/.test(fileContent);
+
+  // Convert namespace imports to default imports
+  if (usesReact && hasReactNamespaceImport) {
+    fileContent = fileContent.replace(/import\s+(type\s+)?\*\s+as\s+React\s+from\s+(['"]react['"])/g, 'import React from $2');
+  }
+
+  // Convert type imports to regular imports
+  if (usesReact && hasReactTypeImport) {
+    fileContent = fileContent.replace(/import\s+type\s+(.*?React.*?)\s+from\s+(['"]react['"])/g, 'import $1 from $2');
+  }
+
+  // Add missing React import
+  if (usesReact && !hasReactImport && !hasReactTypeImport && !hasReactNamespaceImport) {
+    const importSection = fileContent.match(/^((?:import\s+.*?;\s*\n)*)/);
+    if (importSection) {
+      fileContent = fileContent.replace(/^((?:import\s+.*?;\s*\n)*)/, `import React from 'react';\n$1`);
+    } else {
+      fileContent = `import React from 'react';\n\n${fileContent}`;
+    }
+  }
+
+  return fileContent;
+}
+
+/**
+ * Remove empty lines between imports
+ */
+function cleanupImports(fileContent: string): string {
+  const lines = fileContent.split('\n');
+  const cleanedLines: string[] = [];
+  let inImportSection = false;
+  let lastLineWasImport = false;
+  let importSectionEnded = false;
+
+  for (const line of lines) {
+    const isImportLine = /^import\s/.test(line.trim());
+    const isEmptyLine = line.trim() === '';
+
+    if (isImportLine) {
+      inImportSection = true;
+      lastLineWasImport = true;
+      cleanedLines.push(line);
+    } else if (inImportSection && isEmptyLine && lastLineWasImport) {
+      // Skip empty lines between imports
+      continue;
+    } else if (inImportSection && !isImportLine && !isEmptyLine) {
+      // Import section ended, add one empty line before content
+      if (!importSectionEnded) {
+        cleanedLines.push('');
+        importSectionEnded = true;
+      }
+      cleanedLines.push(line);
+    } else {
+      cleanedLines.push(line);
+    }
+
+    if (!isImportLine && !isEmptyLine) {
+      lastLineWasImport = false;
+    }
+  }
+
+  return cleanedLines.join('\n');
+}
+
+/**
+ * Update Spinner component to accept dynamic iconId
+ */
+function updateSpinnerComponent(fileContent: string): string {
+  if (!fileContent.includes('function Spinner')) {
+    return fileContent;
+  }
+
+  // Update function signature to remove spriteUrl and add iconId with default
+  fileContent = fileContent.replace(
+    /function Spinner\(\{\s*className,\s*\.\.\.props\s*\}:\s*([^)]+)\)/,
+    'function Spinner({ className, iconId = \'Loader\', ...props }: $1 & { iconId?: string })'
+  );
+
+  // Replace hardcoded iconId with variable
+  fileContent = fileContent.replace(/iconId="(?:Loader2?|LoaderCircle)"/, 'iconId={iconId}');
+
+  return fileContent;
+}
+
+/**
+ * Main transformation pipeline for component file content
+ */
+function transformComponentsContent(fileContent: string): string {
+  fileContent = applyShadcnTransformations(fileContent);
+  fileContent = transformLucideIcons(fileContent);
+  fileContent = replaceOrphanedIcons(fileContent);
+  fileContent = fixReactImports(fileContent);
+  fileContent = updateSpinnerComponent(fileContent);
+  fileContent = cleanupImports(fileContent);
+  return fileContent;
+}
+
+/**
+ * Process files for index generation (read exports only, no transformation)
+ */
+async function processFilesForIndex(basePath: string, relativePath: string = '', fileSpec?: string) {
   const files = fs.readdirSync(basePath).sort();
   const processedFiles = [];
 
   for (const file of files) {
     if (!file.endsWith('.tsx') && !file.endsWith('.ts')) continue;
-    // if (fileSpec && file !== fileSpec) continue;
+
     if (fileSpec) {
       if (fileSpec === '*.tsx') {
+        // Process all .tsx files
       } else if (file !== fileSpec) {
         continue;
       }
     }
 
-    const filePath = path.join(basePath, file);
     const fileName = path.basename(file, '.tsx');
     const filePathWithRelative = relativePath ? path.join(relativePath, fileName) : fileName;
 
-    // Remove and skip REMOVE_COMPONENTS (only for main directory, not custom)
-    if (!relativePath && REMOVE_COMPONENTS.includes(fileName)) {
-      if (fs.existsSync(filePath)) {
-        fs.unlinkSync(filePath);
-      }
+    // Skip IGNORE_COMPONENTS (only for components directory, not custom)
+    if (relativePath === 'components' && IGNORE_COMPONENTS.includes(fileName)) {
       continue;
     }
 
-    let fileContent = fs.readFileSync(filePath, 'utf-8');
-
-    // Check if file uses React (JSX or React-specific code) but lacks React import
-    const usesReact = /(<[A-Z][^>]*>|React\.|jsx|tsx)/g.test(fileContent);
-    const hasReactImport = /import\s+.*?React.*?from\s+['"]react['"]/.test(fileContent);
-    const hasReactTypeImport = /import\s+type\s+.*?React.*?from\s+['"]react['"]/.test(fileContent);
-    const hasReactNamespaceImport = /import\s+(\*\s+as\s+React|type\s+\*\s+as\s+React)\s+from\s+['"]react['"]/.test(fileContent);
-
-    // Apply shadcn-specific transformations
-    fileContent = fileContent
-      .replace(/["']use client["']\s*;?\s*/g, '') // Remove "use client"
-      .replace(/import\s+{\s*cn\s*}\s+from\s+["'].*?\/utils["']/g, 'import clsx from \'clsx\'') // Replace cn import
-      .replace(/\bcn\(/g, 'clsx(') // Replace cn() calls with clsx()
-      .replace(/@\/registry\/new-york\//g, './') // Replace @/registry/new-york/ with ./
-      .replace(/@\/registry\/new-york-v4\/ui\//g, './') // Replace @/registry/new-york-v4/ui/ with ./
-      .replace(/@\/registry\/new-york-v4\/hooks\/(.*)/g, './hooks/\$1'); // Replace @/registry/new-york-v4/hooks/ with ./
-
-    // Convert React namespace imports to default imports if file uses React
-    if (usesReact && hasReactNamespaceImport && file.endsWith('.tsx')) {
-      fileContent = fileContent.replace(
-        /import\s+(type\s+)?\*\s+as\s+React\s+from\s+(['"]react['"])/g,
-        'import React from $2'
-      );
-    }
-
-    // Convert React type imports to direct imports if file uses React
-    if (usesReact && hasReactTypeImport && file.endsWith('.tsx')) {
-      fileContent = fileContent.replace(
-        /import\s+type\s+(.*?React.*?)\s+from\s+(['"]react['"])/g,
-        'import $1 from $2'
-      );
-    }
-
-    // Inject React import if file uses React but doesn't have the import
-    if (usesReact && !hasReactImport && !hasReactTypeImport && !hasReactNamespaceImport && file.endsWith('.tsx')) {
-      const importSection = fileContent.match(/^((?:import\s+.*?;\s*\n)*)/);
-      if (importSection) {
-        // Insert React import at the beginning of the import section
-        fileContent = fileContent.replace(
-          /^((?:import\s+.*?;\s*\n)*)/,
-          `import React from 'react';\n$1`
-        );
-      } else {
-        // No imports found, add React import at the top
-        fileContent = `import React from 'react';\n\n${fileContent}`;
-      }
-    }
-
-    // Write back the transformed content
-    fs.writeFileSync(filePath, fileContent, 'utf-8');
+    // Read file content to extract exports
+    const filePath = path.join(basePath, file);
+    const fileContent = fs.readFileSync(filePath, 'utf-8');
 
     // Detect both grouped and standalone exports
     const exports = new Set<string>();
@@ -161,19 +348,73 @@ async function processFiles(basePath: string, relativePath: string = '', fileSpe
   return processedFiles;
 }
 
-async function generateIndexFile(componentPath: URL) {
+/**
+ * Phase 1: Transform components from source to destination
+ * Reads all files from COMPONENTS_READ, transforms them, writes to COMPONENTS_WRITE
+ */
+async function transformComponents() {
+  console.log('\n📝 Phase 1: Transforming components...');
+
+  // Ensure write directory exists
+  if (!fs.existsSync(COMPONENTS_WRITE.pathname)) {
+    fs.mkdirSync(COMPONENTS_WRITE.pathname, { recursive: true });
+  }
+
+  if (!fs.existsSync(COMPONENTS_READ.pathname)) {
+    console.log(`Error: Source directory not found: ${COMPONENTS_READ.pathname}`);
+    return;
+  }
+
+  const files = fs.readdirSync(COMPONENTS_READ.pathname).sort();
+
+  for (const file of files) {
+    if (!file.endsWith('.tsx') && !file.endsWith('.ts')) continue;
+
+    const fileName = path.basename(file, path.extname(file));
+
+    // Skip IGNORE_COMPONENTS
+    if (IGNORE_COMPONENTS.includes(fileName)) {
+      console.log(`Ignored: ${fileName}`);
+      continue;
+    }
+
+    // Read from source and transform the file content
+    const readFilePath = path.join(COMPONENTS_READ.pathname, file);
+    let fileContent = fs.readFileSync(readFilePath, 'utf-8');
+    fileContent = transformComponentsContent(fileContent);
+
+    // Write to destination
+    const writeFilePath = path.join(COMPONENTS_WRITE.pathname, file);
+    fs.writeFileSync(writeFilePath, fileContent, 'utf-8');
+    console.log(`Transformed: ${file}`);
+  }
+}
+
+/**
+ * Phase 2: Generate index file from transformed components
+ */
+async function generateIndexFile() {
+  console.log('\n📦 Phase 2: Generating index file...');
+
+  // Ensure index directory exists
+  if (!fs.existsSync(COMPONENTS_CONFIG.path.pathname)) {
+    fs.mkdirSync(COMPONENTS_CONFIG.path.pathname, { recursive: true });
+    console.log(`Created index directory: ${COMPONENTS_CONFIG.path.pathname}`);
+  }
+
   let indexContent = '';
 
-  // Process files
+  // Read from transformed components
   const processedFiles = await Promise.all(
-    COMPONENTS_ADD.map(async (config) => {
-      const dirPath = path.join(componentPath.pathname, config.relativePath);
+    COMPONENTS_CONFIG.folders.map(async (config) => {
+      const componentDirPath = path.join(COMPONENTS_CONFIG.path.pathname, config.relativePath);
 
-      if (!fs.existsSync(dirPath)) {
+      if (!fs.existsSync(componentDirPath)) {
+        console.log(`Skipping ${config.relativePath}: directory not found`);
         return [];
       }
 
-      return processFiles(dirPath, config.relativePath, config.fileSpec);
+      return processFilesForIndex(componentDirPath, config.relativePath, config.fileSpec);
     })
   );
 
@@ -275,10 +516,36 @@ async function generateIndexFile(componentPath: URL) {
     }
   }
 
-  const indexPath = path.join(componentPath.pathname, 'index.ts');
+  // Ensure index directory exists
+  if (!fs.existsSync(COMPONENTS_CONFIG.path.pathname)) {
+    fs.mkdirSync(COMPONENTS_CONFIG.path.pathname, { recursive: true });
+    console.log(`Created index directory: ${COMPONENTS_CONFIG.path.pathname}`);
+  }
+
+  const indexPath = path.join(COMPONENTS_CONFIG.path.pathname, COMPONENTS_CONFIG.index);
   fs.writeFileSync(indexPath, indexContent, 'utf-8');
 
   console.log(`Generated ${indexPath}`);
 }
 
-generateIndexFile(COMPONENTS_PATH).catch(console.error);
+/**
+ * Main execution
+ */
+async function main() {
+  try {
+    console.log('🚀 Starting shadcn component build process...');
+
+    // Phase 1: Transform components from source to destination
+    await transformComponents();
+
+    // Phase 2: Generate index file from transformed components
+    await generateIndexFile();
+
+    console.log('\n✅ Build complete!');
+  } catch (error) {
+    console.error('❌ Error during build:', error);
+    process.exit(1);
+  }
+}
+
+main();

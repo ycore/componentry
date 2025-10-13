@@ -15,7 +15,7 @@ import {
   DropdownMenuTrigger,
 } from '../components/dropdown-menu';
 
-export default function DropdownMenuDemo({ spriteUrl }: { spriteUrl: string }) {
+export default function DropdownMenuDemo() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -45,7 +45,7 @@ export default function DropdownMenuDemo({ spriteUrl }: { spriteUrl: string }) {
         <DropdownMenuGroup>
           <DropdownMenuItem>Team</DropdownMenuItem>
           <DropdownMenuSub>
-            <DropdownMenuSubTrigger spriteUrl={spriteUrl}>Invite users</DropdownMenuSubTrigger>
+            <DropdownMenuSubTrigger>Invite users</DropdownMenuSubTrigger>
             <DropdownMenuPortal>
               <DropdownMenuSubContent>
                 <DropdownMenuItem>Email</DropdownMenuItem>

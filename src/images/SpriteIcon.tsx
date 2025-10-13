@@ -13,7 +13,9 @@ import type { SpriteIconProps } from './@types/SpriteIcon.types';
 export function SpriteIcon<IconId extends string = string>({ url, iconId, ...props }: SpriteIconProps<string, IconId>) {
   return (
     // biome-ignore lint/a11y/noSvgWithoutTitle: acceptable
-    <svg {...props}>{iconId ? <use href={`${url}#${iconId}`} /> : <use href={`${url}`} />}</svg>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" {...props}>
+      {iconId ? <use href={`${url}#${iconId}`} /> : <use href={`${url}`} />}
+    </svg>
   );
 }
 

@@ -9,7 +9,7 @@ export default function PopoverDemo() {
   const maxWidthId = React.useId();
   const heightId = React.useId();
   const maxHeightId = React.useId();
-  
+
   return (
     <Popover>
       <PopoverTrigger asChild>

@@ -1,8 +1,7 @@
+import * as MenubarPrimitive from '@radix-ui/react-menubar';
 import clsx from 'clsx';
-import { Menubar as MenubarPrimitive } from 'radix-ui';
-import type React from 'react';
-import { SpriteIcon } from '../../images/SpriteIcon';
-import type { IconName } from '../@types/lucide-sprites';
+import React from 'react';
+import { Icon } from '../../vibrant/lib/icon';
 
 function Menubar({ className, ...props }: React.ComponentProps<typeof MenubarPrimitive.Root>) {
   return <MenubarPrimitive.Root data-slot="menubar" className={clsx('flex h-9 items-center gap-1 rounded-md border bg-background p-1 shadow-xs', className)} {...props} />;
@@ -78,7 +77,7 @@ function MenubarItem({
   );
 }
 
-function MenubarCheckboxItem({ className, children, checked, spriteUrl, ...props }: React.ComponentProps<typeof MenubarPrimitive.CheckboxItem> & { spriteUrl: string }) {
+function MenubarCheckboxItem({ className, children, checked, ...props }: React.ComponentProps<typeof MenubarPrimitive.CheckboxItem>) {
   return (
     <MenubarPrimitive.CheckboxItem
       data-slot="menubar-checkbox-item"
@@ -91,7 +90,7 @@ function MenubarCheckboxItem({ className, children, checked, spriteUrl, ...props
     >
       <span className="pointer-events-none absolute left-2 flex size-3.5 items-center justify-center">
         <MenubarPrimitive.ItemIndicator>
-          <SpriteIcon<IconName> iconId="Check" className="size-4" url={spriteUrl} />
+          <Icon iconId="Check" className="size-4" />
         </MenubarPrimitive.ItemIndicator>
       </span>
       {children}
@@ -99,7 +98,7 @@ function MenubarCheckboxItem({ className, children, checked, spriteUrl, ...props
   );
 }
 
-function MenubarRadioItem({ className, children, spriteUrl, ...props }: React.ComponentProps<typeof MenubarPrimitive.RadioItem> & { spriteUrl: string }) {
+function MenubarRadioItem({ className, children, ...props }: React.ComponentProps<typeof MenubarPrimitive.RadioItem>) {
   return (
     <MenubarPrimitive.RadioItem
       data-slot="menubar-radio-item"
@@ -111,7 +110,7 @@ function MenubarRadioItem({ className, children, spriteUrl, ...props }: React.Co
     >
       <span className="pointer-events-none absolute left-2 flex size-3.5 items-center justify-center">
         <MenubarPrimitive.ItemIndicator>
-          <SpriteIcon<IconName> iconId="Circle" className="size-2 fill-current" url={spriteUrl} />
+          <Icon iconId="Circle" className="size-2 fill-current" />
         </MenubarPrimitive.ItemIndicator>
       </span>
       {children}
@@ -141,7 +140,14 @@ function MenubarSub({ ...props }: React.ComponentProps<typeof MenubarPrimitive.S
   return <MenubarPrimitive.Sub data-slot="menubar-sub" {...props} />;
 }
 
-function MenubarSubTrigger({ className, inset, children, spriteUrl, ...props }: React.ComponentProps<typeof MenubarPrimitive.SubTrigger> & { inset?: boolean } & { spriteUrl: string }) {
+function MenubarSubTrigger({
+  className,
+  inset,
+  children,
+  ...props
+}: React.ComponentProps<typeof MenubarPrimitive.SubTrigger> & {
+  inset?: boolean;
+}) {
   return (
     <MenubarPrimitive.SubTrigger
       data-slot="menubar-sub-trigger"
@@ -153,7 +159,7 @@ function MenubarSubTrigger({ className, inset, children, spriteUrl, ...props }: 
       {...props}
     >
       {children}
-      <SpriteIcon<IconName> iconId="ChevronRight" className="ml-auto h-4 w-4" url={spriteUrl} />
+      <Icon iconId="ChevronRight" className="ml-auto h-4 w-4" />
     </MenubarPrimitive.SubTrigger>
   );
 }

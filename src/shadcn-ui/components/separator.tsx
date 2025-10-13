@@ -1,6 +1,6 @@
-import clsx from 'clsx';
-import { Separator as SeparatorPrimitive } from 'radix-ui';
 import React from 'react';
+import * as SeparatorPrimitive from '@radix-ui/react-separator';
+import clsx from 'clsx';
 
 function Separator({ className, orientation = 'horizontal', decorative = true, ...props }: React.ComponentProps<typeof SeparatorPrimitive.Root>) {
   return (

@@ -4,17 +4,17 @@ import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, Di
 import { Input } from '../components/input';
 import { Label } from '../components/label';
 
-export default function DialogDemo({ spriteUrl }: { spriteUrl: string }) {
+export default function DialogDemo() {
   const nameId = React.useId();
   const usernameId = React.useId();
-  
+
   return (
     <Dialog>
       <form>
         <DialogTrigger asChild>
           <Button variant="outline">Open Dialog</Button>
         </DialogTrigger>
-        <DialogContent spriteUrl={spriteUrl} className="sm:max-w-[425px]">
+        <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
             <DialogTitle>Edit profile</DialogTitle>
             <DialogDescription>Make changes to your profile here. Click save when you&apos;re done.</DialogDescription>

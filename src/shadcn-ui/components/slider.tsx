@@ -1,6 +1,6 @@
-import clsx from 'clsx';
-import { Slider as SliderPrimitive } from 'radix-ui';
 import React from 'react';
+import * as SliderPrimitive from '@radix-ui/react-slider';
+import clsx from 'clsx';
 
 function Slider({ className, defaultValue, value, min = 0, max = 100, ...props }: React.ComponentProps<typeof SliderPrimitive.Root>) {
   const _values = React.useMemo(() => (Array.isArray(value) ? value : Array.isArray(defaultValue) ? defaultValue : [min, max]), [value, defaultValue, min, max]);
@@ -27,7 +27,6 @@ function Slider({ className, defaultValue, value, min = 0, max = 100, ...props }
       {Array.from({ length: _values.length }, (_, index) => (
         <SliderPrimitive.Thumb
           data-slot="slider-thumb"
-          // biome-ignore lint/suspicious/noArrayIndexKey: slider thumbs are static and positional
           key={index}
           className="block size-4 shrink-0 rounded-full border border-primary bg-background shadow-sm ring-ring/50 transition-[color,box-shadow] hover:ring-4 focus-visible:outline-hidden focus-visible:ring-4 disabled:pointer-events-none disabled:opacity-50"
         />

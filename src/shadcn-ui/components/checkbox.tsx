@@ -1,11 +1,9 @@
+import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
 import clsx from 'clsx';
-import { Checkbox as CheckboxPrimitive } from 'radix-ui';
-import type React from 'react';
+import React from 'react';
+import { Icon } from '../../vibrant/lib/icon';
 
-import { SpriteIcon } from '../../images/SpriteIcon';
-import type { IconName } from '../@types/lucide-sprites';
-
-function Checkbox({ className, spriteUrl, ...props }: React.ComponentProps<typeof CheckboxPrimitive.Root> & { spriteUrl: string }) {
+function Checkbox({ className, ...props }: React.ComponentProps<typeof CheckboxPrimitive.Root>) {
   return (
     <CheckboxPrimitive.Root
       data-slot="checkbox"
@@ -16,7 +14,7 @@ function Checkbox({ className, spriteUrl, ...props }: React.ComponentProps<typeo
       {...props}
     >
       <CheckboxPrimitive.Indicator data-slot="checkbox-indicator" className="flex items-center justify-center text-current transition-none">
-        <SpriteIcon<IconName> iconId="Check" url={spriteUrl} className="size-3.5" />
+        <Icon iconId="Check" className="size-3.5" />
       </CheckboxPrimitive.Indicator>
     </CheckboxPrimitive.Root>
   );

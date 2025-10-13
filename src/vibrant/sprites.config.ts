@@ -4,9 +4,9 @@ import type { IconSpriteConfig } from '../images/@types/icon-spritesheet.types';
 export const staticSpriteConfig: IconSpriteConfig[] = [
   {
     inputDir: '../../node_modules/lucide-static/icons',
-    outputDir: 'src/shadcn-ui/assets',
+    outputDir: 'src/vibrant/assets',
     spriteFileName: 'lucide-sprites.svg',
-    typesFileName: 'src/shadcn-ui/@types/lucide-sprites.ts',
+    typesFileName: 'src/vibrant/@types/lucide-sprites.ts',
     inputFilespec: [
       'arrow-down.svg',
       'arrow-left.svg',
@@ -48,9 +48,9 @@ export const staticSpriteConfig: IconSpriteConfig[] = [
   },
   {
     inputDir: '../../node_modules/lucide-static/icons',
-    outputDir: 'src/shadcn-ui/assets',
+    outputDir: 'src/vibrant/assets',
     spriteFileName: 'example-sprites.svg',
-    typesFileName: 'src/shadcn-ui/@types/example-sprites.ts',
+    typesFileName: 'src/vibrant/@types/example-sprites.ts',
     inputFilespec: ['app-window.svg', 'bold.svg', 'file-code-2.svg', 'italic.svg', 'popcorn.svg', 'underline.svg'],
   },
 ];

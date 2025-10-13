@@ -4,16 +4,16 @@ import { Input } from '../components/input';
 import { Label } from '../components/label';
 import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from '../components/sheet';
 
-export default function SheetDemo({ spriteUrl }: { spriteUrl: string }) {
+export default function SheetDemo() {
   const nameId = React.useId();
   const usernameId = React.useId();
-  
+
   return (
     <Sheet>
       <SheetTrigger asChild>
         <Button variant="outline">Open</Button>
       </SheetTrigger>
-      <SheetContent spriteUrl={spriteUrl}>
+      <SheetContent>
         <SheetHeader>
           <SheetTitle>Edit profile</SheetTitle>
           <SheetDescription>Make changes to your profile here. Click save when you&apos;re done.</SheetDescription>

@@ -180,7 +180,7 @@ export function getLocaleFromBrowser(): SupportedLocale {
   }
 
   // Try language match (e.g., 'en' matches 'en-US')
-  const languageCode = browserLocale.split('-')[0];
+  const languageCode = browserLocale.split('-')[0] || '';
   const languageMatch = supportedLocales.find(locale => locale.startsWith(languageCode));
 
   return languageMatch || defaultIntlConfig.fallbackLocale;

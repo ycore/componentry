@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import React from 'react';
 import { Await } from 'react-router';
 
-import { Spinner } from '../shadcn-ui/custom/spinner';
+import { Spinner } from '../shadcn-ui/components/spinner';
 import type { ImageData, LazyGalleryProps, LazyImageProps } from './@types/LazyImage.types';
 
 export const imageLoader = async (filenames: Record<string, () => Promise<unknown>>) => {
@@ -22,7 +22,7 @@ export const createRemoteImagePromise = (src: string, alt: string, width?: numbe
   });
 };
 
-export function LazyImage({ image, src, alt, width, height, className, spriteUrl, fallback = spriteUrl ? <Spinner spriteUrl={spriteUrl} /> : <div className="text-slate-500/50">Loading...</div> }: LazyImageProps) {
+export function LazyImage({ image, src, alt, width, height, className, spriteUrl, fallback = spriteUrl ? <Spinner /> : <div className="text-slate-500/50">Loading...</div> }: LazyImageProps) {
   const imagePromise = image || (src ? createRemoteImagePromise(src, alt || '', width, height) : null);
 
   if (!imagePromise) {
@@ -31,20 +31,14 @@ export function LazyImage({ image, src, alt, width, height, className, spriteUrl
 
   return (
     <React.Suspense fallback={fallback}>
-      <TypedAwait<ImageData> resolve={imagePromise} errorElement={spriteUrl ? <Spinner spriteUrl={spriteUrl} className="text-slate-500/50" /> : <div className="text-slate-500/50">Error loading image</div>}>
+      <TypedAwait<ImageData> resolve={imagePromise} errorElement={spriteUrl ? <Spinner className="text-slate-500/50" /> : <div className="text-slate-500/50">Error loading image</div>}>
         {(imageData: ImageData) => <ImageElement {...imageData} className={clsx(imageData.className, className)} />}
       </TypedAwait>
     </React.Suspense>
   );
 }
 
-export function LazyGallery({
-  images,
-  className,
-  imageClass,
-  spriteUrl,
-  fallback = spriteUrl ? <Spinner spriteUrl={spriteUrl} className="h-[180px]" /> : <div className="h-[180px] text-slate-500/50">Loading...</div>,
-}: LazyGalleryProps) {
+export function LazyGallery({ images, className, imageClass, spriteUrl, fallback = spriteUrl ? <Spinner className="h-[180px]" /> : <div className="h-[180px] text-slate-500/50">Loading...</div> }: LazyGalleryProps) {
   return (
     <div className={className}>
       {images.map(imgPromise => (

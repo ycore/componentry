@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { Link } from '../../shadcn-ui/custom/link';
+import { Link } from '../../vibrant/components/link';
 import type { FooterProps, HeaderProps } from '../@types/Page.types';
 
 export function Header({ children, className }: HeaderProps) {

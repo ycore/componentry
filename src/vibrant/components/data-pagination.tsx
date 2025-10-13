@@ -1,12 +1,8 @@
-import svgSpriteUrl from '@ycore/componentry/shadcn-ui/assets/lucide-sprites.svg?url';
 import type React from 'react';
 import type { useFetcher } from 'react-router';
-import { createSpriteIcon } from '../../images/SpriteIcon';
-import type { IconName } from '../@types/lucide-sprites';
-import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from '../components/pagination';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/select';
-
-const SpriteIcon = createSpriteIcon<IconName>(svgSpriteUrl);
+import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from '../../shadcn-ui/components/pagination';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../shadcn-ui/components/select';
+import { Icon } from '../lib/icon';
 
 // ============================================================================
 // Type Definitions
@@ -30,6 +26,66 @@ interface RowsPerPageSelectorProps {
   disabled?: boolean;
 }
 
+export function DataPagination({ currentRecords, pagination, totalRecords, baseRoute, routeParams = {}, perPageOptions = [25, 50, 100, 200], fetcher, isLoading = false, loadingIcon = true }: DataPaginationProps) {
+  const buildUrl = (params: Record<string, string>) => {
+    const urlParams = new URLSearchParams();
+
+    // Add route params (like table selection)
+    Object.entries(routeParams).forEach(([key, value]) => {
+      if (value) urlParams.set(key, value);
+    });
+
+    // Add pagination params
+    Object.entries(params).forEach(([key, value]) => {
+      urlParams.set(key, value);
+    });
+
+    const baseUrl = baseRoute;
+    return `${baseUrl}?${urlParams.toString()}`;
+  };
+
+  const navigateToUrl = (url: string) => {
+    try {
+      fetcher.load(url);
+      window.history.pushState({}, '', url);
+    } catch (error) {
+      console.error('Navigation error:', error);
+    }
+  };
+
+  const handleLimitChange = (newLimit: number) => {
+    const url = buildUrl({
+      limit: newLimit.toString(),
+      page: '1',
+    });
+    navigateToUrl(url);
+  };
+
+  const handlePageChange = (newPage: number) => {
+    const url = buildUrl({
+      page: newPage.toString(),
+      limit: pagination.limit.toString(),
+    });
+    navigateToUrl(url);
+  };
+
+  return (
+    <div className="border-b p-4">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <PaginationControls currentPage={pagination.page} hasNextPage={pagination.hasNextPage} hasPreviousPage={pagination.hasPreviousPage} onPageChange={handlePageChange} disabled={isLoading} />
+          {isLoading && loadingIcon && <Icon iconId="LoaderCircle" className="h-4 w-4 animate-spin text-muted-foreground" />}
+        </div>
+
+        <div className="flex items-center gap-4">
+          <RowsPerPageSelector currentLimit={pagination.limit} options={perPageOptions} onLimitChange={handleLimitChange} disabled={isLoading} />
+          <RecordCountDisplay currentPage={pagination.page} currentRecords={currentRecords} hasNextPage={pagination.hasNextPage} totalRecords={totalRecords} />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function RowsPerPageSelector({ currentLimit, options, onLimitChange, disabled = false }: RowsPerPageSelectorProps) {
   return (
     <div className="flex items-center gap-2">
@@ -43,12 +99,12 @@ export function RowsPerPageSelector({ currentLimit, options, onLimitChange, disa
         }}
         disabled={disabled}
       >
-        <SelectTrigger className="w-20" spriteUrl={svgSpriteUrl}>
+        <SelectTrigger className="w-20">
           <SelectValue />
         </SelectTrigger>
-        <SelectContent spriteUrl={svgSpriteUrl}>
+        <SelectContent>
           {options.map(option => (
-            <SelectItem key={option} value={option.toString()} spriteUrl={svgSpriteUrl}>
+            <SelectItem key={option} value={option.toString()}>
               {option}
             </SelectItem>
           ))}
@@ -130,7 +186,7 @@ export function PaginationControls({ currentPage, hasNextPage, hasPreviousPage, 
       <Pagination>
         <PaginationContent>
           <PaginationItem>
-            <PaginationPrevious spriteUrl={svgSpriteUrl} href="#" className={hasPreviousPage ? '' : 'pointer-events-none opacity-50'} onClick={(e: React.MouseEvent) => handleNavigationClick(currentPage - 1, e)} />
+            <PaginationPrevious href="#" className={hasPreviousPage ? '' : 'pointer-events-none opacity-50'} onClick={(e: React.MouseEvent) => handleNavigationClick(currentPage - 1, e)} />
           </PaginationItem>
 
           {currentPage > 2 && (
@@ -142,7 +198,7 @@ export function PaginationControls({ currentPage, hasNextPage, hasPreviousPage, 
               </PaginationItem>
               {currentPage > 3 && (
                 <PaginationItem>
-                  <PaginationEllipsis spriteUrl={svgSpriteUrl} />
+                  <PaginationEllipsis />
                 </PaginationItem>
               )}
             </>
@@ -172,12 +228,12 @@ export function PaginationControls({ currentPage, hasNextPage, hasPreviousPage, 
 
           {hasNextPage && (
             <PaginationItem>
-              <PaginationEllipsis spriteUrl={svgSpriteUrl} />
+              <PaginationEllipsis />
             </PaginationItem>
           )}
 
           <PaginationItem>
-            <PaginationNext spriteUrl={svgSpriteUrl} href="#" className={hasNextPage ? '' : 'pointer-events-none opacity-50'} onClick={(e: React.MouseEvent) => handleNavigationClick(currentPage + 1, e)} />
+            <PaginationNext href="#" className={hasNextPage ? '' : 'pointer-events-none opacity-50'} onClick={(e: React.MouseEvent) => handleNavigationClick(currentPage + 1, e)} />
           </PaginationItem>
         </PaginationContent>
       </Pagination>
@@ -209,66 +265,6 @@ interface DataPaginationProps {
   // Labels
   title?: string;
   loadingIcon?: boolean;
-}
-
-export function DataPagination({ currentRecords, pagination, totalRecords, baseRoute, routeParams = {}, perPageOptions = [25, 50, 100, 200], fetcher, isLoading = false, loadingIcon = true }: DataPaginationProps) {
-  const buildUrl = (params: Record<string, string>) => {
-    const urlParams = new URLSearchParams();
-
-    // Add route params (like table selection)
-    Object.entries(routeParams).forEach(([key, value]) => {
-      if (value) urlParams.set(key, value);
-    });
-
-    // Add pagination params
-    Object.entries(params).forEach(([key, value]) => {
-      urlParams.set(key, value);
-    });
-
-    const baseUrl = baseRoute;
-    return `${baseUrl}?${urlParams.toString()}`;
-  };
-
-  const navigateToUrl = (url: string) => {
-    try {
-      fetcher.load(url);
-      window.history.pushState({}, '', url);
-    } catch (error) {
-      console.error('Navigation error:', error);
-    }
-  };
-
-  const handleLimitChange = (newLimit: number) => {
-    const url = buildUrl({
-      limit: newLimit.toString(),
-      page: '1',
-    });
-    navigateToUrl(url);
-  };
-
-  const handlePageChange = (newPage: number) => {
-    const url = buildUrl({
-      page: newPage.toString(),
-      limit: pagination.limit.toString(),
-    });
-    navigateToUrl(url);
-  };
-
-  return (
-    <div className="border-b p-4">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <PaginationControls currentPage={pagination.page} hasNextPage={pagination.hasNextPage} hasPreviousPage={pagination.hasPreviousPage} onPageChange={handlePageChange} disabled={isLoading} />
-          {isLoading && loadingIcon && <SpriteIcon iconId="LoaderCircle" className="h-4 w-4 animate-spin text-muted-foreground" />}
-        </div>
-
-        <div className="flex items-center gap-4">
-          <RowsPerPageSelector currentLimit={pagination.limit} options={perPageOptions} onLimitChange={handleLimitChange} disabled={isLoading} />
-          <RecordCountDisplay currentPage={pagination.page} currentRecords={currentRecords} hasNextPage={pagination.hasNextPage} totalRecords={totalRecords} />
-        </div>
-      </div>
-    </div>
-  );
 }
 
 // ============================================================================

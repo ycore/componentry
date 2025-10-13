@@ -10,7 +10,7 @@ export default function TabsDemo() {
   const usernameId = React.useId();
   const currentPasswordId = React.useId();
   const newPasswordId = React.useId();
-  
+
   return (
     <div className="flex w-full max-w-sm flex-col gap-6">
       <Tabs defaultValue="account">

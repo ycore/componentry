@@ -1,15 +1,13 @@
+import * as RadioGroupPrimitive from '@radix-ui/react-radio-group';
 import clsx from 'clsx';
-import { RadioGroup as RadioGroupPrimitive } from 'radix-ui';
-import type React from 'react';
-
-import { SpriteIcon } from '../../images/SpriteIcon';
-import type { IconName } from '../@types/lucide-sprites';
+import React from 'react';
+import { Icon } from '../../vibrant/lib/icon';
 
 function RadioGroup({ className, ...props }: React.ComponentProps<typeof RadioGroupPrimitive.Root>) {
   return <RadioGroupPrimitive.Root data-slot="radio-group" className={clsx('grid gap-3', className)} {...props} />;
 }
 
-function RadioGroupItem({ className, spriteUrl, ...props }: React.ComponentProps<typeof RadioGroupPrimitive.Item> & { spriteUrl: string }) {
+function RadioGroupItem({ className, ...props }: React.ComponentProps<typeof RadioGroupPrimitive.Item>) {
   return (
     <RadioGroupPrimitive.Item
       data-slot="radio-group-item"
@@ -20,7 +18,7 @@ function RadioGroupItem({ className, spriteUrl, ...props }: React.ComponentProps
       {...props}
     >
       <RadioGroupPrimitive.Indicator data-slot="radio-group-indicator" className="relative flex items-center justify-center">
-        <SpriteIcon<IconName> iconId="Circle" url={spriteUrl} className="-translate-x-1/2 -translate-y-1/2 absolute top-1/2 left-1/2 size-2 fill-primary" />
+        <Icon iconId="Circle" className="-translate-x-1/2 -translate-y-1/2 absolute top-1/2 left-1/2 size-2 fill-primary" />
       </RadioGroupPrimitive.Indicator>
     </RadioGroupPrimitive.Item>
   );

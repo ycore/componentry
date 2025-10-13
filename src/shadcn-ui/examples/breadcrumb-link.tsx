@@ -1,8 +1,8 @@
 import React from 'react';
+import { Link } from '../../vibrant/components/link';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '../components/breadcrumb';
-import { Link } from '../custom/link';
 
-export default function BreadcrumbWithCustomSeparator({ spriteUrl }: { spriteUrl: string }) {
+export default function BreadcrumbWithCustomSeparator() {
   return (
     <Breadcrumb>
       <BreadcrumbList>
@@ -11,13 +11,13 @@ export default function BreadcrumbWithCustomSeparator({ spriteUrl }: { spriteUrl
             <Link href="/">Home</Link>
           </BreadcrumbLink>
         </BreadcrumbItem>
-        <BreadcrumbSeparator spriteUrl={spriteUrl} />
+        <BreadcrumbSeparator />
         <BreadcrumbItem>
           <BreadcrumbLink asChild>
             <Link href="/components">Components</Link>
           </BreadcrumbLink>
         </BreadcrumbItem>
-        <BreadcrumbSeparator spriteUrl={spriteUrl} />
+        <BreadcrumbSeparator />
         <BreadcrumbItem>
           <BreadcrumbPage>Breadcrumb</BreadcrumbPage>
         </BreadcrumbItem>

@@ -2,58 +2,33 @@
 // Internationalization Type Definitions
 // ============================================================================
 
-export type SupportedLocale =
-  | 'en-US'
-  | 'en-GB'
-  | 'en-CA'
-  | 'en-AU'
-  | 'es-ES'
-  | 'es-MX'
-  | 'fr-FR'
-  | 'fr-CA'
-  | 'de-DE'
-  | 'it-IT'
-  | 'pt-BR'
-  | 'ja-JP'
-  | 'ko-KR'
-  | 'zh-CN'
-  | 'zh-TW';
+export type SupportedLocale = 'en-US' | 'en-GB' | 'en-CA' | 'en-AU' | 'es-ES' | 'es-MX' | 'fr-FR' | 'fr-CA' | 'de-DE' | 'it-IT' | 'pt-BR' | 'ja-JP' | 'ko-KR' | 'zh-CN' | 'zh-TW';
 
-export type SupportedCurrency =
-  | 'USD'
-  | 'EUR'
-  | 'GBP'
-  | 'CAD'
-  | 'AUD'
-  | 'JPY'
-  | 'KRW'
-  | 'CNY'
-  | 'BRL'
-  | 'MXN';
+export type SupportedCurrency = 'USD' | 'EUR' | 'GBP' | 'CAD' | 'AUD' | 'JPY' | 'KRW' | 'CNY' | 'BRL' | 'MXN';
 
 export type DateFormatPreset =
-  | 'short'      // 12/31/2023
-  | 'medium'     // Dec 31, 2023
-  | 'long'       // December 31, 2023
-  | 'full'       // Sunday, December 31, 2023
-  | 'datetime'   // Dec 31, 2023, 10:30 AM
-  | 'timestamp'  // December 31, 2023 at 10:30:15 AM
-  | 'relative';  // 2 days ago (future enhancement)
+  | 'short' // 12/31/2023
+  | 'medium' // Dec 31, 2023
+  | 'long' // December 31, 2023
+  | 'full' // Sunday, December 31, 2023
+  | 'datetime' // Dec 31, 2023, 10:30 AM
+  | 'timestamp' // December 31, 2023 at 10:30:15 AM
+  | 'relative'; // 2 days ago (future enhancement)
 
 export type NumberFormatPreset =
-  | 'integer'    // 1,234
-  | 'decimal'    // 1,234.56
-  | 'percent'    // 12.34%
-  | 'compact'    // 1.2K, 1.2M
+  | 'integer' // 1,234
+  | 'decimal' // 1,234.56
+  | 'percent' // 12.34%
+  | 'compact' // 1.2K, 1.2M
   | 'scientific' // 1.23E+3
-  | 'ordinal';   // 1st, 2nd, 3rd
+  | 'ordinal'; // 1st, 2nd, 3rd
 
 export type CurrencyFormatPreset =
-  | 'standard'   // $1,234.56
+  | 'standard' // $1,234.56
   | 'accounting' // ($1,234.56) for negatives
-  | 'compact'    // $1.2K
-  | 'name'       // 1,234.56 US dollars
-  | 'code';      // USD 1,234.56
+  | 'compact' // $1.2K
+  | 'name' // 1,234.56 US dollars
+  | 'code'; // USD 1,234.56
 
 // ============================================================================
 // Configuration Interfaces

@@ -1,6 +1,6 @@
-import clsx from 'clsx';
-import { Label as LabelPrimitive } from 'radix-ui';
 import React from 'react';
+import * as LabelPrimitive from '@radix-ui/react-label';
+import clsx from 'clsx';
 
 function Label({ className, ...props }: React.ComponentProps<typeof LabelPrimitive.Root>) {
   return (

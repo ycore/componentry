@@ -7,10 +7,10 @@ import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHe
 
 const SHEET_SIDES = ['top', 'right', 'bottom', 'left'] as const;
 
-export default function SheetSide({ spriteUrl }: { spriteUrl: string }) {
+export default function SheetSide() {
   const nameId = React.useId();
   const usernameId = React.useId();
-  
+
   return (
     <div className="grid grid-cols-2 gap-2">
       {SHEET_SIDES.map(side => (
@@ -18,7 +18,7 @@ export default function SheetSide({ spriteUrl }: { spriteUrl: string }) {
           <SheetTrigger asChild>
             <Button variant="outline">{side}</Button>
           </SheetTrigger>
-          <SheetContent spriteUrl={spriteUrl} side={side}>
+          <SheetContent side={side}>
             <SheetHeader>
               <SheetTitle>Edit profile</SheetTitle>
               <SheetDescription>Make changes to your profile here. Click save when you're done.</SheetDescription>

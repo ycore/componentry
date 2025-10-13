@@ -1,9 +1,9 @@
 import React from 'react';
+import { Link } from '../../vibrant/components/link';
 import { Breadcrumb, BreadcrumbEllipsis, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '../components/breadcrumb';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '../components/dropdown-menu';
-import { Link } from '../custom/link';
 
-export default function BreadcrumbDemo({ spriteUrl }: { spriteUrl: string }) {
+export default function BreadcrumbDemo() {
   return (
     <Breadcrumb>
       <BreadcrumbList>
@@ -12,11 +12,11 @@ export default function BreadcrumbDemo({ spriteUrl }: { spriteUrl: string }) {
             <Link href="/">Home</Link>
           </BreadcrumbLink>
         </BreadcrumbItem>
-        <BreadcrumbSeparator spriteUrl={spriteUrl} />
+        <BreadcrumbSeparator />
         <BreadcrumbItem>
           <DropdownMenu>
             <DropdownMenuTrigger className="flex items-center gap-1">
-              <BreadcrumbEllipsis spriteUrl={spriteUrl} className="size-4" />
+              <BreadcrumbEllipsis className="size-4" />
               <span className="sr-only">Toggle menu</span>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="start">
@@ -26,13 +26,13 @@ export default function BreadcrumbDemo({ spriteUrl }: { spriteUrl: string }) {
             </DropdownMenuContent>
           </DropdownMenu>
         </BreadcrumbItem>
-        <BreadcrumbSeparator spriteUrl={spriteUrl} />
+        <BreadcrumbSeparator />
         <BreadcrumbItem>
           <BreadcrumbLink asChild>
             <Link href="/docs/components">Components</Link>
           </BreadcrumbLink>
         </BreadcrumbItem>
-        <BreadcrumbSeparator spriteUrl={spriteUrl} />
+        <BreadcrumbSeparator />
         <BreadcrumbItem>
           <BreadcrumbPage>Breadcrumb</BreadcrumbPage>
         </BreadcrumbItem>

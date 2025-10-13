@@ -16,7 +16,7 @@ import {
   MenubarTrigger,
 } from '../components/menubar';
 
-export default function MenubarDemo({ spriteUrl }: { spriteUrl: string }) {
+export default function MenubarDemo() {
   return (
     <Menubar>
       <MenubarMenu>
@@ -31,7 +31,7 @@ export default function MenubarDemo({ spriteUrl }: { spriteUrl: string }) {
           <MenubarItem disabled>New Incognito Window</MenubarItem>
           <MenubarSeparator />
           <MenubarSub>
-            <MenubarSubTrigger spriteUrl={spriteUrl}>Share</MenubarSubTrigger>
+            <MenubarSubTrigger>Share</MenubarSubTrigger>
             <MenubarSubContent>
               <MenubarItem>Email link</MenubarItem>
               <MenubarItem>Messages</MenubarItem>
@@ -55,7 +55,7 @@ export default function MenubarDemo({ spriteUrl }: { spriteUrl: string }) {
           </MenubarItem>
           <MenubarSeparator />
           <MenubarSub>
-            <MenubarSubTrigger spriteUrl={spriteUrl}>Find</MenubarSubTrigger>
+            <MenubarSubTrigger>Find</MenubarSubTrigger>
             <MenubarSubContent>
               <MenubarItem>Search the web</MenubarItem>
               <MenubarSeparator />
@@ -73,10 +73,8 @@ export default function MenubarDemo({ spriteUrl }: { spriteUrl: string }) {
       <MenubarMenu>
         <MenubarTrigger>View</MenubarTrigger>
         <MenubarContent>
-          <MenubarCheckboxItem spriteUrl={spriteUrl}>Always Show Bookmarks Bar</MenubarCheckboxItem>
-          <MenubarCheckboxItem spriteUrl={spriteUrl} checked>
-            Always Show Full URLs
-          </MenubarCheckboxItem>
+          <MenubarCheckboxItem>Always Show Bookmarks Bar</MenubarCheckboxItem>
+          <MenubarCheckboxItem checked>Always Show Full URLs</MenubarCheckboxItem>
           <MenubarSeparator />
           <MenubarItem inset>
             Reload <MenubarShortcut>⌘R</MenubarShortcut>
@@ -94,15 +92,9 @@ export default function MenubarDemo({ spriteUrl }: { spriteUrl: string }) {
         <MenubarTrigger>Profiles</MenubarTrigger>
         <MenubarContent>
           <MenubarRadioGroup value="benoit">
-            <MenubarRadioItem spriteUrl={spriteUrl} value="andy">
-              Andy
-            </MenubarRadioItem>
-            <MenubarRadioItem spriteUrl={spriteUrl} value="benoit">
-              Benoit
-            </MenubarRadioItem>
-            <MenubarRadioItem spriteUrl={spriteUrl} value="Luis">
-              Luis
-            </MenubarRadioItem>
+            <MenubarRadioItem value="andy">Andy</MenubarRadioItem>
+            <MenubarRadioItem value="benoit">Benoit</MenubarRadioItem>
+            <MenubarRadioItem value="Luis">Luis</MenubarRadioItem>
           </MenubarRadioGroup>
           <MenubarSeparator />
           <MenubarItem inset>Edit...</MenubarItem>

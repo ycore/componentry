@@ -1,8 +1,8 @@
 import type React from 'react';
 import { SpriteIcon } from '../../images/SpriteIcon';
-import type { IconName } from '../@types/lucide-sprites';
+import type { IconName } from '../../vibrant/@types/lucide-sprites';
+import { Link } from '../../vibrant/components/link';
 import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger, navigationMenuTriggerStyle } from '../components/navigation-menu';
-import { Link } from '../custom/link';
 
 const components: { title: string; href: string; description: string }[] = [
   {
@@ -42,7 +42,7 @@ export default function NavigationMenuDemo({ spriteUrl }: { spriteUrl: string })
     <NavigationMenu viewport={false}>
       <NavigationMenuList>
         <NavigationMenuItem>
-          <NavigationMenuTrigger spriteUrl={spriteUrl}>Home</NavigationMenuTrigger>
+          <NavigationMenuTrigger>Home</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid gap-2 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
               <li className="row-span-3">
@@ -66,7 +66,7 @@ export default function NavigationMenuDemo({ spriteUrl }: { spriteUrl: string })
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <NavigationMenuTrigger spriteUrl={spriteUrl}>Components</NavigationMenuTrigger>
+          <NavigationMenuTrigger>Components</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid w-[400px] gap-2 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
               {components.map(component => (
@@ -83,7 +83,7 @@ export default function NavigationMenuDemo({ spriteUrl }: { spriteUrl: string })
           </NavigationMenuLink>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <NavigationMenuTrigger spriteUrl={spriteUrl}>List</NavigationMenuTrigger>
+          <NavigationMenuTrigger>List</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid w-[300px] gap-4">
               <li>
@@ -110,7 +110,7 @@ export default function NavigationMenuDemo({ spriteUrl }: { spriteUrl: string })
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <NavigationMenuTrigger spriteUrl={spriteUrl}>Simple</NavigationMenuTrigger>
+          <NavigationMenuTrigger>Simple</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid w-[200px] gap-4">
               <li>
@@ -128,7 +128,7 @@ export default function NavigationMenuDemo({ spriteUrl }: { spriteUrl: string })
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <NavigationMenuTrigger spriteUrl={spriteUrl}>With Icon</NavigationMenuTrigger>
+          <NavigationMenuTrigger>With Icon</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid w-[200px] gap-4">
               <li>

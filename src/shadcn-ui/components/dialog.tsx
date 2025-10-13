@@ -1,9 +1,7 @@
+import * as DialogPrimitive from '@radix-ui/react-dialog';
 import clsx from 'clsx';
-import { Dialog as DialogPrimitive } from 'radix-ui';
-import type React from 'react';
-
-import { SpriteIcon } from '../../images/SpriteIcon';
-import type { IconName } from '../@types/lucide-sprites';
+import React from 'react';
+import { Icon } from '../../vibrant/lib/icon';
 
 function Dialog({ ...props }: React.ComponentProps<typeof DialogPrimitive.Root>) {
   return <DialogPrimitive.Root data-slot="dialog" {...props} />;
@@ -31,7 +29,14 @@ function DialogOverlay({ className, ...props }: React.ComponentProps<typeof Dial
   );
 }
 
-function DialogContent({ className, children, showCloseButton = true, spriteUrl, ...props }: React.ComponentProps<typeof DialogPrimitive.Content> & { showCloseButton?: boolean } & { spriteUrl: string }) {
+function DialogContent({
+  className,
+  children,
+  showCloseButton = true,
+  ...props
+}: React.ComponentProps<typeof DialogPrimitive.Content> & {
+  showCloseButton?: boolean;
+}) {
   return (
     <DialogPortal data-slot="dialog-portal">
       <DialogOverlay />
@@ -49,7 +54,7 @@ function DialogContent({ className, children, showCloseButton = true, spriteUrl,
             data-slot="dialog-close"
             className="absolute top-4 right-4 rounded-xs opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-hidden focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground [&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0"
           >
-            <SpriteIcon<IconName> iconId="X" url={spriteUrl} />
+            <Icon iconId="X" />
             <span className="sr-only">Close</span>
           </DialogPrimitive.Close>
         )}

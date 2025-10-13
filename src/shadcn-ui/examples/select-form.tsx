@@ -1,12 +1,11 @@
 import type React from 'react';
 import { toast } from 'sonner';
-
+// import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '../custom/form';
+// import { Link } from '../../vibrant/components/link';
 import { Button } from '../components/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/select';
-// import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '../custom/form';
-import { Link } from '../custom/link';
 
-export default function SelectForm({ spriteUrl }: { spriteUrl: string }) {
+export default function SelectForm() {
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
@@ -28,20 +27,14 @@ export default function SelectForm({ spriteUrl }: { spriteUrl: string }) {
           <FormLabel>Email</FormLabel> */}
       <Select name="email">
         {/* <FormControl> */}
-        <SelectTrigger spriteUrl={spriteUrl}>
+        <SelectTrigger>
           <SelectValue placeholder="Select a verified email to display" />
         </SelectTrigger>
         {/* </FormControl> */}
-        <SelectContent spriteUrl={spriteUrl}>
-          <SelectItem spriteUrl={spriteUrl} value="joe@example.com">
-            joe@example.com
-          </SelectItem>
-          <SelectItem spriteUrl={spriteUrl} value="joe@google.com">
-            joe@google.com
-          </SelectItem>
-          <SelectItem spriteUrl={spriteUrl} value="joe@support.com">
-            joe@support.com
-          </SelectItem>
+        <SelectContent>
+          <SelectItem value="joe@example.com">joe@example.com</SelectItem>
+          <SelectItem value="joe@google.com">joe@google.com</SelectItem>
+          <SelectItem value="joe@support.com">joe@support.com</SelectItem>
         </SelectContent>
       </Select>
       {/* <FormDescription>

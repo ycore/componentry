@@ -1,10 +1,8 @@
+import { Slot } from '@radix-ui/react-slot';
 import { cva, type VariantProps } from 'class-variance-authority';
 import clsx from 'clsx';
-import { Slot as SlotPrimitive } from 'radix-ui';
 import React from 'react';
-
-import { SpriteIcon } from '../../images/SpriteIcon';
-import type { IconName } from '../@types/lucide-sprites';
+import { Icon } from '../../vibrant/lib/icon';
 import { useIsMobile } from '../hooks/use-mobile';
 import { Button } from './button';
 import { Input } from './input';
@@ -71,7 +69,6 @@ function SidebarProvider({
       }
 
       // This sets the cookie to keep the sidebar state.
-      // biome-ignore lint/suspicious/noDocumentCookie: acceptable
       document.cookie = `${SIDEBAR_COOKIE_NAME}=${openState}; path=/; max-age=${SIDEBAR_COOKIE_MAX_AGE}`;
     },
     [setOpenProp, open]
@@ -80,7 +77,7 @@ function SidebarProvider({
   // Helper to toggle the sidebar.
   const toggleSidebar = React.useCallback(() => {
     return isMobile ? setOpenMobile(open => !open) : setOpen(open => !open);
-  }, [isMobile, setOpen]);
+  }, [isMobile, setOpen, setOpenMobile]);
 
   // Adds a keyboard shortcut to toggle the sidebar.
   React.useEffect(() => {
@@ -109,7 +106,7 @@ function SidebarProvider({
       setOpenMobile,
       toggleSidebar,
     }),
-    [state, open, setOpen, isMobile, openMobile, toggleSidebar]
+    [state, open, setOpen, isMobile, openMobile, setOpenMobile, toggleSidebar]
   );
 
   return (
@@ -140,13 +137,12 @@ function Sidebar({
   collapsible = 'offcanvas',
   className,
   children,
-  spriteUrl,
   ...props
 }: React.ComponentProps<'div'> & {
   side?: 'left' | 'right';
   variant?: 'sidebar' | 'floating' | 'inset';
   collapsible?: 'offcanvas' | 'icon' | 'none';
-} & { spriteUrl: string }) {
+}) {
   const { isMobile, state, openMobile, setOpenMobile } = useSidebar();
 
   if (collapsible === 'none') {
@@ -171,7 +167,6 @@ function Sidebar({
             } as React.CSSProperties
           }
           side={side}
-          spriteUrl={spriteUrl}
         >
           <SheetHeader className="sr-only">
             <SheetTitle>Sidebar</SheetTitle>
@@ -220,7 +215,7 @@ function Sidebar({
   );
 }
 
-function SidebarTrigger({ className, onClick, spriteUrl, ...props }: React.ComponentProps<typeof Button> & { spriteUrl: string }) {
+function SidebarTrigger({ className, onClick, ...props }: React.ComponentProps<typeof Button>) {
   const { toggleSidebar } = useSidebar();
 
   return (
@@ -236,7 +231,7 @@ function SidebarTrigger({ className, onClick, spriteUrl, ...props }: React.Compo
       }}
       {...props}
     >
-      <SpriteIcon<IconName> iconId="PanelLeft" url={spriteUrl} />
+      <Icon iconId="PanelLeft" />
       <span className="sr-only">Toggle Sidebar</span>
     </Button>
   );
@@ -306,7 +301,7 @@ function SidebarGroup({ className, ...props }: React.ComponentProps<'div'>) {
 }
 
 function SidebarGroupLabel({ className, asChild = false, ...props }: React.ComponentProps<'div'> & { asChild?: boolean }) {
-  const Comp = asChild ? SlotPrimitive.Slot : 'div';
+  const Comp = asChild ? Slot : 'div';
 
   return (
     <Comp
@@ -323,7 +318,7 @@ function SidebarGroupLabel({ className, asChild = false, ...props }: React.Compo
 }
 
 function SidebarGroupAction({ className, asChild = false, ...props }: React.ComponentProps<'button'> & { asChild?: boolean }) {
-  const Comp = asChild ? SlotPrimitive.Slot : 'button';
+  const Comp = asChild ? Slot : 'button';
 
   return (
     <Comp
@@ -387,7 +382,7 @@ function SidebarMenuButton({
   isActive?: boolean;
   tooltip?: string | React.ComponentProps<typeof TooltipContent>;
 } & VariantProps<typeof sidebarMenuButtonVariants>) {
-  const Comp = asChild ? SlotPrimitive.Slot : 'button';
+  const Comp = asChild ? Slot : 'button';
   const { isMobile, state } = useSidebar();
 
   const button = <Comp data-slot="sidebar-menu-button" data-sidebar="menu-button" data-size={size} data-active={isActive} className={clsx(sidebarMenuButtonVariants({ variant, size }), className)} {...props} />;
@@ -419,7 +414,7 @@ function SidebarMenuAction({
   asChild?: boolean;
   showOnHover?: boolean;
 }) {
-  const Comp = asChild ? SlotPrimitive.Slot : 'button';
+  const Comp = asChild ? Slot : 'button';
 
   return (
     <Comp
@@ -514,7 +509,7 @@ function SidebarMenuSubButton({
   size?: 'sm' | 'md';
   isActive?: boolean;
 }) {
-  const Comp = asChild ? SlotPrimitive.Slot : 'a';
+  const Comp = asChild ? Slot : 'a';
 
   return (
     <Comp

@@ -33,7 +33,7 @@ const items = [
   },
 ] as const;
 
-export default function CheckboxReactHookFormMultiple({ spriteUrl }: { spriteUrl: string }) {
+export default function CheckboxReactHookFormMultiple() {
   const [selectedItems, setSelectedItems] = React.useState(['recents', 'home']);
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -67,7 +67,7 @@ export default function CheckboxReactHookFormMultiple({ spriteUrl }: { spriteUrl
       </div>
       {items.map(item => (
         <div key={item.id} className="flex flex-row items-center gap-2">
-          <Checkbox spriteUrl={spriteUrl} name="items" value={item.id} checked={selectedItems.includes(item.id)} onCheckedChange={checked => handleCheckboxChange(item.id, !!checked)} />
+          <Checkbox name="items" value={item.id} checked={selectedItems.includes(item.id)} onCheckedChange={checked => handleCheckboxChange(item.id, !!checked)} />
           <div className="font-normal text-sm">{item.label}</div>
         </div>
       ))}

@@ -4,7 +4,7 @@ import { Button } from '../components/button';
 import { RadioGroup, RadioGroupItem } from '../components/radio-group';
 // import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '../custom/form';
 
-export default function RadioGroupForm({ spriteUrl }: { spriteUrl: string }) {
+export default function RadioGroupForm() {
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
@@ -28,19 +28,19 @@ export default function RadioGroupForm({ spriteUrl }: { spriteUrl: string }) {
       <RadioGroup name="type" className="flex flex-col">
         {/* <FormItem className="flex items-center gap-3">
                 <FormControl> */}
-        <RadioGroupItem spriteUrl={spriteUrl} value="all" />
+        <RadioGroupItem value="all" />
         {/* </FormControl>
                 <FormLabel className="font-normal">All new messages</FormLabel>
               </FormItem>
               <FormItem className="flex items-center gap-3">
                 <FormControl> */}
-        <RadioGroupItem spriteUrl={spriteUrl} value="mentions" />
+        <RadioGroupItem value="mentions" />
         {/* </FormControl>
                 <FormLabel className="font-normal">Direct messages and mentions</FormLabel>
               </FormItem>
               <FormItem className="flex items-center gap-3">
                 <FormControl> */}
-        <RadioGroupItem spriteUrl={spriteUrl} value="none" />
+        <RadioGroupItem value="none" />
         {/* </FormControl>
                 <FormLabel className="font-normal">Nothing</FormLabel>
               </FormItem> */}

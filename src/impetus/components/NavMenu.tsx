@@ -7,7 +7,7 @@ import { createSpriteIcon } from '../../images/SpriteIcon';
 import { Button } from '../../shadcn-ui/components/button';
 import { Menubar, MenubarCheckboxItem, MenubarContent, MenubarItem, MenubarMenu, MenubarRadioGroup, MenubarRadioItem, MenubarSeparator, MenubarShortcut, MenubarSub, MenubarSubContent, MenubarSubTrigger, MenubarTrigger } from '../../shadcn-ui/components/menubar';
 import { Sheet, SheetContent, SheetTrigger } from '../../shadcn-ui/components/sheet';
-import { Link } from '../../shadcn-ui/custom/link';
+import { Link } from '../../vibrant/components/link';
 import type { MenubarConfigItem, MenubarContextValue, MenubarItemConfig, NavMenubarProps } from '../@types/NavMenu.types';
 
 const MenubarContext = createContext<MenubarContextValue | null>(null);
@@ -17,7 +17,7 @@ const MenubarContext = createContext<MenubarContextValue | null>(null);
  * Handles active state highlighting and navigation links.
  */
 function renderMenubarItem(item: MenubarItemConfig, index: number, context: MenubarContextValue): React.ReactNode {
-  const { currentPath, spriteUrl: defaultSpriteUrl, IconSprite } = context;
+  const { currentPath, IconSprite } = context;
 
   if (item.separator) {
     return <MenubarSeparator key={`separator-${index}`} />;
@@ -28,14 +28,13 @@ function renderMenubarItem(item: MenubarItemConfig, index: number, context: Menu
     return <Component key={`component-${index}`} />;
   }
 
-  const itemSpriteUrl = item.spriteUrl || defaultSpriteUrl;
   const isActive = item.href && currentPath === item.href;
 
   // Sub menu (has items array)
   if (item.items) {
     return (
       <MenubarSub key={`sub-${index}`}>
-        <MenubarSubTrigger spriteUrl={itemSpriteUrl} inset={item.inset}>
+        <MenubarSubTrigger inset={item.inset}>
           {item.iconId && <IconSprite iconId={item.iconId} />}
           {item.label}
         </MenubarSubTrigger>
@@ -47,7 +46,7 @@ function renderMenubarItem(item: MenubarItemConfig, index: number, context: Menu
   // Checkbox item (has checked property)
   if (item.checked !== undefined) {
     return (
-      <MenubarCheckboxItem key={`checkbox-${index}`} spriteUrl={itemSpriteUrl} checked={item.checked} disabled={item.disabled}>
+      <MenubarCheckboxItem key={`checkbox-${index}`} checked={item.checked} disabled={item.disabled}>
         {item.iconId && <IconSprite iconId={item.iconId} />}
         {item.label}
         {item.shortcut && <MenubarShortcut>{item.shortcut}</MenubarShortcut>}
@@ -58,7 +57,7 @@ function renderMenubarItem(item: MenubarItemConfig, index: number, context: Menu
   // Radio item (has value property)
   if (item.value !== undefined) {
     return (
-      <MenubarRadioItem key={`radio-${index}`} spriteUrl={itemSpriteUrl} value={item.value} disabled={item.disabled}>
+      <MenubarRadioItem key={`radio-${index}`} value={item.value} disabled={item.disabled}>
         {item.iconId && <IconSprite iconId={item.iconId} />}
         {item.label}
         {item.shortcut && <MenubarShortcut>{item.shortcut}</MenubarShortcut>}
@@ -156,7 +155,7 @@ function renderMenuConfigItem(configItem: MenubarConfigItem, index: number, cont
  * Sub-menus are rendered as expandable sections rather than dropdowns for better touch experience.
  */
 function renderSheetItem(item: MenubarItemConfig, index: number, context: MenubarContextValue, onItemClick?: () => void): React.ReactNode {
-  const { currentPath, spriteUrl: defaultSpriteUrl, IconSprite } = context;
+  const { currentPath, IconSprite } = context;
 
   if (item.separator) {
     return <div key={`separator-${index}`} className="my-2 h-px bg-border" />;
@@ -293,7 +292,7 @@ export function NavMenu({ navConfigItems, spriteUrl, navFilters, className }: Na
               <IconSprite iconId="EllipsisVertical" className="size-4" />
             </Button>
           </SheetTrigger>
-          <SheetContent side="left" spriteUrl={spriteUrl} className="w-80 px-2 pt-4">
+          <SheetContent side="left" className="w-80 px-2 pt-4">
             <div className="mt-6 flex flex-col gap-2">{allMenus.map((configItem: MenubarConfigItem, index: number) => renderSheetMenuSection(configItem, index, contextValue, () => setIsSheetOpen(false)))}</div>
           </SheetContent>
         </Sheet>

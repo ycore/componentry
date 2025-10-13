@@ -1,6 +1,6 @@
 import React from 'react';
+import { Link } from '../../vibrant/components/link';
 import { Button } from '../components/button';
-import { Link } from '../custom/link';
 
 export default function ButtonAsChild() {
   return (

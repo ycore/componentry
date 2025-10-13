@@ -1,4 +1,4 @@
-import { staticSpriteConfig } from '../../shadcn-ui/sprites.config';
+import { staticSpriteConfig } from '../../vibrant/sprites.config';
 import type { IconSpriteConfig } from '../@types/icon-spritesheet.types';
 import { createSpritesheet } from '../plugins/icon-spritesheet';
 
