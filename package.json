@@ -26,10 +26,6 @@
       "types": "./src/impetus/intl/index.ts",
       "import": "./src/impetus/intl/index.ts"
     },
-    "./impetus/services": {
-      "types": "./src/impetus/services/index.ts",
-      "import": "./src/impetus/services/index.ts"
-    },
     "./impetus/theme": {
       "types": "./src/impetus/theme/index.ts",
       "import": "./src/impetus/theme/index.ts"
@@ -40,23 +36,18 @@
     },
     "./impetus/components/loading-bar.css": "./src/impetus/components/loading-bar.css",
     "./impetus/theme/theme-switch.css": "./src/impetus/theme/theme-switch.css",
-    "./shadcn-ui": {
-      "types": "./src/shadcn-ui/index.ts",
-      "import": "./src/shadcn-ui/index.ts"
-    },
-    "./shadcn-ui/examples": {
-      "types": "./src/shadcn-ui/examples/index.ts",
-      "import": "./src/shadcn-ui/examples/index.ts"
-    },
     "./shadcn-ui/styles/shadcn-ui.css": "./src/shadcn-ui/styles/shadcn-ui.css",
     "./shadcn-ui/styles/gray.css": "./src/shadcn-ui/styles/gray.css",
     "./shadcn-ui/styles/neutral.css": "./src/shadcn-ui/styles/neutral.css",
     "./shadcn-ui/styles/slate.css": "./src/shadcn-ui/styles/slate.css",
     "./shadcn-ui/styles/stone.css": "./src/shadcn-ui/styles/stone.css",
     "./shadcn-ui/styles/zinc.css": "./src/shadcn-ui/styles/zinc.css",
-    "./shadcn-ui/assets/example-sprites.svg": "./src/shadcn-ui/assets/example-sprites.svg",
-    "./shadcn-ui/assets/lucide-sprites.svg": "./src/shadcn-ui/assets/lucide-sprites.svg",
-    "./shadcn-ui/types/sprites": "./src/shadcn-ui/@types/sprites-index.ts",
+    "./vibrant": {
+      "types": "./src/vibrant/index.ts",
+      "import": "./src/vibrant/index.ts"
+    },
+    "./vibrant/assets/example-sprites.svg": "./src/vibrant/assets/example-sprites.svg",
+    "./vibrant/assets/lucide-sprites.svg": "./src/vibrant/assets/lucide-sprites.svg",
     "./package.json": "./package.json"
   },
   "files": [
@@ -90,7 +81,9 @@
     "build-catalyst": "bun ./scripts/build-catalyst.ts",
     "build-shadcn": "bun ./scripts/build-shadcn.ts",
     "clean": "rm -rf dist node_modules",
-    "ws:sprites": "bun ./src/images/cli/create-spritesheets.ts",
-    "ws:types": "tsc --noEmit"
+    "ws:format": "biome format src",
+    "ws:lint": "biome lint src",
+    "ws:tc": "tsc --noEmit",
+    "ws:sprites": "bun ./src/images/cli/create-spritesheets.ts"
   }
 }
