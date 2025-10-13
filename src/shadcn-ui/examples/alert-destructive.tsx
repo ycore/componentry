@@ -1,6 +1,6 @@
 import React from 'react';
 import { SpriteIcon } from '../../images/SpriteIcon';
-import type { IconName } from '../@types/lucide-sprites';
+import type { IconName } from '../../vibrant/@types/lucide-sprites';
 import { Alert, AlertDescription, AlertTitle } from '../components/alert';
 
 export default function AlertDestructive({ spriteUrl }: { spriteUrl: string }) {

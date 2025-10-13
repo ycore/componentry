@@ -1,7 +1,7 @@
 import { useTheme } from 'next-themes';
 import React from 'react';
 import { SpriteIcon } from '../../images/SpriteIcon';
-import type { IconName } from '../@types/lucide-sprites';
+import type { IconName } from '../../vibrant/@types/lucide-sprites';
 import { Button } from '../components/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '../components/dropdown-menu';
 

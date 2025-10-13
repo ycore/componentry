@@ -1,6 +1,6 @@
 import React from 'react';
 import { SpriteIcon } from '../../images/SpriteIcon';
-import type { IconName } from '../@types/lucide-sprites';
+import type { IconName } from '../../vibrant/@types/lucide-sprites';
 import { Badge } from '../components/badge';
 
 export default function BadgeDemo({ spriteUrl }: { spriteUrl: string }) {
