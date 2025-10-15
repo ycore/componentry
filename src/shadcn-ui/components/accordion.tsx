@@ -1,7 +1,7 @@
 import React from 'react';
 import * as AccordionPrimitive from '@radix-ui/react-accordion';
 import clsx from 'clsx';
-import { Icon } from '../../vibrant/lib/icon';
+import { SvgIcon } from '../../vibrant/lib/icon';
 
 function Accordion({ ...props }: React.ComponentProps<typeof AccordionPrimitive.Root>) {
   return <AccordionPrimitive.Root data-slot="accordion" {...props} />;
@@ -23,7 +23,7 @@ function AccordionTrigger({ className, children, ...props }: React.ComponentProp
         {...props}
       >
         {children}
-        <Icon iconId="ChevronDown" className="pointer-events-none size-4 shrink-0 translate-y-0.5 text-muted-foreground transition-transform duration-200" />
+        <SvgIcon iconId="ChevronDown" className="pointer-events-none size-4 shrink-0 translate-y-0.5 text-muted-foreground transition-transform duration-200" />
       </AccordionPrimitive.Trigger>
     </AccordionPrimitive.Header>
   );

@@ -29,7 +29,7 @@ export default function SwitchForm() {
       <div>
         <h3 className="mb-4 font-medium text-lg">Email Notifications</h3>
         <div className="space-y-4">
-          <div name="marketing_emails">
+          <div>
             <div className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm">
               <div className="space-y-0.5">
                 <Label>Marketing emails</Label>
@@ -39,7 +39,7 @@ export default function SwitchForm() {
               </div>
             </div>
           </div>
-          <div name="security_emails">
+          <div>
             <div className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm">
               <div className="space-y-0.5">
                 <Label>Security emails</Label>

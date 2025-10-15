@@ -2,7 +2,7 @@ import type React from 'react';
 import type { useFetcher } from 'react-router';
 import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from '../../shadcn-ui/components/pagination';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../shadcn-ui/components/select';
-import { Icon } from '../lib/icon';
+import { SvgIcon } from '../lib/icon';
 
 // ============================================================================
 // Type Definitions
@@ -74,7 +74,7 @@ export function DataPagination({ currentRecords, pagination, totalRecords, baseR
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <PaginationControls currentPage={pagination.page} hasNextPage={pagination.hasNextPage} hasPreviousPage={pagination.hasPreviousPage} onPageChange={handlePageChange} disabled={isLoading} />
-          {isLoading && loadingIcon && <Icon iconId="LoaderCircle" className="h-4 w-4 animate-spin text-muted-foreground" />}
+          {isLoading && loadingIcon && <SvgIcon iconId="LoaderCircle" className="h-4 w-4 animate-spin text-muted-foreground" />}
         </div>
 
         <div className="flex items-center gap-4">

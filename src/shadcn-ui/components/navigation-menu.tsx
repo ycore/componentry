@@ -2,7 +2,7 @@ import * as NavigationMenuPrimitive from '@radix-ui/react-navigation-menu';
 import { cva } from 'class-variance-authority';
 import clsx from 'clsx';
 import React from 'react';
-import { Icon } from '../../vibrant/lib/icon';
+import { SvgIcon } from '../../vibrant/lib/icon';
 
 function NavigationMenu({
   className,
@@ -35,7 +35,7 @@ const navigationMenuTriggerStyle = cva(
 function NavigationMenuTrigger({ className, children, ...props }: React.ComponentProps<typeof NavigationMenuPrimitive.Trigger>) {
   return (
     <NavigationMenuPrimitive.Trigger data-slot="navigation-menu-trigger" className={clsx(navigationMenuTriggerStyle(), 'group', className)} {...props}>
-      {children} <Icon iconId="ChevronDown" className="relative top-[1px] ml-1 size-3 transition duration-300 group-data-[state=open]:rotate-180" aria-hidden="true" />
+      {children} <SvgIcon iconId="ChevronDown" className="relative top-[1px] ml-1 size-3 transition duration-300 group-data-[state=open]:rotate-180" aria-hidden="true" />
     </NavigationMenuPrimitive.Trigger>
   );
 }

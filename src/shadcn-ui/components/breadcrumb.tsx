@@ -1,7 +1,7 @@
 import { Slot } from '@radix-ui/react-slot';
 import clsx from 'clsx';
 import React from 'react';
-import { Icon } from '../../vibrant/lib/icon';
+import { SvgIcon } from '../../vibrant/lib/icon';
 
 function Breadcrumb({ ...props }: React.ComponentProps<'nav'>) {
   return <nav aria-label="breadcrumb" data-slot="breadcrumb" {...props} />;
@@ -34,7 +34,7 @@ function BreadcrumbPage({ className, ...props }: React.ComponentProps<'span'>) {
 function BreadcrumbSeparator({ children, className, ...props }: React.ComponentProps<'li'>) {
   return (
     <li data-slot="breadcrumb-separator" role="presentation" aria-hidden="true" className={clsx('[&>svg]:size-3.5', className)} {...props}>
-      {children ?? <Icon iconId="ChevronRight" />}
+      {children ?? <SvgIcon iconId="ChevronRight" />}
     </li>
   );
 }
@@ -42,7 +42,7 @@ function BreadcrumbSeparator({ children, className, ...props }: React.ComponentP
 function BreadcrumbEllipsis({ className, ...props }: React.ComponentProps<'span'>) {
   return (
     <span data-slot="breadcrumb-ellipsis" role="presentation" aria-hidden="true" className={clsx('flex size-9 items-center justify-center', className)} {...props}>
-      <Icon iconId="Ellipsis" className="size-4" />
+      <SvgIcon iconId="Ellipsis" className="size-4" />
       <span className="sr-only">More</span>
     </span>
   );

@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { Command as CommandPrimitive } from 'cmdk';
 import React from 'react';
-import { Icon } from '../../vibrant/lib/icon';
+import { SvgIcon } from '../../vibrant/lib/icon';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from './dialog';
 
 function Command({ className, ...props }: React.ComponentProps<typeof CommandPrimitive>) {
@@ -39,7 +39,7 @@ function CommandDialog({
 function CommandInput({ className, ...props }: React.ComponentProps<typeof CommandPrimitive.Input>) {
   return (
     <div data-slot="command-input-wrapper" className="flex h-9 items-center gap-2 border-b px-3">
-      <Icon iconId="Search" className="size-4 shrink-0 opacity-50" />
+      <SvgIcon iconId="Search" className="size-4 shrink-0 opacity-50" />
       <CommandPrimitive.Input
         data-slot="command-input"
         className={clsx('flex h-10 w-full rounded-md bg-transparent py-3 text-sm outline-hidden placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50', className)}

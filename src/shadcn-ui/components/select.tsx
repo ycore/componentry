@@ -1,7 +1,7 @@
 import * as SelectPrimitive from '@radix-ui/react-select';
 import clsx from 'clsx';
 import React from 'react';
-import { Icon } from '../../vibrant/lib/icon';
+import { SvgIcon } from '../../vibrant/lib/icon';
 
 function Select({ ...props }: React.ComponentProps<typeof SelectPrimitive.Root>) {
   return <SelectPrimitive.Root data-slot="select" {...props} />;
@@ -35,7 +35,7 @@ function SelectTrigger({
     >
       {children}
       <SelectPrimitive.Icon asChild>
-        <Icon iconId="ChevronDown" className="size-4 opacity-50" />
+        <SvgIcon iconId="ChevronDown" className="size-4 opacity-50" />
       </SelectPrimitive.Icon>
     </SelectPrimitive.Trigger>
   );
@@ -79,7 +79,7 @@ function SelectItem({ className, children, ...props }: React.ComponentProps<type
     >
       <span className="absolute right-2 flex size-3.5 items-center justify-center">
         <SelectPrimitive.ItemIndicator>
-          <Icon iconId="Check" className="size-4" />
+          <SvgIcon iconId="Check" className="size-4" />
         </SelectPrimitive.ItemIndicator>
       </span>
       <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
@@ -94,7 +94,7 @@ function SelectSeparator({ className, ...props }: React.ComponentProps<typeof Se
 function SelectScrollUpButton({ className, ...props }: React.ComponentProps<typeof SelectPrimitive.ScrollUpButton>) {
   return (
     <SelectPrimitive.ScrollUpButton data-slot="select-scroll-up-button" className={clsx('flex cursor-default items-center justify-center py-1', className)} {...props}>
-      <Icon iconId="ChevronUp" className="size-4" />
+      <SvgIcon iconId="ChevronUp" className="size-4" />
     </SelectPrimitive.ScrollUpButton>
   );
 }
@@ -102,7 +102,7 @@ function SelectScrollUpButton({ className, ...props }: React.ComponentProps<type
 function SelectScrollDownButton({ className, ...props }: React.ComponentProps<typeof SelectPrimitive.ScrollDownButton>) {
   return (
     <SelectPrimitive.ScrollDownButton data-slot="select-scroll-down-button" className={clsx('flex cursor-default items-center justify-center py-1', className)} {...props}>
-      <Icon iconId="ChevronDown" className="size-4" />
+      <SvgIcon iconId="ChevronDown" className="size-4" />
     </SelectPrimitive.ScrollDownButton>
   );
 }

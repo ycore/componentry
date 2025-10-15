@@ -1,7 +1,7 @@
 import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
 import clsx from 'clsx';
 import React from 'react';
-import { Icon } from '../../vibrant/lib/icon';
+import { SvgIcon } from '../../vibrant/lib/icon';
 
 function DropdownMenu({ ...props }: React.ComponentProps<typeof DropdownMenuPrimitive.Root>) {
   return <DropdownMenuPrimitive.Root data-slot="dropdown-menu" {...props} />;
@@ -71,7 +71,7 @@ function DropdownMenuCheckboxItem({ className, children, checked, ...props }: Re
     >
       <span className="pointer-events-none absolute left-2 flex size-3.5 items-center justify-center">
         <DropdownMenuPrimitive.ItemIndicator>
-          <Icon iconId="Check" className="size-4" />
+          <SvgIcon iconId="Check" className="size-4" />
         </DropdownMenuPrimitive.ItemIndicator>
       </span>
       {children}
@@ -95,7 +95,7 @@ function DropdownMenuRadioItem({ className, children, ...props }: React.Componen
     >
       <span className="pointer-events-none absolute left-2 flex size-3.5 items-center justify-center">
         <DropdownMenuPrimitive.ItemIndicator>
-          <Icon iconId="Circle" className="size-2 fill-current" />
+          <SvgIcon iconId="Circle" className="size-2 fill-current" />
         </DropdownMenuPrimitive.ItemIndicator>
       </span>
       {children}
@@ -144,7 +144,7 @@ function DropdownMenuSubTrigger({
       {...props}
     >
       {children}
-      <Icon iconId="ChevronRight" className="ml-auto size-4" />
+      <SvgIcon iconId="ChevronRight" className="ml-auto size-4" />
     </DropdownMenuPrimitive.SubTrigger>
   );
 }

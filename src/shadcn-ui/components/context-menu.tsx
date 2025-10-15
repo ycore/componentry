@@ -1,7 +1,7 @@
 import * as ContextMenuPrimitive from '@radix-ui/react-context-menu';
 import clsx from 'clsx';
 import React from 'react';
-import { Icon } from '../../vibrant/lib/icon';
+import { SvgIcon } from '../../vibrant/lib/icon';
 
 function ContextMenu({ ...props }: React.ComponentProps<typeof ContextMenuPrimitive.Root>) {
   return <ContextMenuPrimitive.Root data-slot="context-menu" {...props} />;
@@ -46,7 +46,7 @@ function ContextMenuSubTrigger({
       {...props}
     >
       {children}
-      <Icon iconId="ChevronRight" className="ml-auto" />
+      <SvgIcon iconId="ChevronRight" className="ml-auto" />
     </ContextMenuPrimitive.SubTrigger>
   );
 }
@@ -115,7 +115,7 @@ function ContextMenuCheckboxItem({ className, children, checked, ...props }: Rea
     >
       <span className="pointer-events-none absolute left-2 flex size-3.5 items-center justify-center">
         <ContextMenuPrimitive.ItemIndicator>
-          <Icon iconId="Check" className="size-4" />
+          <SvgIcon iconId="Check" className="size-4" />
         </ContextMenuPrimitive.ItemIndicator>
       </span>
       {children}
@@ -135,7 +135,7 @@ function ContextMenuRadioItem({ className, children, ...props }: React.Component
     >
       <span className="pointer-events-none absolute left-2 flex size-3.5 items-center justify-center">
         <ContextMenuPrimitive.ItemIndicator>
-          <Icon iconId="Circle" className="size-2 fill-current" />
+          <SvgIcon iconId="Circle" className="size-2 fill-current" />
         </ContextMenuPrimitive.ItemIndicator>
       </span>
       {children}

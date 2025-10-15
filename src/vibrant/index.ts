@@ -19,5 +19,6 @@ export const InputOtp = Object.assign(InputOtpComponent, {
 
 export type { IconName as ExampleIconName } from './@types//example-sprites';
 export { type IconName, iconNames } from './@types/lucide-sprites';
-
 export { Link } from './components/link';
+export { SvgIcon } from './lib/icon';
+

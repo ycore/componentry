@@ -2,7 +2,7 @@ import { Slot } from '@radix-ui/react-slot';
 import { cva, type VariantProps } from 'class-variance-authority';
 import clsx from 'clsx';
 import React from 'react';
-import { Icon } from '../../vibrant/lib/icon';
+import { SvgIcon } from '../../vibrant/lib/icon';
 import { useIsMobile } from '../hooks/use-mobile';
 import { Button } from './button';
 import { Input } from './input';
@@ -231,7 +231,7 @@ function SidebarTrigger({ className, onClick, ...props }: React.ComponentProps<t
       }}
       {...props}
     >
-      <Icon iconId="PanelLeft" />
+      <SvgIcon iconId="PanelLeft" />
       <span className="sr-only">Toggle Sidebar</span>
     </Button>
   );

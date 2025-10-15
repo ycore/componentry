@@ -52,7 +52,7 @@ function applyShadcnTransformations(fileContent: string): string {
 }
 
 /**
- * Transform lucide-react icons to Icon (pre-configured SpriteIcon)
+ * Transform lucide-react icons to SvgIcon (pre-configured SpriteIcon)
  */
 function transformLucideIcons(fileContent: string): string {
   const lucideImportMatch = fileContent.match(/import\s+{\s*([^}]+)\s*}\s+from\s+['"]lucide-react['"]/);
@@ -70,7 +70,7 @@ function transformLucideIcons(fileContent: string): string {
   // Remove lucide-react import
   fileContent = fileContent.replace(/import\s+{\s*[^}]+\s*}\s+from\s+['"]lucide-react['"];?\s*\n?/g, '');
 
-  // Add Icon import - find position after the last import statement
+  // Add SvgIcon import - find position after the last import statement
   const importRegex = /^import\s+.*?from\s+['"][^'"]+['"];?\s*$/gm;
   let lastImportEnd = 0;
   let match;
@@ -79,11 +79,11 @@ function transformLucideIcons(fileContent: string): string {
   }
 
   if (lastImportEnd > 0) {
-    const iconImport = `\nimport { Icon } from '../../vibrant/lib/icon';\n`;
+    const iconImport = `\nimport { SvgIcon } from '../../vibrant/lib/icon';\n`;
     fileContent = fileContent.slice(0, lastImportEnd) + iconImport + fileContent.slice(lastImportEnd);
   }
 
-  // Replace icon JSX elements with Icon
+  // Replace icon JSX elements with SvgIcon
   for (const [iconName, iconId] of iconMap.entries()) {
     const mappedIconId = ICON_NAME_MAP[iconId] || iconId;
 
@@ -93,13 +93,13 @@ function transformLucideIcons(fileContent: string): string {
     // Pattern 1: Self-closing without props (e.g., <Check />)
     const iconRegexNoProp = new RegExp(`<${escapedIconName}\\s*\\/>`, 'g');
     fileContent = fileContent.replace(iconRegexNoProp, () => {
-      return `<Icon iconId="${mappedIconId}" />`;
+      return `<SvgIcon iconId="${mappedIconId}" />`;
     });
 
     // Pattern 2: With props - handles multi-line and complex props (e.g., <Check className="..." />)
     const iconRegexWithProps = new RegExp(`<${escapedIconName}\\s+([\\s\\S]*?)\\/>`, 'g');
     fileContent = fileContent.replace(iconRegexWithProps, (match, attrs) => {
-      return `<Icon iconId="${mappedIconId}" ${attrs.trim()} />`;
+      return `<SvgIcon iconId="${mappedIconId}" ${attrs.trim()} />`;
     });
   }
 
@@ -107,7 +107,7 @@ function transformLucideIcons(fileContent: string): string {
 }
 
 /**
- * Replace orphaned icon components with Icon
+ * Replace orphaned icon components with SvgIcon
  * Handles partially transformed source files
  */
 function replaceOrphanedIcons(fileContent: string): string {
@@ -131,22 +131,22 @@ function replaceOrphanedIcons(fileContent: string): string {
     // Pattern 1: Self-closing without props (e.g., <CircleIcon />)
     const iconRegexNoProp = new RegExp(`<${escapedIconName}\\s*\\/>`, 'g');
     fileContent = fileContent.replace(iconRegexNoProp, () => {
-      return `<Icon iconId="${mappedIconId}" />`;
+      return `<SvgIcon iconId="${mappedIconId}" />`;
     });
 
     // Pattern 2: With props - handles multi-line and complex props
     const iconRegexWithProps = new RegExp(`<${escapedIconName}\\s+([\\s\\S]*?)\\/>`, 'g');
     fileContent = fileContent.replace(iconRegexWithProps, (match, attrs) => {
-      return `<Icon iconId="${mappedIconId}" ${attrs.trim()} />`;
+      return `<SvgIcon iconId="${mappedIconId}" ${attrs.trim()} />`;
     });
   }
 
-  // Add Icon import if we made replacements and it doesn't exist
+  // Add SvgIcon import if we made replacements and it doesn't exist
   if (hasReplacements && !fileContent.includes("from '../lib/icon'")) {
     const lastImportMatch = fileContent.match(/(import\s+.*?;\s*\n)+/);
     if (lastImportMatch) {
       const insertionPoint = lastImportMatch[0].length;
-      const iconImport = `\nimport { Icon } from '../lib/icon';\n`;
+      const iconImport = `\nimport { SvgIcon } from '../lib/icon';\n`;
       fileContent = fileContent.slice(0, insertionPoint) + iconImport + fileContent.slice(insertionPoint);
     }
   }

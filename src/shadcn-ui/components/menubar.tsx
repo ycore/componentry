@@ -1,7 +1,7 @@
 import * as MenubarPrimitive from '@radix-ui/react-menubar';
 import clsx from 'clsx';
 import React from 'react';
-import { Icon } from '../../vibrant/lib/icon';
+import { SvgIcon } from '../../vibrant/lib/icon';
 
 function Menubar({ className, ...props }: React.ComponentProps<typeof MenubarPrimitive.Root>) {
   return <MenubarPrimitive.Root data-slot="menubar" className={clsx('flex h-9 items-center gap-1 rounded-md border bg-background p-1 shadow-xs', className)} {...props} />;
@@ -90,7 +90,7 @@ function MenubarCheckboxItem({ className, children, checked, ...props }: React.C
     >
       <span className="pointer-events-none absolute left-2 flex size-3.5 items-center justify-center">
         <MenubarPrimitive.ItemIndicator>
-          <Icon iconId="Check" className="size-4" />
+          <SvgIcon iconId="Check" className="size-4" />
         </MenubarPrimitive.ItemIndicator>
       </span>
       {children}
@@ -110,7 +110,7 @@ function MenubarRadioItem({ className, children, ...props }: React.ComponentProp
     >
       <span className="pointer-events-none absolute left-2 flex size-3.5 items-center justify-center">
         <MenubarPrimitive.ItemIndicator>
-          <Icon iconId="Circle" className="size-2 fill-current" />
+          <SvgIcon iconId="Circle" className="size-2 fill-current" />
         </MenubarPrimitive.ItemIndicator>
       </span>
       {children}
@@ -159,7 +159,7 @@ function MenubarSubTrigger({
       {...props}
     >
       {children}
-      <Icon iconId="ChevronRight" className="ml-auto h-4 w-4" />
+      <SvgIcon iconId="ChevronRight" className="ml-auto h-4 w-4" />
     </MenubarPrimitive.SubTrigger>
   );
 }

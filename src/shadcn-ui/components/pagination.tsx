@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import React from 'react';
-import { Icon } from '../../vibrant/lib/icon';
+import { SvgIcon } from '../../vibrant/lib/icon';
 import { type Button, buttonVariants } from './button';
 
 function Pagination({ className, ...props }: React.ComponentProps<'nav'>) {
@@ -41,7 +41,7 @@ function PaginationLink({ className, isActive, size = 'icon', ...props }: Pagina
 function PaginationPrevious({ className, ...props }: React.ComponentProps<typeof PaginationLink>) {
   return (
     <PaginationLink aria-label="Go to previous page" size="default" className={clsx('gap-1 px-2.5 sm:pl-2.5', className)} {...props}>
-      <Icon iconId="ChevronLeft" />
+      <SvgIcon iconId="ChevronLeft" />
       <span className="hidden sm:block">Previous</span>
     </PaginationLink>
   );
@@ -51,7 +51,7 @@ function PaginationNext({ className, ...props }: React.ComponentProps<typeof Pag
   return (
     <PaginationLink aria-label="Go to next page" size="default" className={clsx('gap-1 px-2.5 sm:pr-2.5', className)} {...props}>
       <span className="hidden sm:block">Next</span>
-      <Icon iconId="ChevronRight" />
+      <SvgIcon iconId="ChevronRight" />
     </PaginationLink>
   );
 }
@@ -59,7 +59,7 @@ function PaginationNext({ className, ...props }: React.ComponentProps<typeof Pag
 function PaginationEllipsis({ className, ...props }: React.ComponentProps<'span'>) {
   return (
     <span aria-hidden data-slot="pagination-ellipsis" className={clsx('flex size-9 items-center justify-center', className)} {...props}>
-      <Icon iconId="Ellipsis" className="size-4" />
+      <SvgIcon iconId="Ellipsis" className="size-4" />
       <span className="sr-only">More pages</span>
     </span>
   );
