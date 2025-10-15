@@ -30,7 +30,7 @@ const ThemeSwitchButton = ({ themeContext, theme, spriteUrl, className, classThe
       }}
       aria-label="theme switch"
     >
-      {resolvedTheme === theme.theme.dark ? <SpriteIcon url={spriteUrl} iconId="Moon" className={clsx('size-5', className)} /> : <SpriteIcon url={spriteUrl} iconId="Sun" className={clsx('size-5', className)} />}
+      {resolvedTheme === theme.theme.dark ? <SpriteIcon spriteUrl={spriteUrl} iconId="Moon" className={clsx('size-5', className)} /> : <SpriteIcon spriteUrl={spriteUrl} iconId="Sun" className={clsx('size-5', className)} />}
     </button>
   );
 };

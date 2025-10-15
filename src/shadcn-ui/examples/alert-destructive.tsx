@@ -6,7 +6,7 @@ import { Alert, AlertDescription, AlertTitle } from '../components/alert';
 export default function AlertDestructive({ spriteUrl }: { spriteUrl: string }) {
   return (
     <Alert variant="destructive">
-      <SpriteIcon<IconName> iconId="CircleAlert" url={spriteUrl} />
+      <SpriteIcon<IconName> iconId="CircleAlert" spriteUrl={spriteUrl} />
       <AlertTitle>Error</AlertTitle>
       <AlertDescription>Your session has expired. Please log in again.</AlertDescription>
     </Alert>

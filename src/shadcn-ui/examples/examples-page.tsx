@@ -123,7 +123,7 @@ function ReturnToTop({ tableOfContentsId, spriteUrl }: { tableOfContentsId: stri
       className="inline-flex items-center gap-2 rounded-md bg-primary px-3 py-2 font-medium text-primary-foreground text-sm transition-colors hover:bg-primary/80 hover:text-foreground"
       aria-label="Return to table of contents"
     >
-      <SpriteIcon url={spriteUrl} iconId="ArrowUp" className="h-4 w-4" />
+      <SpriteIcon spriteUrl={spriteUrl} iconId="ArrowUp" className="h-4 w-4" />
     </a>
   );
 }
@@ -160,7 +160,7 @@ function SpriteExamples({ spriteUrl }: { spriteUrl: string }) {
           <div key={iconName} className="flex flex-col items-center rounded-lg border bg-background p-3 transition-colors hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:hover:bg-input/50">
             <Tooltip>
               <TooltipTrigger asChild>
-                <SpriteIcon<IconName> url={spriteUrl} iconId={iconName} className="h-6 w-6 text-accent-foreground" viewBox="0 0 24 24" />
+                <SpriteIcon<IconName> spriteUrl={spriteUrl} iconId={iconName} className="h-6 w-6 text-accent-foreground" viewBox="0 0 24 24" />
               </TooltipTrigger>
               <TooltipContent>
                 <p>{iconName}</p>
@@ -255,7 +255,7 @@ export function ComponentExamples({ spriteUrl, exampleUrl }: { spriteUrl: string
           <div className="flex items-center gap-x-4">
             <ThemeSwitch spriteUrl={spriteUrl} />
             <Link href="/">
-              <SpriteIcon<IconName> url={spriteUrl} iconId="House" className="size-5 text-accent-foreground" viewBox="0 0 24 24" />
+              <SpriteIcon<IconName> spriteUrl={spriteUrl} iconId="House" className="size-5 text-accent-foreground" viewBox="0 0 24 24" />
             </Link>
           </div>
         </div>

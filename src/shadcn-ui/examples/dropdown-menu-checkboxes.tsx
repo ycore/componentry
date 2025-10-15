@@ -1,8 +1,8 @@
 import React from 'react';
 import { Button } from '../components/button';
-import { DropdownMenu, DropdownMenuCheckboxItem, type DropdownMenuCheckboxItemProps, DropdownMenuContent, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '../components/dropdown-menu';
+import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '../components/dropdown-menu';
 
-type Checked = DropdownMenuCheckboxItemProps['checked'];
+type Checked = React.ComponentProps<typeof DropdownMenuCheckboxItem>['checked'];
 
 export default function DropdownMenuCheckboxes() {
   const [showStatusBar, setShowStatusBar] = React.useState<Checked>(true);

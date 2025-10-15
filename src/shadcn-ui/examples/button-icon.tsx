@@ -6,7 +6,7 @@ import { Button } from '../components/button';
 export default function ButtonIcon({ spriteUrl }: { spriteUrl: string }) {
   return (
     <Button variant="secondary" size="icon" className="size-8">
-      <SpriteIcon<IconName> iconId="ChevronRight" url={spriteUrl} />
+      <SpriteIcon<IconName> iconId="ChevronRight" spriteUrl={spriteUrl} />
     </Button>
   );
 }

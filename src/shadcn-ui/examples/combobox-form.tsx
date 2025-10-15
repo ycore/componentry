@@ -44,7 +44,7 @@ export default function ComboboxForm({ spriteUrl }: { spriteUrl: string }) {
       {/* <FormField name="language"> */}
       <Button variant="outline" role="combobox" aria-expanded={open} className={clsx('w-[200px] justify-between', !selectedLanguage && 'text-muted-foreground')}>
         {selectedLanguage ? languages.find(language => language.value === selectedLanguage)?.label : 'Select language'}
-        <SpriteIcon<IconName> iconId="ChevronsUpDown" className="opacity-50" url={spriteUrl} />
+        <SpriteIcon<IconName> iconId="ChevronsUpDown" className="opacity-50" spriteUrl={spriteUrl} />
       </Button>
 
       <div className="flex flex-col">
@@ -70,7 +70,7 @@ export default function ComboboxForm({ spriteUrl }: { spriteUrl: string }) {
                       }}
                     >
                       {language.label}
-                      <SpriteIcon<IconName> iconId="Check" className={clsx('ml-auto', language.value === selectedLanguage ? 'opacity-100' : 'opacity-0')} url={spriteUrl} />
+                      <SpriteIcon<IconName> iconId="Check" className={clsx('ml-auto', language.value === selectedLanguage ? 'opacity-100' : 'opacity-0')} spriteUrl={spriteUrl} />
                     </CommandItem>
                   ))}
                 </CommandGroup>

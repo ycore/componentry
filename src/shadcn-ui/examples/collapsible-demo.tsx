@@ -13,7 +13,7 @@ export default function CollapsibleDemo({ spriteUrl }: { spriteUrl: string }) {
         <h4 className="font-semibold text-sm">@peduarte starred 3 repositories</h4>
         <CollapsibleTrigger asChild>
           <Button variant="ghost" size="icon" className="size-8">
-            <SpriteIcon<IconName> iconId="ChevronsUpDown" url={spriteUrl} />
+            <SpriteIcon<IconName> iconId="ChevronsUpDown" spriteUrl={spriteUrl} />
             <span className="sr-only">Toggle</span>
           </Button>
         </CollapsibleTrigger>

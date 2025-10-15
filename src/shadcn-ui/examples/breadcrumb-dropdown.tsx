@@ -15,13 +15,13 @@ export default function BreadcrumbWithDropdown({ spriteUrl }: { spriteUrl: strin
           </BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator>
-          <SpriteIcon<IconName> iconId="Slash" url={spriteUrl} />
+          <SpriteIcon<IconName> iconId="Slash" spriteUrl={spriteUrl} />
         </BreadcrumbSeparator>
         <BreadcrumbItem>
           <DropdownMenu>
             <DropdownMenuTrigger className="flex items-center gap-1 [&_svg:not([class*='size-'])]:size-3.5 [&_svg]:pointer-events-none [&_svg]:shrink-0">
               Components
-              <SpriteIcon<IconName> iconId="ChevronDown" url={spriteUrl} />
+              <SpriteIcon<IconName> iconId="ChevronDown" spriteUrl={spriteUrl} />
             </DropdownMenuTrigger>
             <DropdownMenuContent align="start">
               <DropdownMenuItem>Documentation</DropdownMenuItem>
@@ -31,7 +31,7 @@ export default function BreadcrumbWithDropdown({ spriteUrl }: { spriteUrl: strin
           </DropdownMenu>
         </BreadcrumbItem>
         <BreadcrumbSeparator>
-          <SpriteIcon<IconName> iconId="Slash" url={spriteUrl} />
+          <SpriteIcon<IconName> iconId="Slash" spriteUrl={spriteUrl} />
         </BreadcrumbSeparator>
         <BreadcrumbItem>
           <BreadcrumbPage>Breadcrumb</BreadcrumbPage>

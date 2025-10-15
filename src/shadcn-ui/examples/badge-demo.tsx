@@ -14,7 +14,7 @@ export default function BadgeDemo({ spriteUrl }: { spriteUrl: string }) {
       </div>
       <div className="flex w-full flex-wrap gap-2">
         <Badge variant="secondary" className="bg-blue-500 text-white dark:bg-blue-600">
-          <SpriteIcon<IconName> iconId="BadgeCheck" url={spriteUrl} />
+          <SpriteIcon<IconName> iconId="BadgeCheck" spriteUrl={spriteUrl} />
           Verified
         </Badge>
         <Badge className="h-5 min-w-5 rounded-full px-1 font-mono tabular-nums">8</Badge>

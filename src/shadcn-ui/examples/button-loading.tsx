@@ -6,7 +6,7 @@ import { Button } from '../components/button';
 export default function ButtonLoading({ spriteUrl }: { spriteUrl: string }) {
   return (
     <Button size="sm" disabled>
-      <SpriteIcon<IconName> iconId="Loader" className="animate-spin" url={spriteUrl} />
+      <SpriteIcon<IconName> iconId="Loader" className="animate-spin" spriteUrl={spriteUrl} />
       Please wait
     </Button>
   );
