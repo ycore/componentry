@@ -1,7 +1,7 @@
 import * as MenubarPrimitive from '@radix-ui/react-menubar';
 import clsx from 'clsx';
 import React from 'react';
-import { SvgIcon } from '../../vibrant/lib/icon';
+import { SvgIcon } from '../../vibrant/components/svg-icon';
 
 function Menubar({ className, ...props }: React.ComponentProps<typeof MenubarPrimitive.Root>) {
   return <MenubarPrimitive.Root data-slot="menubar" className={clsx('flex h-9 items-center gap-1 rounded-md border bg-background p-1 shadow-xs', className)} {...props} />;

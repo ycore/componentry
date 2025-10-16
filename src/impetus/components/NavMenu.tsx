@@ -1,9 +1,8 @@
+import { createSpriteIcon } from '@ycore/componentry/images';
 import clsx from 'clsx';
 import type React from 'react';
 import { createContext, useState } from 'react';
 import { useLocation } from 'react-router';
-
-import { createSpriteIcon } from '../../images/SpriteIcon';
 import { Button } from '../../shadcn-ui/components/button';
 import { Menubar, MenubarCheckboxItem, MenubarContent, MenubarItem, MenubarMenu, MenubarRadioGroup, MenubarRadioItem, MenubarSeparator, MenubarShortcut, MenubarSub, MenubarSubContent, MenubarSubTrigger, MenubarTrigger } from '../../shadcn-ui/components/menubar';
 import { Sheet, SheetContent, SheetTrigger } from '../../shadcn-ui/components/sheet';
@@ -94,7 +93,7 @@ function renderMenubarItem(item: MenubarItemConfig, index: number, context: Menu
  * Automatically adds ChevronDown icon for dropdown menus and handles active state for navigation links.
  */
 function renderMenuConfigItem(configItem: MenubarConfigItem, index: number, context: MenubarContextValue): React.ReactNode {
-  const { currentPath, IconSprite, spriteUrl } = context;
+  const { currentPath, IconSprite, spriteKey } = context;
 
   // Radio group
   if (configItem.radioGroup) {
@@ -115,7 +114,7 @@ function renderMenuConfigItem(configItem: MenubarConfigItem, index: number, cont
       <MenubarMenu key={`component-menu-${index}`}>
         <MenubarTrigger asChild>
           <div>
-            <Component spriteUrl={spriteUrl} />
+            <Component spriteKey={spriteKey} />
           </div>
         </MenubarTrigger>
       </MenubarMenu>
@@ -208,7 +207,7 @@ function renderSheetMenuSection(configItem: MenubarConfigItem, index: number, co
   // Top-level component
   if (configItem.component) {
     const Component = configItem.component;
-    return <Component key={`component-${index}`} spriteUrl={context.spriteUrl} />;
+    return <Component key={`component-${index}`} spriteKey={context.spriteKey} />;
   }
 
   // Top-level href
@@ -254,10 +253,10 @@ function renderSheetMenuSection(configItem: MenubarConfigItem, index: number, co
  * @param navFilters - Array of filter values to show only matching menu items
  *
  */
-export function NavMenu({ navConfigItems, spriteUrl, navFilters, className }: NavMenubarProps) {
+export function NavMenu({ navConfigItems, spriteKey = 'lucide', navFilters, className }: NavMenubarProps) {
   const location = useLocation();
-  const IconSprite = createSpriteIcon(spriteUrl);
-  const contextValue: MenubarContextValue = { currentPath: location.pathname, spriteUrl, IconSprite };
+  const IconSprite = createSpriteIcon(spriteKey);
+  const contextValue: MenubarContextValue = { currentPath: location.pathname, spriteKey, IconSprite };
   const [isSheetOpen, setIsSheetOpen] = useState(false);
 
   // Handle both legacy (menus) and new (sections) config formats

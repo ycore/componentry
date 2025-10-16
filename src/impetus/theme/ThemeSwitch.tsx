@@ -1,8 +1,7 @@
+import { SpriteIcon } from '@ycore/componentry/images';
 import clsx from 'clsx';
 import type { MouseEvent } from 'react';
 import { useEffect, useState } from 'react';
-
-import { SpriteIcon } from '../../images/SpriteIcon';
 import type { ThemeContext, ThemeSwitchProps, Themes } from '../@types/ThemeSwitch.types';
 import { useTheme } from './useTheme';
 

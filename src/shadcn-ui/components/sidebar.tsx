@@ -2,7 +2,7 @@ import { Slot } from '@radix-ui/react-slot';
 import { cva, type VariantProps } from 'class-variance-authority';
 import clsx from 'clsx';
 import React from 'react';
-import { SvgIcon } from '../../vibrant/lib/icon';
+import { SvgIcon } from '../../vibrant/components/svg-icon';
 import { useIsMobile } from '../hooks/use-mobile';
 import { Button } from './button';
 import { Input } from './input';

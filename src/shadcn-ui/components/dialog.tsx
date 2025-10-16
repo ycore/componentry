@@ -1,7 +1,7 @@
 import * as DialogPrimitive from '@radix-ui/react-dialog';
 import clsx from 'clsx';
 import React from 'react';
-import { SvgIcon } from '../../vibrant/lib/icon';
+import { SvgIcon } from '../../vibrant/components/svg-icon';
 
 function Dialog({ ...props }: React.ComponentProps<typeof DialogPrimitive.Root>) {
   return <DialogPrimitive.Root data-slot="dialog" {...props} />;

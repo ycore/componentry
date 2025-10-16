@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { Command as CommandPrimitive } from 'cmdk';
 import React from 'react';
-import { SvgIcon } from '../../vibrant/lib/icon';
+import { SvgIcon } from '../../vibrant/components/svg-icon';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from './dialog';
 
 function Command({ className, ...props }: React.ComponentProps<typeof CommandPrimitive>) {

@@ -1,7 +1,7 @@
-import React from 'react';
 import * as AccordionPrimitive from '@radix-ui/react-accordion';
 import clsx from 'clsx';
-import { SvgIcon } from '../../vibrant/lib/icon';
+import React from 'react';
+import { SvgIcon } from '../../vibrant/components/svg-icon';
 
 function Accordion({ ...props }: React.ComponentProps<typeof AccordionPrimitive.Root>) {
   return <AccordionPrimitive.Root data-slot="accordion" {...props} />;

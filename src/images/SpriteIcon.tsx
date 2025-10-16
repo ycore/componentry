@@ -1,5 +1,6 @@
 import React from 'react';
 import type { SpriteIconProps } from './@types/SpriteIcon.types';
+import { useSpriteIcon } from './SpriteIconProvider';
 
 /**
  * Renders an SVG icon using a sprite sheet.
@@ -20,14 +21,21 @@ export function SpriteIcon<IconId extends string = string>({ spriteUrl, iconId, 
 }
 
 /**
- * Creates a pre-configured SpriteIcon component bound to a specific sprite URL.
+ * Creates a pre-configured SpriteIcon component bound to a sprite key from Context.
  *
  * @template IconId - The type of sprite icon IDs available in the sprite sheet
- * @param spriteUrl - The URL of the SVG sprite sheet
- * @returns A configured SpriteIcon component that only requires the icon ID
+ * @param spriteKey - Key to look up sprite URL from SpriteIconProvider (e.g., 'lucide', 'example')
+ * @returns Configured SpriteIcon component requiring only iconId prop
+ *
+ * @example
+ * ```tsx
+ * const Icon = createSpriteIcon<IconName>('lucide');
+ * <Icon iconId="Home" className="size-6" />
+ * ```
  */
-export function createSpriteIcon<IconId extends string>(spriteUrl: string) {
+export function createSpriteIcon<IconId extends string>(spriteKey: string) {
   return function SpriteIconComponent({ iconId, ...props }: { iconId: IconId } & Omit<SpriteIconProps<string, IconId>, 'spriteUrl'>) {
+    const spriteUrl = useSpriteIcon(spriteKey);
     return <SpriteIcon spriteUrl={spriteUrl} iconId={iconId} {...props} />;
   };
 }
