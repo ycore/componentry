@@ -2,13 +2,9 @@
 import { useEffect } from "react";
 
 // src/impetus/toast/vendor.ts
-import { setToast as setToastVendor } from "remix-toast/middleware";
 import { dataWithError, dataWithSuccess, dataWithToast } from "remix-toast";
-import { getToast, unstable_toastMiddleware } from "remix-toast/middleware";
+import { getToast, setToast, toastMiddleware } from "remix-toast/middleware";
 import { toast } from "sonner";
-function setToast(context, toast2) {
-  return setToastVendor(context, toast2);
-}
 
 // src/impetus/toast/useToast.ts
 function useToast(toast2) {
@@ -30,7 +26,7 @@ function useToast(toast2) {
 }
 export {
   useToast,
-  unstable_toastMiddleware,
+  toastMiddleware,
   setToast,
   toast as notify,
   getToast,
@@ -39,4 +35,4 @@ export {
   dataWithError
 };
 
-//# debugId=2EDEF02C181E9D8364756E2164756E21
+//# debugId=32FB3FCB7E62E9BD64756E2164756E21
