@@ -2,7 +2,7 @@ import type React from 'react';
 import type { useFetcher } from 'react-router';
 import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from '../../shadcn-ui/components/pagination';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../shadcn-ui/components/select';
-import { SvgIcon } from '../lib/icon';
+import { SvgIcon } from './svg-icon';
 
 // ============================================================================
 // Type Definitions
