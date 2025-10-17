@@ -8,9 +8,9 @@ export declare const DataPagination: typeof DataPaginationComponent & {
 import * as InputOtpComponents from './components/input-otp';
 import { InputOtp as InputOtpComponent } from './components/input-otp';
 export declare const InputOtp: typeof InputOtpComponent & {
-    InputOtpGroup: typeof InputOtpComponents.InputOtpGroup;
-    InputOtpSlot: typeof InputOtpComponents.InputOtpSlot;
-    InputOtpHiddenInput: typeof InputOtpComponents.InputOtpHiddenInput;
+    Group: typeof InputOtpComponents.InputOtpGroup;
+    Slot: typeof InputOtpComponents.InputOtpSlot;
+    HiddenInput: typeof InputOtpComponents.InputOtpHiddenInput;
 };
 export type { IconName as ExampleIconName } from './@types//example-sprites';
 export { type IconName, iconNames } from './@types/lucide-sprites';

@@ -17643,7 +17643,7 @@ function SonnerDemo() {
       description: "Sunday, December 03, 2023 at 9:00 AM",
       action: {
         label: "Undo",
-        onClick: () => console.log("Undo")
+        onClick: () => console.info("Undo")
       }
     }),
     children: "Show Toast"
@@ -21500,9 +21500,9 @@ var DataPagination2 = Object.assign(DataPagination, {
   RowsPerPageSelector
 });
 var InputOtp2 = Object.assign(InputOtp, {
-  InputOtpGroup,
-  InputOtpSlot,
-  InputOtpHiddenInput
+  Group: InputOtpGroup,
+  Slot: InputOtpSlot,
+  HiddenInput: InputOtpHiddenInput
 });
 var Accordion3 = Object.assign(Accordion2, {
   Item: AccordionItem2,
@@ -21837,4 +21837,4 @@ export {
   Accordion3 as Accordion
 };
 
-//# debugId=8DB69E809433C60F64756E2164756E21
+//# debugId=477F60E8287F00B464756E2164756E21
