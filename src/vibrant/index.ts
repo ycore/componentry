@@ -11,9 +11,9 @@ export const DataPagination = Object.assign(DataPaginationComponent, {
 import * as InputOtpComponents from './components/input-otp';
 import { InputOtp as InputOtpComponent } from './components/input-otp';
 export const InputOtp = Object.assign(InputOtpComponent, {
-  InputOtpGroup: InputOtpComponents.InputOtpGroup,
-  InputOtpSlot: InputOtpComponents.InputOtpSlot,
-  InputOtpHiddenInput: InputOtpComponents.InputOtpHiddenInput,
+  Group: InputOtpComponents.InputOtpGroup,
+  Slot: InputOtpComponents.InputOtpSlot,
+  HiddenInput: InputOtpComponents.InputOtpHiddenInput,
 });
 
 export type { IconName as ExampleIconName } from './@types//example-sprites';

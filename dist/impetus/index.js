@@ -293,7 +293,7 @@ function getErrorInfo(error) {
 function GeneralErrorBoundary({ isDev = false }) {
   const error = useRouteError();
   if (isDev && error instanceof Error) {
-    console.log("\uD83D\uDD34 error on dev", error);
+    console.error("\uD83D\uDD34 error on dev", error);
     return /* @__PURE__ */ jsx(DevErrorDisplay, {
       message: "Application Error",
       detail: error.message,
@@ -6844,4 +6844,4 @@ export {
   Footer
 };
 
-//# debugId=C4F2F4035F70D9B464756E2164756E21
+//# debugId=C1A88836FA45314364756E2164756E21
