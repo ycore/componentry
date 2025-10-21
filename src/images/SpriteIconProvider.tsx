@@ -27,17 +27,11 @@ export function useSpriteIcon(spriteKey: string): string {
   const config = useContext(SpriteIconContext);
 
   if (!config) {
-    throw new Error(
-      'useSpriteIcon must be used within a SpriteIconProvider. ' +
-      'Wrap your app with <SpriteIconProvider sprites={{...}}>.'
-    );
+    throw new Error('useSpriteIcon must be used within a SpriteIconProvider. Wrap your app with <SpriteIconProvider sprites={{...}}>.');
   }
 
   if (!config[spriteKey]) {
-    throw new Error(
-      `Sprite key "${spriteKey}" not found in SpriteIconProvider. ` +
-      `Available keys: ${Object.keys(config).join(', ')}`
-    );
+    throw new Error(`Sprite key "${spriteKey}" not found in SpriteIconProvider. Available keys: ${Object.keys(config).join(', ')}`);
   }
 
   return config[spriteKey];
@@ -62,16 +56,6 @@ export function useSpriteIcon(spriteKey: string): string {
  * }
  * ```
  */
-export function SpriteIconProvider({
-  sprites,
-  children
-}: {
-  sprites: SpriteIconConfig;
-  children: React.ReactNode;
-}) {
-  return (
-    <SpriteIconContext.Provider value={sprites}>
-      {children}
-    </SpriteIconContext.Provider>
-  );
+export function SpriteIconProvider({ sprites, children }: { sprites: SpriteIconConfig; children: React.ReactNode }) {
+  return <SpriteIconContext.Provider value={sprites}>{children}</SpriteIconContext.Provider>;
 }
