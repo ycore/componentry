@@ -1,7 +1,6 @@
-import React from 'react';
-import { useMemo } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import clsx from 'clsx';
+import React, { useMemo } from 'react';
 import { Label } from './label';
 import { Separator } from './separator';
 
@@ -87,7 +86,7 @@ function FieldSeparator({
     <div data-slot="field-separator" data-content={!!children} className={clsx('-my-2 group-data-[variant=outline]/field-group:-mb-2 relative h-5 text-sm', className)} {...props}>
       <Separator className="absolute inset-0 top-1/2" />
       {children && (
-        <span className="relative mx-auto block w-fit bg-background px-2 text-muted-foreground" data-slot="field-separator-content">
+        <span className='relative mx-auto block w-fit bg-background px-2 text-muted-foreground' data-slot="field-separator-content">
           {children}
         </span>
       )}
@@ -108,15 +107,17 @@ function FieldError({
       return children;
     }
 
-    if (!errors) {
+    if (!errors?.length) {
       return null;
     }
 
-    if (errors?.length === 1 && errors[0]?.message) {
-      return errors[0].message;
+    const uniqueErrors = [...new Map(errors.map(error => [error?.message, error])).values()];
+
+    if (uniqueErrors?.length == 1) {
+      return uniqueErrors[0]?.message;
     }
 
-    return <ul className="ml-4 flex list-disc flex-col gap-1">{errors.map((error, index) => error?.message && <li key={index}>{error.message}</li>)}</ul>;
+    return <ul className="ml-4 flex list-disc flex-col gap-1">{uniqueErrors.map((error, index) => error?.message && <li key={index}>{error.message}</li>)}</ul>;
   }, [children, errors]);
 
   if (!content) {

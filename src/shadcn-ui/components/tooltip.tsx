@@ -1,6 +1,6 @@
-import React from 'react';
-import * as TooltipPrimitive from '@radix-ui/react-tooltip';
 import clsx from 'clsx';
+import { Tooltip as TooltipPrimitive } from 'radix-ui';
+import React from 'react';
 
 function TooltipProvider({ delayDuration = 0, ...props }: React.ComponentProps<typeof TooltipPrimitive.Provider>) {
   return <TooltipPrimitive.Provider data-slot="tooltip-provider" delayDuration={delayDuration} {...props} />;
@@ -31,7 +31,7 @@ function TooltipContent({ className, sideOffset = 0, children, ...props }: React
         {...props}
       >
         {children}
-        <TooltipPrimitive.Arrow className="z-50 size-2.5 translate-y-[calc(-50%_-_2px)] rotate-45 rounded-[2px] bg-foreground fill-foreground" />
+        <TooltipPrimitive.Arrow className='z-50 size-2.5 translate-y-[calc(-50%_-_2px)] rotate-45 rounded-[2px] bg-foreground fill-foreground' />
       </TooltipPrimitive.Content>
     </TooltipPrimitive.Portal>
   );

@@ -1,5 +1,5 @@
-import React from 'react';
 import clsx from 'clsx';
+import React from 'react';
 
 function Kbd({ className, ...props }: React.ComponentProps<'kbd'>) {
   return (

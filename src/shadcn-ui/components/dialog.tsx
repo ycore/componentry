@@ -1,5 +1,5 @@
-import * as DialogPrimitive from '@radix-ui/react-dialog';
 import clsx from 'clsx';
+import { Dialog as DialogPrimitive } from 'radix-ui';
 import React from 'react';
 import { SvgIcon } from '../../vibrant/components/svg-icon';
 

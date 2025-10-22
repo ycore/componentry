@@ -1,5 +1,5 @@
-import * as MenubarPrimitive from '@radix-ui/react-menubar';
 import clsx from 'clsx';
+import { Menubar as MenubarPrimitive } from 'radix-ui';
 import React from 'react';
 import { SvgIcon } from '../../vibrant/components/svg-icon';
 

@@ -1,7 +1,7 @@
-import React from 'react';
-import { Slot } from '@radix-ui/react-slot';
 import { cva, type VariantProps } from 'class-variance-authority';
 import clsx from 'clsx';
+import { Slot } from 'radix-ui';
+import React from 'react';
 import { Separator } from './separator';
 
 const buttonGroupVariants = cva(
@@ -30,7 +30,7 @@ function ButtonGroupText({
 }: React.ComponentProps<'div'> & {
   asChild?: boolean;
 }) {
-  const Comp = asChild ? Slot : 'div';
+  const Comp = asChild ? Slot.Slot : 'div';
 
   return <Comp className={clsx("flex items-center gap-2 rounded-md border bg-muted px-4 font-medium text-sm shadow-xs [&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none", className)} {...props} />;
 }

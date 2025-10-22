@@ -251,6 +251,13 @@ export const Menubar = Object.assign(MenubarComponent, {
   SubContent: MenubarComponents.MenubarSubContent,
 });
 
+import * as NativeSelectComponents from './components/native-select';
+import { NativeSelect as NativeSelectComponent } from './components/native-select';
+export const NativeSelect = Object.assign(NativeSelectComponent, {
+  OptGroup: NativeSelectComponents.NativeSelectOptGroup,
+  Option: NativeSelectComponents.NativeSelectOption,
+});
+
 import * as NavigationMenuComponents from './components/navigation-menu';
 import { NavigationMenu as NavigationMenuComponent } from './components/navigation-menu';
 export const NavigationMenu = Object.assign(NavigationMenuComponent, {

@@ -1,5 +1,5 @@
-import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
 import clsx from 'clsx';
+import { DropdownMenu as DropdownMenuPrimitive } from 'radix-ui';
 import React from 'react';
 import { SvgIcon } from '../../vibrant/components/svg-icon';
 

@@ -79,7 +79,7 @@ function transformLucideIcons(fileContent: string): string {
   }
 
   if (lastImportEnd > 0) {
-    const iconImport = `\nimport { SvgIcon } from '../../vibrant/lib/icon';\n`;
+    const iconImport = `\nimport { SvgIcon } from '../../vibrant/components/svg-icon';\n`;
     fileContent = fileContent.slice(0, lastImportEnd) + iconImport + fileContent.slice(lastImportEnd);
   }
 
@@ -247,10 +247,45 @@ function updateSpinnerComponent(fileContent: string): string {
 }
 
 /**
+ * Transform Radix UI imports from @radix-ui/react-* to radix-ui
+ * Example 1: import * as AccordionPrimitive from '@radix-ui/react-accordion'
+ * Becomes: import { Accordion as AccordionPrimitive } from 'radix-ui'
+ *
+ * Example 2: import { Slot } from '@radix-ui/react-slot'
+ * Becomes: import { Slot } from 'radix-ui' and updates usage to Slot.Slot
+ */
+function transformRadixImports(fileContent: string): string {
+  // Pattern 1: import * as (Something)Primitive from '@radix-ui/...'
+  // Extract the component name from the alias by removing 'Primitive' suffix
+  const namespaceImportRegex = /import\s+\*\s+as\s+(\w+)Primitive\s+from\s+['"]@radix-ui\/[^'"]+['"]/g;
+
+  fileContent = fileContent.replace(namespaceImportRegex, (match, componentName) => {
+    return `import { ${componentName} as ${componentName}Primitive } from 'radix-ui'`;
+  });
+
+  // Pattern 2: import { Slot } from '@radix-ui/react-slot'
+  // Replace import and update usage in ternary expressions
+  const namedImportRegex = /import\s+\{\s*Slot\s*\}\s+from\s+['"]@radix-ui\/react-slot['"];?\s*/g;
+
+  if (namedImportRegex.test(fileContent)) {
+    // Replace import
+    fileContent = fileContent.replace(namedImportRegex, `import { Slot } from 'radix-ui';\n`);
+
+    // Replace usage: const Comp = asChild ? Slot : 'element'
+    // Becomes: const Comp = asChild ? Slot.Slot : 'element'
+    const slotUsageRegex = /const\s+Comp\s*=\s*asChild\s*\?\s*Slot\s*:/g;
+    fileContent = fileContent.replace(slotUsageRegex, 'const Comp = asChild ? Slot.Slot :');
+  }
+
+  return fileContent;
+}
+
+/**
  * Main transformation pipeline for component file content
  */
 function transformComponentsContent(fileContent: string): string {
   fileContent = applyShadcnTransformations(fileContent);
+  fileContent = transformRadixImports(fileContent);
   fileContent = transformLucideIcons(fileContent);
   fileContent = replaceOrphanedIcons(fileContent);
   fileContent = fixReactImports(fileContent);

@@ -1,5 +1,5 @@
-import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
 import clsx from 'clsx';
+import { Checkbox as CheckboxPrimitive } from 'radix-ui';
 import React from 'react';
 import { SvgIcon } from '../../vibrant/components/svg-icon';
 
@@ -13,7 +13,7 @@ function Checkbox({ className, ...props }: React.ComponentProps<typeof CheckboxP
       )}
       {...props}
     >
-      <CheckboxPrimitive.Indicator data-slot="checkbox-indicator" className="flex items-center justify-center text-current transition-none">
+      <CheckboxPrimitive.Indicator data-slot="checkbox-indicator" className="grid place-content-center text-current transition-none">
         <SvgIcon iconId="Check" className="size-3.5" />
       </CheckboxPrimitive.Indicator>
     </CheckboxPrimitive.Root>

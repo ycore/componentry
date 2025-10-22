@@ -1,6 +1,6 @@
-import { Slot } from '@radix-ui/react-slot';
 import { cva, type VariantProps } from 'class-variance-authority';
 import clsx from 'clsx';
+import { Slot } from 'radix-ui';
 import React from 'react';
 import { SvgIcon } from '../../vibrant/components/svg-icon';
 import { useIsMobile } from '../hooks/use-mobile';
@@ -160,7 +160,7 @@ function Sidebar({
           data-sidebar="sidebar"
           data-slot="sidebar"
           data-mobile="true"
-          className="w-(--sidebar-width) bg-sidebar p-0 text-sidebar-foreground [&>button]:hidden"
+          className='w-(--sidebar-width) bg-sidebar p-0 text-sidebar-foreground [&>button]:hidden'
           style={
             {
               '--sidebar-width': SIDEBAR_WIDTH_MOBILE,
@@ -179,7 +179,7 @@ function Sidebar({
   }
 
   return (
-    <div className="group peer hidden text-sidebar-foreground md:block" data-state={state} data-collapsible={state === 'collapsed' ? collapsible : ''} data-variant={variant} data-side={side} data-slot="sidebar">
+    <div className='group peer hidden text-sidebar-foreground md:block' data-state={state} data-collapsible={state === 'collapsed' ? collapsible : ''} data-variant={variant} data-side={side} data-slot="sidebar">
       {/* This is what handles the sidebar gap on desktop */}
       <div
         data-slot="sidebar-gap"
@@ -206,7 +206,7 @@ function Sidebar({
         <div
           data-sidebar="sidebar"
           data-slot="sidebar-inner"
-          className="flex h-full w-full flex-col bg-sidebar group-data-[variant=floating]:rounded-lg group-data-[variant=floating]:border group-data-[variant=floating]:border-sidebar-border group-data-[variant=floating]:shadow-sm"
+          className='flex h-full w-full flex-col bg-sidebar group-data-[variant=floating]:rounded-lg group-data-[variant=floating]:border group-data-[variant=floating]:border-sidebar-border group-data-[variant=floating]:shadow-sm'
         >
           {children}
         </div>
@@ -301,7 +301,7 @@ function SidebarGroup({ className, ...props }: React.ComponentProps<'div'>) {
 }
 
 function SidebarGroupLabel({ className, asChild = false, ...props }: React.ComponentProps<'div'> & { asChild?: boolean }) {
-  const Comp = asChild ? Slot : 'div';
+  const Comp = asChild ? Slot.Slot : 'div';
 
   return (
     <Comp
@@ -318,7 +318,7 @@ function SidebarGroupLabel({ className, asChild = false, ...props }: React.Compo
 }
 
 function SidebarGroupAction({ className, asChild = false, ...props }: React.ComponentProps<'button'> & { asChild?: boolean }) {
-  const Comp = asChild ? Slot : 'button';
+  const Comp = asChild ? Slot.Slot : 'button';
 
   return (
     <Comp
@@ -382,7 +382,7 @@ function SidebarMenuButton({
   isActive?: boolean;
   tooltip?: string | React.ComponentProps<typeof TooltipContent>;
 } & VariantProps<typeof sidebarMenuButtonVariants>) {
-  const Comp = asChild ? Slot : 'button';
+  const Comp = asChild ? Slot.Slot : 'button';
   const { isMobile, state } = useSidebar();
 
   const button = <Comp data-slot="sidebar-menu-button" data-sidebar="menu-button" data-size={size} data-active={isActive} className={clsx(sidebarMenuButtonVariants({ variant, size }), className)} {...props} />;
@@ -414,7 +414,7 @@ function SidebarMenuAction({
   asChild?: boolean;
   showOnHover?: boolean;
 }) {
-  const Comp = asChild ? Slot : 'button';
+  const Comp = asChild ? Slot.Slot : 'button';
 
   return (
     <Comp
@@ -509,7 +509,7 @@ function SidebarMenuSubButton({
   size?: 'sm' | 'md';
   isActive?: boolean;
 }) {
-  const Comp = asChild ? Slot : 'a';
+  const Comp = asChild ? Slot.Slot : 'a';
 
   return (
     <Comp

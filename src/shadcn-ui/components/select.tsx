@@ -1,5 +1,5 @@
-import * as SelectPrimitive from '@radix-ui/react-select';
 import clsx from 'clsx';
+import { Select as SelectPrimitive } from 'radix-ui';
 import React from 'react';
 import { SvgIcon } from '../../vibrant/components/svg-icon';
 

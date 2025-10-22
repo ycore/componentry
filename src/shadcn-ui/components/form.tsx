@@ -1,10 +1,9 @@
-import React from 'react';
-import type * as LabelPrimitive from '@radix-ui/react-label';
-import { Slot } from '@radix-ui/react-slot';
-import { Controller, FormProvider, useFormContext, useFormState, type ControllerProps, type FieldPath, type FieldValues } from 'react-hook-form';
-
 import clsx from 'clsx';
+import { type Label as LabelPrimitive, Slot } from 'radix-ui';
+import React from 'react';
+import { Controller, type ControllerProps, type FieldPath, type FieldValues, FormProvider, useFormContext, useFormState } from 'react-hook-form';
 import { Label } from './label';
+
 const Form = FormProvider;
 
 type FormFieldContextValue<TFieldValues extends FieldValues = FieldValues, TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>> = {

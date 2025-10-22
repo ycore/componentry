@@ -1,7 +1,7 @@
-import React from 'react';
-import { Slot } from '@radix-ui/react-slot';
 import { cva, type VariantProps } from 'class-variance-authority';
 import clsx from 'clsx';
+import { Slot } from 'radix-ui';
+import React from 'react';
 import { Separator } from './separator';
 
 function ItemGroup({ className, ...props }: React.ComponentProps<'div'>) {
@@ -34,7 +34,7 @@ const itemVariants = cva(
 );
 
 function Item({ className, variant = 'default', size = 'default', asChild = false, ...props }: React.ComponentProps<'div'> & VariantProps<typeof itemVariants> & { asChild?: boolean }) {
-  const Comp = asChild ? Slot : 'div';
+  const Comp = asChild ? Slot.Slot : 'div';
   return <Comp data-slot="item" data-variant={variant} data-size={size} className={clsx(itemVariants({ variant, size, className }))} {...props} />;
 }
 

@@ -1,6 +1,6 @@
-import * as NavigationMenuPrimitive from '@radix-ui/react-navigation-menu';
 import { cva } from 'class-variance-authority';
 import clsx from 'clsx';
+import { NavigationMenu as NavigationMenuPrimitive } from 'radix-ui';
 import React from 'react';
 import { SvgIcon } from '../../vibrant/components/svg-icon';
 
@@ -89,7 +89,7 @@ function NavigationMenuIndicator({ className, ...props }: React.ComponentProps<t
       className={clsx('data-[state=hidden]:fade-out data-[state=visible]:fade-in top-full z-[1] flex h-1.5 items-end justify-center overflow-hidden data-[state=hidden]:animate-out data-[state=visible]:animate-in', className)}
       {...props}
     >
-      <div className="relative top-[60%] h-2 w-2 rotate-45 rounded-tl-sm bg-border shadow-md" />
+      <div className='relative top-[60%] h-2 w-2 rotate-45 rounded-tl-sm bg-border shadow-md' />
     </NavigationMenuPrimitive.Indicator>
   );
 }

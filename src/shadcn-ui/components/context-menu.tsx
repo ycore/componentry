@@ -1,5 +1,5 @@
-import * as ContextMenuPrimitive from '@radix-ui/react-context-menu';
 import clsx from 'clsx';
+import { ContextMenu as ContextMenuPrimitive } from 'radix-ui';
 import React from 'react';
 import { SvgIcon } from '../../vibrant/components/svg-icon';
 

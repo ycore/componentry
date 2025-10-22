@@ -1,5 +1,5 @@
-import { Slot } from '@radix-ui/react-slot';
 import clsx from 'clsx';
+import { Slot } from 'radix-ui';
 import React from 'react';
 import { SvgIcon } from '../../vibrant/components/svg-icon';
 
@@ -22,7 +22,7 @@ function BreadcrumbLink({
 }: React.ComponentProps<'a'> & {
   asChild?: boolean;
 }) {
-  const Comp = asChild ? Slot : 'a';
+  const Comp = asChild ? Slot.Slot : 'a';
 
   return <Comp data-slot="breadcrumb-link" className={clsx('transition-colors hover:text-foreground', className)} {...props} />;
 }

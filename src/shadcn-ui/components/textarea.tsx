@@ -1,5 +1,5 @@
-import React from 'react';
 import clsx from 'clsx';
+import React from 'react';
 
 function Textarea({ className, ...props }: React.ComponentProps<'textarea'>) {
   return (
