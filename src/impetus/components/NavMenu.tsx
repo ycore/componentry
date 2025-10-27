@@ -4,7 +4,21 @@ import type React from 'react';
 import { createContext, useState } from 'react';
 import { useLocation } from 'react-router';
 import { Button } from '../../shadcn-ui/components/button';
-import { Menubar, MenubarCheckboxItem, MenubarContent, MenubarItem, MenubarMenu, MenubarRadioGroup, MenubarRadioItem, MenubarSeparator, MenubarShortcut, MenubarSub, MenubarSubContent, MenubarSubTrigger, MenubarTrigger } from '../../shadcn-ui/components/menubar';
+import {
+  Menubar,
+  MenubarCheckboxItem,
+  MenubarContent,
+  MenubarItem,
+  MenubarMenu,
+  MenubarRadioGroup,
+  MenubarRadioItem,
+  MenubarSeparator,
+  MenubarShortcut,
+  MenubarSub,
+  MenubarSubContent,
+  MenubarSubTrigger,
+  MenubarTrigger,
+} from '../../shadcn-ui/components/menubar';
 import { Sheet, SheetContent, SheetTrigger } from '../../shadcn-ui/components/sheet';
 import { Link } from '../../vibrant/components/link';
 import type { MenubarConfigItem, MenubarContextValue, MenubarItemConfig, NavMenubarProps } from '../@types/NavMenu.types';
@@ -265,17 +279,17 @@ export function NavMenu({ navConfigItems, spriteKey = 'lucide', navFilters, clas
   // Filter sections/menus if navFilters is provided
   const filteredSections = navFilters
     ? sections
-      .map((section: { menus: MenubarConfigItem[] }) => ({
-        ...section,
-        menus: section.menus.filter((menu: MenubarConfigItem) => {
-          // If no filter property exists, always show
-          if (!menu.filter || !Array.isArray(menu.filter)) {
-            return true;
-          }
-          return menu.filter.some((filterValue: string) => navFilters.includes(filterValue));
-        }),
-      }))
-      .filter((section: { menus: MenubarConfigItem[] }) => section.menus.length > 0)
+        .map((section: { menus: MenubarConfigItem[] }) => ({
+          ...section,
+          menus: section.menus.filter((menu: MenubarConfigItem) => {
+            // If no filter property exists, always show
+            if (!menu.filter || !Array.isArray(menu.filter)) {
+              return true;
+            }
+            return menu.filter.some((filterValue: string) => navFilters.includes(filterValue));
+          }),
+        }))
+        .filter((section: { menus: MenubarConfigItem[] }) => section.menus.length > 0)
     : sections;
 
   // Get all menus for mobile

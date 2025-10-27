@@ -15,7 +15,7 @@ function NativeSelect({ className, ...props }: React.ComponentProps<'select'>) {
         )}
         {...props}
       />
-      <SvgIcon iconId="ChevronDown" className='-translate-y-1/2 pointer-events-none absolute top-1/2 right-3.5 size-4 select-none text-muted-foreground opacity-50' aria-hidden="true" data-slot="native-select-icon" />
+      <SvgIcon iconId="ChevronDown" className="-translate-y-1/2 pointer-events-none absolute top-1/2 right-3.5 size-4 select-none text-muted-foreground opacity-50" aria-hidden="true" data-slot="native-select-icon" />
     </div>
   );
 }

@@ -86,7 +86,7 @@ function FieldSeparator({
     <div data-slot="field-separator" data-content={!!children} className={clsx('-my-2 group-data-[variant=outline]/field-group:-mb-2 relative h-5 text-sm', className)} {...props}>
       <Separator className="absolute inset-0 top-1/2" />
       {children && (
-        <span className='relative mx-auto block w-fit bg-background px-2 text-muted-foreground' data-slot="field-separator-content">
+        <span className="relative mx-auto block w-fit bg-background px-2 text-muted-foreground" data-slot="field-separator-content">
           {children}
         </span>
       )}
