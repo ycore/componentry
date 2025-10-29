@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { Switch as SwitchPrimitive } from 'radix-ui';
 import React from 'react';
 
-function Switch({ className, ...props }: React.ComponentProps<typeof SwitchPrimitive.Root>) {
+function Switch({ className, ...props }: React.ComponentProps<typeof SwitchPrimitive.Root>): React.JSX.Element | null {
   return (
     <SwitchPrimitive.Root
       data-slot="switch"

@@ -31,6 +31,8 @@ const ORPHANED_ICONS = ['CircleIcon'];
 const ICON_NAME_MAP: Record<string, string> = {
   'MoreHorizontal': 'Ellipsis',
   'Loader2': 'Loader',
+  'TriangleAlert': 'CircleAlert',
+  'OctagonX': 'X',
 };
 
 console.log('Reading from:', COMPONENTS_READ.pathname);
@@ -227,17 +229,25 @@ function cleanupImports(fileContent: string): string {
 }
 
 /**
- * Update Spinner component to accept dynamic iconId
+ * Update Spinner component to accept dynamic iconId with proper IconName type
  */
 function updateSpinnerComponent(fileContent: string): string {
   if (!fileContent.includes('function Spinner')) {
     return fileContent;
   }
 
-  // Update function signature to remove spriteUrl and add iconId with default
+  // Add IconName import if not present
+  if (!fileContent.includes('import type { IconName }')) {
+    fileContent = fileContent.replace(
+      /(import.*SvgIcon.*)/,
+      '$1\nimport type { IconName } from \'../../vibrant/@types/lucide-sprites\';'
+    );
+  }
+
+  // Update function signature to use IconName type instead of string
   fileContent = fileContent.replace(
     /function Spinner\(\{\s*className,\s*\.\.\.props\s*\}:\s*([^)]+)\)/,
-    'function Spinner({ className, iconId = \'Loader\', ...props }: $1 & { iconId?: string })'
+    'function Spinner({ className, iconId = \'Loader\', ...props }: $1 & { iconId?: IconName })'
   );
 
   // Replace hardcoded iconId with variable
@@ -257,25 +267,78 @@ function updateSpinnerComponent(fileContent: string): string {
 function transformRadixImports(fileContent: string): string {
   // Pattern 1: import * as (Something)Primitive from '@radix-ui/...'
   // Extract the component name from the alias by removing 'Primitive' suffix
+  // Special case: SheetPrimitive imports from react-dialog, not react-sheet
   const namespaceImportRegex = /import\s+\*\s+as\s+(\w+)Primitive\s+from\s+['"]@radix-ui\/[^'"]+['"]/g;
 
   fileContent = fileContent.replace(namespaceImportRegex, (match, componentName) => {
+    // Special case: Sheet uses Dialog primitive
+    if (componentName === 'Sheet') {
+      return `import { Dialog as SheetPrimitive } from 'radix-ui'`;
+    }
     return `import { ${componentName} as ${componentName}Primitive } from 'radix-ui'`;
   });
 
   // Pattern 2: import { Slot } from '@radix-ui/react-slot'
-  // Replace import and update usage in ternary expressions
+  // Replace import and update ALL Slot references to Slot.Slot
   const namedImportRegex = /import\s+\{\s*Slot\s*\}\s+from\s+['"]@radix-ui\/react-slot['"];?\s*/g;
 
   if (namedImportRegex.test(fileContent)) {
     // Replace import
     fileContent = fileContent.replace(namedImportRegex, `import { Slot } from 'radix-ui';\n`);
 
-    // Replace usage: const Comp = asChild ? Slot : 'element'
-    // Becomes: const Comp = asChild ? Slot.Slot : 'element'
+    // Replace all Slot references with Slot.Slot:
+    // 1. Ternary expressions: const Comp = asChild ? Slot : 'element'
     const slotUsageRegex = /const\s+Comp\s*=\s*asChild\s*\?\s*Slot\s*:/g;
     fileContent = fileContent.replace(slotUsageRegex, 'const Comp = asChild ? Slot.Slot :');
+
+    // 2. Type annotations: React.ComponentProps<typeof Slot>
+    const slotTypeRegex = /typeof\s+Slot(?!\.)/g;
+    fileContent = fileContent.replace(slotTypeRegex, 'typeof Slot.Slot');
+
+    // 3. JSX usage: <Slot followed by whitespace or > (but not if already <Slot.Slot)
+    // Match: <Slot\n, <Slot , <Slot> but not <Slot.Slot
+    const slotJsxRegex = /<Slot(?!\.Slot)(?=[\s>])/g;
+    fileContent = fileContent.replace(slotJsxRegex, '<Slot.Slot');
   }
+
+  return fileContent;
+}
+
+/**
+ * Add explicit type annotations to CVA variant definitions
+ */
+function addCvaVariantTypes(fileContent: string): string {
+  const cvaPattern = /const\s+([a-zA-Z][a-zA-Z0-9]*Variants)\s*=\s*cva\(/g;
+
+  fileContent = fileContent.replace(cvaPattern, (match, variantName) => {
+    if (match.includes(':')) {
+      return match; // Already has type annotation, skip
+    }
+
+    return `const ${variantName}: ReturnType<typeof cva> = cva(`;
+  });
+
+  return fileContent;
+}
+
+/**
+ * Add explicit JSX.Element return types to component functions
+ */
+function addComponentReturnTypes(fileContent: string): string {
+  // Match function declarations that don't already have return types
+  // Pattern: function ComponentName({ ... }: Props) {
+  // Becomes: function ComponentName({ ... }: Props): JSX.Element {
+
+  const functionPattern = /function\s+([A-Z][a-zA-Z0-9]*)\s*\(([^)]*)\)\s*\{/g;
+
+  fileContent = fileContent.replace(functionPattern, (match, componentName, params) => {
+    if (match.includes('):')) {
+      return match; // Already has return type, skip
+    }
+
+    // Add React.JSX.Element | null return type (React 19+ compatible, allows conditional rendering)
+    return `function ${componentName}(${params}): React.JSX.Element | null {`;
+  });
 
   return fileContent;
 }
@@ -290,6 +353,7 @@ function transformComponentsContent(fileContent: string): string {
   fileContent = replaceOrphanedIcons(fileContent);
   fileContent = fixReactImports(fileContent);
   fileContent = updateSpinnerComponent(fileContent);
+  fileContent = addComponentReturnTypes(fileContent);
   fileContent = cleanupImports(fileContent);
   return fileContent;
 }
@@ -499,7 +563,10 @@ async function generateIndexFile() {
       // Append component exports using shadcn naming pattern
       indexContent += `import { ${anchorComponent} as ${anchorComponent}Component } from './${filePathWithRelative}${SUFFIX}';\n`;
       indexContent += `import * as ${anchorComponent}Components from './${filePathWithRelative}${SUFFIX}';\n`;
-      indexContent += `export const ${anchorComponent} = Object.assign(${anchorComponent}Component, {\n`;
+
+      // Build the type properties array
+      const typeProperties: string[] = [];
+      const assignProperties: string[] = [];
 
       for (const exp of allAdditionalExports) {
         let propertyName;
@@ -536,9 +603,14 @@ async function generateIndexFile() {
         // Skip empty property names
         if (!propertyName) continue;
 
-        indexContent += `  ${propertyName}: ${anchorComponent}Components.${exp},\n`;
+        typeProperties.push(`  ${propertyName}: typeof ${anchorComponent}Components.${exp};`);
+        assignProperties.push(`  ${propertyName}: ${anchorComponent}Components.${exp},`);
       }
 
+      indexContent += `export const ${anchorComponent}: typeof ${anchorComponent}Component & {\n`;
+      indexContent += typeProperties.join('\n') + '\n';
+      indexContent += `} = Object.assign(${anchorComponent}Component, {\n`;
+      indexContent += assignProperties.join('\n') + '\n';
       indexContent += '});\n\n';
     }
   }

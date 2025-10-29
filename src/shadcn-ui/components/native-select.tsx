@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import React from 'react';
 import { SvgIcon } from '../../vibrant/components/svg-icon';
 
-function NativeSelect({ className, ...props }: React.ComponentProps<'select'>) {
+function NativeSelect({ className, ...props }: React.ComponentProps<'select'>): React.JSX.Element | null {
   return (
     <div className="group/native-select relative w-fit has-[select:disabled]:opacity-50" data-slot="native-select-wrapper">
       <select
@@ -20,11 +20,11 @@ function NativeSelect({ className, ...props }: React.ComponentProps<'select'>) {
   );
 }
 
-function NativeSelectOption({ ...props }: React.ComponentProps<'option'>) {
+function NativeSelectOption({ ...props }: React.ComponentProps<'option'>): React.JSX.Element | null {
   return <option data-slot="native-select-option" {...props} />;
 }
 
-function NativeSelectOptGroup({ className, ...props }: React.ComponentProps<'optgroup'>) {
+function NativeSelectOptGroup({ className, ...props }: React.ComponentProps<'optgroup'>): React.JSX.Element | null {
   return <optgroup data-slot="native-select-optgroup" className={clsx(className)} {...props} />;
 }
 

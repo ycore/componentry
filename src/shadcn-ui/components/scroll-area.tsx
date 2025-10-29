@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { ScrollArea as ScrollAreaPrimitive } from 'radix-ui';
 import React from 'react';
 
-function ScrollArea({ className, children, ...props }: React.ComponentProps<typeof ScrollAreaPrimitive.Root>) {
+function ScrollArea({ className, children, ...props }: React.ComponentProps<typeof ScrollAreaPrimitive.Root>): React.JSX.Element | null {
   return (
     <ScrollAreaPrimitive.Root data-slot="scroll-area" className={clsx('relative', className)} {...props}>
       <ScrollAreaPrimitive.Viewport data-slot="scroll-area-viewport" className="size-full rounded-[inherit] outline-none transition-[color,box-shadow] focus-visible:outline-1 focus-visible:ring-[3px] focus-visible:ring-ring/50">
@@ -14,7 +14,7 @@ function ScrollArea({ className, children, ...props }: React.ComponentProps<type
   );
 }
 
-function ScrollBar({ className, orientation = 'vertical', ...props }: React.ComponentProps<typeof ScrollAreaPrimitive.ScrollAreaScrollbar>) {
+function ScrollBar({ className, orientation = 'vertical', ...props }: React.ComponentProps<typeof ScrollAreaPrimitive.ScrollAreaScrollbar>): React.JSX.Element | null {
   return (
     <ScrollAreaPrimitive.ScrollAreaScrollbar
       data-slot="scroll-area-scrollbar"

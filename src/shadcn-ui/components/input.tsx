@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import React from 'react';
 
-function Input({ className, type, ...props }: React.ComponentProps<'input'>) {
+function Input({ className, type, ...props }: React.ComponentProps<'input'>): React.JSX.Element | null {
   return (
     <input
       type={type}

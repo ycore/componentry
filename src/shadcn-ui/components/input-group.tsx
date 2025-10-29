@@ -5,7 +5,7 @@ import { Button } from './button';
 import { Input } from './input';
 import { Textarea } from './textarea';
 
-function InputGroup({ className, ...props }: React.ComponentProps<'div'>) {
+function InputGroup({ className, ...props }: React.ComponentProps<'div'>): React.JSX.Element | null {
   return (
     <div
       data-slot="input-group"
@@ -50,7 +50,7 @@ const inputGroupAddonVariants = cva(
   }
 );
 
-function InputGroupAddon({ className, align = 'inline-start', ...props }: React.ComponentProps<'div'> & VariantProps<typeof inputGroupAddonVariants>) {
+function InputGroupAddon({ className, align = 'inline-start', ...props }: React.ComponentProps<'div'> & VariantProps<typeof inputGroupAddonVariants>): React.JSX.Element | null {
   return (
     <div
       role="group"
@@ -82,19 +82,19 @@ const inputGroupButtonVariants = cva('text-sm shadow-none flex gap-2 items-cente
   },
 });
 
-function InputGroupButton({ className, type = 'button', variant = 'ghost', size = 'xs', ...props }: Omit<React.ComponentProps<typeof Button>, 'size'> & VariantProps<typeof inputGroupButtonVariants>) {
+function InputGroupButton({ className, type = 'button', variant = 'ghost', size = 'xs', ...props }: Omit<React.ComponentProps<typeof Button>, 'size'> & VariantProps<typeof inputGroupButtonVariants>): React.JSX.Element | null {
   return <Button type={type} data-size={size} variant={variant} className={clsx(inputGroupButtonVariants({ size }), className)} {...props} />;
 }
 
-function InputGroupText({ className, ...props }: React.ComponentProps<'span'>) {
+function InputGroupText({ className, ...props }: React.ComponentProps<'span'>): React.JSX.Element | null {
   return <span className={clsx("flex items-center gap-2 text-muted-foreground text-sm [&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none", className)} {...props} />;
 }
 
-function InputGroupInput({ className, ...props }: React.ComponentProps<'input'>) {
+function InputGroupInput({ className, ...props }: React.ComponentProps<'input'>): React.JSX.Element | null {
   return <Input data-slot="input-group-control" className={clsx('flex-1 rounded-none border-0 bg-transparent shadow-none focus-visible:ring-0 dark:bg-transparent', className)} {...props} />;
 }
 
-function InputGroupTextarea({ className, ...props }: React.ComponentProps<'textarea'>) {
+function InputGroupTextarea({ className, ...props }: React.ComponentProps<'textarea'>): React.JSX.Element | null {
   return <Textarea data-slot="input-group-control" className={clsx('flex-1 resize-none rounded-none border-0 bg-transparent py-3 shadow-none focus-visible:ring-0 dark:bg-transparent', className)} {...props} />;
 }
 

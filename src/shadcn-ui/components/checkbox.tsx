@@ -3,7 +3,7 @@ import { Checkbox as CheckboxPrimitive } from 'radix-ui';
 import React from 'react';
 import { SvgIcon } from '../../vibrant/components/svg-icon';
 
-function Checkbox({ className, ...props }: React.ComponentProps<typeof CheckboxPrimitive.Root>) {
+function Checkbox({ className, ...props }: React.ComponentProps<typeof CheckboxPrimitive.Root>): React.JSX.Element | null {
   return (
     <CheckboxPrimitive.Root
       data-slot="checkbox"

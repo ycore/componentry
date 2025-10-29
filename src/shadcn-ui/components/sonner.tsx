@@ -13,6 +13,8 @@ const Toaster = ({ ...props }: ToasterProps) => {
       icons={{
         success: <SvgIcon iconId="CircleCheck" className="size-4" />,
         info: <SvgIcon iconId="Info" className="size-4" />,
+        warning: <SvgIcon iconId="CircleAlert" className="size-4" />,
+        error: <SvgIcon iconId="CircleAlert" className="size-4" />,
         loading: <SvgIcon iconId="Loader" className="size-4 animate-spin" />,
       }}
       style={

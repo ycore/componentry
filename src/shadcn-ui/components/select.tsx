@@ -3,15 +3,15 @@ import { Select as SelectPrimitive } from 'radix-ui';
 import React from 'react';
 import { SvgIcon } from '../../vibrant/components/svg-icon';
 
-function Select({ ...props }: React.ComponentProps<typeof SelectPrimitive.Root>) {
+function Select({ ...props }: React.ComponentProps<typeof SelectPrimitive.Root>): React.JSX.Element | null {
   return <SelectPrimitive.Root data-slot="select" {...props} />;
 }
 
-function SelectGroup({ ...props }: React.ComponentProps<typeof SelectPrimitive.Group>) {
+function SelectGroup({ ...props }: React.ComponentProps<typeof SelectPrimitive.Group>): React.JSX.Element | null {
   return <SelectPrimitive.Group data-slot="select-group" {...props} />;
 }
 
-function SelectValue({ ...props }: React.ComponentProps<typeof SelectPrimitive.Value>) {
+function SelectValue({ ...props }: React.ComponentProps<typeof SelectPrimitive.Value>): React.JSX.Element | null {
   return <SelectPrimitive.Value data-slot="select-value" {...props} />;
 }
 
@@ -22,7 +22,7 @@ function SelectTrigger({
   ...props
 }: React.ComponentProps<typeof SelectPrimitive.Trigger> & {
   size?: 'sm' | 'default';
-}) {
+}): React.JSX.Element | null {
   return (
     <SelectPrimitive.Trigger
       data-slot="select-trigger"
@@ -41,7 +41,7 @@ function SelectTrigger({
   );
 }
 
-function SelectContent({ className, children, position = 'popper', align = 'center', ...props }: React.ComponentProps<typeof SelectPrimitive.Content>) {
+function SelectContent({ className, children, position = 'popper', align = 'center', ...props }: React.ComponentProps<typeof SelectPrimitive.Content>): React.JSX.Element | null {
   return (
     <SelectPrimitive.Portal>
       <SelectPrimitive.Content
@@ -63,11 +63,11 @@ function SelectContent({ className, children, position = 'popper', align = 'cent
   );
 }
 
-function SelectLabel({ className, ...props }: React.ComponentProps<typeof SelectPrimitive.Label>) {
+function SelectLabel({ className, ...props }: React.ComponentProps<typeof SelectPrimitive.Label>): React.JSX.Element | null {
   return <SelectPrimitive.Label data-slot="select-label" className={clsx('px-2 py-1.5 text-muted-foreground text-xs', className)} {...props} />;
 }
 
-function SelectItem({ className, children, ...props }: React.ComponentProps<typeof SelectPrimitive.Item>) {
+function SelectItem({ className, children, ...props }: React.ComponentProps<typeof SelectPrimitive.Item>): React.JSX.Element | null {
   return (
     <SelectPrimitive.Item
       data-slot="select-item"
@@ -87,11 +87,11 @@ function SelectItem({ className, children, ...props }: React.ComponentProps<type
   );
 }
 
-function SelectSeparator({ className, ...props }: React.ComponentProps<typeof SelectPrimitive.Separator>) {
+function SelectSeparator({ className, ...props }: React.ComponentProps<typeof SelectPrimitive.Separator>): React.JSX.Element | null {
   return <SelectPrimitive.Separator data-slot="select-separator" className={clsx('-mx-1 pointer-events-none my-1 h-px bg-border', className)} {...props} />;
 }
 
-function SelectScrollUpButton({ className, ...props }: React.ComponentProps<typeof SelectPrimitive.ScrollUpButton>) {
+function SelectScrollUpButton({ className, ...props }: React.ComponentProps<typeof SelectPrimitive.ScrollUpButton>): React.JSX.Element | null {
   return (
     <SelectPrimitive.ScrollUpButton data-slot="select-scroll-up-button" className={clsx('flex cursor-default items-center justify-center py-1', className)} {...props}>
       <SvgIcon iconId="ChevronUp" className="size-4" />
@@ -99,7 +99,7 @@ function SelectScrollUpButton({ className, ...props }: React.ComponentProps<type
   );
 }
 
-function SelectScrollDownButton({ className, ...props }: React.ComponentProps<typeof SelectPrimitive.ScrollDownButton>) {
+function SelectScrollDownButton({ className, ...props }: React.ComponentProps<typeof SelectPrimitive.ScrollDownButton>): React.JSX.Element | null {
   return (
     <SelectPrimitive.ScrollDownButton data-slot="select-scroll-down-button" className={clsx('flex cursor-default items-center justify-center py-1', className)} {...props}>
       <SvgIcon iconId="ChevronDown" className="size-4" />

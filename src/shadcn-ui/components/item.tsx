@@ -4,11 +4,11 @@ import { Slot } from 'radix-ui';
 import React from 'react';
 import { Separator } from './separator';
 
-function ItemGroup({ className, ...props }: React.ComponentProps<'div'>) {
+function ItemGroup({ className, ...props }: React.ComponentProps<'div'>): React.JSX.Element | null {
   return <div role="list" data-slot="item-group" className={clsx('group/item-group flex flex-col', className)} {...props} />;
 }
 
-function ItemSeparator({ className, ...props }: React.ComponentProps<typeof Separator>) {
+function ItemSeparator({ className, ...props }: React.ComponentProps<typeof Separator>): React.JSX.Element | null {
   return <Separator data-slot="item-separator" orientation="horizontal" className={clsx('my-0', className)} {...props} />;
 }
 
@@ -33,7 +33,7 @@ const itemVariants = cva(
   }
 );
 
-function Item({ className, variant = 'default', size = 'default', asChild = false, ...props }: React.ComponentProps<'div'> & VariantProps<typeof itemVariants> & { asChild?: boolean }) {
+function Item({ className, variant = 'default', size = 'default', asChild = false, ...props }: React.ComponentProps<'div'> & VariantProps<typeof itemVariants> & { asChild?: boolean }): React.JSX.Element | null {
   const Comp = asChild ? Slot.Slot : 'div';
   return <Comp data-slot="item" data-variant={variant} data-size={size} className={clsx(itemVariants({ variant, size, className }))} {...props} />;
 }
@@ -54,19 +54,19 @@ const itemMediaVariants = cva(
   }
 );
 
-function ItemMedia({ className, variant = 'default', ...props }: React.ComponentProps<'div'> & VariantProps<typeof itemMediaVariants>) {
+function ItemMedia({ className, variant = 'default', ...props }: React.ComponentProps<'div'> & VariantProps<typeof itemMediaVariants>): React.JSX.Element | null {
   return <div data-slot="item-media" data-variant={variant} className={clsx(itemMediaVariants({ variant, className }))} {...props} />;
 }
 
-function ItemContent({ className, ...props }: React.ComponentProps<'div'>) {
+function ItemContent({ className, ...props }: React.ComponentProps<'div'>): React.JSX.Element | null {
   return <div data-slot="item-content" className={clsx('flex flex-1 flex-col gap-1 [&+[data-slot=item-content]]:flex-none', className)} {...props} />;
 }
 
-function ItemTitle({ className, ...props }: React.ComponentProps<'div'>) {
+function ItemTitle({ className, ...props }: React.ComponentProps<'div'>): React.JSX.Element | null {
   return <div data-slot="item-title" className={clsx('flex w-fit items-center gap-2 font-medium text-sm leading-snug', className)} {...props} />;
 }
 
-function ItemDescription({ className, ...props }: React.ComponentProps<'p'>) {
+function ItemDescription({ className, ...props }: React.ComponentProps<'p'>): React.JSX.Element | null {
   return (
     <p
       data-slot="item-description"
@@ -76,15 +76,15 @@ function ItemDescription({ className, ...props }: React.ComponentProps<'p'>) {
   );
 }
 
-function ItemActions({ className, ...props }: React.ComponentProps<'div'>) {
+function ItemActions({ className, ...props }: React.ComponentProps<'div'>): React.JSX.Element | null {
   return <div data-slot="item-actions" className={clsx('flex items-center gap-2', className)} {...props} />;
 }
 
-function ItemHeader({ className, ...props }: React.ComponentProps<'div'>) {
+function ItemHeader({ className, ...props }: React.ComponentProps<'div'>): React.JSX.Element | null {
   return <div data-slot="item-header" className={clsx('flex basis-full items-center justify-between gap-2', className)} {...props} />;
 }
 
-function ItemFooter({ className, ...props }: React.ComponentProps<'div'>) {
+function ItemFooter({ className, ...props }: React.ComponentProps<'div'>): React.JSX.Element | null {
   return <div data-slot="item-footer" className={clsx('flex basis-full items-center justify-between gap-2', className)} {...props} />;
 }
 

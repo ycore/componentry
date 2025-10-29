@@ -24,7 +24,7 @@ const toggleVariants = cva(
   }
 );
 
-function Toggle({ className, variant, size, ...props }: React.ComponentProps<typeof TogglePrimitive.Root> & VariantProps<typeof toggleVariants>) {
+function Toggle({ className, variant, size, ...props }: React.ComponentProps<typeof TogglePrimitive.Root> & VariantProps<typeof toggleVariants>): React.JSX.Element | null {
   return <TogglePrimitive.Root data-slot="toggle" className={clsx(toggleVariants({ variant, size, className }))} {...props} />;
 }
 

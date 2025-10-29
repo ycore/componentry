@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { Progress as ProgressPrimitive } from 'radix-ui';
 import React from 'react';
 
-function Progress({ className, value, ...props }: React.ComponentProps<typeof ProgressPrimitive.Root>) {
+function Progress({ className, value, ...props }: React.ComponentProps<typeof ProgressPrimitive.Root>): React.JSX.Element | null {
   return (
     <ProgressPrimitive.Root data-slot="progress" className={clsx('relative h-2 w-full overflow-hidden rounded-full bg-primary/20', className)} {...props}>
       <ProgressPrimitive.Indicator data-slot="progress-indicator" className="h-full w-full flex-1 bg-primary transition-all" style={{ transform: `translateX(-${100 - (value || 0)}%)` }} />

@@ -20,7 +20,7 @@ const badgeVariants = cva(
   }
 );
 
-function Badge({ className, variant, asChild = false, ...props }: React.ComponentProps<'span'> & VariantProps<typeof badgeVariants> & { asChild?: boolean }) {
+function Badge({ className, variant, asChild = false, ...props }: React.ComponentProps<'span'> & VariantProps<typeof badgeVariants> & { asChild?: boolean }): React.JSX.Element | null {
   const Comp = asChild ? Slot.Slot : 'span';
 
   return <Comp data-slot="badge" className={clsx(badgeVariants({ variant }), className)} {...props} />;

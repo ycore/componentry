@@ -2,15 +2,15 @@ import clsx from 'clsx';
 import { Tabs as TabsPrimitive } from 'radix-ui';
 import React from 'react';
 
-function Tabs({ className, ...props }: React.ComponentProps<typeof TabsPrimitive.Root>) {
+function Tabs({ className, ...props }: React.ComponentProps<typeof TabsPrimitive.Root>): React.JSX.Element | null {
   return <TabsPrimitive.Root data-slot="tabs" className={clsx('flex flex-col gap-2', className)} {...props} />;
 }
 
-function TabsList({ className, ...props }: React.ComponentProps<typeof TabsPrimitive.List>) {
+function TabsList({ className, ...props }: React.ComponentProps<typeof TabsPrimitive.List>): React.JSX.Element | null {
   return <TabsPrimitive.List data-slot="tabs-list" className={clsx('inline-flex h-9 w-fit items-center justify-center rounded-lg bg-muted p-[3px] text-muted-foreground', className)} {...props} />;
 }
 
-function TabsTrigger({ className, ...props }: React.ComponentProps<typeof TabsPrimitive.Trigger>) {
+function TabsTrigger({ className, ...props }: React.ComponentProps<typeof TabsPrimitive.Trigger>): React.JSX.Element | null {
   return (
     <TabsPrimitive.Trigger
       data-slot="tabs-trigger"
@@ -23,7 +23,7 @@ function TabsTrigger({ className, ...props }: React.ComponentProps<typeof TabsPr
   );
 }
 
-function TabsContent({ className, ...props }: React.ComponentProps<typeof TabsPrimitive.Content>) {
+function TabsContent({ className, ...props }: React.ComponentProps<typeof TabsPrimitive.Content>): React.JSX.Element | null {
   return <TabsPrimitive.Content data-slot="tabs-content" className={clsx('flex-1 outline-none', className)} {...props} />;
 }
 

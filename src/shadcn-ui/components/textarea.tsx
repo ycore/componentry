@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import React from 'react';
 
-function Textarea({ className, ...props }: React.ComponentProps<'textarea'>) {
+function Textarea({ className, ...props }: React.ComponentProps<'textarea'>): React.JSX.Element | null {
   return (
     <textarea
       data-slot="textarea"

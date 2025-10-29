@@ -3,11 +3,11 @@ import { RadioGroup as RadioGroupPrimitive } from 'radix-ui';
 import React from 'react';
 import { SvgIcon } from '../../vibrant/components/svg-icon';
 
-function RadioGroup({ className, ...props }: React.ComponentProps<typeof RadioGroupPrimitive.Root>) {
+function RadioGroup({ className, ...props }: React.ComponentProps<typeof RadioGroupPrimitive.Root>): React.JSX.Element | null {
   return <RadioGroupPrimitive.Root data-slot="radio-group" className={clsx('grid gap-3', className)} {...props} />;
 }
 
-function RadioGroupItem({ className, ...props }: React.ComponentProps<typeof RadioGroupPrimitive.Item>) {
+function RadioGroupItem({ className, ...props }: React.ComponentProps<typeof RadioGroupPrimitive.Item>): React.JSX.Element | null {
   return (
     <RadioGroupPrimitive.Item
       data-slot="radio-group-item"

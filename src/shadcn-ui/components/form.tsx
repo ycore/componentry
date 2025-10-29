@@ -49,7 +49,7 @@ type FormItemContextValue = {
 
 const FormItemContext = React.createContext<FormItemContextValue>({} as FormItemContextValue);
 
-function FormItem({ className, ...props }: React.ComponentProps<'div'>) {
+function FormItem({ className, ...props }: React.ComponentProps<'div'>): React.JSX.Element | null {
   const id = React.useId();
 
   return (
@@ -59,25 +59,25 @@ function FormItem({ className, ...props }: React.ComponentProps<'div'>) {
   );
 }
 
-function FormLabel({ className, ...props }: React.ComponentProps<typeof LabelPrimitive.Root>) {
+function FormLabel({ className, ...props }: React.ComponentProps<typeof LabelPrimitive.Root>): React.JSX.Element | null {
   const { error, formItemId } = useFormField();
 
   return <Label data-slot="form-label" data-error={!!error} className={clsx('data-[error=true]:text-destructive', className)} htmlFor={formItemId} {...props} />;
 }
 
-function FormControl({ ...props }: React.ComponentProps<typeof Slot>) {
+function FormControl({ ...props }: React.ComponentProps<typeof Slot.Slot>): React.JSX.Element | null {
   const { error, formItemId, formDescriptionId, formMessageId } = useFormField();
 
-  return <Slot data-slot="form-control" id={formItemId} aria-describedby={!error ? `${formDescriptionId}` : `${formDescriptionId} ${formMessageId}`} aria-invalid={!!error} {...props} />;
+  return <Slot.Slot data-slot="form-control" id={formItemId} aria-describedby={!error ? `${formDescriptionId}` : `${formDescriptionId} ${formMessageId}`} aria-invalid={!!error} {...props} />;
 }
 
-function FormDescription({ className, ...props }: React.ComponentProps<'p'>) {
+function FormDescription({ className, ...props }: React.ComponentProps<'p'>): React.JSX.Element | null {
   const { formDescriptionId } = useFormField();
 
   return <p data-slot="form-description" id={formDescriptionId} className={clsx('text-muted-foreground text-sm', className)} {...props} />;
 }
 
-function FormMessage({ className, ...props }: React.ComponentProps<'p'>) {
+function FormMessage({ className, ...props }: React.ComponentProps<'p'>): React.JSX.Element | null {
   const { error, formMessageId } = useFormField();
   const body = error ? String(error?.message ?? '') : props.children;
 

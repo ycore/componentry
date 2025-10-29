@@ -40,7 +40,7 @@ function Button({
 }: React.ComponentProps<'button'> &
   VariantProps<typeof buttonVariants> & {
     asChild?: boolean;
-  }) {
+  }): React.JSX.Element | null {
   const Comp = asChild ? Slot.Slot : 'button';
 
   return <Comp data-slot="button" className={clsx(buttonVariants({ variant, size, className }))} {...props} />;

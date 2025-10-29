@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { Separator as SeparatorPrimitive } from 'radix-ui';
 import React from 'react';
 
-function Separator({ className, orientation = 'horizontal', decorative = true, ...props }: React.ComponentProps<typeof SeparatorPrimitive.Root>) {
+function Separator({ className, orientation = 'horizontal', decorative = true, ...props }: React.ComponentProps<typeof SeparatorPrimitive.Root>): React.JSX.Element | null {
   return (
     <SeparatorPrimitive.Root
       data-slot="separator"

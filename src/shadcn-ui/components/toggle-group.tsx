@@ -4,13 +4,27 @@ import { ToggleGroup as ToggleGroupPrimitive } from 'radix-ui';
 import React from 'react';
 import { toggleVariants } from './toggle';
 
-const ToggleGroupContext = React.createContext<VariantProps<typeof toggleVariants> & { spacing?: number }>({
+const ToggleGroupContext = React.createContext<
+  VariantProps<typeof toggleVariants> & {
+    spacing?: number;
+  }
+>({
   size: 'default',
   variant: 'default',
   spacing: 0,
 });
 
-function ToggleGroup({ className, variant, size, spacing = 0, children, ...props }: React.ComponentProps<typeof ToggleGroupPrimitive.Root> & VariantProps<typeof toggleVariants> & { spacing?: number }) {
+function ToggleGroup({
+  className,
+  variant,
+  size,
+  spacing = 0,
+  children,
+  ...props
+}: React.ComponentProps<typeof ToggleGroupPrimitive.Root> &
+  VariantProps<typeof toggleVariants> & {
+    spacing?: number;
+  }): React.JSX.Element | null {
   return (
     <ToggleGroupPrimitive.Root
       data-slot="toggle-group"
@@ -26,7 +40,7 @@ function ToggleGroup({ className, variant, size, spacing = 0, children, ...props
   );
 }
 
-function ToggleGroupItem({ className, children, variant, size, ...props }: React.ComponentProps<typeof ToggleGroupPrimitive.Item> & VariantProps<typeof toggleVariants>) {
+function ToggleGroupItem({ className, children, variant, size, ...props }: React.ComponentProps<typeof ToggleGroupPrimitive.Item> & VariantProps<typeof toggleVariants>): React.JSX.Element | null {
   const context = React.useContext(ToggleGroupContext);
 
   return (
