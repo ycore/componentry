@@ -1,12 +1,17 @@
+import path from 'node:path';
 import type { IconSpriteConfig } from '../images/@types/icon-spritesheet.types';
 
-// Used with manual run using ws:sprites to create static assets
-export const staticSpriteConfig: IconSpriteConfig[] = [
+// Resolve paths relative to this config file's directory
+const configDir = import.meta.dirname;
+const workspaceRoot = path.resolve(configDir, '..');
+
+// Used with manual run using ws:sprites to update static assets
+export const spriteConfig: IconSpriteConfig[] = [
   {
-    inputDir: '../../node_modules/lucide-static/icons',
-    outputDir: 'src/vibrant/assets',
+    inputDir: path.resolve(workspaceRoot, '../node_modules/lucide-static/icons'),
+    outputDir: path.resolve(configDir, 'assets'),
     spriteFileName: 'lucide-sprites.svg',
-    typesFileName: 'src/vibrant/@types/lucide-sprites.ts',
+    typesFileName: path.resolve(configDir, '@types/lucide-sprites.ts'),
     inputFilespec: [
       'arrow-down.svg',
       'arrow-left.svg',
@@ -47,10 +52,10 @@ export const staticSpriteConfig: IconSpriteConfig[] = [
     ],
   },
   {
-    inputDir: '../../node_modules/lucide-static/icons',
-    outputDir: 'src/vibrant/assets',
+    inputDir: path.resolve(workspaceRoot, '../node_modules/lucide-static/icons'),
+    outputDir: path.resolve(configDir, 'assets'),
     spriteFileName: 'example-sprites.svg',
-    typesFileName: 'src/vibrant/@types/example-sprites.ts',
+    typesFileName: path.resolve(configDir, '@types/example-sprites.ts'),
     inputFilespec: ['app-window.svg', 'bold.svg', 'file-code-2.svg', 'italic.svg', 'popcorn.svg', 'underline.svg'],
   },
 ];

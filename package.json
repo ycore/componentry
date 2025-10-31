@@ -12,11 +12,6 @@
       "types": "./src/images/index.ts",
       "import": "./src/images/index.ts"
     },
-    "./images/plugins": {
-      "node": {
-        "types": "./src/images/plugins/index.ts",
-        "import": "./src/images/plugins/index.ts"
-      }
     },
     "./impetus": {
       "types": "./src/impetus/index.ts",
@@ -82,6 +77,6 @@
     "clean": "rm -rf dist node_modules",
     "ws:format": "biome format src",
     "ws:lint": "biome lint src",
-    "ws:sprites": "bun ./src/images/cli/create-spritesheets.ts"
+    "ws:sprites": "bun ./src/images/create-spritesheet-cli.ts ./src/vibrant/sprites.config.ts"
   }
 }
