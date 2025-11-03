@@ -5,7 +5,7 @@ import type { IconName } from '../../vibrant/@types/lucide-sprites';
 import { Button } from '../components/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '../components/dropdown-menu';
 
-export default function ModeToggle({ spriteUrl }: { spriteUrl: string }) {
+export default function ModeToggle({ spriteUrl }: { spriteUrl: string }): React.JSX.Element {
   const { setTheme } = useTheme();
 
   return (

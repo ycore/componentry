@@ -56,6 +56,6 @@ export function useSpriteIcon(spriteKey: string): string {
  * }
  * ```
  */
-export function SpriteIconProvider({ sprites, children }: { sprites: SpriteIconConfig; children: React.ReactNode }) {
+export function SpriteIconProvider({ sprites, children }: { sprites: SpriteIconConfig; children: React.ReactNode }): React.JSX.Element {
   return <SpriteIconContext.Provider value={sprites}>{children}</SpriteIconContext.Provider>;
 }

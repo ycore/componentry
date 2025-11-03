@@ -8,7 +8,7 @@ import { useTheme } from './useTheme';
 export const THEME_OPTIONS: Themes = { theme: { light: 'light', dark: 'dark' } } as const;
 
 // Internal button component
-const ThemeSwitchButton = ({ themeContext, theme, spriteUrl, className, classTheme }: { themeContext: ThemeContext | null; theme: Themes; spriteUrl: string; className?: string; classTheme?: string }) => {
+const ThemeSwitchButton = ({ themeContext, theme, spriteUrl, className, classTheme }: { themeContext: ThemeContext | null; theme: Themes; spriteUrl: string; className?: string; classTheme?: string }): React.JSX.Element | null => {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => setMounted(true), []);
@@ -35,7 +35,7 @@ const ThemeSwitchButton = ({ themeContext, theme, spriteUrl, className, classThe
 };
 
 // Main ThemeSwitch component with render props pattern
-export const ThemeSwitch = ({ theme = THEME_OPTIONS, spriteUrl, className, classTheme, children }: ThemeSwitchProps) => {
+export const ThemeSwitch = ({ theme = THEME_OPTIONS, spriteUrl, className, classTheme, children }: ThemeSwitchProps): React.ReactNode => {
   const nextThemeContext = useTheme();
   const themeContext: ThemeContext | null = nextThemeContext ? { resolvedTheme: nextThemeContext.resolvedTheme, setTheme: nextThemeContext.setTheme } : null;
 

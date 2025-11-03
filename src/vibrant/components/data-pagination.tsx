@@ -26,7 +26,17 @@ interface RowsPerPageSelectorProps {
   disabled?: boolean;
 }
 
-export function DataPagination({ currentRecords, pagination, totalRecords, baseRoute, routeParams = {}, perPageOptions = [25, 50, 100, 200], fetcher, isLoading = false, loadingIcon = true }: DataPaginationProps) {
+export function DataPagination({
+  currentRecords,
+  pagination,
+  totalRecords,
+  baseRoute,
+  routeParams = {},
+  perPageOptions = [25, 50, 100, 200],
+  fetcher,
+  isLoading = false,
+  loadingIcon = true,
+}: DataPaginationProps): React.JSX.Element {
   const buildUrl = (params: Record<string, string>) => {
     const urlParams = new URLSearchParams();
 
@@ -86,7 +96,7 @@ export function DataPagination({ currentRecords, pagination, totalRecords, baseR
   );
 }
 
-export function RowsPerPageSelector({ currentLimit, options, onLimitChange, disabled = false }: RowsPerPageSelectorProps) {
+export function RowsPerPageSelector({ currentLimit, options, onLimitChange, disabled = false }: RowsPerPageSelectorProps): React.JSX.Element {
   return (
     <div className="flex items-center gap-2">
       <label htmlFor="rows-per-page" className="font-medium text-sm">
@@ -125,7 +135,7 @@ interface RecordCountDisplayProps {
   totalRecords?: number;
 }
 
-export function RecordCountDisplay({ currentPage, currentRecords, hasNextPage, totalRecords }: RecordCountDisplayProps) {
+export function RecordCountDisplay({ currentPage, currentRecords, hasNextPage, totalRecords }: RecordCountDisplayProps): React.JSX.Element | null {
   if (currentRecords === 0) {
     return null;
   }
@@ -161,7 +171,7 @@ interface PaginationControlsProps {
   disabled?: boolean;
 }
 
-export function PaginationControls({ currentPage, hasNextPage, hasPreviousPage, onPageChange, disabled = false }: PaginationControlsProps) {
+export function PaginationControls({ currentPage, hasNextPage, hasPreviousPage, onPageChange, disabled = false }: PaginationControlsProps): React.JSX.Element | null {
   // Only show pagination if there are pages to navigate
   if (!hasPreviousPage && !hasNextPage) {
     return null;

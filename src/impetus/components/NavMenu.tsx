@@ -267,7 +267,7 @@ function renderSheetMenuSection(configItem: MenubarConfigItem, index: number, co
  * @param navFilters - Array of filter values to show only matching menu items
  *
  */
-export function NavMenu({ navConfigItems, spriteKey = 'lucide', navFilters, className }: NavMenubarProps) {
+export function NavMenu({ navConfigItems, spriteKey = 'lucide', navFilters, className }: NavMenubarProps): React.JSX.Element {
   const location = useLocation();
   const IconSprite = createSpriteIcon(spriteKey);
   const contextValue: MenubarContextValue = { currentPath: location.pathname, spriteKey, IconSprite };

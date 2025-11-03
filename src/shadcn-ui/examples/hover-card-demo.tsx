@@ -3,7 +3,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '../components/avatar';
 import { Button } from '../components/button';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '../components/hover-card';
 
-export default function HoverCardDemo() {
+export default function HoverCardDemo(): React.JSX.Element {
   return (
     <HoverCard>
       <HoverCardTrigger asChild>

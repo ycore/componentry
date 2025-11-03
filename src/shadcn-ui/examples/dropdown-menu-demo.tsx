@@ -15,7 +15,7 @@ import {
   DropdownMenuTrigger,
 } from '../components/dropdown-menu';
 
-export default function DropdownMenuDemo() {
+export default function DropdownMenuDemo(): React.JSX.Element {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Separator } from '../components/separator';
 
-export default function SeparatorDemo() {
+export default function SeparatorDemo(): React.JSX.Element {
   return (
     <div>
       <div className="space-y-1">

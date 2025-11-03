@@ -1,5 +1,8 @@
 // vibrant
 
+// Variant utilities
+export { createVariants, type VariantProps } from './utils/variants';
+
 import * as DataPaginationComponents from './components/data-pagination';
 import { DataPagination as DataPaginationComponent } from './components/data-pagination';
 export const DataPagination = Object.assign(DataPaginationComponent, {

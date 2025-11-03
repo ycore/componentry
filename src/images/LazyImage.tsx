@@ -22,7 +22,7 @@ export const createRemoteImagePromise = (src: string, alt: string, width?: numbe
   });
 };
 
-export function LazyImage({ image, src, alt, width, height, className, spriteUrl, fallback = spriteUrl ? <Spinner /> : <div className="text-slate-500/50">Loading...</div> }: LazyImageProps) {
+export function LazyImage({ image, src, alt, width, height, className, spriteUrl, fallback = spriteUrl ? <Spinner /> : <div className="text-slate-500/50">Loading...</div> }: LazyImageProps): React.JSX.Element {
   const imagePromise = image || (src ? createRemoteImagePromise(src, alt || '', width, height) : null);
 
   if (!imagePromise) {
@@ -38,7 +38,7 @@ export function LazyImage({ image, src, alt, width, height, className, spriteUrl
   );
 }
 
-export function LazyGallery({ images, className, imageClass, spriteUrl, fallback = spriteUrl ? <Spinner className="h-[180px]" /> : <div className="h-[180px] text-slate-500/50">Loading...</div> }: LazyGalleryProps) {
+export function LazyGallery({ images, className, imageClass, spriteUrl, fallback = spriteUrl ? <Spinner className="h-[180px]" /> : <div className="h-[180px] text-slate-500/50">Loading...</div> }: LazyGalleryProps): React.JSX.Element {
   return (
     <div className={className}>
       {images.map(imgPromise => (

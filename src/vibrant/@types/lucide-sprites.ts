@@ -37,6 +37,6 @@ export const iconNames = [
   'Trash2',
   'UserRound',
   'X',
-] as const
+] as const;
 
-export type IconName = typeof iconNames[number]
+export type IconName = (typeof iconNames)[number];

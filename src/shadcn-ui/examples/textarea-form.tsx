@@ -5,7 +5,7 @@ import { Button } from '../components/button';
 import { Textarea } from '../components/textarea';
 // import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '../custom/form';
 
-export default function TextareaForm() {
+export default function TextareaForm(): React.JSX.Element {
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);

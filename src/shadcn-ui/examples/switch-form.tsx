@@ -5,7 +5,7 @@ import { Label } from '../components/label';
 import { Switch } from '../components/switch';
 // import { Form, div, FormDescription, div, div, Label } from '../custom/form';
 
-export default function SwitchForm() {
+export default function SwitchForm(): React.JSX.Element {
   const [marketingEmails, setMarketingEmails] = React.useState(false);
   const [securityEmails, setSecurityEmails] = React.useState(true);
 

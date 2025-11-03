@@ -2,7 +2,7 @@ import React from 'react';
 import { Checkbox } from '../components/checkbox';
 import { Label } from '../components/label';
 
-export default function LabelDemo() {
+export default function LabelDemo(): React.JSX.Element {
   const termsId = React.useId();
 
   return (

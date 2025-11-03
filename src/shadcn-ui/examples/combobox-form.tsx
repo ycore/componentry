@@ -21,7 +21,7 @@ const languages = [
   { label: 'Chinese', value: 'zh' },
 ] as const;
 
-export default function ComboboxForm({ spriteUrl }: { spriteUrl: string }) {
+export default function ComboboxForm({ spriteUrl }: { spriteUrl: string }): React.JSX.Element {
   const [selectedLanguage, setSelectedLanguage] = React.useState('');
   const [open, setOpen] = React.useState(false);
 

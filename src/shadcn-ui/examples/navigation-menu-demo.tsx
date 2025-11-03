@@ -37,7 +37,7 @@ const components: { title: string; href: string; description: string }[] = [
   },
 ];
 
-export default function NavigationMenuDemo({ spriteUrl }: { spriteUrl: string }) {
+export default function NavigationMenuDemo({ spriteUrl }: { spriteUrl: string }): React.JSX.Element {
   return (
     <NavigationMenu viewport={false}>
       <NavigationMenuList>

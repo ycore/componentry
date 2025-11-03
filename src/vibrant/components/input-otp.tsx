@@ -3,7 +3,7 @@ import { unstable_OneTimePasswordField as OneTimePasswordFieldPrimitive } from '
 import * as React from 'react';
 import type { InputOtpSlotProps, OTPInputProps } from './@types/input-otp.types';
 
-function InputOtp({ value, onValueChange, containerClassName, children, ...props }: OTPInputProps) {
+function InputOtp({ value, onValueChange, containerClassName, children, ...props }: OTPInputProps): React.JSX.Element {
   return (
     <OneTimePasswordFieldPrimitive.Root data-slot="input-otp" className={containerClassName} value={value} onValueChange={onValueChange} {...props}>
       {children}
@@ -11,11 +11,11 @@ function InputOtp({ value, onValueChange, containerClassName, children, ...props
   );
 }
 
-function InputOtpGroup({ className, ...props }: React.ComponentProps<'div'>) {
+function InputOtpGroup({ className, ...props }: React.ComponentProps<'div'>): React.JSX.Element {
   return <div data-slot="input-otp-group" className={clsx('flex items-center gap-2', className)} {...props} />;
 }
 
-function InputOtpSlot({ className, index, ...props }: InputOtpSlotProps) {
+function InputOtpSlot({ className, index, ...props }: InputOtpSlotProps): React.JSX.Element {
   return (
     <OneTimePasswordFieldPrimitive.Input
       data-slot="input-otp-slot"
@@ -35,7 +35,7 @@ function InputOtpSlot({ className, index, ...props }: InputOtpSlotProps) {
   );
 }
 
-function InputOtpHiddenInput(props: React.ComponentProps<typeof OneTimePasswordFieldPrimitive.HiddenInput>) {
+function InputOtpHiddenInput(props: React.ComponentProps<typeof OneTimePasswordFieldPrimitive.HiddenInput>): React.JSX.Element {
   return <OneTimePasswordFieldPrimitive.HiddenInput data-slot="input-otp-hidden" {...props} />;
 }
 

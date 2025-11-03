@@ -4,7 +4,7 @@ import { Input } from '../components/input';
 import { Label } from '../components/label';
 import { Popover, PopoverContent, PopoverTrigger } from '../components/popover';
 
-export default function PopoverDemo() {
+export default function PopoverDemo(): React.JSX.Element {
   const widthId = React.useId();
   const maxWidthId = React.useId();
   const heightId = React.useId();

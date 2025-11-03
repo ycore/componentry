@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Progress } from '../components/progress';
 
-export default function ProgressDemo() {
+export default function ProgressDemo(): React.JSX.Element | null {
   const [progress, setProgress] = React.useState(13);
 
   React.useEffect(() => {

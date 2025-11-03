@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '../components/select';
 
-export default function SelectDemo() {
+export default function SelectDemo(): React.JSX.Element {
   return (
     <Select>
       <SelectTrigger className="w-[180px]">

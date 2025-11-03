@@ -29,7 +29,7 @@ const frameworks = [
   },
 ];
 
-export default function ComboboxDemo({ spriteUrl }: { spriteUrl: string }) {
+export default function ComboboxDemo({ spriteUrl }: { spriteUrl: string }): React.JSX.Element {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState('');
 

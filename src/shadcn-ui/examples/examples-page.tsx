@@ -173,7 +173,7 @@ function SpriteExamples({ spriteUrl }: { spriteUrl: string }) {
   );
 }
 
-export function ComponentExamples({ spriteUrl, exampleUrl }: { spriteUrl: string; exampleUrl: string }) {
+export function ComponentExamples({ spriteUrl, exampleUrl }: { spriteUrl: string; exampleUrl: string }): React.JSX.Element {
   // Generate unique IDs for each section
   const spritesId = useId();
   const accordionId = useId();

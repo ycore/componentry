@@ -9,7 +9,7 @@ import { Checkbox } from '../components/checkbox';
 
 type CheckedState = boolean | 'indeterminate';
 
-export default function CheckboxReactHookFormSingle() {
+export default function CheckboxReactHookFormSingle(): React.JSX.Element {
   // const [mobileEnabled, setMobileEnabled] = React.useState(true);
   const [mobileEnabled, setMobileEnabled] = React.useState<CheckedState>(false);
 

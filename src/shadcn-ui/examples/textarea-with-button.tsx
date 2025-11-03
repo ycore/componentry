@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from '../components/button';
 import { Textarea } from '../components/textarea';
 
-export default function TextareaWithButton() {
+export default function TextareaWithButton(): React.JSX.Element {
   return (
     <div className="grid w-full gap-2">
       <Textarea placeholder="Type your message here." />

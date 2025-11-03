@@ -2,7 +2,7 @@ import React from 'react';
 import { Label } from '../components/label';
 import { Textarea } from '../components/textarea';
 
-export default function TextareaWithLabel() {
+export default function TextareaWithLabel(): React.JSX.Element {
   const messageId = React.useId();
 
   return (

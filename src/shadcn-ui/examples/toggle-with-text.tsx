@@ -3,7 +3,7 @@ import { SpriteIcon } from '../../images/SpriteIcon';
 import type { IconName } from '../../vibrant/@types/example-sprites';
 import { Toggle } from '../components/toggle';
 
-export default function ToggleWithText({ spriteUrl }: { spriteUrl: string }) {
+export default function ToggleWithText({ spriteUrl }: { spriteUrl: string }): React.JSX.Element {
   return (
     <Toggle aria-label="Toggle italic">
       <SpriteIcon<IconName> iconId="Italic" spriteUrl={spriteUrl} />

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Checkbox } from '../components/checkbox';
 
-export default function CheckboxWithText() {
+export default function CheckboxWithText(): React.JSX.Element {
   const termsId = React.useId();
 
   return (

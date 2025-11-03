@@ -53,7 +53,7 @@ function DevErrorDisplay({ message, detail, stack }: ErrorDisplayProps & { stack
   );
 }
 
-export function ProductionErrorDisplay({ message, detail }: ErrorDisplayProps) {
+export function ProductionErrorDisplay({ message, detail }: ErrorDisplayProps): React.JSX.Element {
   return (
     <main className="flex h-screen items-center justify-center p-6">
       <div className="mx-auto flex max-w-sm flex-col items-center gap-4 text-center">
@@ -82,7 +82,7 @@ function getErrorInfo(error: unknown): ErrorDisplayProps {
   };
 }
 
-export function GeneralErrorBoundary({ isDev = false }) {
+export function GeneralErrorBoundary({ isDev = false }): React.JSX.Element {
   const error = useRouteError();
 
   if (isDev && error instanceof Error) {

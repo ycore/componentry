@@ -3,7 +3,7 @@ import React from 'react';
 import { Toaster as Sonner, type ToasterProps } from 'sonner';
 import { SvgIcon } from '../../vibrant/components/svg-icon';
 
-const Toaster = ({ ...props }: ToasterProps) => {
+const Toaster = ({ ...props }: ToasterProps): React.JSX.Element => {
   const { theme = 'system' } = useTheme();
 
   return (

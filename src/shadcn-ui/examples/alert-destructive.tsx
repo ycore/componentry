@@ -3,7 +3,7 @@ import { SpriteIcon } from '../../images/SpriteIcon';
 import type { IconName } from '../../vibrant/@types/lucide-sprites';
 import { Alert, AlertDescription, AlertTitle } from '../components/alert';
 
-export default function AlertDestructive({ spriteUrl }: { spriteUrl: string }) {
+export default function AlertDestructive({ spriteUrl }: { spriteUrl: string }): React.JSX.Element {
   return (
     <Alert variant="destructive">
       <SpriteIcon<IconName> iconId="CircleAlert" spriteUrl={spriteUrl} />

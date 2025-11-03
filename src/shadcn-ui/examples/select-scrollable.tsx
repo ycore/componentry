@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '../components/select';
 
-export default function SelectScrollable() {
+export default function SelectScrollable(): React.JSX.Element {
   return (
     <Select>
       <SelectTrigger className="w-[280px]">

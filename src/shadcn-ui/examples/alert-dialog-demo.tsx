@@ -2,7 +2,7 @@ import React from 'react';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '../components/alert-dialog';
 import { Button } from '../components/button';
 
-export default function AlertDialogDemo() {
+export default function AlertDialogDemo(): React.JSX.Element {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>

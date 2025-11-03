@@ -2,7 +2,7 @@ import React from 'react';
 import { Input } from '../components/input';
 import { Label } from '../components/label';
 
-export default function InputFile() {
+export default function InputFile(): React.JSX.Element {
   const pictureId = React.useId();
 
   return (

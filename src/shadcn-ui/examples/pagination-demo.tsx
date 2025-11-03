@@ -1,7 +1,7 @@
 import React from 'react';
 import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from '../components/pagination';
 
-export default function PaginationDemo() {
+export default function PaginationDemo(): React.JSX.Element {
   return (
     <Pagination>
       <PaginationContent>

@@ -13,4 +13,4 @@ import type { IconName } from '../@types/lucide-sprites';
  * <SpriteIconProvider sprites={{ lucide: lucideSpriteUrl }}>
  * ```
  */
-export const SvgIcon = createSpriteIcon<IconName>('lucide');
+export const SvgIcon: React.FC<Omit<React.ComponentProps<'svg'>, 'children'> & { iconId?: IconName }> = createSpriteIcon<IconName>('lucide');

@@ -5,7 +5,7 @@ import { toast } from 'sonner';
 import { Button } from '../components/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/select';
 
-export default function SelectForm() {
+export default function SelectForm(): React.JSX.Element {
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);

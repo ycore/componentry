@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from '../../vibrant/components/link';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '../components/breadcrumb';
 
-export default function BreadcrumbWithCustomSeparator() {
+export default function BreadcrumbWithCustomSeparator(): React.JSX.Element {
   return (
     <Breadcrumb>
       <BreadcrumbList>

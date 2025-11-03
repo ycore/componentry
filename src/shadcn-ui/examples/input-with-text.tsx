@@ -2,7 +2,7 @@ import React from 'react';
 import { Input } from '../components/input';
 import { Label } from '../components/label';
 
-export default function InputWithText() {
+export default function InputWithText(): React.JSX.Element {
   const emailId = React.useId();
 
   return (

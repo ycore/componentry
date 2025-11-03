@@ -3,7 +3,7 @@ import { SpriteIcon } from '../../images/SpriteIcon';
 import type { IconName } from '../../vibrant/@types/lucide-sprites';
 import { Alert, AlertDescription, AlertTitle } from '../components/alert';
 
-export default function AlertDemo({ spriteUrl }: { spriteUrl: string }) {
+export default function AlertDemo({ spriteUrl }: { spriteUrl: string }): React.JSX.Element {
   return (
     <div className="grid w-full max-w-xl items-start gap-4">
       <Alert>

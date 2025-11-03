@@ -3,7 +3,7 @@ import { Link } from '../../vibrant/components/link';
 import { Breadcrumb, BreadcrumbEllipsis, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '../components/breadcrumb';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '../components/dropdown-menu';
 
-export default function BreadcrumbDemo() {
+export default function BreadcrumbDemo(): React.JSX.Element {
   return (
     <Breadcrumb>
       <BreadcrumbList>

@@ -2,7 +2,7 @@ import React from 'react';
 import { Label } from '../components/label';
 import { RadioGroup, RadioGroupItem } from '../components/radio-group';
 
-export default function RadioGroupDemo() {
+export default function RadioGroupDemo(): React.JSX.Element {
   const defaultId = React.useId();
   const comfortableId = React.useId();
   const compactId = React.useId();

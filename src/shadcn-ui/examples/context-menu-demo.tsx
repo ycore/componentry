@@ -15,7 +15,7 @@ import {
   ContextMenuTrigger,
 } from '../components/context-menu';
 
-export default function ContextMenuDemo() {
+export default function ContextMenuDemo(): React.JSX.Element {
   return (
     <ContextMenu>
       <ContextMenuTrigger className="flex h-[150px] w-[300px] items-center justify-center rounded-md border border-dashed text-sm">Right click here</ContextMenuTrigger>

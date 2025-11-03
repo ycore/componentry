@@ -7,7 +7,7 @@ import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHe
 
 const SHEET_SIDES = ['top', 'right', 'bottom', 'left'] as const;
 
-export default function SheetSide() {
+export default function SheetSide(): React.JSX.Element {
   const nameId = React.useId();
   const usernameId = React.useId();
 

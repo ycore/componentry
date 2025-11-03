@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from '../../vibrant/components/link';
 import { Breadcrumb, BreadcrumbEllipsis, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '../components/breadcrumb';
 
-export default function BreadcrumbCollapsed() {
+export default function BreadcrumbCollapsed(): React.JSX.Element {
   return (
     <Breadcrumb>
       <BreadcrumbList>

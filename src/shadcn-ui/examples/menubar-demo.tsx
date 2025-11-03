@@ -16,7 +16,7 @@ import {
   MenubarTrigger,
 } from '../components/menubar';
 
-export default function MenubarDemo() {
+export default function MenubarDemo(): React.JSX.Element {
   return (
     <Menubar>
       <MenubarMenu>

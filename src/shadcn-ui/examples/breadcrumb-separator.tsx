@@ -4,7 +4,7 @@ import type { IconName } from '../../vibrant/@types/lucide-sprites';
 import { Link } from '../../vibrant/components/link';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '../components/breadcrumb';
 
-export default function BreadcrumbWithCustomSeparator({ spriteUrl }: { spriteUrl: string }) {
+export default function BreadcrumbWithCustomSeparator({ spriteUrl }: { spriteUrl: string }): React.JSX.Element {
   return (
     <Breadcrumb>
       <BreadcrumbList>

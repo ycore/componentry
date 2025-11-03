@@ -50,7 +50,9 @@ function applyShadcnTransformations(fileContent: string): string {
     .replace(/@\/registry\/new-york\//g, './') // Replace @/registry/new-york/ with ./
     .replace(/@\/registry\/new-york-v4\/ui\//g, './') // Replace @/registry/new-york-v4/ui/ with ./
     .replace(/@\/registry\/new-york-v4\/hooks\/(.*)/g, '../hooks/\$1') // Replace @/registry/new-york-v4/hooks/ with ../
-    .replace(/bg-white/g, 'bg-background'); // Replace @/registry/new-york-v4/hooks/ with ./
+    .replace(/bg-white/g, 'bg-background') // Replace bg-white with bg-background
+    .replace(/import\s+{\s*cva,\s*type\s+VariantProps\s*}\s+from\s+['"]class-variance-authority['"]/g,
+      'import { createVariants as cva, type VariantProps } from \'../../vibrant/utils/variants\''); // Replace CVA import with wrapper
 }
 
 /**

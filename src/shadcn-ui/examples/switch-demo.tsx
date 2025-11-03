@@ -2,7 +2,7 @@ import React from 'react';
 import { Label } from '../components/label';
 import { Switch } from '../components/switch';
 
-export default function SwitchDemo() {
+export default function SwitchDemo(): React.JSX.Element {
   const airplaneModeId = React.useId();
 
   return (

@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from '../components/button';
 import { Tooltip, TooltipContent, TooltipTrigger } from '../components/tooltip';
 
-export default function TooltipDemo() {
+export default function TooltipDemo(): React.JSX.Element {
   return (
     <Tooltip>
       <TooltipTrigger asChild>

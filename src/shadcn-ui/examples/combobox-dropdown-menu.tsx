@@ -19,7 +19,7 @@ import {
 
 const labels = ['feature', 'bug', 'enhancement', 'documentation', 'design', 'question', 'maintenance'];
 
-export default function ComboboxDropdownMenu({ spriteUrl }: { spriteUrl: string }) {
+export default function ComboboxDropdownMenu({ spriteUrl }: { spriteUrl: string }): React.JSX.Element {
   const [label, setLabel] = React.useState('feature');
   const [open, setOpen] = React.useState(false);
 

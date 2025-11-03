@@ -2,7 +2,7 @@ import { toast } from 'sonner';
 
 import { Button } from '../components/button';
 
-export default function SonnerDemo() {
+export default function SonnerDemo(): React.JSX.Element {
   return (
     <Button
       variant="outline"

@@ -4,7 +4,7 @@ import { Input } from '../components/input';
 import { Label } from '../components/label';
 import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from '../components/sheet';
 
-export default function SheetDemo() {
+export default function SheetDemo(): React.JSX.Element {
   const nameId = React.useId();
   const usernameId = React.useId();
 

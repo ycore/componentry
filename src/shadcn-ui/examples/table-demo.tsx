@@ -46,7 +46,7 @@ const invoices = [
   },
 ];
 
-export default function TableDemo() {
+export default function TableDemo(): React.JSX.Element {
   return (
     <Table>
       <TableCaption>A list of your recent invoices.</TableCaption>

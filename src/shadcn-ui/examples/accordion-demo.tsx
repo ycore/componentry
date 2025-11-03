@@ -1,7 +1,7 @@
 import React from 'react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '../components/accordion';
 
-export default function AccordionDemo() {
+export default function AccordionDemo(): React.JSX.Element {
   return (
     <Accordion type="single" collapsible className="w-full" defaultValue="item-1">
       <AccordionItem value="item-1">

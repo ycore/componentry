@@ -5,7 +5,7 @@ import { Input } from '../components/input';
 import { Label } from '../components/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/tabs';
 
-export default function TabsDemo() {
+export default function TabsDemo(): React.JSX.Element {
   const nameId = React.useId();
   const usernameId = React.useId();
   const currentPasswordId = React.useId();

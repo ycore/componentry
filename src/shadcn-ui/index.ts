@@ -1,5 +1,5 @@
-import * as AccordionComponents from './components/accordion';
 import { Accordion as AccordionComponent } from './components/accordion';
+import * as AccordionComponents from './components/accordion';
 export const Accordion: typeof AccordionComponent & {
   Item: typeof AccordionComponents.AccordionItem;
   Trigger: typeof AccordionComponents.AccordionTrigger;
@@ -10,34 +10,34 @@ export const Accordion: typeof AccordionComponent & {
   Content: AccordionComponents.AccordionContent,
 });
 
-import * as AlertDialogComponents from './components/alert-dialog';
 import { AlertDialog as AlertDialogComponent } from './components/alert-dialog';
+import * as AlertDialogComponents from './components/alert-dialog';
 export const AlertDialog: typeof AlertDialogComponent & {
-  Portal: typeof AlertDialogComponents.AlertDialogPortal;
-  Overlay: typeof AlertDialogComponents.AlertDialogOverlay;
-  Trigger: typeof AlertDialogComponents.AlertDialogTrigger;
-  Content: typeof AlertDialogComponents.AlertDialogContent;
-  Header: typeof AlertDialogComponents.AlertDialogHeader;
-  Footer: typeof AlertDialogComponents.AlertDialogFooter;
-  Title: typeof AlertDialogComponents.AlertDialogTitle;
-  Description: typeof AlertDialogComponents.AlertDialogDescription;
   Action: typeof AlertDialogComponents.AlertDialogAction;
   Cancel: typeof AlertDialogComponents.AlertDialogCancel;
+  Content: typeof AlertDialogComponents.AlertDialogContent;
+  Description: typeof AlertDialogComponents.AlertDialogDescription;
+  Footer: typeof AlertDialogComponents.AlertDialogFooter;
+  Header: typeof AlertDialogComponents.AlertDialogHeader;
+  Overlay: typeof AlertDialogComponents.AlertDialogOverlay;
+  Portal: typeof AlertDialogComponents.AlertDialogPortal;
+  Title: typeof AlertDialogComponents.AlertDialogTitle;
+  Trigger: typeof AlertDialogComponents.AlertDialogTrigger;
 } = Object.assign(AlertDialogComponent, {
-  Portal: AlertDialogComponents.AlertDialogPortal,
-  Overlay: AlertDialogComponents.AlertDialogOverlay,
-  Trigger: AlertDialogComponents.AlertDialogTrigger,
-  Content: AlertDialogComponents.AlertDialogContent,
-  Header: AlertDialogComponents.AlertDialogHeader,
-  Footer: AlertDialogComponents.AlertDialogFooter,
-  Title: AlertDialogComponents.AlertDialogTitle,
-  Description: AlertDialogComponents.AlertDialogDescription,
   Action: AlertDialogComponents.AlertDialogAction,
   Cancel: AlertDialogComponents.AlertDialogCancel,
+  Content: AlertDialogComponents.AlertDialogContent,
+  Description: AlertDialogComponents.AlertDialogDescription,
+  Footer: AlertDialogComponents.AlertDialogFooter,
+  Header: AlertDialogComponents.AlertDialogHeader,
+  Overlay: AlertDialogComponents.AlertDialogOverlay,
+  Portal: AlertDialogComponents.AlertDialogPortal,
+  Title: AlertDialogComponents.AlertDialogTitle,
+  Trigger: AlertDialogComponents.AlertDialogTrigger,
 });
 
-import * as AlertComponents from './components/alert';
 import { Alert as AlertComponent } from './components/alert';
+import * as AlertComponents from './components/alert';
 export const Alert: typeof AlertComponent & {
   Title: typeof AlertComponents.AlertTitle;
   Description: typeof AlertComponents.AlertDescription;
@@ -48,8 +48,8 @@ export const Alert: typeof AlertComponent & {
 
 export { AspectRatio } from './components/aspect-ratio';
 
-import * as AvatarComponents from './components/avatar';
 import { Avatar as AvatarComponent } from './components/avatar';
+import * as AvatarComponents from './components/avatar';
 export const Avatar: typeof AvatarComponent & {
   Image: typeof AvatarComponents.AvatarImage;
   Fallback: typeof AvatarComponents.AvatarFallback;
@@ -58,16 +58,16 @@ export const Avatar: typeof AvatarComponent & {
   Fallback: AvatarComponents.AvatarFallback,
 });
 
-import * as BadgeComponents from './components/badge';
 import { Badge as BadgeComponent } from './components/badge';
+import * as BadgeComponents from './components/badge';
 export const Badge: typeof BadgeComponent & {
   Variants: typeof BadgeComponents.badgeVariants;
 } = Object.assign(BadgeComponent, {
   Variants: BadgeComponents.badgeVariants,
 });
 
-import * as BreadcrumbComponents from './components/breadcrumb';
 import { Breadcrumb as BreadcrumbComponent } from './components/breadcrumb';
+import * as BreadcrumbComponents from './components/breadcrumb';
 export const Breadcrumb: typeof BreadcrumbComponent & {
   List: typeof BreadcrumbComponents.BreadcrumbList;
   Item: typeof BreadcrumbComponents.BreadcrumbItem;
@@ -84,8 +84,8 @@ export const Breadcrumb: typeof BreadcrumbComponent & {
   Ellipsis: BreadcrumbComponents.BreadcrumbEllipsis,
 });
 
-import * as ButtonGroupComponents from './components/button-group';
 import { ButtonGroup as ButtonGroupComponent } from './components/button-group';
+import * as ButtonGroupComponents from './components/button-group';
 export const ButtonGroup: typeof ButtonGroupComponent & {
   Separator: typeof ButtonGroupComponents.ButtonGroupSeparator;
   Text: typeof ButtonGroupComponents.ButtonGroupText;
@@ -96,16 +96,16 @@ export const ButtonGroup: typeof ButtonGroupComponent & {
   ButtonGroupVariants: ButtonGroupComponents.buttonGroupVariants,
 });
 
-import * as ButtonComponents from './components/button';
 import { Button as ButtonComponent } from './components/button';
+import * as ButtonComponents from './components/button';
 export const Button: typeof ButtonComponent & {
   Variants: typeof ButtonComponents.buttonVariants;
 } = Object.assign(ButtonComponent, {
   Variants: ButtonComponents.buttonVariants,
 });
 
-import * as CardComponents from './components/card';
 import { Card as CardComponent } from './components/card';
+import * as CardComponents from './components/card';
 export const Card: typeof CardComponent & {
   Header: typeof CardComponents.CardHeader;
   Footer: typeof CardComponents.CardFooter;
@@ -124,8 +124,8 @@ export const Card: typeof CardComponent & {
 
 export { Checkbox } from './components/checkbox';
 
-import * as CollapsibleComponents from './components/collapsible';
 import { Collapsible as CollapsibleComponent } from './components/collapsible';
+import * as CollapsibleComponents from './components/collapsible';
 export const Collapsible: typeof CollapsibleComponent & {
   Trigger: typeof CollapsibleComponents.CollapsibleTrigger;
   Content: typeof CollapsibleComponents.CollapsibleContent;
@@ -134,8 +134,8 @@ export const Collapsible: typeof CollapsibleComponent & {
   Content: CollapsibleComponents.CollapsibleContent,
 });
 
-import * as CommandComponents from './components/command';
 import { Command as CommandComponent } from './components/command';
+import * as CommandComponents from './components/command';
 export const Command: typeof CommandComponent & {
   Dialog: typeof CommandComponents.CommandDialog;
   Input: typeof CommandComponents.CommandInput;
@@ -156,8 +156,8 @@ export const Command: typeof CommandComponent & {
   Separator: CommandComponents.CommandSeparator,
 });
 
-import * as ContextMenuComponents from './components/context-menu';
 import { ContextMenu as ContextMenuComponent } from './components/context-menu';
+import * as ContextMenuComponents from './components/context-menu';
 export const ContextMenu: typeof ContextMenuComponent & {
   Trigger: typeof ContextMenuComponents.ContextMenuTrigger;
   Content: typeof ContextMenuComponents.ContextMenuContent;
@@ -190,8 +190,8 @@ export const ContextMenu: typeof ContextMenuComponent & {
   RadioGroup: ContextMenuComponents.ContextMenuRadioGroup,
 });
 
-import * as DialogComponents from './components/dialog';
 import { Dialog as DialogComponent } from './components/dialog';
+import * as DialogComponents from './components/dialog';
 export const Dialog: typeof DialogComponent & {
   Close: typeof DialogComponents.DialogClose;
   Content: typeof DialogComponents.DialogContent;
@@ -214,8 +214,8 @@ export const Dialog: typeof DialogComponent & {
   Trigger: DialogComponents.DialogTrigger,
 });
 
-import * as DropdownMenuComponents from './components/dropdown-menu';
 import { DropdownMenu as DropdownMenuComponent } from './components/dropdown-menu';
+import * as DropdownMenuComponents from './components/dropdown-menu';
 export const DropdownMenu: typeof DropdownMenuComponent & {
   Portal: typeof DropdownMenuComponents.DropdownMenuPortal;
   Trigger: typeof DropdownMenuComponents.DropdownMenuTrigger;
@@ -248,8 +248,8 @@ export const DropdownMenu: typeof DropdownMenuComponent & {
   SubContent: DropdownMenuComponents.DropdownMenuSubContent,
 });
 
-import * as EmptyComponents from './components/empty';
 import { Empty as EmptyComponent } from './components/empty';
+import * as EmptyComponents from './components/empty';
 export const Empty: typeof EmptyComponent & {
   Header: typeof EmptyComponents.EmptyHeader;
   Title: typeof EmptyComponents.EmptyTitle;
@@ -264,8 +264,8 @@ export const Empty: typeof EmptyComponent & {
   Media: EmptyComponents.EmptyMedia,
 });
 
-import * as FieldComponents from './components/field';
 import { Field as FieldComponent } from './components/field';
+import * as FieldComponents from './components/field';
 export const Field: typeof FieldComponent & {
   Label: typeof FieldComponents.FieldLabel;
   Description: typeof FieldComponents.FieldDescription;
@@ -289,9 +289,8 @@ export const Field: typeof FieldComponent & {
 });
 
 export { useFormField } from './components/form';
-
-import * as FormComponents from './components/form';
 import { Form as FormComponent } from './components/form';
+import * as FormComponents from './components/form';
 export const Form: typeof FormComponent & {
   Item: typeof FormComponents.FormItem;
   Label: typeof FormComponents.FormLabel;
@@ -308,8 +307,8 @@ export const Form: typeof FormComponent & {
   Field: FormComponents.FormField,
 });
 
-import * as HoverCardComponents from './components/hover-card';
 import { HoverCard as HoverCardComponent } from './components/hover-card';
+import * as HoverCardComponents from './components/hover-card';
 export const HoverCard: typeof HoverCardComponent & {
   Trigger: typeof HoverCardComponents.HoverCardTrigger;
   Content: typeof HoverCardComponents.HoverCardContent;
@@ -318,8 +317,8 @@ export const HoverCard: typeof HoverCardComponent & {
   Content: HoverCardComponents.HoverCardContent,
 });
 
-import * as InputGroupComponents from './components/input-group';
 import { InputGroup as InputGroupComponent } from './components/input-group';
+import * as InputGroupComponents from './components/input-group';
 export const InputGroup: typeof InputGroupComponent & {
   Addon: typeof InputGroupComponents.InputGroupAddon;
   Button: typeof InputGroupComponents.InputGroupButton;
@@ -336,8 +335,8 @@ export const InputGroup: typeof InputGroupComponent & {
 
 export { Input } from './components/input';
 
-import * as ItemComponents from './components/item';
 import { Item as ItemComponent } from './components/item';
+import * as ItemComponents from './components/item';
 export const Item: typeof ItemComponent & {
   Media: typeof ItemComponents.ItemMedia;
   Content: typeof ItemComponents.ItemContent;
@@ -360,8 +359,8 @@ export const Item: typeof ItemComponent & {
   Footer: ItemComponents.ItemFooter,
 });
 
-import * as KbdComponents from './components/kbd';
 import { Kbd as KbdComponent } from './components/kbd';
+import * as KbdComponents from './components/kbd';
 export const Kbd: typeof KbdComponent & {
   Group: typeof KbdComponents.KbdGroup;
 } = Object.assign(KbdComponent, {
@@ -370,8 +369,8 @@ export const Kbd: typeof KbdComponent & {
 
 export { Label } from './components/label';
 
-import * as MenubarComponents from './components/menubar';
 import { Menubar as MenubarComponent } from './components/menubar';
+import * as MenubarComponents from './components/menubar';
 export const Menubar: typeof MenubarComponent & {
   Portal: typeof MenubarComponents.MenubarPortal;
   Menu: typeof MenubarComponents.MenubarMenu;
@@ -406,8 +405,8 @@ export const Menubar: typeof MenubarComponent & {
   SubContent: MenubarComponents.MenubarSubContent,
 });
 
-import * as NativeSelectComponents from './components/native-select';
 import { NativeSelect as NativeSelectComponent } from './components/native-select';
+import * as NativeSelectComponents from './components/native-select';
 export const NativeSelect: typeof NativeSelectComponent & {
   OptGroup: typeof NativeSelectComponents.NativeSelectOptGroup;
   Option: typeof NativeSelectComponents.NativeSelectOption;
@@ -416,8 +415,8 @@ export const NativeSelect: typeof NativeSelectComponent & {
   Option: NativeSelectComponents.NativeSelectOption,
 });
 
-import * as NavigationMenuComponents from './components/navigation-menu';
 import { NavigationMenu as NavigationMenuComponent } from './components/navigation-menu';
+import * as NavigationMenuComponents from './components/navigation-menu';
 export const NavigationMenu: typeof NavigationMenuComponent & {
   List: typeof NavigationMenuComponents.NavigationMenuList;
   Item: typeof NavigationMenuComponents.NavigationMenuItem;
@@ -438,8 +437,8 @@ export const NavigationMenu: typeof NavigationMenuComponent & {
   NavigationMenuTriggerStyle: NavigationMenuComponents.navigationMenuTriggerStyle,
 });
 
-import * as PaginationComponents from './components/pagination';
 import { Pagination as PaginationComponent } from './components/pagination';
+import * as PaginationComponents from './components/pagination';
 export const Pagination: typeof PaginationComponent & {
   Content: typeof PaginationComponents.PaginationContent;
   Link: typeof PaginationComponents.PaginationLink;
@@ -456,8 +455,8 @@ export const Pagination: typeof PaginationComponent & {
   Ellipsis: PaginationComponents.PaginationEllipsis,
 });
 
-import * as PopoverComponents from './components/popover';
 import { Popover as PopoverComponent } from './components/popover';
+import * as PopoverComponents from './components/popover';
 export const Popover: typeof PopoverComponent & {
   Trigger: typeof PopoverComponents.PopoverTrigger;
   Content: typeof PopoverComponents.PopoverContent;
@@ -470,24 +469,24 @@ export const Popover: typeof PopoverComponent & {
 
 export { Progress } from './components/progress';
 
-import * as RadioGroupComponents from './components/radio-group';
 import { RadioGroup as RadioGroupComponent } from './components/radio-group';
+import * as RadioGroupComponents from './components/radio-group';
 export const RadioGroup: typeof RadioGroupComponent & {
   Item: typeof RadioGroupComponents.RadioGroupItem;
 } = Object.assign(RadioGroupComponent, {
   Item: RadioGroupComponents.RadioGroupItem,
 });
 
-import * as ScrollAreaComponents from './components/scroll-area';
 import { ScrollArea as ScrollAreaComponent } from './components/scroll-area';
+import * as ScrollAreaComponents from './components/scroll-area';
 export const ScrollArea: typeof ScrollAreaComponent & {
   ScrollBar: typeof ScrollAreaComponents.ScrollBar;
 } = Object.assign(ScrollAreaComponent, {
   ScrollBar: ScrollAreaComponents.ScrollBar,
 });
 
-import * as SelectComponents from './components/select';
 import { Select as SelectComponent } from './components/select';
+import * as SelectComponents from './components/select';
 export const Select: typeof SelectComponent & {
   Content: typeof SelectComponents.SelectContent;
   Group: typeof SelectComponents.SelectGroup;
@@ -512,8 +511,8 @@ export const Select: typeof SelectComponent & {
 
 export { Separator } from './components/separator';
 
-import * as SheetComponents from './components/sheet';
 import { Sheet as SheetComponent } from './components/sheet';
+import * as SheetComponents from './components/sheet';
 export const Sheet: typeof SheetComponent & {
   Trigger: typeof SheetComponents.SheetTrigger;
   Close: typeof SheetComponents.SheetClose;
@@ -533,9 +532,8 @@ export const Sheet: typeof SheetComponent & {
 });
 
 export { useSidebar } from './components/sidebar';
-
-import * as SidebarComponents from './components/sidebar';
 import { Sidebar as SidebarComponent } from './components/sidebar';
+import * as SidebarComponents from './components/sidebar';
 export const Sidebar: typeof SidebarComponent & {
   Content: typeof SidebarComponents.SidebarContent;
   Footer: typeof SidebarComponents.SidebarFooter;
@@ -594,8 +592,8 @@ export { Spinner } from './components/spinner';
 
 export { Switch } from './components/switch';
 
-import * as TableComponents from './components/table';
 import { Table as TableComponent } from './components/table';
+import * as TableComponents from './components/table';
 export const Table: typeof TableComponent & {
   Header: typeof TableComponents.TableHeader;
   Body: typeof TableComponents.TableBody;
@@ -614,8 +612,8 @@ export const Table: typeof TableComponent & {
   Caption: TableComponents.TableCaption,
 });
 
-import * as TabsComponents from './components/tabs';
 import { Tabs as TabsComponent } from './components/tabs';
+import * as TabsComponents from './components/tabs';
 export const Tabs: typeof TabsComponent & {
   List: typeof TabsComponents.TabsList;
   Trigger: typeof TabsComponents.TabsTrigger;
@@ -628,24 +626,24 @@ export const Tabs: typeof TabsComponent & {
 
 export { Textarea } from './components/textarea';
 
-import * as ToggleGroupComponents from './components/toggle-group';
 import { ToggleGroup as ToggleGroupComponent } from './components/toggle-group';
+import * as ToggleGroupComponents from './components/toggle-group';
 export const ToggleGroup: typeof ToggleGroupComponent & {
   Item: typeof ToggleGroupComponents.ToggleGroupItem;
 } = Object.assign(ToggleGroupComponent, {
   Item: ToggleGroupComponents.ToggleGroupItem,
 });
 
-import * as ToggleComponents from './components/toggle';
 import { Toggle as ToggleComponent } from './components/toggle';
+import * as ToggleComponents from './components/toggle';
 export const Toggle: typeof ToggleComponent & {
   Variants: typeof ToggleComponents.toggleVariants;
 } = Object.assign(ToggleComponent, {
   Variants: ToggleComponents.toggleVariants,
 });
 
-import * as TooltipComponents from './components/tooltip';
 import { Tooltip as TooltipComponent } from './components/tooltip';
+import * as TooltipComponents from './components/tooltip';
 export const Tooltip: typeof TooltipComponent & {
   Trigger: typeof TooltipComponents.TooltipTrigger;
   Content: typeof TooltipComponents.TooltipContent;
@@ -655,3 +653,4 @@ export const Tooltip: typeof TooltipComponent & {
   Content: TooltipComponents.TooltipContent,
   Provider: TooltipComponents.TooltipProvider,
 });
+

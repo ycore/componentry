@@ -31,7 +31,7 @@ const statuses: Status[] = [
   },
 ];
 
-export default function ComboboxPopover() {
+export default function ComboboxPopover(): React.JSX.Element {
   const [open, setOpen] = React.useState(false);
   const [selectedStatus, setSelectedStatus] = React.useState<Status | null>(null);
 

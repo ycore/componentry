@@ -1,5 +1,5 @@
 import React from 'react';
-export default function TypographyDemo() {
+export default function TypographyDemo(): React.JSX.Element {
   return (
     <div>
       <h1 className="scroll-m-20 text-balance font-extrabold text-4xl tracking-tight">Taxing Laughter: The Joke Tax Chronicles</h1>

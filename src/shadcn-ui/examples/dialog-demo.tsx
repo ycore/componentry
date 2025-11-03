@@ -4,7 +4,7 @@ import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, Di
 import { Input } from '../components/input';
 import { Label } from '../components/label';
 
-export default function DialogDemo() {
+export default function DialogDemo(): React.JSX.Element {
   const nameId = React.useId();
   const usernameId = React.useId();
 

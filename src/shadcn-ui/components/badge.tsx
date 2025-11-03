@@ -1,4 +1,4 @@
-import { cva, type VariantProps } from 'class-variance-authority';
+import { createVariants as cva, type VariantProps } from '../../vibrant/utils/variants';
 import clsx from 'clsx';
 import { Slot } from 'radix-ui';
 import React from 'react';

@@ -4,7 +4,7 @@ import { Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader,
 import { Input } from '../components/input';
 import { Label } from '../components/label';
 
-export default function CardDemo() {
+export default function CardDemo(): React.JSX.Element {
   return (
     <Card className="w-full max-w-sm">
       <CardHeader>

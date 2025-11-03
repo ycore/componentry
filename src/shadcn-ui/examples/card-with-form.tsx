@@ -5,7 +5,7 @@ import { Input } from '../components/input';
 import { Label } from '../components/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/select';
 
-export default function CardWithForm() {
+export default function CardWithForm(): React.JSX.Element {
   const nameId = React.useId();
   const frameworkId = React.useId();
   return (

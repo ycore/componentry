@@ -3,7 +3,7 @@ import { SpriteIcon } from '../../images/SpriteIcon';
 import type { IconName } from '../../vibrant/@types/example-sprites';
 import { ToggleGroup, ToggleGroupItem } from '../components/toggle-group';
 
-export default function ToggleGroupDemo({ spriteUrl }: { spriteUrl: string }) {
+export default function ToggleGroupDemo({ spriteUrl }: { spriteUrl: string }): React.JSX.Element {
   return (
     <ToggleGroup type="multiple" variant="outline">
       <ToggleGroupItem value="bold" aria-label="Toggle bold">

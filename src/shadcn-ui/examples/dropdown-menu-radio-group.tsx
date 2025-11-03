@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from '../components/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuSeparator, DropdownMenuTrigger } from '../components/dropdown-menu';
 
-export default function DropdownMenuRadioGroupDemo() {
+export default function DropdownMenuRadioGroupDemo(): React.JSX.Element {
   const [position, setPosition] = React.useState('bottom');
 
   return (

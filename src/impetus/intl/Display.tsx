@@ -151,7 +151,7 @@ function formatDateSafely(date: Date, locale: SupportedLocale, options: Intl.Dat
 /**
  * DisplayDate - A hydration-safe date formatting component
  */
-export function DisplayDate({ date, locale, preset, options, fallback = 'N/A', className, timeProps, semantic = true, intlConfig }: DisplayDateProps) {
+export function DisplayDate({ date, locale, preset, options, fallback = 'N/A', className, timeProps, semantic = true, intlConfig }: DisplayDateProps): React.JSX.Element {
   // Parse and validate the input date
   const parsedDate = parseDate(date);
 
@@ -302,7 +302,7 @@ function formatNumberSafely(num: number, locale: SupportedLocale, options: Intl.
 /**
  * DisplayNumber - A hydration-safe number formatting component
  */
-export function DisplayNumber({ value, locale, preset, options, fallback = 'N/A', className, dataAttributes, intlConfig, ordinalType = 'ordinal' }: DisplayNumberProps) {
+export function DisplayNumber({ value, locale, preset, options, fallback = 'N/A', className, dataAttributes, intlConfig, ordinalType = 'ordinal' }: DisplayNumberProps): React.JSX.Element {
   // Parse and validate the input number
   const parsedNumber = parseNumber(value);
 
@@ -433,7 +433,7 @@ function formatCurrencySafely(amount: number, locale: SupportedLocale, options: 
 /**
  * DisplayCurrency - A hydration-safe currency formatting component
  */
-export function DisplayCurrency({ amount, currency, locale, preset, options, fallback = 'N/A', className, dataAttributes, intlConfig, showSign = false, minimumFractionDigits, maximumFractionDigits }: DisplayCurrencyProps) {
+export function DisplayCurrency({ amount, currency, locale, preset, options, fallback = 'N/A', className, dataAttributes, intlConfig, showSign = false, minimumFractionDigits, maximumFractionDigits }: DisplayCurrencyProps): React.JSX.Element {
   // Parse and validate the input amount
   const parsedAmount = parseAmount(amount);
 

@@ -3,7 +3,7 @@ import { SpriteIcon } from '../../images/SpriteIcon';
 import type { IconName } from '../../vibrant/@types/lucide-sprites';
 import { Badge } from '../components/badge';
 
-export default function BadgeDemo({ spriteUrl }: { spriteUrl: string }) {
+export default function BadgeDemo({ spriteUrl }: { spriteUrl: string }): React.JSX.Element {
   return (
     <div className="flex flex-col items-center gap-2">
       <div className="flex w-full flex-wrap gap-2">

@@ -4,7 +4,7 @@ import { Button } from '../components/button';
 import { Input } from '../components/input';
 // import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '../custom/form';
 
-export default function InputForm() {
+export default function InputForm(): React.JSX.Element {
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);

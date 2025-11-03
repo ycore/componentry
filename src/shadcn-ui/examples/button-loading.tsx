@@ -3,7 +3,7 @@ import { SpriteIcon } from '../../images/SpriteIcon';
 import type { IconName } from '../../vibrant/@types/lucide-sprites';
 import { Button } from '../components/button';
 
-export default function ButtonLoading({ spriteUrl }: { spriteUrl: string }) {
+export default function ButtonLoading({ spriteUrl }: { spriteUrl: string }): React.JSX.Element {
   return (
     <Button size="sm" disabled>
       <SpriteIcon<IconName> iconId="Loader" className="animate-spin" spriteUrl={spriteUrl} />

@@ -4,7 +4,7 @@ import type { IconName } from '../../vibrant/@types/lucide-sprites';
 import { Button } from '../components/button';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '../components/collapsible';
 
-export default function CollapsibleDemo({ spriteUrl }: { spriteUrl: string }) {
+export default function CollapsibleDemo({ spriteUrl }: { spriteUrl: string }): React.JSX.Element {
   const [isOpen, setIsOpen] = React.useState(false);
 
   return (

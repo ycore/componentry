@@ -33,7 +33,7 @@ const items = [
   },
 ] as const;
 
-export default function CheckboxReactHookFormMultiple() {
+export default function CheckboxReactHookFormMultiple(): React.JSX.Element {
   const [selectedItems, setSelectedItems] = React.useState(['recents', 'home']);
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {

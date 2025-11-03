@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function TypographyTable() {
+export default function TypographyTable(): React.JSX.Element {
   return (
     <div className="my-6 w-full overflow-y-auto">
       <table className="w-full">

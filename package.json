@@ -12,7 +12,6 @@
       "types": "./src/images/index.ts",
       "import": "./src/images/index.ts"
     },
-    },
     "./impetus": {
       "types": "./src/impetus/index.ts",
       "import": "./src/impetus/index.ts"
@@ -37,6 +36,14 @@
     "./shadcn-ui/styles/slate.css": "./src/shadcn-ui/styles/slate.css",
     "./shadcn-ui/styles/stone.css": "./src/shadcn-ui/styles/stone.css",
     "./shadcn-ui/styles/zinc.css": "./src/shadcn-ui/styles/zinc.css",
+    "./email": {
+      "types": "./src/email/index.ts",
+      "import": "./src/email/index.ts"
+    },
+    "./email/server": {
+      "types": "./src/email/server/index.ts",
+      "import": "./src/email/server/index.ts"
+    },
     "./vibrant": {
       "types": "./src/vibrant/index.ts",
       "import": "./src/vibrant/index.ts"

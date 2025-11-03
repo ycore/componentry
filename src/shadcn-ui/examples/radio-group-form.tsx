@@ -4,7 +4,7 @@ import { Button } from '../components/button';
 import { RadioGroup, RadioGroupItem } from '../components/radio-group';
 // import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '../custom/form';
 
-export default function RadioGroupForm() {
+export default function RadioGroupForm(): React.JSX.Element {
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);

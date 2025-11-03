@@ -4,7 +4,7 @@ import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, Di
 import { Input } from '../components/input';
 import { Label } from '../components/label';
 
-export default function DialogCloseButton() {
+export default function DialogCloseButton(): React.JSX.Element {
   const linkId = React.useId();
 
   return (
