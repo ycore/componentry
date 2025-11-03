@@ -9,12 +9,12 @@ import { DisplayCurrency, DisplayDate, DisplayNumber } from './Display';
 // Date Component with Preset Shortcuts
 // ============================================================================
 
-const DateShort: React.FC<Omit<DisplayDateProps, 'preset'>> = (props) => DisplayDate({ ...props, preset: 'short' });
-const DateMedium: React.FC<Omit<DisplayDateProps, 'preset'>> = (props) => DisplayDate({ ...props, preset: 'medium' });
-const DateLong: React.FC<Omit<DisplayDateProps, 'preset'>> = (props) => DisplayDate({ ...props, preset: 'long' });
-const DateFull: React.FC<Omit<DisplayDateProps, 'preset'>> = (props) => DisplayDate({ ...props, preset: 'full' });
-const DateTime: React.FC<Omit<DisplayDateProps, 'preset'>> = (props) => DisplayDate({ ...props, preset: 'datetime' });
-const Timestamp: React.FC<Omit<DisplayDateProps, 'preset'>> = (props) => DisplayDate({ ...props, preset: 'timestamp' });
+const DateShort: React.FC<Omit<DisplayDateProps, 'preset'>> = props => DisplayDate({ ...props, preset: 'short' });
+const DateMedium: React.FC<Omit<DisplayDateProps, 'preset'>> = props => DisplayDate({ ...props, preset: 'medium' });
+const DateLong: React.FC<Omit<DisplayDateProps, 'preset'>> = props => DisplayDate({ ...props, preset: 'long' });
+const DateFull: React.FC<Omit<DisplayDateProps, 'preset'>> = props => DisplayDate({ ...props, preset: 'full' });
+const DateTime: React.FC<Omit<DisplayDateProps, 'preset'>> = props => DisplayDate({ ...props, preset: 'datetime' });
+const Timestamp: React.FC<Omit<DisplayDateProps, 'preset'>> = props => DisplayDate({ ...props, preset: 'timestamp' });
 
 export const DateFormat: typeof DisplayDate & {
   Short: typeof DateShort;
@@ -39,12 +39,12 @@ export { DateFormat as Date };
 // Number Component with Preset Shortcuts
 // ============================================================================
 
-const NumberInteger: React.FC<Omit<DisplayNumberProps, 'preset'>> = (props) => DisplayNumber({ ...props, preset: 'integer' });
-const NumberDecimal: React.FC<Omit<DisplayNumberProps, 'preset'>> = (props) => DisplayNumber({ ...props, preset: 'decimal' });
-const NumberPercent: React.FC<Omit<DisplayNumberProps, 'preset'>> = (props) => DisplayNumber({ ...props, preset: 'percent' });
-const NumberCompact: React.FC<Omit<DisplayNumberProps, 'preset'>> = (props) => DisplayNumber({ ...props, preset: 'compact' });
-const NumberScientific: React.FC<Omit<DisplayNumberProps, 'preset'>> = (props) => DisplayNumber({ ...props, preset: 'scientific' });
-const NumberOrdinal: React.FC<Omit<DisplayNumberProps, 'preset'>> = (props) => DisplayNumber({ ...props, preset: 'ordinal' });
+const NumberInteger: React.FC<Omit<DisplayNumberProps, 'preset'>> = props => DisplayNumber({ ...props, preset: 'integer' });
+const NumberDecimal: React.FC<Omit<DisplayNumberProps, 'preset'>> = props => DisplayNumber({ ...props, preset: 'decimal' });
+const NumberPercent: React.FC<Omit<DisplayNumberProps, 'preset'>> = props => DisplayNumber({ ...props, preset: 'percent' });
+const NumberCompact: React.FC<Omit<DisplayNumberProps, 'preset'>> = props => DisplayNumber({ ...props, preset: 'compact' });
+const NumberScientific: React.FC<Omit<DisplayNumberProps, 'preset'>> = props => DisplayNumber({ ...props, preset: 'scientific' });
+const NumberOrdinal: React.FC<Omit<DisplayNumberProps, 'preset'>> = props => DisplayNumber({ ...props, preset: 'ordinal' });
 
 export const NumberFormat: typeof DisplayNumber & {
   Integer: typeof NumberInteger;
@@ -69,11 +69,11 @@ export { NumberFormat as Number };
 // Currency Component with Preset Shortcuts
 // ============================================================================
 
-const CurrencyStandard: React.FC<Omit<DisplayCurrencyProps, 'preset'>> = (props) => DisplayCurrency({ ...props, preset: 'standard' });
-const CurrencyAccounting: React.FC<Omit<DisplayCurrencyProps, 'preset'>> = (props) => DisplayCurrency({ ...props, preset: 'accounting' });
-const CurrencyCompact: React.FC<Omit<DisplayCurrencyProps, 'preset'>> = (props) => DisplayCurrency({ ...props, preset: 'compact' });
-const CurrencyName: React.FC<Omit<DisplayCurrencyProps, 'preset'>> = (props) => DisplayCurrency({ ...props, preset: 'name' });
-const CurrencyCode: React.FC<Omit<DisplayCurrencyProps, 'preset'>> = (props) => DisplayCurrency({ ...props, preset: 'code' });
+const CurrencyStandard: React.FC<Omit<DisplayCurrencyProps, 'preset'>> = props => DisplayCurrency({ ...props, preset: 'standard' });
+const CurrencyAccounting: React.FC<Omit<DisplayCurrencyProps, 'preset'>> = props => DisplayCurrency({ ...props, preset: 'accounting' });
+const CurrencyCompact: React.FC<Omit<DisplayCurrencyProps, 'preset'>> = props => DisplayCurrency({ ...props, preset: 'compact' });
+const CurrencyName: React.FC<Omit<DisplayCurrencyProps, 'preset'>> = props => DisplayCurrency({ ...props, preset: 'name' });
+const CurrencyCode: React.FC<Omit<DisplayCurrencyProps, 'preset'>> = props => DisplayCurrency({ ...props, preset: 'code' });
 
 export const Currency: typeof DisplayCurrency & {
   Standard: typeof CurrencyStandard;

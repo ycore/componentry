@@ -433,7 +433,20 @@ function formatCurrencySafely(amount: number, locale: SupportedLocale, options: 
 /**
  * DisplayCurrency - A hydration-safe currency formatting component
  */
-export function DisplayCurrency({ amount, currency, locale, preset, options, fallback = 'N/A', className, dataAttributes, intlConfig, showSign = false, minimumFractionDigits, maximumFractionDigits }: DisplayCurrencyProps): React.JSX.Element {
+export function DisplayCurrency({
+  amount,
+  currency,
+  locale,
+  preset,
+  options,
+  fallback = 'N/A',
+  className,
+  dataAttributes,
+  intlConfig,
+  showSign = false,
+  minimumFractionDigits,
+  maximumFractionDigits,
+}: DisplayCurrencyProps): React.JSX.Element {
   // Parse and validate the input amount
   const parsedAmount = parseAmount(amount);
 

@@ -8,7 +8,19 @@ import { useTheme } from './useTheme';
 export const THEME_OPTIONS: Themes = { theme: { light: 'light', dark: 'dark' } } as const;
 
 // Internal button component
-const ThemeSwitchButton = ({ themeContext, theme, spriteUrl, className, classTheme }: { themeContext: ThemeContext | null; theme: Themes; spriteUrl: string; className?: string; classTheme?: string }): React.JSX.Element | null => {
+const ThemeSwitchButton = ({
+  themeContext,
+  theme,
+  spriteUrl,
+  className,
+  classTheme,
+}: {
+  themeContext: ThemeContext | null;
+  theme: Themes;
+  spriteUrl: string;
+  className?: string;
+  classTheme?: string;
+}): React.JSX.Element | null => {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => setMounted(true), []);

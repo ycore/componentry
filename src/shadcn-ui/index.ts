@@ -653,4 +653,3 @@ export const Tooltip: typeof TooltipComponent & {
   Content: TooltipComponents.TooltipContent,
   Provider: TooltipComponents.TooltipProvider,
 });
-
