@@ -1,6 +1,6 @@
 {
   "name": "@ycore/componentry",
-  "version": "2.4.1",
+  "version": "2.4.2",
   "private": true,
   "type": "module",
   "repository": {
@@ -9,47 +9,47 @@
   },
   "exports": {
     "./images": {
-      "types": "./src/images/index.ts",
-      "import": "./src/images/index.ts"
+      "types": "./dist/images/index.d.ts",
+      "import": "./dist/images/index.js"
     },
     "./impetus": {
-      "types": "./src/impetus/index.ts",
-      "import": "./src/impetus/index.ts"
+      "types": "./dist/impetus/index.d.ts",
+      "import": "./dist/impetus/index.js"
     },
     "./impetus/intl": {
-      "types": "./src/impetus/intl/index.ts",
-      "import": "./src/impetus/intl/index.ts"
+      "types": "./dist/impetus/intl/index.d.ts",
+      "import": "./dist/impetus/intl/index.js"
     },
     "./impetus/theme": {
-      "types": "./src/impetus/theme/index.ts",
-      "import": "./src/impetus/theme/index.ts"
+      "types": "./dist/impetus/theme/index.d.ts",
+      "import": "./dist/impetus/theme/index.js"
     },
     "./impetus/toast": {
-      "types": "./src/impetus/toast/index.ts",
-      "import": "./src/impetus/toast/index.ts"
+      "types": "./dist/impetus/toast/index.d.ts",
+      "import": "./dist/impetus/toast/index.js"
     },
-    "./impetus/components/loading-bar.css": "./src/impetus/components/loading-bar.css",
-    "./impetus/theme/theme-switch.css": "./src/impetus/theme/theme-switch.css",
-    "./shadcn-ui/styles/shadcn-ui.css": "./src/shadcn-ui/styles/shadcn-ui.css",
-    "./shadcn-ui/styles/gray.css": "./src/shadcn-ui/styles/gray.css",
-    "./shadcn-ui/styles/neutral.css": "./src/shadcn-ui/styles/neutral.css",
-    "./shadcn-ui/styles/slate.css": "./src/shadcn-ui/styles/slate.css",
-    "./shadcn-ui/styles/stone.css": "./src/shadcn-ui/styles/stone.css",
-    "./shadcn-ui/styles/zinc.css": "./src/shadcn-ui/styles/zinc.css",
+    "./impetus/components/loading-bar.css": "./dist/impetus/components/loading-bar.css",
+    "./impetus/theme/theme-switch.css": "./dist/impetus/theme/theme-switch.css",
+    "./shadcn-ui/styles/shadcn-ui.css": "./dist/shadcn-ui/styles/shadcn-ui.css",
+    "./shadcn-ui/styles/gray.css": "./dist/shadcn-ui/styles/gray.css",
+    "./shadcn-ui/styles/neutral.css": "./dist/shadcn-ui/styles/neutral.css",
+    "./shadcn-ui/styles/slate.css": "./dist/shadcn-ui/styles/slate.css",
+    "./shadcn-ui/styles/stone.css": "./dist/shadcn-ui/styles/stone.css",
+    "./shadcn-ui/styles/zinc.css": "./dist/shadcn-ui/styles/zinc.css",
     "./email": {
-      "types": "./src/email/index.ts",
-      "import": "./src/email/index.ts"
+      "types": "./dist/email/index.d.ts",
+      "import": "./dist/email/index.js"
     },
     "./email/server": {
-      "types": "./src/email/server/index.ts",
-      "import": "./src/email/server/index.ts"
+      "types": "./dist/email/server/index.d.ts",
+      "import": "./dist/email/server/index.js"
     },
     "./vibrant": {
-      "types": "./src/vibrant/index.ts",
-      "import": "./src/vibrant/index.ts"
+      "types": "./dist/vibrant/index.d.ts",
+      "import": "./dist/vibrant/index.js"
     },
-    "./vibrant/assets/example-sprites.svg": "./src/vibrant/assets/example-sprites.svg",
-    "./vibrant/assets/lucide-sprites.svg": "./src/vibrant/assets/lucide-sprites.svg",
+    "./vibrant/assets/example-sprites.svg": "./dist/vibrant/assets/example-sprites.svg",
+    "./vibrant/assets/lucide-sprites.svg": "./dist/vibrant/assets/lucide-sprites.svg",
     "./package.json": "./package.json"
   },
   "files": [
