@@ -9,47 +9,47 @@
   },
   "exports": {
     "./images": {
-      "types": "./dist/images/index.d.ts",
-      "import": "./dist/images/index.js"
+      "types": "./src/images/index.ts",
+      "import": "./src/images/index.ts"
     },
     "./impetus": {
-      "types": "./dist/impetus/index.d.ts",
-      "import": "./dist/impetus/index.js"
+      "types": "./src/impetus/index.ts",
+      "import": "./src/impetus/index.ts"
     },
     "./impetus/intl": {
-      "types": "./dist/impetus/intl/index.d.ts",
-      "import": "./dist/impetus/intl/index.js"
+      "types": "./src/impetus/intl/index.ts",
+      "import": "./src/impetus/intl/index.ts"
     },
     "./impetus/theme": {
-      "types": "./dist/impetus/theme/index.d.ts",
-      "import": "./dist/impetus/theme/index.js"
+      "types": "./src/impetus/theme/index.ts",
+      "import": "./src/impetus/theme/index.ts"
     },
     "./impetus/toast": {
-      "types": "./dist/impetus/toast/index.d.ts",
-      "import": "./dist/impetus/toast/index.js"
+      "types": "./src/impetus/toast/index.ts",
+      "import": "./src/impetus/toast/index.ts"
     },
-    "./impetus/components/loading-bar.css": "./dist/impetus/components/loading-bar.css",
-    "./impetus/theme/theme-switch.css": "./dist/impetus/theme/theme-switch.css",
-    "./shadcn-ui/styles/shadcn-ui.css": "./dist/shadcn-ui/styles/shadcn-ui.css",
-    "./shadcn-ui/styles/gray.css": "./dist/shadcn-ui/styles/gray.css",
-    "./shadcn-ui/styles/neutral.css": "./dist/shadcn-ui/styles/neutral.css",
-    "./shadcn-ui/styles/slate.css": "./dist/shadcn-ui/styles/slate.css",
-    "./shadcn-ui/styles/stone.css": "./dist/shadcn-ui/styles/stone.css",
-    "./shadcn-ui/styles/zinc.css": "./dist/shadcn-ui/styles/zinc.css",
+    "./impetus/components/loading-bar.css": "./src/impetus/components/loading-bar.css",
+    "./impetus/theme/theme-switch.css": "./src/impetus/theme/theme-switch.css",
+    "./shadcn-ui/styles/shadcn-ui.css": "./src/shadcn-ui/styles/shadcn-ui.css",
+    "./shadcn-ui/styles/gray.css": "./src/shadcn-ui/styles/gray.css",
+    "./shadcn-ui/styles/neutral.css": "./src/shadcn-ui/styles/neutral.css",
+    "./shadcn-ui/styles/slate.css": "./src/shadcn-ui/styles/slate.css",
+    "./shadcn-ui/styles/stone.css": "./src/shadcn-ui/styles/stone.css",
+    "./shadcn-ui/styles/zinc.css": "./src/shadcn-ui/styles/zinc.css",
     "./email": {
-      "types": "./dist/email/index.d.ts",
-      "import": "./dist/email/index.js"
+      "types": "./src/email/index.ts",
+      "import": "./src/email/index.ts"
     },
     "./email/server": {
-      "types": "./dist/email/server/index.d.ts",
-      "import": "./dist/email/server/index.js"
+      "types": "./src/email/server/index.ts",
+      "import": "./src/email/server/index.ts"
     },
     "./vibrant": {
-      "types": "./dist/vibrant/index.d.ts",
-      "import": "./dist/vibrant/index.js"
+      "types": "./src/vibrant/index.ts",
+      "import": "./src/vibrant/index.ts"
     },
-    "./vibrant/assets/example-sprites.svg": "./dist/vibrant/assets/example-sprites.svg",
-    "./vibrant/assets/lucide-sprites.svg": "./dist/vibrant/assets/lucide-sprites.svg",
+    "./vibrant/assets/example-sprites.svg": "./src/vibrant/assets/example-sprites.svg",
+    "./vibrant/assets/lucide-sprites.svg": "./src/vibrant/assets/lucide-sprites.svg",
     "./package.json": "./package.json"
   },
   "files": [
