@@ -2,23 +2,6 @@ import type { PreviewProps } from './@types/email-components.types';
 
 /**
  * Preview component - Email preview text
- *
- * Shows preview text in email client inbox list view, but hidden in email body.
- * Most email clients display the first ~100 characters of preview text.
- *
- * This text appears after the subject line in email client inbox views,
- * providing additional context before opening the email.
- *
- * @example
- * ```tsx
- * <Html>
- *   <Head />
- *   <Preview>Welcome to our platform! Get started with your account...</Preview>
- *   <Body>
- *     {/* Email body content *\/}
- *   </Body>
- * </Html>
- * ```
  */
 export function Preview({ children }: PreviewProps): React.JSX.Element {
   // Preview text styling:

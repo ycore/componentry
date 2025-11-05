@@ -1,5 +1,4 @@
-import { useTailwindStylesMap } from '../server/tailwind-mapping-context';
-import { extractBgColor, tailwindToInline } from '../server/tailwind-to-inline';
+import { extractBgColor, tailwindToInline, useTailwindStylesMap } from '@ycore/componentry/email/server';
 import type { SectionProps } from './@types/email-components.types';
 
 /**

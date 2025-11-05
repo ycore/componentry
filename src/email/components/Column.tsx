@@ -1,5 +1,4 @@
-import { useTailwindStylesMap } from '../server/tailwind-mapping-context';
-import { tailwindToInline } from '../server/tailwind-to-inline';
+import { tailwindToInline, useTailwindStylesMap } from '@ycore/componentry/email/server';
 import type { ColumnProps } from './@types/email-components.types';
 
 /**

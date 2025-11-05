@@ -1,5 +1,4 @@
-import { useTailwindStylesMap } from '../server/tailwind-mapping-context';
-import { extractBgColor, tailwindToInline } from '../server/tailwind-to-inline';
+import { extractBgColor, tailwindToInline, useTailwindStylesMap } from '@ycore/componentry/email/server';
 import type { BodyProps } from './@types/email-components.types';
 
 export function Body({ className, style, children }: BodyProps): React.JSX.Element {

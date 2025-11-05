@@ -2,21 +2,6 @@ import type { HeadProps } from './@types/email-components.types';
 
 /**
  * Head component - Email metadata and styles container
- *
- * Includes essential meta tags for proper email rendering across clients.
- * Supports custom meta tags and embedded styles.
- *
- * @example
- * ```tsx
- * <Head>
- *   <title>Welcome Email</title>
- *   <style>{`
- *     @media only screen and (max-width: 600px) {
- *       .mobile-padding { padding: 10px !important; }
- *     }
- *   `}</style>
- * </Head>
- * ```
  */
 export function Head({ children }: HeadProps): React.JSX.Element {
   return (
